@@ -45,8 +45,9 @@ from XMLConfigurer import XMLConfigurer as XMLC
 #==================================================================
 # 	Device States Description:
 #
-#   DevState.OPEN :  Open connection to the database
-#   DevState.ON :    Server is ON
+#   DevState.OPEN :     Open connection to the database
+#   DevState.ON :       Server is ON
+#   DevState.RUNNING :
 #==================================================================
 
 
@@ -61,7 +62,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		self.xmlc = None
 		PyTango.Device_4Impl.__init__(self,cl,name)
 		XMLConfigServer.init_device(self)
-
 
 #------------------------------------------------------------------
 #	Device destructor
@@ -125,7 +125,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #---- XMLString attribute State Machine -----------------
 	def is_XMLString_allowed(self, req_type):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -149,15 +150,18 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::Open()"
 		#	Add your own code here
 		try:
+			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.open()
 			self.set_state(PyTango.DevState.OPEN)
-		except:
-			self.set_state(PyTango.DevState.ON)
-			raise
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.ON)
+
 
 #---- Open command State Machine -----------------
 	def is_Open_allowed(self):
-		if self.get_state() in [PyTango.DevState.OPEN]:
+		if self.get_state() in [PyTango.DevState.OPEN,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -175,15 +179,18 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		#	Add your own code here
 
 		try:
+			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.close()
 			self.set_state(PyTango.DevState.ON)
  		finally:
-			if self.get_state() == PyTango.DevState.OPEN:
+			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.ON)
-				
+
+
 #---- Close command State Machine -----------------
 	def is_Close_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -201,13 +208,22 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def Components(self, argin):
 		print "In ", self.get_name(), "::Components()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.components(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
 		
 		return argout
 
 
 #---- Components command State Machine -----------------
 	def is_Components_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -226,12 +242,22 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::DataSources()"
 		#	Add your own code here
 		
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.dataSources(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
 		return argout
 
 
 #---- DataSources command State Machine -----------------
 	def is_DataSources_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -248,13 +274,22 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def AvailableComponents(self):
 		print "In ", self.get_name(), "::AvailableComponents()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.availableComponents()
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
 		
 		return argout
 
 
 #---- AvailableComponents command State Machine -----------------
 	def is_AvailableComponents_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -271,13 +306,22 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def AvailableDataSources(self):
 		print "In ", self.get_name(), "::AvailableDataSources()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.availableDataSources()
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
 		
 		return argout
 
 
 #---- AvailableDataSources command State Machine -----------------
 	def is_AvailableDataSources_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -294,11 +338,21 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def StoreComponent(self, argin):
 		print "In ", self.get_name(), "::StoreComponent()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.storeComponent(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
 
 
 #---- StoreComponent command State Machine -----------------
 	def is_StoreComponent_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -315,11 +369,21 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def StoreDataSource(self, argin):
 		print "In ", self.get_name(), "::StoreDataSource()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.storeDataSource(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
 
 
 #---- StoreDataSource command State Machine -----------------
 	def is_StoreDataSource_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -336,11 +400,22 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def CreateConfiguration(self, argin):
 		print "In ", self.get_name(), "::CreateConfiguration()"
 		#	Add your own code here
+		self.set_state(PyTango.DevState.RUNNING)
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.createConfiguration(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
+
 
 
 #---- CreateConfiguration command State Machine -----------------
 	def is_CreateConfiguration_allowed(self):
-		if self.get_state() in [PyTango.DevState.ON]:
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -385,10 +460,10 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 			[[PyTango.DevVoid, ""],
 			[PyTango.DevVarStringArray, "list of available DataSource names"]],
 		'StoreComponent':
-			[[PyTango.ConstDevString, "component name"],
+			[[PyTango.DevString, "component name"],
 			[PyTango.DevVoid, ""]],
 		'StoreDataSource':
-			[[PyTango.ConstDevString, "datasource name"],
+			[[PyTango.DevString, "datasource name"],
 			[PyTango.DevVoid, ""]],
 		'CreateConfiguration':
 			[[PyTango.DevVarStringArray, "list of component names"],
