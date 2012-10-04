@@ -133,6 +133,39 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		return True
 
 
+#------------------------------------------------------------------
+#	Read JSONSettings attribute
+#------------------------------------------------------------------
+	def read_JSONSettings(self, attr):
+		print "In ", self.get_name(), "::read_JSONSettings()"
+		
+		#	Add your own code here
+		
+		attr.set_value(self.xmlc.jsonSettings)
+
+
+#------------------------------------------------------------------
+#	Write JSONSettings attribute
+#------------------------------------------------------------------
+	def write_JSONSettings(self, attr):
+		print "In ", self.get_name(), "::write_JSONSettings()"
+		data = []
+		attr.get_write_value(data)
+		self.xmlc.jsonSettings = data[0]
+		print "Attribute value = ", data
+
+		#	Add your own code here
+
+#---- JSONSettings attribute State Machine -----------------
+	def is_JSONSettings_allowed(self, req_type):
+		if self.get_state() in [PyTango.DevState.OPEN,
+		                        PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
 
 #==================================================================
 #
@@ -333,7 +366,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #
 #	Description: Stores the component from XMLString
 #                
-#	argin:  ConstDevString	component name
+#	argin:  DevString	component name
 #------------------------------------------------------------------
 	def StoreComponent(self, argin):
 		print "In ", self.get_name(), "::StoreComponent()"
@@ -346,7 +379,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
-		
 
 
 #---- StoreComponent command State Machine -----------------
@@ -364,7 +396,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #
 #	Description: Stores the DataSource from XMLString
 #                
-#	argin:  ConstDevString	datasource name
+#	argin:  DevString	datasource name
 #------------------------------------------------------------------
 	def StoreDataSource(self, argin):
 		print "In ", self.get_name(), "::StoreDataSource()"
@@ -377,7 +409,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
-		
 
 
 #---- StoreDataSource command State Machine -----------------
@@ -408,8 +439,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
-		
-
 
 
 #---- CreateConfiguration command State Machine -----------------
@@ -474,6 +503,10 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 	#	Attribute definitions
 	attr_list = {
 		'XMLString':
+			[[PyTango.DevString,
+			PyTango.SCALAR,
+			PyTango.READ_WRITE]],
+		'JSONSettings':
 			[[PyTango.DevString,
 			PyTango.SCALAR,
 			PyTango.READ_WRITE]],

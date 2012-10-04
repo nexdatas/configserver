@@ -16,37 +16,27 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \package mcs nexdatas.configserver
-## \file XMLConfigurer.py
-# Allows the access to a database with NDTS configuration files 
+## \file MYSQLDataBase.py
+# Allows the access to MYSQL database with NDTS configuration files 
 #
 
-from MYSQLDataBase import MYSQLDataBase as MyDB
-import json
+import MySQLdb
+
 
 ## XML Configurer
-class XMLConfigurer(object):
+class MYSQLDataBase(object):
     def __init__(self):
         ## XML string
         self.xmlConfig = ""
-        self.jsonSettings = "{}"
-        self.mydb = MyDB()
+        self.db = None 
 
-    def open(self): 
-        args = {}
-        print "Open connection"
-        try:
-            js = json.loads(self.jsonSettings)
-            targs = dict(js.items())
-            for k in targs.keys():
-                args[str(k)] = str(targs[k])
-        except:
-            args = {}
-        self.mydb.connect(args)    
-            
-            
+    def connect(self, args):
+        print "connect:", args
+        db = MySQLdb.connect(**args)
+
 
     def close(self):
-        self.mydb.close()    
+        db.close()
         print "Close connection"
 
 
