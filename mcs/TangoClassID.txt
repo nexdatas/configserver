@@ -1,7 +1,7 @@
 /**
  * Device Class Identification:
  * 
- * Class Name   :	MCS
+ * Class Name   :	XMLConfigServer
  * Contact      :	jkotan@mail.desy.de
  * Class Family :	Acquisition
  * Platform     :	All Platforms
