@@ -34,6 +34,8 @@
 import PyTango
 import sys
 
+from XMLConfigurer import XMLConfigurer as XMLC
+
 
 #==================================================================
 #   XMLConfigServer Class Description:
@@ -56,8 +58,10 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #	Device constructor
 #------------------------------------------------------------------
 	def __init__(self,cl, name):
+		self.xmlc = None
 		PyTango.Device_4Impl.__init__(self,cl,name)
 		XMLConfigServer.init_device(self)
+
 
 #------------------------------------------------------------------
 #	Device destructor
@@ -71,6 +75,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def init_device(self):
 		print "In ", self.get_name(), "::init_device()"
+		self.xmlc = XMLC()
 		self.set_state(PyTango.DevState.ON)
 		self.get_device_properties(self.get_device_class())
 
@@ -101,8 +106,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		
 		#	Add your own code here
 		
-		attr_XMLString_read = "Hello Tango world"
-		attr.set_value(attr_XMLString_read)
+#		attr_XMLString_read = "Hello Tango world"
+		attr.set_value(self.xmlc.xmlConfig)
 
 
 #------------------------------------------------------------------
@@ -110,8 +115,9 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def write_XMLString(self, attr):
 		print "In ", self.get_name(), "::write_XMLString()"
-		data=[]
+		data = []
 		attr.get_write_value(data)
+		self.xmlc.xmlConfig = data[0]
 		print "Attribute value = ", data
 
 		#	Add your own code here
@@ -142,7 +148,12 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def Open(self):
 		print "In ", self.get_name(), "::Open()"
 		#	Add your own code here
-
+		try:
+			self.xmlc.open()
+			self.set_state(PyTango.DevState.OPEN)
+		except:
+			self.set_state(PyTango.DevState.ON)
+			raise
 
 #---- Open command State Machine -----------------
 	def is_Open_allowed(self):
@@ -163,7 +174,13 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::Close()"
 		#	Add your own code here
 
-
+		try:
+			self.xmlc.close()
+			self.set_state(PyTango.DevState.ON)
+ 		finally:
+			if self.get_state() == PyTango.DevState.OPEN:
+				self.set_state(PyTango.DevState.ON)
+				
 #---- Close command State Machine -----------------
 	def is_Close_allowed(self):
 		if self.get_state() in [PyTango.DevState.ON]:
