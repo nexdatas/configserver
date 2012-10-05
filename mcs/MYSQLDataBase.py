@@ -74,6 +74,7 @@ class MYSQLDataBase(object):
         return argout
 
 
+
     def availableComponents(self):
         argout = []
         if self.db is not None:
@@ -146,6 +147,44 @@ class MYSQLDataBase(object):
                                    % (name, xml))
                     
                 self.db.commit()
+                cursor.close()    
+            except:
+                self.db.rollback()
+                cursor.close()    
+                raise
+            print "store DataSource", name
+
+
+    def deleteComponent(self, name):
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name)
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("delete from components where name = '%s';" % name)
+                    
+                    self.db.commit()
+                cursor.close()    
+            except:
+                self.db.rollback()
+                cursor.close()    
+                raise
+    
+
+            print "store component", name
+
+
+    def deleteDataSource(self, name):
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("delete from datasources where name = '%s';" % name)
+                    
+                    self.db.commit()
                 cursor.close()    
             except:
                 self.db.rollback()

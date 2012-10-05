@@ -87,6 +87,18 @@ class XMLConfigurer(object):
         if self.mydb:
            self.mydb.storeDataSource(argin, self.xmlConfig )   
 
+
+
+
+    def deleteComponent(self, argin):
+        if self.mydb:
+            self.mydb.deleteComponent(argin)   
+
+
+    def deleteDataSource(self, argin):
+        if self.mydb:
+           self.mydb.deleteDataSource(argin)   
+
     def createConfiguration(self, argin):
         argout = argin
         print "create configuration"
