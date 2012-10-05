@@ -32,11 +32,11 @@ class MYSQLDataBase(object):
 
     def connect(self, args):
         print "connect:", args
-        db = MySQLdb.connect(**args)
+        self.db = MySQLdb.connect(**args)
 
 
     def close(self):
-        db.close()
+        self.db.close()
         print "Close connection"
 
 
