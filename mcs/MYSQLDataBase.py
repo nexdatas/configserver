@@ -40,43 +40,118 @@ class MYSQLDataBase(object):
         print "Close connection"
 
 
-    def components(self, argin):
-        argout = argin
+    def components(self, argin): 
+        argout = []
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                for ar in argin:
+                    cursor.execute("select xml from components where name = '%s';" % ar)
+                    data=cursor.fetchone()
+                    argout.append(data[0])
+                cursor.close()    
+            except:
+                cursor.close()    
+                raise
         print "components"
         return argout
 
 
     def dataSources(self, argin):
-        argout = argin
-        print "datasource"
+        argout = []
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                for ar in argin:
+                    cursor.execute("select xml from datasources where name = '%s';" % ar)
+                    data=cursor.fetchone()
+                    argout.append(data[0])
+                cursor.close()    
+            except:
+                cursor.close()    
+                raise
+#        print "dataSources"
         return argout
 
 
     def availableComponents(self):
-        argout = ["<xml2>","<xml1>"]
-        print "available components"
+        argout = []
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select name from components;")
+                data=cursor.fetchall()
+                argout = [d[0] for d in data]
+                cursor.close()    
+            except:
+                cursor.close()    
+                raise
+
+#        print "available components"
         return argout
 
 
 
     def availableDataSources(self):
-        argout = ["<xml2>","<xml1>"]
-        print "available datasources"
+        argout = []
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select name from datasources;")
+                data=cursor.fetchall()
+                argout = [d[0] for d in data]
+                cursor.close()    
+            except:
+                cursor.close()    
+                raise
+#        print "available datasources"
         return argout
 
 
-    def storeComponent(self, argin):
-        argout = argin
-        print "store component", argin
+    def storeComponent(self, name, xml):
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name)
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("update components set xml = '%s' where name = '%s';" 
+                                   % (name, xml))
+                else:
+                    cursor.execute("insert into components values('%s','%s');" 
+                                   % (name, xml))
+                    
+                self.db.commit()
+                cursor.close()    
+            except:
+                self.db.rollback()
+                cursor.close()    
+                raise
+    
+
+            print "store component", name
 
 
-    def storeDataSource(self, argin):
-        argout = argin
-        print "store DataSource", argin
-
-    def createConfiguration(self, argin):
-        argout = argin
-        print "create configuration"
+    def storeDataSource(self, name, xml):
+        if self.db is not None:
+            try:
+                cursor = self.db.cursor()
+                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("update datasources set xml = '%s' where name = '%s';" 
+                                   % (name, xml))
+                else:
+                    cursor.execute("insert into datasources values('%s','%s');" 
+                                   % (name, xml))
+                    
+                self.db.commit()
+                cursor.close()    
+            except:
+                self.db.rollback()
+                cursor.close()    
+                raise
+            print "store DataSource", name
 
 
 if __name__ == "__main__":

@@ -46,43 +46,46 @@ class XMLConfigurer(object):
             
 
     def close(self):
-        self.mydb.close()    
+        if self.mydb:
+            self.mydb.close()    
         print "Close connection"
 
 
     def components(self, argin):
-        argout = argin
-        print "components"
+        if self.mydb:
+            argout = self.mydb.components(argin)   
+#        print "components"
         return argout
 
 
     def dataSources(self, argin):
-        argout = argin
-        print "datasource"
+        if self.mydb:
+            argout = self.mydb.dataSources(argin)   
+#        print "datasource"
         return argout
 
 
     def availableComponents(self):
-        argout = ["<xml2>","<xml1>"]
-        print "available components"
+        if self.mydb:
+            argout = self.mydb.availableComponents()   
         return argout
 
 
 
     def availableDataSources(self):
-        argout = ["<xml2>","<xml1>"]
-        print "available datasources"
+        if self.mydb:
+            argout = self.mydb.availableDataSources()   
         return argout
 
 
     def storeComponent(self, argin):
-        argout = argin
-        print "store component", argin
+        if self.mydb:
+            self.mydb.storeComponent(argin, self.xmlConfig )   
 
 
     def storeDataSource(self, argin):
-        argout = argin
-        print "store DataSource", argin
+        if self.mydb:
+           self.mydb.storeDataSource(argin, self.xmlConfig )   
 
     def createConfiguration(self, argin):
         argout = argin
