@@ -47,7 +47,6 @@ class UndefinedTagError(Exception):
 class Merger(object):
     
     ## constructor
-    # \param root  DOM root node
     def __init__(self):
         
         ## DOM root node
@@ -56,6 +55,7 @@ class Merger(object):
         self.singles =['datasource', 'strategy', 'dimensions', 'definition',
                        'record', 'device', 'query', 'database', 'door']
 
+        ## allowed children
         self.children ={
             "datasource":("record", "doc", "device", "database", "query", "door"),
             "attribute":("enumeration", "doc"),
@@ -66,6 +66,8 @@ class Merger(object):
             "link":("doc")
             }
 
+    ## collects text from text child nodes
+    # \param node parent node    
     def getText(self, node):
         text = ""
         if node:
@@ -76,11 +78,13 @@ class Merger(object):
                 child = child.nextSibling
         return text    
 
+    ## gets ancestors form the xml tree
+    # \param node dom node   
+    # \returns xml path
     def getAncestors(self, node):
         res = "" 
         attr = node.attributes
 
-        
         name = node.getAttribute("name") if isinstance(node, Element) else "" 
 
         if node and node.parentNode and node.parentNode.nodeName != '#document':
@@ -91,7 +95,10 @@ class Merger(object):
             res += ":" + name
         return res 
 
-
+    ## checks if two elements are mergeable
+    # \param elem1 first element
+    # \param elem2 second element
+    # \returns bool varaible if two elements are mergeable 
     def areMergeable(self, elem1, elem2):
 #        return False
         if elem1.nodeName != elem2.nodeName:
@@ -135,6 +142,9 @@ class Merger(object):
             
         return status
 
+    ## merges two dom elements 
+    # \param elem1 first element
+    # \param elem2 second element
     def mergeNodes(self,elem1, elem2):
         tagName = elem1.nodeName
         attr1 = elem1.attributes
@@ -172,6 +182,8 @@ class Merger(object):
         parent.removeChild(elem2)
 
 
+    ## merge the given node
+    # \param node the given node
     def mergeChildren(self, node):
         status = False
         if node:
@@ -213,6 +225,9 @@ class Merger(object):
                 child = child.nextSibling
 
 
+                
+    ## collects the given components in one DOM tree
+    # \param components given components        
     def collect(self, components):	
         self.root = None
         rootDef = None
@@ -229,7 +244,6 @@ class Merger(object):
                 rootDef = dcp.getElementsByTagName("definition")[0]
             else:
                 if not rootDef: 
-                    # TODO raise an exception"
                     raise  UndefinedTagError, "<definition> not defined"
                 defin = dcp.getElementsByTagName("definition")[0]
                 if defin:
@@ -237,11 +251,15 @@ class Merger(object):
                         icd = self.root.importNode(cd, True) 
                         rootDef.appendChild(icd)
 
-
+    ## Converts DOM trer to string
+    #  returns DOM tree in XML string
     def toString(self):
 #        return self.root.toprettyxml(indent="  ")
-        return self.root.toxml()
+        if self.root:
+            return self.root.toxml()
 
+    ## performs the merging operation
+    # \brief It calls mergeChildern() method
     def merge(self):
         self.mergeChildren(self.root)
 

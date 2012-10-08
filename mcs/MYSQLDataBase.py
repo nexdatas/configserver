@@ -29,27 +29,36 @@ class NonregisteredDBRecordError(Exception):
 
 ## XML Configurer
 class MYSQLDataBase(object):
+    ## constructor
+    # \brief It sets xmlConfig to null string
     def __init__(self):
         ## XML string
         self.xmlConfig = ""
-        self.db = None 
+        self._db = None 
 
+    ## connects to the database
+    # \param args arguments of the MySQLdb connect method    
     def connect(self, args):
         print "connect:", args
-        self.db = MySQLdb.connect(**args)
+        self._db = MySQLdb.connect(**args)
 
 
+    ## closes database connection
+    # \brief It closes connection to the open database
     def close(self):
-        if self.db:
-            self.db.close()
+        if self._db:
+            self._db.close()
 
 
-    def components(self, argin): 
+    ## fetches the required components
+    # \param names list of component names
+    # \returns list of given components
+    def components(self, names): 
         argout = []
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
-                for ar in argin:
+                cursor = self._db.cursor()
+                for ar in names:
                     cursor.execute("select xml from components where name = '%s';" % ar)
                     data=cursor.fetchone()
                     if not data or not data[0]:
@@ -63,12 +72,15 @@ class MYSQLDataBase(object):
         return argout
 
 
-    def dataSources(self, argin):
+    ## fetches the required datasources
+    # \param names list of datasource names
+    # \returns list of given datasources
+    def dataSources(self, names):
         argout = []
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
-                for ar in argin:
+                cursor = self._db.cursor()
+                for ar in names:
                     cursor.execute("select xml from datasources where name = '%s';" % ar)
                     data=cursor.fetchone()
                     if not data or not data[0]:
@@ -83,11 +95,13 @@ class MYSQLDataBase(object):
 
 
 
+    ## fetches the names of available components
+    # \returns list of available components
     def availableComponents(self):
         argout = []
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select name from components;")
                 data=cursor.fetchall()
                 argout = [d[0] for d in data]
@@ -101,11 +115,13 @@ class MYSQLDataBase(object):
 
 
 
+    ## fetches the names of available datasources
+    # \returns list of available datasources
     def availableDataSources(self):
         argout = []
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select name from datasources;")
                 data=cursor.fetchall()
                 argout = [d[0] for d in data]
@@ -117,10 +133,13 @@ class MYSQLDataBase(object):
         return argout
 
 
+    ## stores the given component
+    # \param name name of the component to store
+    # \param xml component tree
     def storeComponent(self, name, xml):
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name)
                 data=cursor.fetchone()
                 if data[0]:
@@ -130,10 +149,10 @@ class MYSQLDataBase(object):
                     cursor.execute("insert into components values('%s','%s');" 
                                    % (name, xml))
                     
-                self.db.commit()
+                self._db.commit()
                 cursor.close()    
             except:
-                self.db.rollback()
+                self._db.rollback()
                 cursor.close()    
                 raise
     
@@ -141,10 +160,13 @@ class MYSQLDataBase(object):
             print "store component", name
 
 
+    ## stores the given datasource
+    # \param name name of the datasource to store
+    # \param xml datasource tree
     def storeDataSource(self, name, xml):
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
                 data=cursor.fetchone()
                 if data[0]:
@@ -154,28 +176,30 @@ class MYSQLDataBase(object):
                     cursor.execute("insert into datasources values('%s','%s');" 
                                    % (name, xml))
                     
-                self.db.commit()
+                self._db.commit()
                 cursor.close()    
             except:
-                self.db.rollback()
+                self._db.rollback()
                 cursor.close()    
                 raise
             print "store DataSource", name
 
 
+    ## deletes the given component
+    # \param name of the component to delete
     def deleteComponent(self, name):
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name)
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("delete from components where name = '%s';" % name)
                     
-                    self.db.commit()
+                    self._db.commit()
                 cursor.close()    
             except:
-                self.db.rollback()
+                self._db.rollback()
                 cursor.close()    
                 raise
     
@@ -183,19 +207,21 @@ class MYSQLDataBase(object):
             print "store component", name
 
 
+    ## deletes the given datasource 
+    # \param name of the datasource to delete
     def deleteDataSource(self, name):
-        if self.db is not None:
+        if self._db is not None:
             try:
-                cursor = self.db.cursor()
+                cursor = self._db.cursor()
                 cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("delete from datasources where name = '%s';" % name)
                     
-                    self.db.commit()
+                    self._db.commit()
                 cursor.close()    
             except:
-                self.db.rollback()
+                self._db.rollback()
                 cursor.close()    
                 raise
             print "store DataSource", name

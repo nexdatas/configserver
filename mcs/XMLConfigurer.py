@@ -97,28 +97,28 @@ class XMLConfigurer(object):
 
 
     ## stores the component from the xmlConfig attribute
-    # \param name of the component to store
+    # \param name name of the component to store
     def storeComponent(self, name):
         if self._mydb:
             self._mydb.storeComponent(name, self.xmlConfig )   
 
 
     ## stores the datasource from the xmlConfig attribute
-    # \param name of the datasource to store
+    # \param name name of the datasource to store
     def storeDataSource(self, name):
         if self._mydb:
            self._mydb.storeDataSource(name, self.xmlConfig )   
 
 
     ## deletes the given component
-    # \param name list of the component to delete
+    # \param name of the component to delete
     def deleteComponent(self, name):
         if self._mydb:
             self._mydb.deleteComponent(name)   
 
 
     ## deletes the given datasource 
-    # \param name list of the datasource to delete
+    # \param name of the datasource to delete
     def deleteDataSource(self, name):
         if self._mydb:
            self._mydb.deleteDataSource(name)   
