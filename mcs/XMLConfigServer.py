@@ -68,6 +68,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def delete_device(self):
 		print "[Device delete_device method] for device",self.get_name()
+		if hasattr(self.xmlc, "close"):
+			self.xmlc.close()
 
 
 #------------------------------------------------------------------
@@ -84,8 +86,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def always_executed_hook(self):
 		print "In ", self.get_name(), "::always_excuted_hook()"
-		if hasattr(self.xmlc, "close"):
-			self.xmlc.close()
 
 #==================================================================
 #
