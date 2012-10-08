@@ -146,7 +146,7 @@ class MYSQLDataBase(object):
                     cursor.execute("update components set xml = '%s' where name = '%s';" 
                                    % (name, xml))
                 else:
-                    cursor.execute("insert into components values('%s','%s');" 
+                    cursor.execute("insert into components values('%s', '%s');" 
                                    % (name, xml))
                     
                 self._db.commit()
@@ -173,7 +173,7 @@ class MYSQLDataBase(object):
                     cursor.execute("update datasources set xml = '%s' where name = '%s';" 
                                    % (name, xml))
                 else:
-                    cursor.execute("insert into datasources values('%s','%s');" 
+                    cursor.execute("insert into datasources values('%s', '%s');" 
                                    % (name, xml))
                     
                 self._db.commit()

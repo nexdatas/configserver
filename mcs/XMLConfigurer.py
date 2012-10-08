@@ -147,7 +147,6 @@ class XMLConfigurer(object):
     def createConfiguration(self, names):
         if self._mydb:
             comps = self._mydb.components(list(set(self._mandatory + names)))   
-        print "Components:",comps    
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
@@ -161,12 +160,12 @@ if __name__ == "__main__":
     try:
         ## configurer object
         conf = XMLConfigurer()
-        conf.jsonSettings = '{"host":"localhost","db":"ndts","read_default_file":"/etc/my.cnf"}'
+        conf.jsonSettings = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
-#        conf.createConfiguration(["scan1","scan2"])
-#        conf.createConfiguration(["scan1","scan1"])
-        conf.createConfiguration(["scan2","scan2","scan2"])
+#        conf.createConfiguration(["scan1", "scan2"])
+#        conf.createConfiguration(["scan1", "scan1"])
+        conf.createConfiguration(["scan2", "scan2", "scan2"])
         print conf.xmlConfig
     finally:
         if conf:
