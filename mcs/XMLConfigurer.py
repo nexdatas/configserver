@@ -22,6 +22,7 @@
 
 from MYSQLDataBase import MYSQLDataBase as MyDB
 import json
+from Merger import Merger 
 
 ## XML Configurer
 class XMLConfigurer(object):
@@ -30,6 +31,7 @@ class XMLConfigurer(object):
         self.xmlConfig = ""
         self.jsonSettings = "{}"
         self.mydb = MyDB()
+
 
     def open(self): 
         args = {}
@@ -71,7 +73,6 @@ class XMLConfigurer(object):
         return argout
 
 
-
     def availableDataSources(self):
         if self.mydb:
             argout = self.mydb.availableDataSources()   
@@ -88,8 +89,6 @@ class XMLConfigurer(object):
            self.mydb.storeDataSource(argin, self.xmlConfig )   
 
 
-
-
     def deleteComponent(self, argin):
         if self.mydb:
             self.mydb.deleteComponent(argin)   
@@ -99,15 +98,30 @@ class XMLConfigurer(object):
         if self.mydb:
            self.mydb.deleteDataSource(argin)   
 
+
     def createConfiguration(self, argin):
-        argout = argin
+        if self.mydb:
+            comps = self.mydb.components(argin)   
+        mgr = Merger()
+        mgr.collect(comps)
+        mgr.merge()
+        self.xmlConfig = mgr.toString()
         print "create configuration"
 
 
 if __name__ == "__main__":
-
+    
     import time
-
-            
+    try:
+        conf = XMLConfigurer()
+        conf.jsonSettings = '{"host":"localhost","db":"ndts","read_default_file":"/etc/my.cnf"}'
+        conf.open()
+        print conf.availableComponents()
+#        conf.createConfiguration(["scan1","scan2"])
+        conf.createConfiguration(["scan1","scan1"])
+        print conf.xmlConfig
+    finally:
+        if conf:
+            conf.close()
                 
     

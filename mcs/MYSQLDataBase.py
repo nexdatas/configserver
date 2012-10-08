@@ -37,7 +37,6 @@ class MYSQLDataBase(object):
 
     def close(self):
         self.db.close()
-        print "Close connection"
 
 
     def components(self, argin): 
