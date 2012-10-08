@@ -26,13 +26,20 @@ from Merger import Merger
 
 ## XML Configurer
 class XMLConfigurer(object):
+    ## constructor
+    # \brief It allows to construct XML configurer object
     def __init__(self):
-        ## XML string
+        ## XML config string
         self.xmlConfig = ""
+        ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
-        self.mydb = MyDB()
+        ## names of mandatory components 
+        self._mandatory = []
 
+        self._mydb = MyDB()
 
+    ## opens database connection
+    # \brief It opens connection to the give database by JSON string
     def open(self): 
         args = {}
         print "Open connection"
@@ -43,65 +50,104 @@ class XMLConfigurer(object):
                 args[str(k)] = str(targs[k])
         except:
             args = {}
-        self.mydb.connect(args)    
+        self._mydb.connect(args)    
             
             
 
+    ## closes database connection
+    # \brief It closes connection to the open database
     def close(self):
-        if self.mydb:
-            self.mydb.close()    
+        if self._mydb:
+            self._mydb.close()    
         print "Close connection"
 
 
-    def components(self, argin):
-        if self.mydb:
-            argout = self.mydb.components(argin)   
-#        print "components"
+    ## fetches the required components
+    # \param names list of component names
+    # \returns list of given components
+    def components(self, names):
+        if self._mydb:
+            argout = self._mydb.components(names)   
         return argout
 
 
-    def dataSources(self, argin):
-        if self.mydb:
-            argout = self.mydb.dataSources(argin)   
-#        print "datasource"
+    ## fetches the required datasources
+    # \param names list of datasource names
+    # \returns list of given datasources
+    def dataSources(self, names):
+        if self._mydb:
+            argout = self._mydb.dataSources(names)   
         return argout
 
 
+    ## fetches the names of available components
+    # \returns list of available components
     def availableComponents(self):
-        if self.mydb:
-            argout = self.mydb.availableComponents()   
+        if self._mydb:
+            argout = self._mydb.availableComponents()   
         return argout
 
 
+    ## fetches the names of available datasources
+    # \returns list of available datasources
     def availableDataSources(self):
-        if self.mydb:
-            argout = self.mydb.availableDataSources()   
+        if self._mydb:
+            argout = self._mydb.availableDataSources()   
         return argout
 
 
-    def storeComponent(self, argin):
-        if self.mydb:
-            self.mydb.storeComponent(argin, self.xmlConfig )   
+    ## stores the component from the xmlConfig attribute
+    # \param name of the component to store
+    def storeComponent(self, name):
+        if self._mydb:
+            self._mydb.storeComponent(name, self.xmlConfig )   
 
 
-    def storeDataSource(self, argin):
-        if self.mydb:
-           self.mydb.storeDataSource(argin, self.xmlConfig )   
+    ## stores the datasource from the xmlConfig attribute
+    # \param name of the datasource to store
+    def storeDataSource(self, name):
+        if self._mydb:
+           self._mydb.storeDataSource(name, self.xmlConfig )   
 
 
-    def deleteComponent(self, argin):
-        if self.mydb:
-            self.mydb.deleteComponent(argin)   
+    ## deletes the given component
+    # \param name list of the component to delete
+    def deleteComponent(self, name):
+        if self._mydb:
+            self._mydb.deleteComponent(name)   
 
 
-    def deleteDataSource(self, argin):
-        if self.mydb:
-           self.mydb.deleteDataSource(argin)   
+    ## deletes the given datasource 
+    # \param name list of the datasource to delete
+    def deleteDataSource(self, name):
+        if self._mydb:
+           self._mydb.deleteDataSource(name)   
 
 
-    def createConfiguration(self, argin):
-        if self.mydb:
-            comps = self.mydb.components(argin)   
+    ## sets the mandatory components
+    # \param names list of component names
+    def setMandatoryComponents(self, names):
+        self._mandatory = []
+        for name in names:
+            self._mandatory.append(name)
+
+
+    ## Provides names of the mandatory components
+    # \returns mandatory components
+    def mandatoryComponents(self):
+        argout = []
+        for name in self._mandatory:
+            argout.append(name)
+        return argout    
+
+
+    ## creates the final configuration string in the xmlConfig attribute
+    # \param names list of component names
+    # \returns list of given components
+    def createConfiguration(self, names):
+        if self._mydb:
+            comps = self._mydb.components(list(set(self._mandatory + names)))   
+        print "Components:",comps    
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
@@ -113,12 +159,14 @@ if __name__ == "__main__":
     
     import time
     try:
+        ## configurer object
         conf = XMLConfigurer()
         conf.jsonSettings = '{"host":"localhost","db":"ndts","read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
 #        conf.createConfiguration(["scan1","scan2"])
-        conf.createConfiguration(["scan1","scan1"])
+#        conf.createConfiguration(["scan1","scan1"])
+        conf.createConfiguration(["scan2","scan2","scan2"])
         print conf.xmlConfig
     finally:
         if conf:

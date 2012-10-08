@@ -84,6 +84,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def always_executed_hook(self):
 		print "In ", self.get_name(), "::always_excuted_hook()"
+		if hasattr(self.xmlc, "close"):
+			self.xmlc.close()
 
 #==================================================================
 #
@@ -448,7 +450,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 #	DeleteComponent command:
 #
-#	Description: Deletes the given component 
+#	Description: Deletes the given component
 #                
 #	argin:  DevString	component name
 #------------------------------------------------------------------
@@ -491,6 +493,65 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
+
+
+#------------------------------------------------------------------
+#	SetMandatoryComponents command:
+#
+#	Description: Sets the mandatory components
+#                
+#	argin:  DevVarStringArray	component names
+#------------------------------------------------------------------
+	def SetMandatoryComponents(self, argin):
+		print "In ", self.get_name(), "::SetMandatoryComponents()"
+		#	Add your own code here
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.setMandatoryComponents(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
+
+
+#---- SetMandatoryComponents command State Machine -----------------
+	def is_SetMandatoryComponents_allowed(self):
+		if self.get_state() in [PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
+#------------------------------------------------------------------
+#	MandatoryComponents command:
+#
+#	Description: Sets the mandatory components
+#                
+#	argout: DevVarStringArray	component names
+#------------------------------------------------------------------
+	def MandatoryComponents(self):
+		print "In ", self.get_name(), "::MandatoryComponents()"
+		#	Add your own code here
+		
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.mandatoryComponents()
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		return argout
+
+
+#---- MandatoryComponents command State Machine -----------------
+	def is_MandatoryComponents_allowed(self):
+		if self.get_state() in [PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
 
 
 #==================================================================
@@ -545,6 +606,12 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'DeleteDataSource':
 			[[PyTango.DevString, "datasource name"],
 			[PyTango.DevVoid, ""]],
+		'SetMandatoryComponents':
+			[[PyTango.DevVarStringArray, "component names"],
+			[PyTango.DevVoid, ""]],
+		'MandatoryComponents':
+			[[PyTango.DevVoid, ""],
+			[PyTango.DevVarStringArray, "component names"]],
 		}
 
 

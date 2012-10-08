@@ -22,6 +22,10 @@
 
 import MySQLdb
 
+##  Error for non-existing database records
+class NonregisteredDBRecordError(Exception): 
+    pass
+
 
 ## XML Configurer
 class MYSQLDataBase(object):
@@ -36,7 +40,8 @@ class MYSQLDataBase(object):
 
 
     def close(self):
-        self.db.close()
+        if self.db:
+            self.db.close()
 
 
     def components(self, argin): 
@@ -47,6 +52,8 @@ class MYSQLDataBase(object):
                 for ar in argin:
                     cursor.execute("select xml from components where name = '%s';" % ar)
                     data=cursor.fetchone()
+                    if not data or not data[0]:
+                        raise NonregisteredDBRecordError, "Component %s not registered in the database" % ar
                     argout.append(data[0])
                 cursor.close()    
             except:
@@ -64,6 +71,8 @@ class MYSQLDataBase(object):
                 for ar in argin:
                     cursor.execute("select xml from datasources where name = '%s';" % ar)
                     data=cursor.fetchone()
+                    if not data or not data[0]:
+                        raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % ar
                     argout.append(data[0])
                 cursor.close()    
             except:

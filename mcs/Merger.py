@@ -21,11 +21,25 @@
 
 from xml.dom.minidom import Document, parseString, Element
 
+## Incompatible class Exception
 class IncompatibleNodeError(Exception): 
+    ## constructor
+    # \param value string wit error message
+    # \param nodes list of nodes with errors
     def __init__(self, value, nodes = []):
+        ## exception value 
         self.value = value
+        ## nodes with errors
         self.nodes = nodes
-        
+    
+    ## tostring method
+    # \brief It shows the error message
+    def __str__(self):
+           return repr(self.value)    
+
+## Exception for undefined tags
+class UndefinedTagError(Exception): 
+    pass
 
 
 
@@ -67,7 +81,7 @@ class Merger(object):
         attr = node.attributes
 
         
-        name = node.getAttribute("name") if isinstance(node,Element) else "" 
+        name = node.getAttribute("name") if isinstance(node, Element) else "" 
 
         if node and node.parentNode and node.parentNode.nodeName != '#document':
 #            print node.nodeName()
@@ -78,9 +92,8 @@ class Merger(object):
         return res 
 
 
-    def areMergeable(self,elem1, elem2):
+    def areMergeable(self, elem1, elem2):
 #        return False
-        print "checking:" ,elem1.nodeName, elem2.nodeName
         if elem1.nodeName != elem2.nodeName:
             return False
         tagName = unicode(elem1.nodeName)
@@ -130,7 +143,7 @@ class Merger(object):
 
         for i2 in range(attr2.length):
             at2 = attr2.item(i2)
-            elem1.setAttribute(at2.nodeName,at2.nodeValue)
+            elem1.setAttribute(at2.nodeName, at2.nodeValue)
         
             
         child1 = elem1.firstChild
@@ -172,13 +185,10 @@ class Merger(object):
                     child1 = children.item(c1)
                     for c2 in range(children.length):
                         child2 = children.item(c2)
-                        print "type1", isinstance(child1, Element)
-                        print "type2", isinstance(child2, Element),  child1 != child2, changes
                         if child1 != child2:
                             if isinstance(child1, Element) and isinstance(child2, Element):
                                 #                            if elem1 is not None and elem2 is not None:
-                                print "CHECK"
-                                if self.areMergeable(child1,child2):
+                                if self.areMergeable(child1, child2):
                                     self.mergeNodes(child1, child2)
                                     changes = True
                                     status = True
@@ -220,12 +230,11 @@ class Merger(object):
             else:
                 if not rootDef: 
                     # TODO raise an exception"
-                    raise "<definition> not defined"
+                    raise  UndefinedTagError, "<definition> not defined"
                 defin = dcp.getElementsByTagName("definition")[0]
                 if defin:
                     for cd in defin.childNodes:
                         icd = self.root.importNode(cd, True) 
-                        print "CHILD:", icd.nodeName
                         rootDef.appendChild(icd)
 
 
