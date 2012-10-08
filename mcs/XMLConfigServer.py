@@ -156,6 +156,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 		#	Add your own code here
 
+
 #---- JSONSettings attribute State Machine -----------------
 	def is_JSONSettings_allowed(self, req_type):
 		if self.get_state() in [PyTango.DevState.OPEN,
@@ -241,7 +242,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def Components(self, argin):
 		print "In ", self.get_name(), "::Components()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			argout = self.xmlc.components(argin)
@@ -275,7 +275,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::DataSources()"
 		#	Add your own code here
 		
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			argout = self.xmlc.dataSources(argin)
@@ -307,7 +306,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def AvailableComponents(self):
 		print "In ", self.get_name(), "::AvailableComponents()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			argout = self.xmlc.availableComponents()
@@ -339,7 +337,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def AvailableDataSources(self):
 		print "In ", self.get_name(), "::AvailableDataSources()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			argout = self.xmlc.availableDataSources()
@@ -371,7 +368,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def StoreComponent(self, argin):
 		print "In ", self.get_name(), "::StoreComponent()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.storeComponent(argin)
@@ -401,7 +397,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def StoreDataSource(self, argin):
 		print "In ", self.get_name(), "::StoreDataSource()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.storeDataSource(argin)
@@ -431,7 +426,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def CreateConfiguration(self, argin):
 		print "In ", self.get_name(), "::CreateConfiguration()"
 		#	Add your own code here
-		self.set_state(PyTango.DevState.RUNNING)
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.createConfiguration(argin)
@@ -449,6 +443,54 @@ class XMLConfigServer(PyTango.Device_4Impl):
 			#	Re-Start of Generated Code
 			return False
 		return True
+
+
+#------------------------------------------------------------------
+#	DeleteComponent command:
+#
+#	Description: Deletes the given component 
+#                
+#	argin:  DevString	component name
+#------------------------------------------------------------------
+	def DeleteComponent(self, argin):
+		print "In ", self.get_name(), "::DeleteComponent()"
+		#	Add your own code here
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.deleteComponent(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+
+
+#---- DeleteComponent command State Machine -----------------
+	def is_DeleteComponent_allowed(self):
+		if self.get_state() in [PyTango.DevState.OPEN,
+		                        PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
+#------------------------------------------------------------------
+#	DeleteDataSource command:
+#
+#	Description: Deletes the given datasource
+#                
+#	argin:  DevString	datasource name
+#------------------------------------------------------------------
+	def DeleteDataSource(self, argin):
+		print "In ", self.get_name(), "::DeleteDataSource()"
+		#	Add your own code here
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.deleteDataSource(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
 
 
 #==================================================================
@@ -496,6 +538,12 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 			[PyTango.DevVoid, ""]],
 		'CreateConfiguration':
 			[[PyTango.DevVarStringArray, "list of component names"],
+			[PyTango.DevVoid, ""]],
+		'DeleteComponent':
+			[[PyTango.DevString, "component name"],
+			[PyTango.DevVoid, ""]],
+		'DeleteDataSource':
+			[[PyTango.DevString, "datasource name"],
 			[PyTango.DevVoid, ""]],
 		}
 
