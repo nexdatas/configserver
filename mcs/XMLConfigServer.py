@@ -186,6 +186,9 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::Open()"
 		#	Add your own code here
 		try:
+			if self.get_state() == PyTango.DevState.OPEN:
+				self.set_state(PyTango.DevState.RUNNING)
+				self.xmlc.close()
 			self.set_state(PyTango.DevState.RUNNING)
 			self.xmlc.open()
 			self.set_state(PyTango.DevState.OPEN)
@@ -196,8 +199,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #---- Open command State Machine -----------------
 	def is_Open_allowed(self):
-		if self.get_state() in [PyTango.DevState.OPEN,
-		                        PyTango.DevState.RUNNING]:
+		if self.get_state() in [PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -512,7 +514,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
-		
 
 
 #---- SetMandatoryComponents command State Machine -----------------

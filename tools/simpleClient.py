@@ -31,7 +31,7 @@ def main():
     dpx = PyTango.DeviceProxy(device)
     dpx.set_timeout_millis(25000)
     dpx.Init()
-    dpx.JSONSettings = '{"db": "tango",  "host":"haso228k.desy.de" ,"read_default_file":"/etc/my.cnf" }'
+    dpx.JSONSettings = '{"db": "ndts",  "host":"localhost" ,"read_default_file":"/etc/my.cnf" }'
 
 
 if __name__ == "__main__":
