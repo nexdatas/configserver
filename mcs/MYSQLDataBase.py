@@ -144,10 +144,10 @@ class MYSQLDataBase(object):
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("update components set xml = '%s' where name = '%s';" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into components values('%s', '%s');" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
@@ -171,10 +171,10 @@ class MYSQLDataBase(object):
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("update datasources set xml = '%s' where name = '%s';" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into datasources values('%s', '%s');" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
