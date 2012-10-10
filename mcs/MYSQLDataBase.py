@@ -147,7 +147,7 @@ class MYSQLDataBase(object):
                                    % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into components values('%s', '%s');" 
-                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
@@ -174,7 +174,7 @@ class MYSQLDataBase(object):
                                    % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into datasources values('%s', '%s');" 
-                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
