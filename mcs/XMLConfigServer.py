@@ -470,7 +470,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #---- DeleteComponent command State Machine -----------------
 	def is_DeleteComponent_allowed(self):
-		if self.get_state() in [PyTango.DevState.OPEN,
+		if self.get_state() in [PyTango.DevState.ON,
 		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
@@ -495,6 +495,16 @@ class XMLConfigServer(PyTango.Device_4Impl):
  		finally:
 			if self.get_state() == PyTango.DevState.RUNNING:
 				self.set_state(PyTango.DevState.OPEN)
+
+
+#---- DeleteDataSource command State Machine -----------------
+	def is_DeleteDataSource_allowed(self):
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
 
 
 #------------------------------------------------------------------
