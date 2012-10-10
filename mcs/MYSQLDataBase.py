@@ -48,7 +48,7 @@ class MYSQLDataBase(object):
     def close(self):
         if self._db:
             self._db.close()
-
+#        pass
 
     ## fetches the required components
     # \param names list of component names
@@ -59,7 +59,7 @@ class MYSQLDataBase(object):
             try:
                 cursor = self._db.cursor()
                 for ar in names:
-                    cursor.execute("select xml from components where name = '%s';" % ar)
+                    cursor.execute("select xml from components where name = '%s';" % ar.replace("'","\\\'"))
                     data=cursor.fetchone()
                     if not data or not data[0]:
                         raise NonregisteredDBRecordError, "Component %s not registered in the database" % ar
@@ -81,7 +81,7 @@ class MYSQLDataBase(object):
             try:
                 cursor = self._db.cursor()
                 for ar in names:
-                    cursor.execute("select xml from datasources where name = '%s';" % ar)
+                    cursor.execute("select xml from datasources where name = '%s';" % ar.replace("'","\\\'"))
                     data=cursor.fetchone()
                     if not data or not data[0]:
                         raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % ar
@@ -140,14 +140,14 @@ class MYSQLDataBase(object):
         if self._db is not None:
             try:
                 cursor = self._db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name)
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("update components set xml = '%s' where name = '%s';" 
-                                   % (name, xml))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into components values('%s', '%s');" 
-                                   % (name, xml))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
@@ -167,14 +167,14 @@ class MYSQLDataBase(object):
         if self._db is not None:
             try:
                 cursor = self._db.cursor()
-                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
+                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
                 if data[0]:
                     cursor.execute("update datasources set xml = '%s' where name = '%s';" 
-                                   % (name, xml))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                 else:
                     cursor.execute("insert into datasources values('%s', '%s');" 
-                                   % (name, xml))
+                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
                 self._db.commit()
                 cursor.close()    
@@ -191,10 +191,10 @@ class MYSQLDataBase(object):
         if self._db is not None:
             try:
                 cursor = self._db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name)
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
                 if data[0]:
-                    cursor.execute("delete from components where name = '%s';" % name)
+                    cursor.execute("delete from components where name = '%s';" % name.replace("'","\\\'"))
                     
                     self._db.commit()
                 cursor.close()    
@@ -213,10 +213,10 @@ class MYSQLDataBase(object):
         if self._db is not None:
             try:
                 cursor = self._db.cursor()
-                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name)
+                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
                 if data[0]:
-                    cursor.execute("delete from datasources where name = '%s';" % name)
+                    cursor.execute("delete from datasources where name = '%s';" % name.replace("'","\\\'"))
                     
                     self._db.commit()
                 cursor.close()    
