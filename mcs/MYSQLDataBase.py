@@ -146,7 +146,7 @@ class MYSQLDataBase(object):
                     cursor.execute("update components set xml = '%s' where name = '%s';" 
                                    % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
                 else:
-                    cursor.execute("insert into components values('%s', '%s');" 
+                    cursor.execute("insert into components values('%s', '%s', 0);" 
                                    % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
                 self._db.commit()
@@ -207,6 +207,69 @@ class MYSQLDataBase(object):
             print "store component", name
 
 
+
+    ## sets components as mandatory
+    # \param name of the component 
+    def setMandatory(self, name):
+        if self._db is not None:
+            try:
+                cursor = self._db.cursor()
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("update components set mandatory = 1 where name = '%s';" %  name.replace("'","\\\'"))
+                    
+                    self._db.commit()
+                cursor.close()    
+            except:
+                self._db.rollback()
+                cursor.close()    
+                raise
+    
+
+            print "unset mandatory", name
+
+    ## sets components as not mandatory
+    # \param name of the component to delete
+    def unsetMandatory(self, name):
+        if self._db is not None:
+            try:
+                cursor = self._db.cursor()
+                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
+                data=cursor.fetchone()
+                if data[0]:
+                    cursor.execute("update components set mandatory = 0 where name = '%s';" %  name.replace("'","\\\'"))
+                    
+                    self._db.commit()
+                cursor.close()    
+            except:
+                self._db.rollback()
+                cursor.close()    
+                raise
+    
+
+            print "unset mandatory", name
+
+
+
+    ## sets components as not mandatory
+    # \param name of the component 
+    def mandatory(self):
+        argout = []
+        if self._db is not None:
+            try:
+                cursor = self._db.cursor()
+                cursor.execute("select name from components where mandatory = 1")
+                data=cursor.fetchall()
+                argout = [d[0] for d in data]
+                cursor.close()    
+            except:
+                raise
+    
+
+        print "mandatory"
+        return argout   
+            
     ## deletes the given datasource 
     # \param name of the datasource to delete
     def deleteDataSource(self, name):

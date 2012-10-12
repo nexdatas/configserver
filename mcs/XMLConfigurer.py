@@ -33,8 +33,6 @@ class XMLConfigurer(object):
         self.xmlConfig = ""
         ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
-        ## names of mandatory components 
-        self._mandatory = []
 
         self._mydb = MyDB()
 
@@ -66,6 +64,7 @@ class XMLConfigurer(object):
     # \param names list of component names
     # \returns list of given components
     def components(self, names):
+        argout = []
         if self._mydb:
             argout = self._mydb.components(names)   
         return argout
@@ -75,6 +74,7 @@ class XMLConfigurer(object):
     # \param names list of datasource names
     # \returns list of given datasources
     def dataSources(self, names):
+        argout = []
         if self._mydb:
             argout = self._mydb.dataSources(names)   
         return argout
@@ -83,6 +83,7 @@ class XMLConfigurer(object):
     ## fetches the names of available components
     # \returns list of available components
     def availableComponents(self):
+        argout = []
         if self._mydb:
             argout = self._mydb.availableComponents()   
         return argout
@@ -91,6 +92,7 @@ class XMLConfigurer(object):
     ## fetches the names of available datasources
     # \returns list of available datasources
     def availableDataSources(self):
+        argout = []
         if self._mydb:
             argout = self._mydb.availableDataSources()   
         return argout
@@ -128,8 +130,7 @@ class XMLConfigurer(object):
     # \param names list of component names
     def setMandatoryComponents(self, names):
         for name in names:
-            if name not in self._mandatory:
-                self._mandatory.append(name)
+            self._mydb.setMandatory(name)
                 
 
 
@@ -137,17 +138,16 @@ class XMLConfigurer(object):
     # \param names list of component names
     def unsetMandatoryComponents(self, names):
         for name in names:
-            if name in self._mandatory:
-                self._mandatory.remove(name)
+            self._mydb.unsetMandatory(name)
 
 
     ## Provides names of the mandatory components
     # \returns mandatory components
     def mandatoryComponents(self):
         argout = []
-        for name in self._mandatory:
-            argout.append(name)
-        return argout    
+        if self._mydb:
+            argout = self._mydb.mandatory()   
+        return argout
 
 
     ## creates the final configuration string in the xmlConfig attribute
