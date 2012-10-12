@@ -127,9 +127,18 @@ class XMLConfigurer(object):
     ## sets the mandatory components
     # \param names list of component names
     def setMandatoryComponents(self, names):
-        self._mandatory = []
         for name in names:
-            self._mandatory.append(name)
+            if name not in self._mandatory:
+                self._mandatory.append(name)
+                
+
+
+    ## sets the mandatory components
+    # \param names list of component names
+    def unsetMandatoryComponents(self, names):
+        for name in names:
+            if name in self._mandatory:
+                self._mandatory.remove(name)
 
 
     ## Provides names of the mandatory components

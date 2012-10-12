@@ -538,7 +538,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 #	MandatoryComponents command:
 #
-#	Description: Sets the mandatory components
+#	Description: It adds the mandatory components
 #                
 #	argout: DevVarStringArray	component names
 #------------------------------------------------------------------
@@ -559,6 +559,35 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #---- MandatoryComponents command State Machine -----------------
 	def is_MandatoryComponents_allowed(self):
 		if self.get_state() in [PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
+#------------------------------------------------------------------
+#	UnsetMandatoryComponents command:
+#
+#	Description: It removes the given components from the mandatory components
+#                
+#	argin:  DevVarStringArray	list of component names
+#------------------------------------------------------------------
+	def UnsetMandatoryComponents(self, argin):
+		print "In ", self.get_name(), "::UnsetMandatoryComponents()"
+		#	Add your own code here
+		try:
+			self.set_state(PyTango.DevState.RUNNING)
+			self.xmlc.unsetMandatoryComponents(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+
+
+#---- UnsetMandatoryComponents command State Machine -----------------
+	def is_UnsetMandatoryComponents_allowed(self):
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
 			return False
@@ -623,6 +652,9 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'MandatoryComponents':
 			[[PyTango.DevVoid, ""],
 			[PyTango.DevVarStringArray, "component names"]],
+		'UnsetMandatoryComponents':
+			[[PyTango.DevVarStringArray, "list of component names"],
+			[PyTango.DevVoid, ""]],
 		}
 
 
