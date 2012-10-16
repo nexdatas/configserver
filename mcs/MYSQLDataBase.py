@@ -252,8 +252,8 @@ class MYSQLDataBase(object):
 
 
 
-    ## sets components as not mandatory
-    # \param name of the component 
+    ## provides mandatory components
+    # \returns list of mandatory components
     def mandatory(self):
         argout = []
         if self._db is not None:
