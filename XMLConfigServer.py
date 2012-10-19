@@ -34,7 +34,8 @@
 import PyTango
 import sys
 
-from XMLConfigurer import XMLConfigurer as XMLC
+import mcs
+from mcs.XMLConfigurer import XMLConfigurer as XMLC
 
 
 #==================================================================

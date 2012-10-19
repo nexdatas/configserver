@@ -1,0 +1,5 @@
+#!/bin/bash
+. /home/etc/tango_env
+SCRIPT=$(readlink -f $0)
+LOCALDIR=$(dirname "$SCRIPT")
+exec python $LOCALDIR/XMLConfigServer.py $*
