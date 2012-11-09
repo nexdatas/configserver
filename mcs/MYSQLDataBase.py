@@ -204,7 +204,7 @@ class MYSQLDataBase(object):
                 raise
     
 
-            print "store component", name
+            print "delete component", name
 
 
 
@@ -287,7 +287,7 @@ class MYSQLDataBase(object):
                 self._db.rollback()
                 cursor.close()    
                 raise
-            print "store DataSource", name
+            print "delete DataSource", name
 
 
 if __name__ == "__main__":
