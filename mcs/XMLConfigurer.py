@@ -45,7 +45,7 @@ class XMLConfigurer(object):
             js = json.loads(self.jsonSettings)
             targs = dict(js.items())
             for k in targs.keys():
-                args[str(k)] = str(targs[k])
+                args[str(k)] = targs[k]
         except:
             args = {}
         self._mydb.connect(args)    
