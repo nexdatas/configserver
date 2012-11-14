@@ -21,7 +21,9 @@
 #
 
 from MYSQLDataBase import MYSQLDataBase as MyDB
+from ComponentParser import ComponentHandler
 import json
+from xml import  sax
 from Merger import Merger 
 
 ## XML Configurer
@@ -68,6 +70,20 @@ class XMLConfigurer(object):
         if self._mydb:
             argout = self._mydb.components(names)   
         return argout
+
+
+    ## provides a tuple of datasources from the given component
+    # \param name given component 
+    # \returns tuple of datasource names from the given component
+    def componentDataSources(self, name):
+        cpl = []
+        if self._mydb:
+            cpl = self._mydb.components([name])   
+            if len(cpl)>0:
+                handler = ComponentHandler()
+                sax.parseString(cpl[0], handler)
+                print handler.datasources
+                return tuple(handler.datasources)
 
 
     ## fetches the required datasources
