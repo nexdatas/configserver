@@ -81,9 +81,8 @@ class XMLConfigurer(object):
             cpl = self._mydb.components([name])   
             if len(cpl)>0:
                 handler = ComponentHandler()
-                sax.parseString(cpl[0], handler)
-                print handler.datasources
-                return tuple(handler.datasources)
+                sax.parseString(str(cpl[0]).strip(), handler)
+                return tuple(handler.datasources.keys())
 
 
     ## fetches the required datasources

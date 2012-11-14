@@ -279,7 +279,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
 	def DataSources(self, argin):
 		print "In ", self.get_name(), "::DataSources()"
 		#	Add your own code here
-		
 		try:
 			self.set_state(PyTango.DevState.RUNNING)
 			argout = self.xmlc.dataSources(argin)
@@ -539,7 +538,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 #	MandatoryComponents command:
 #
-#	Description: It adds the mandatory components
+#	Description: Sets the mandatory components
 #                
 #	argout: DevVarStringArray	component names
 #------------------------------------------------------------------
@@ -587,6 +586,39 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #---- UnsetMandatoryComponents command State Machine -----------------
 	def is_UnsetMandatoryComponents_allowed(self):
+		if self.get_state() in [PyTango.DevState.ON,
+		                        PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
+#------------------------------------------------------------------
+#	ComponentDataSources command:
+#
+#	Description: returns a list of datasource names for a given component
+#                
+#	argin:  DevString	component name
+#	argout: DevVarStringArray	list of datasource names
+#------------------------------------------------------------------
+	def ComponentDataSources(self, argin):
+		print "In ", self.get_name(), "::ComponentDataSources()"
+		#	Add your own code here
+		try:
+			print "component name",argin
+			self.set_state(PyTango.DevState.RUNNING)
+			argout = self.xmlc.componentDataSources(argin)
+			self.set_state(PyTango.DevState.OPEN)
+ 		finally:
+			if self.get_state() == PyTango.DevState.RUNNING:
+				self.set_state(PyTango.DevState.OPEN)
+		
+		return argout
+
+
+#---- ComponentDataSources command State Machine -----------------
+	def is_ComponentDataSources_allowed(self):
 		if self.get_state() in [PyTango.DevState.ON,
 		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
@@ -656,6 +688,9 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'UnsetMandatoryComponents':
 			[[PyTango.DevVarStringArray, "list of component names"],
 			[PyTango.DevVoid, ""]],
+		'ComponentDataSources':
+			[[PyTango.DevString, "component name"],
+			[PyTango.DevVarStringArray, "list of datasource names"]],
 		}
 
 

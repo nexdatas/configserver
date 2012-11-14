@@ -62,6 +62,116 @@ class ComponentHandler(sax.ContentHandler):
 
 if __name__ == "__main__":
 
+#
+
+
+    www2 = """
+<?xml version='1.0'?>
+<definition type="" name="">
+<group type="NXentry" name="entry1">
+<group type="NXinstrument" name="instrument">
+<group type="NXdetector" name="detector">
+<field units="m" type="NX_FLOAT" name="counter1">
+<strategy mode="STEP"/>
+<datasource type="CLIENT">
+<record name="exp_c01"/>
+</datasource>
+</field>
+<field units="s" type="NX_FLOAT" name="counter2">
+<strategy mode="STEP"/>
+<datasource type="CLIENT">
+<record name="exp_c02"/>
+</datasource>
+</field>
+<field units="" type="NX_FLOAT" name="mca">
+<dimensions rank="1">
+<dim value="2048" index="1"/>
+</dimensions>
+<strategy mode="STEP"/>
+<datasource type="TANGO">
+<device member="attribute" name="p09/mca/exp.02"/>
+<record name="Data"/>
+</datasource>
+</field>
+</group>
+</group>
+<group type="NXdata" name="data">
+<link target="/NXentry/NXinstrument/NXdetector/mca" name="data">
+<doc>
+          Link to mca in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+<link target="/NXentry/NXinstrument/NXdetector/counter1" name="counter1">
+<doc>
+          Link to counter1 in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+<link target="/NXentry/NXinstrument/NXdetector/counter2" name="counter2">
+<doc>
+          Link to counter2 in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+</group>
+</group>
+<doc>definition</doc>
+</definition>
+"""
+
+    www = """
+<?xml version='1.0'?>
+<definition type="" name="">
+<group type="NXentry" name="entry1">
+<group type="NXinstrument" name="instrument">
+<group type="NXdetector" name="detector">
+<field units="m" type="NX_FLOAT" name="counter1">
+<strategy mode="STEP"/>
+<datasource type="CLIENT">
+<record name="exp_c01"/>
+</datasource>
+</field>
+<field units="s" type="NX_FLOAT" name="counter2">
+<strategy mode="STEP"/>
+<datasource type="CLIENT">
+<record name="exp_c02"/>
+</datasource>
+</field>
+<field units="" type="NX_FLOAT" name="mca">
+<dimensions rank="1">
+<dim value="2048" index="1"/>
+</dimensions>
+<strategy mode="STEP"/>
+<datasource type="TANGO">
+<device member="attribute" name="p09/mca/exp.02"/>
+<record name="Data"/>
+</datasource>
+</field>
+</group>
+</group>
+<group type="NXdata" name="data">
+<link target="/NXentry/NXinstrument/NXdetector/mca" name="data">
+<doc>
+          Link to mca in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+<link target="/NXentry/NXinstrument/NXdetector/counter1" name="counter1">
+<doc>
+          Link to counter1 in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+<link target="/NXentry/NXinstrument/NXdetector/counter2" name="counter2">
+<doc>
+          Link to counter2 in /NXentry/NXinstrument/NXdetector
+        </doc>
+</link>
+</group>
+</group>
+<doc>definition</doc>
+</definition>
+"""
+
+
+
+
     if  len(sys.argv) <2:
         print "usage: ComponentParser.py  <XMLinput>"
         
@@ -78,11 +188,12 @@ if __name__ == "__main__":
             parser.setContentHandler(handler)
             parser.parse(open(fi))
             print handler.datasources
-
+            
 
             ## a SAX2 handler object
             handler = ComponentHandler()
-            sax.parseString("<datasource name ='myds' type = 'CLIENT'/> ", handler)
+#            sax.parseString("<datasource name ='myds' type = 'CLIENT'/> ", handler)
+            sax.parseString(str(www2).strip(), handler)
             print handler.datasources
     
 
