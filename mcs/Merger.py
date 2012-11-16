@@ -255,8 +255,11 @@ class Merger(object):
     #  returns DOM tree in XML string
     def toString(self):
         if self.root:
-            return self.root.toprettyxml(indent="  ",newl="")
 #            return self.root.toxml()
+#            xml = self.root.toxml()
+#            reparsed = parseString(xml)
+#            return reparsed.toprettyxml(indent=" ",newl="")
+            return self.root.toprettyxml(indent=" ",newl="")
 
     ## performs the merging operation
     # \brief It calls mergeChildern() method
