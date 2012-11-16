@@ -170,7 +170,7 @@ class XMLConfigurer(object):
     # \returns list of given components
     def createConfiguration(self, names):
         if self._mydb:
-            comps = self._mydb.components(list(set(self._mandatory + names)))   
+            comps = self._mydb.components(list(set(self._mydb.mandatory() + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
