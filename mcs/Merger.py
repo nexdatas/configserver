@@ -255,7 +255,7 @@ class Merger(object):
     #  returns DOM tree in XML string
     def toString(self):
         if self.root:
-            return self.root.toprettyxml(indent="  ")
+            return self.root.toprettyxml(indent="  ",newl="")
 #            return self.root.toxml()
 
     ## performs the merging operation
