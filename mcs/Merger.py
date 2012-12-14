@@ -259,7 +259,9 @@ class Merger(object):
 #            xml = self.root.toxml()
 #            reparsed = parseString(xml)
 #            return reparsed.toprettyxml(indent=" ",newl="")
-            return self.root.toprettyxml(indent=" ",newl="")
+            
+            return str((self.root.toprettyxml(indent=" ",newl=""))).replace("\n \n "," ").replace("\n\n","\n")
+#            return self.root.toprettyxml(indent=" ",newl="")
 
     ## performs the merging operation
     # \brief It calls mergeChildern() method
