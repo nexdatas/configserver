@@ -703,7 +703,10 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'JSONSettings':
 			[[PyTango.DevString,
 			PyTango.SCALAR,
-			PyTango.READ_WRITE]],
+			PyTango.READ_WRITE],
+			{
+				'Memorized':"true",
+			} ],
 		}
 
 
