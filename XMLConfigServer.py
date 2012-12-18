@@ -699,12 +699,18 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'XMLString':
 			[[PyTango.DevString,
 			PyTango.SCALAR,
-			PyTango.READ_WRITE]],
+			PyTango.READ_WRITE],
+			{
+				'label':"XML configuration",
+				'description':"It allows to pass XML strings into database during performing StoreComponent and StoreDataSource.\nMoreover, after performing CreateConfiguration it contains the resulting XML configuration.",
+			} ],
 		'JSONSettings':
 			[[PyTango.DevString,
 			PyTango.SCALAR,
 			PyTango.READ_WRITE],
 			{
+				'label':"Arguments of MySQLdb.connect(...)",
+				'description':"The JSON string with parameters of MySQLdb.connect(...).",
 				'Memorized':"true",
 			} ],
 		}
