@@ -30,12 +30,12 @@ import sys, os
 class ComponentHandler(sax.ContentHandler):
 
     ## constructor
-    # \brief It constructs parser and defines the H5 output file
-    # \param fileElement file element
-    # \param decoders decoder pool
+    # \brief It constructs parser and sets variables to default values 
     def __init__(self):
         sax.ContentHandler.__init__(self)
+        ##  dictionary with datasources
         self.datasources = {}
+        ## datasource counter
         self.counter = 0 
 
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
 #
 
-
+    ## second test xml
     www2 = """
 <?xml version='1.0'?>
 <definition type="" name="">
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 <doc>definition</doc>
 </definition>
 """
-
+    ## first test XML
     www = """
 <?xml version='1.0'?>
 <definition type="" name="">
