@@ -118,10 +118,9 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def write_XMLString(self, attr):
 		print "In ", self.get_name(), "::write_XMLString()"
-		data = []
-		attr.get_write_value(data)
-		self.xmlc.xmlConfig = data[0]
-		print "Attribute value = ", data
+		
+		self.xmlc.xmlConfig = attr.get_write_value()
+		print "Attribute value = ", self.xmlc.xmlConfig
 
 		#	Add your own code here
 
@@ -152,10 +151,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def write_JSONSettings(self, attr):
 		print "In ", self.get_name(), "::write_JSONSettings()"
-		data = []
-		attr.get_write_value(data)
-		self.xmlc.jsonSettings = data[0]
-		print "Attribute value = ", data
+		self.xmlc.jsonSettings = attr.get_write_value()
+		print "Attribute value = ", self.xmlc.jsonSettings
 
 		#	Add your own code here
 
