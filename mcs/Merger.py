@@ -116,6 +116,9 @@ class Merger(object):
         name2 = elem2.getAttribute("name")
 
         if name1 != name2 :
+            if tagName in self.singles:
+                raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
+                
             return False
 
         for i1 in range(attr1.length):
