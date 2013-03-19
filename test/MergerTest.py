@@ -342,7 +342,7 @@ class MergerTest(unittest.TestCase):
 
     ## test collect
     # \brief It tests default settings
-    def test_merge_group_field_6(self):
+    def test_merge_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
