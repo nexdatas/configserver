@@ -35,8 +35,8 @@ class ComponentHandler(sax.ContentHandler):
         sax.ContentHandler.__init__(self)
         ##  dictionary with datasources
         self.datasources = {}
-        ## datasource counter
-        self.counter = 0 
+        ## unnamed datasource counter
+        self.__counter = 0 
 
 
     ##  parses the opening tag
@@ -47,8 +47,8 @@ class ComponentHandler(sax.ContentHandler):
             if "name" in attrs.keys():
                 aName = attrs["name"]
             else:
-                aName = "__unnamed__%s" % self.counter
-                self.counter += 1
+                aName = "__unnamed__%s" % self.__counter
+                self.__counter += 1
             if "type" in attrs.keys():
                 aType = attrs["type"]
             else:
