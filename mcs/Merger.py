@@ -52,11 +52,11 @@ class Merger(object):
         ## DOM root node
         self.__root = None
         ## tags which cannot have the same siblings
-        self.__singles =['datasource', 'strategy', 'dimensions', 'definition',
+        self.singles =['datasource', 'strategy', 'dimensions', 'definition',
                        'record', 'device', 'query', 'database', 'door']
 
         ## allowed children
-        self.__children ={
+        self.children ={
             "datasource":("record", "doc", "device", "database", "query", "door"),
             "attribute":("datasource", "strategy", "enumeration", "doc"),
             "definition":("group", "field", "attribute", "link", "component", "doc", "symbols"),
@@ -65,6 +65,9 @@ class Merger(object):
             "group":("group", "field", "attribute", "link", "component", "doc"),
             "link":("doc")
             }
+
+        ## with unique text
+        self.uniqueText = ['field']
 
     ## collects text from text child nodes
     # \param node parent node    
@@ -124,12 +127,12 @@ class Merger(object):
                     tags.append((str(self.__getAncestors(at1)),
                                  str(at1.nodeValue) , str(at2.nodeValue)))
 
-        if not status  and tagName in self.__singles: 
+        if not status  and ( tagName in self.singles  or name1 ): 
             raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
                 
 
 
-        if tagName == 'field':
+        if tagName in self.uniqueText:
             text1=unicode(self.__getText(elem1)).strip()
             text2=unicode(self.__getText(elem2)).strip()         
             ## TODO white spaces?
@@ -213,9 +216,9 @@ class Merger(object):
             nName = unicode(node.nodeName) if isinstance(node, Element) else ""
 
             while child:
-                if nName and nName in self.__children.keys():
+                if nName and nName in self.children.keys():
                     cName = unicode(child.nodeName) if isinstance(child, Element)  else ""
-                    if cName and cName not in self.__children[nName]:
+                    if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"  \
                                 % (cName, self.__getAncestors(elem)),
