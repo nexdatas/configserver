@@ -241,13 +241,14 @@ class Merger(object):
             
             if self.__root is None:
                 self.__root = dcp
-                rootDef = dcp.getElementsByTagName("definition")[0]
-            else:
-                if not rootDef: 
+                rdef = dcp.getElementsByTagName("definition")
+                if not rdef: 
                     raise  UndefinedTagError, "<definition> not defined"
-                defin = dcp.getElementsByTagName("definition")[0]
+                rootDef = rdef[0]
+            else:
+                defin = dcp.getElementsByTagName("definition")
                 if defin:
-                    for cd in defin.childNodes:
+                    for cd in defin[0].childNodes:
                         icd = self.__root.importNode(cd, True) 
                         rootDef.appendChild(icd)
 
