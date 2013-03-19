@@ -24,6 +24,7 @@ import os
 import unittest
 
 import ComponentHandlerTest
+import MergerTest
 
 try:
     import PyTango
@@ -81,6 +82,9 @@ def main():
 
     suite.addTests(
         unittest.defaultTestLoader.loadTestsFromModule(ComponentHandlerTest) )
+
+    suite.addTests(
+        unittest.defaultTestLoader.loadTestsFromModule(MergerTest) )
     
 
     if "MYSQL" in DB_AVAILABLE:
