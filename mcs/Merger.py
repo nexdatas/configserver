@@ -247,10 +247,11 @@ class Merger(object):
                 rootDef = rdef[0]
             else:
                 defin = dcp.getElementsByTagName("definition")
-                if defin:
-                    for cd in defin[0].childNodes:
-                        icd = self.__root.importNode(cd, True) 
-                        rootDef.appendChild(icd)
+                if not defin: 
+                    raise  UndefinedTagError, "<definition> not defined"
+                for cd in defin[0].childNodes:
+                    icd = self.__root.importNode(cd, True) 
+                    rootDef.appendChild(icd)
 
     ## Converts DOM trer to string
     #  \returns DOM tree in XML string
