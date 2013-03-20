@@ -20,28 +20,7 @@
 # Class for merging DOM component trees
 
 from xml.dom.minidom import Document, parseString, Element
-
-## Incompatible class Exception
-class IncompatibleNodeError(Exception): 
-    ## constructor
-    # \param value string wit error message
-    # \param nodes list of nodes with errors
-    def __init__(self, value, nodes = []):
-        ## exception value 
-        self.value = value
-        ## nodes with errors
-        self.nodes = nodes
-    
-    ## tostring method
-    # \brief It shows the error message
-    def __str__(self):
-           return repr(self.value)    
-
-## Exception for undefined tags
-class UndefinedTagError(Exception): 
-    pass
-
-
+from Errors import IncompatibleNodeError, UndefinedTagError
 
 ## merges the components
 class Merger(object):

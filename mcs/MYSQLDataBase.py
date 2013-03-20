@@ -22,9 +22,7 @@
 
 import MySQLdb
 
-##  Error for non-existing database records
-class NonregisteredDBRecordError(Exception): 
-    pass
+from Errors import NonregisteredDBRecordError
 
 
 ## XML Configurer
