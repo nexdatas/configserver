@@ -351,5 +351,98 @@ class MergerTest(unittest.TestCase):
         self.myAssertRaise(IncompatibleNodeError,el.merge)
 
 
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_single_name(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.singles = []
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString(),'<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <field type="field"/> </group> <group name="entry2" type="NXentry2">  <field type="field"/> </group></definition>')
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_single_name_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.singles = ['group']
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]), None)
+        self.myAssertRaise(IncompatibleNodeError,el.merge)
+
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_single(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.singles = ['field']
+        self.assertEqual(el.collect(["<definition><group  type='NXentry'><field type='field'/></group></definition>","<definition><group type='NXentry2'><field type='field'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString(),'<?xml version="1.0" ?>\n<definition> <group type="NXentry">  <field type="field"/> </group> <group type="NXentry2">  <field type="field"/> </group></definition>')
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_single_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.singles = ['group']
+        self.assertEqual(el.collect(["<definition><group type='NXentry'><field type='field'/></group></definition>","<definition><group  type='NXentry2'><field type='field'/></group></definition>"]), None)
+        self.myAssertRaise(IncompatibleNodeError,el.merge)
+
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_uniqueText(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.uniqueText = []
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>My text </field></group></definition>","<definition><group  name='entry' type='NXentry'><field type='field'>My text 2 </field></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString(),'<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <field type="field">   My text    My text 2   </field> </group></definition>')
+
+
+
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_uniqueText_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.uniqueText = ['field']
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>My text </field></group></definition>","<definition><group  name='entry' type='NXentry'><field type='field'>My text 2 </field></group></definition>"]), None)
+        self.myAssertRaise(IncompatibleNodeError,el.merge)
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_uniqueText_error_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.uniqueText = ['datasource','field']
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>My text </field></group></definition>","<definition><group  name='entry' type='NXentry'><field type='field'>My text 2 </field></group></definition>"]), None)
+        self.myAssertRaise(IncompatibleNodeError,el.merge)
+
+
 if __name__ == '__main__':
     unittest.main()
