@@ -444,5 +444,18 @@ class MergerTest(unittest.TestCase):
         self.myAssertRaise(IncompatibleNodeError,el.merge)
 
 
+
+    ## test collect
+    # \brief It tests default settings
+    def test_merge_uniqueText_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group  name='entry' type='NXentry'><field type='field'>My text 2 </field></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString(),'<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <field type="field">   My text 2   </field> </group></definition>')
+
+
 if __name__ == '__main__':
     unittest.main()

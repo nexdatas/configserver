@@ -139,7 +139,7 @@ class Merger(object):
             text1=unicode(self.__getText(elem1)).strip()
             text2=unicode(self.__getText(elem2)).strip()         
             ## TODO white spaces?
-            if text1 != text2:
+            if text1 != text2 and text1 and text2:
                 raise IncompatibleNodeError(
                     "Incompatible \n%s element value\n%s \n%s "  \
                         % (str(self.__getAncestors(elem1)), text1, text2),
