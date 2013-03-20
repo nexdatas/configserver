@@ -26,6 +26,7 @@ import unittest
 import ComponentHandlerTest
 import MergerTest
 import ErrorsTest
+import MYSQLDataBaseTest
 
 try:
     import PyTango
@@ -41,10 +42,7 @@ DB_AVAILABLE = []
 try:
     import MySQLdb    
     ## connection arguments to MYSQL DB
-    args = {}
-    args["db"] = 'tango'
-    args["host"] = 'localhost'
-    args["read_default_file"] = '/etc/my.cnf'
+    self.args = {'host': u'localhost', 'db': u'ndts', 'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
     ## inscance of MySQLdb
     mydb = MySQLdb.connect(**args)
     mydb.close()
@@ -89,13 +87,12 @@ def main():
 
     suite.addTests(
         unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest) )
+
     
 
     if "MYSQL" in DB_AVAILABLE:
-        pass
-
-    if "PGSQL" in DB_AVAILABLE:
-        pass
+        suite.addTests(
+            unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBaseTest) )
 
 
     if PYTANGO_AVAILABLE:

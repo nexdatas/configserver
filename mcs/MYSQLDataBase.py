@@ -45,7 +45,6 @@ class MYSQLDataBase(object):
     def close(self):
         if self.__db:
             self.__db.close()
-#        pass
 
     ## fetches the required components
     # \param names list of component names
