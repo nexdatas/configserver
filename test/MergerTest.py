@@ -526,7 +526,7 @@ class MergerTest(unittest.TestCase):
             "link":("doc")
             }
 
-        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group  name='entry' type='NXentry'><field /></group></definition>"]), None)
+        self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group  name='entry' type='NXentry'><field /></group></definition>"]), None)
         self.myAssertRaise(IncompatibleNodeError,el.merge)
 
 if __name__ == '__main__':
