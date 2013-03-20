@@ -224,8 +224,8 @@ class Merger(object):
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"  \
-                                % (cName, self.__getAncestors(elem)),
-                            [childElem])
+                                % (cName, self.__getAncestors(child)),
+                            [child])
                                 
                 self.__mergeChildren(child)
                 child = child.nextSibling
