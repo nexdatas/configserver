@@ -46,7 +46,7 @@ class Merger(object):
             }
 
         ## with unique text
-        self.uniqueText = ['field']
+        self.uniqueText = ['field', 'attribute','query','strategy']
 
     ## collects text from text child nodes
     # \param node parent node    
