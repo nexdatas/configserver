@@ -26,7 +26,6 @@ import unittest
 import ComponentHandlerTest
 import MergerTest
 import ErrorsTest
-import MYSQLDataBaseTest
 
 try:
     import PyTango
@@ -57,11 +56,13 @@ except:
 
 
 if "MYSQL" in DB_AVAILABLE:
-    pass
+    import MYSQLDataBaseTest
+    import XMLConfiguratorTest
 
 
-if PYTANGO_AVAILABLE:
-    pass
+if PYTANGO_AVAILABLE :
+    if "MYSQL" in DB_AVAILABLE:
+        import XMLConfigServerTest
 
 
 #import TestServerSetUp
@@ -88,18 +89,21 @@ def main():
     suite.addTests(
         unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest) )
 
+
     
 
     if "MYSQL" in DB_AVAILABLE:
         suite.addTests(
             unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBaseTest) )
+        suite.addTests(
+            unittest.defaultTestLoader.loadTestsFromModule(XMLConfiguratorTest) )
 
 
     if PYTANGO_AVAILABLE:
-        pass
 
         if "MYSQL" in DB_AVAILABLE:
-            pass
+            suite.addTests(
+                unittest.defaultTestLoader.loadTestsFromModule(XMLConfigServerTest) )
 
 
     
