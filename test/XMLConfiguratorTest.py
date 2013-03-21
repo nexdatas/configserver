@@ -33,7 +33,8 @@ IS64BIT = (struct.calcsize("P") == 8)
 
 
 from mcs.XMLConfigurator  import XMLConfigurator
-from mcs.Errors import NonregisteredDBRecordError                         
+from mcs.Merger import Merger
+from mcs.Errors import NonregisteredDBRecordError, UndefinedTagError, IncompatibleNodeError
 
 ## test fixture
 class XMLConfiguratorTest(unittest.TestCase):
@@ -60,6 +61,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__args = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf", "use_unicode":true}'
         self.__cmps = []
         self.__ds = []
+        self.__man = []
 
 
     ## test starter
@@ -83,6 +85,11 @@ class XMLConfiguratorTest(unittest.TestCase):
                 el.deleteDataSource(ds)
             el.close()
 
+        if self.__man:
+            el = self.openConfig(self.__args)
+            el.setMandatoryComponents[self.__man]
+            el.close()
+
     ## Exception tester
     # \param exception expected exception
     # \param method called method      
@@ -104,6 +111,8 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \returns XMLConfigurator instance   
     def openConfig(self, args):
         xmlc = XMLConfigurator()
+        self.assertEqual(xmlc.jsonSettings, "{}")
+        self.assertEqual(xmlc.xmlConfig, "")
         xmlc.jsonSettings = args
         print args
         xmlc.open()
@@ -829,6 +838,923 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_default(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        self.assertEqual(el.createConfiguration([]), None)
+        self.assertEqual(el.xmlConfig, None)
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        el.xmlConfig = xml
+        self.assertEqual(el.storeComponent(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+            
+        self.assertTrue(name in avc2)
+
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        
+        self.assertEqual(el.createConfiguration([name]), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_def(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        xml = "<group type='NXentry'/>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        el.xmlConfig = xml
+        self.assertEqual(el.storeComponent(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+            
+        self.assertTrue(name in avc2)
+
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        
+        self.myAssertRaise(UndefinedTagError,el.createConfiguration,[name])
+
+        self.assertEqual(el.deleteComponent(name),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = ["mcs_test_component"]
+        xml = ["<definition/>", "<definition><group type='NXentry'/></definition>"]
+        name.append(name[0] +'_2')
+        while name[0] in avc:
+            name[0] = name[0] + '_1'
+        while name[1] in avc:
+            name[1] = name[1] + '_2'
+#        print avc
+        el.xmlConfig = xml[0]
+        self.assertEqual(el.storeComponent(name[0]),None)
+        self.__cmps.append(name[0])
+
+        el.xmlConfig = xml[1]
+        self.assertEqual(el.storeComponent(name[1]),None)
+        self.__cmps.append(name[1])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name[1]),None)
+        self.__cmps.pop()
+
+        self.assertEqual(el.deleteComponent(name[0]),None)
+        self.__cmps.pop()
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_5(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = [ "<definition><group type='NXentry'/></definition>"]*5
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'/></definition>","<group/>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.myAssertRaise(UndefinedTagError,el.createConfiguration, name)
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_error_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<group/>","<definition><group type='NXentry'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.myAssertRaise(UndefinedTagError,el.createConfiguration, name)
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_field_3(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*3
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'><field name='field1'/></group></definition>","<definition><group type='NXentry2'/><field name='field1'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <field name="field1"/> <group type="NXentry">  <field name="field1"/> </group></definition>' )
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group name='entry'/></definition>","<definition><group type='NXentry2'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <group name="entry"/></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_3(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group name='entry'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry"/></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_group_4(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group name='entry2'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry"/> <group name="entry2"/></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_field_4(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*15
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_field_5(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry'><field type='field'/></group></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_group_field_name_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry2'><field type='field'/></group></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.myAssertRaise(IncompatibleNodeError,el.createConfiguration, name)
+         
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_single_name(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        self.assertEqual(el.createConfiguration(name), None)
+        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry2" type="NXentry2">  <field type="field"/> </group> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_single_name_2_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        mr = Merger()
+        for sg in mr.singles:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><group  name='entry' type='NXentry'><%s name='field2'/></group></definition>" % sg,"<definition><group name='entry2' type='NXentry2'><%s name='field'/></group></definition>" % sg]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+        
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_uniqueText_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        mr = Merger()
+        for ut in mr.uniqueText:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %(ut ,ut),"<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" %(ut ,ut)]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+        
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_uniqueText(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        uts = ['group','link']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %(ut ,ut),"<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" %(ut ,ut)]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <%s type="field">   My text 2    My text   </%s> </group></definition>' % (ut,ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
 
 
 

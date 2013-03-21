@@ -36,7 +36,7 @@ class XMLConfigurator(object):
         ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
 
-        self._mydb = MyDB()
+        self.__mydb = MyDB()
 
     ## opens database connection
     # \brief It opens connection to the give database by JSON string
@@ -51,15 +51,15 @@ class XMLConfigurator(object):
         except:
             print args
             args = {}
-        self._mydb.connect(args)    
+        self.__mydb.connect(args)    
             
             
 
     ## closes database connection
     # \brief It closes connection to the open database
     def close(self):
-        if self._mydb:
-            self._mydb.close()    
+        if self.__mydb:
+            self.__mydb.close()    
         print "Close connection"
 
 
@@ -68,8 +68,8 @@ class XMLConfigurator(object):
     # \returns list of given components
     def components(self, names):
         argout = []
-        if self._mydb:
-            argout = self._mydb.components(names)   
+        if self.__mydb:
+            argout = self.__mydb.components(names)   
         return argout
 
 
@@ -78,8 +78,8 @@ class XMLConfigurator(object):
     # \returns tuple of datasource names from the given component
     def componentDataSources(self, name):
         cpl = []
-        if self._mydb:
-            cpl = self._mydb.components([name])   
+        if self.__mydb:
+            cpl = self.__mydb.components([name])   
             if len(cpl)>0:
                 handler = ComponentHandler()
                 sax.parseString(str(cpl[0]).strip(), handler)
@@ -91,8 +91,8 @@ class XMLConfigurator(object):
     # \returns list of given datasources
     def dataSources(self, names):
         argout = []
-        if self._mydb:
-            argout = self._mydb.dataSources(names)   
+        if self.__mydb:
+            argout = self.__mydb.dataSources(names)   
         return argout
 
 
@@ -100,8 +100,8 @@ class XMLConfigurator(object):
     # \returns list of available components
     def availableComponents(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.availableComponents()   
+        if self.__mydb:
+            argout = self.__mydb.availableComponents()   
         return argout
 
 
@@ -109,44 +109,44 @@ class XMLConfigurator(object):
     # \returns list of available datasources
     def availableDataSources(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.availableDataSources()   
+        if self.__mydb:
+            argout = self.__mydb.availableDataSources()   
         return argout
 
 
     ## stores the component from the xmlConfig attribute
     # \param name name of the component to store
     def storeComponent(self, name):
-        if self._mydb:
-            self._mydb.storeComponent(name, self.xmlConfig )   
+        if self.__mydb:
+            self.__mydb.storeComponent(name, self.xmlConfig )   
 
 
     ## stores the datasource from the xmlConfig attribute
     # \param name name of the datasource to store
     def storeDataSource(self, name):
-        if self._mydb:
-           self._mydb.storeDataSource(name, self.xmlConfig )   
+        if self.__mydb:
+           self.__mydb.storeDataSource(name, self.xmlConfig )   
 
 
     ## deletes the given component
     # \param name of the component to delete
     def deleteComponent(self, name):
-        if self._mydb:
-            self._mydb.deleteComponent(name)   
+        if self.__mydb:
+            self.__mydb.deleteComponent(name)   
 
 
     ## deletes the given datasource 
     # \param name of the datasource to delete
     def deleteDataSource(self, name):
-        if self._mydb:
-           self._mydb.deleteDataSource(name)   
+        if self.__mydb:
+           self.__mydb.deleteDataSource(name)   
 
 
-    ## sets the mandatory components
+    ## sets the mandtaory components
     # \param names list of component names
     def setMandatoryComponents(self, names):
         for name in names:
-            self._mydb.setMandatory(name)
+            self.__mydb.setMandatory(name)
                 
 
 
@@ -154,15 +154,15 @@ class XMLConfigurator(object):
     # \param names list of component names
     def unsetMandatoryComponents(self, names):
         for name in names:
-            self._mydb.unsetMandatory(name)
+            self.__mydb.unsetMandatory(name)
 
 
     ## Provides names of the mandatory components
     # \returns mandatory components
     def mandatoryComponents(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.mandatory()   
+        if self.__mydb:
+            argout = self.__mydb.mandatory()   
         return argout
 
 
@@ -170,8 +170,8 @@ class XMLConfigurator(object):
     # \param names list of component names
     # \returns list of given components
     def createConfiguration(self, names):
-        if self._mydb:
-            comps = self._mydb.components(list(set(self._mydb.mandatory() + names)))   
+        if self.__mydb:
+            comps = self.__mydb.components(list(set(self.__mydb.mandatory() + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
