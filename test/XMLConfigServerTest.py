@@ -53,6 +53,7 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
     # \brief Common tear down oif Tango Server
     def tearDown(self): 
         self._sv.tearDown()
+        XMLConfiguratorTest.XMLConfiguratorTest.tearDown(self)
         
     ## opens config server
     # \param args connection arguments

@@ -98,7 +98,7 @@ class MergerTest(unittest.TestCase):
 
     ## test collect
     # \brief It tests default settings
-    def test_collect_default(self):
+    def test_collect_default_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
