@@ -1712,11 +1712,11 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_uniqueText(self):
+    def test_createConf_children_datasource(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-
-        uts = ['group','link']
+        el = Merger()
+        uts = el.children['datasource']
         for ut in uts:
         
             el = self.openConfig(self.__args)
@@ -1728,7 +1728,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %(ut ,ut),"<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" %(ut ,ut)]
+            xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
             np = len(xml)
             name = []
             for i in range(np):
@@ -1745,7 +1745,676 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <%s type="field">   My text 2    My text   </%s> </group></definition>' % (ut,ut) )
+            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <field name="entry">  <datasource type="TANGO">   <%s/>  </datasource> </field></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_datasource_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["datasource"]:
+                    uts.append(w)
+
+        uts = set(uts)
+
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_attribute(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['attribute']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <field name="entry">  <attribute type="TANGO">   <%s/>  </attribute> </field></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_attribute_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["attribute"]:
+                    uts.append(w)
+        uts = set(uts)
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration, name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_definition(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['definition']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><%s  name='entry' /></definition>" % ut ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <%s name="entry"/></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_definition_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["definition"]:
+                    uts.append(w)
+
+        uts = set(uts)
+
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><%s  name='entry' /></definition>" % ut ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration, name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_dimensions(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['dimensions']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <field name="entry">  <dimensions type="TANGO">   <%s/>  </dimensions> </field></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_dimensions_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["dimensions"]:
+                    uts.append(w)
+
+        uts = set(uts)
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            print i    
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['field']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <field name="entry">  <%s/> </field></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_field_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["field"]:
+                    uts.append(w)
+
+        uts = set(uts)
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['group']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group name="entry">  <%s/> </group></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_group_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["group"]:
+                    uts.append(w)
+
+        uts = set(uts)
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_link(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = el.children['link']
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.assertEqual(el.createConfiguration(name), None)
+            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <link name="entry">  <%s/> </link></definition>' % (ut) )
+
+            for i in range(np):
+                self.assertEqual(el.deleteComponent(name[i]),None)
+                self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_children_link_error(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = Merger()
+        uts = []
+        for k in el.children:
+            for w in el.children[k]:
+                if w not in  el.children["link"]:
+                    uts.append(w)
+
+        uts = set(uts)
+        for ut in uts:
+        
+            el = self.openConfig(self.__args)
+            man = el.mandatoryComponents()
+            el.unsetMandatoryComponents(man)
+            self.__man += man
+
+            avc = el.availableComponents()
+
+            oname = "mcs_test_component"
+            self.assertTrue(isinstance(avc, list))
+            xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
+            np = len(xml)
+            name = []
+            for i in range(np):
+                
+                name.append(oname +'_%s' % i )
+                while name[i] in avc:
+                    name[i] = name[i] + '_%s' %i
+#        print avc
+
+            for i in range(np):
+                el.xmlConfig = xml[i]
+                self.assertEqual(el.storeComponent(name[i]),None)
+                self.__cmps.append(name[i])
+
+
+            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
