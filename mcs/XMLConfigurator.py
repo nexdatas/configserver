@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \package mcs nexdatas.configserver
-## \file XMLConfigurer.py
+## \file XMLConfigurator.py
 # Allows the access to a database with NDTS configuration files 
 #
 
@@ -26,8 +26,8 @@ import json
 from xml import  sax
 from Merger import Merger 
 
-## XML Configurer
-class XMLConfigurer(object):
+## XML Configurator
+class XMLConfigurator(object):
     ## constructor
     # \brief It allows to construct XML configurer object
     def __init__(self):
@@ -183,7 +183,7 @@ if __name__ == "__main__":
     import time
     try:
         ## configurer object
-        conf = XMLConfigurer()
+        conf = XMLConfigurator()
         conf.jsonSettings = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
