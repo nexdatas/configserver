@@ -49,6 +49,7 @@ class XMLConfigurator(object):
             for k in targs.keys():
                 args[str(k)] = targs[k]
         except:
+            print args
             args = {}
         self._mydb.connect(args)    
             
