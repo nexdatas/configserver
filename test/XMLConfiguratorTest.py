@@ -895,7 +895,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cpx[0], xml)
         
         self.assertEqual(el.createConfiguration([name]), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name),None)
         self.__cmps.pop()
@@ -999,7 +999,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name[1]),None)
         self.__cmps.pop()
@@ -1048,7 +1048,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1096,7 +1096,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1231,7 +1231,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1276,7 +1276,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <field name="field1"/> <group type="NXentry">  <field name="field1"/> </group></definition>' )
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <field name="field1"/> <group type="NXentry">  <field name="field1"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1324,7 +1324,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group type="NXentry2"/> <group name="entry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group name="entry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1371,7 +1371,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1418,7 +1418,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry"/> <group name="entry2"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/> <group name="entry2"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1463,7 +1463,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1509,7 +1509,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1599,7 +1599,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig, '<?xml version="1.0" ?>\n<definition> <group name="entry2" type="NXentry2">  <field type="field"/> </group> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry2" type="NXentry2">  <field type="field"/> </group> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1745,7 +1745,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <field name="entry">  <datasource type="TANGO">   <%s/>  </datasource> </field></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <datasource type="TANGO">   <%s/>  </datasource> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1850,7 +1850,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <field name="entry">  <attribute type="TANGO">   <%s/>  </attribute> </field></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <attribute type="TANGO">   <%s/>  </attribute> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1953,7 +1953,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,  '<?xml version="1.0" ?>\n<definition> <%s name="entry"/></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <%s name="entry"/></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2059,7 +2059,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <field name="entry">  <dimensions type="TANGO">   <%s/>  </dimensions> </field></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <dimensions type="TANGO">   <%s/>  </dimensions> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2161,7 +2161,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <field name="entry">  <%s/> </field></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <%s/> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2260,7 +2260,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <group name="entry">  <%s/> </group></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry">  <%s/> </group></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2362,7 +2362,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig,'<?xml version="1.0" ?>\n<definition> <link name="entry">  <%s/> </link></definition>' % (ut) )
+            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),
+                             '<?xml version="1.0" ?><definition> <link name="entry">  <%s/> </link></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
