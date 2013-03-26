@@ -15,29 +15,34 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-# \package tools tools for configserver
-## \file simpleClient.py
-# first example of simple client
-
-import sys, os
-import time
-
-import PyTango
-
-## the main function
-def main():
-    device = "p09/mcs/r228"
-            
-    dpx = PyTango.DeviceProxy(device)
-    dpx.set_timeout_millis(25000)
-    dpx.Init()
-    dpx.JSONSettings = '{"db": "ndts",  "host":"localhost" ,"read_default_file":"/etc/my.cnf" }'
+## \package ndts nexdatas
+## \file Errors.py
+# Error classes
 
 
-if __name__ == "__main__":
-    main()
-            
-                
-            
-            
+## Incompatible class Exception
+class IncompatibleNodeError(Exception): 
+    ## constructor
+    # \param value string wit error message
+    # \param nodes list of nodes with errors
+    def __init__(self, value, nodes = []):
+        ## exception value 
+        self.value = value
+        ## nodes with errors
+        self.nodes = nodes
+    
+    ## tostring method
+    # \brief It shows the error message
+    def __str__(self):
+           return repr(self.value)    
+
+## Exception for undefined tags
+class UndefinedTagError(Exception): 
+    pass
+
+##  Error for non-existing database records
+class NonregisteredDBRecordError(Exception): 
+    pass
+
+
 
