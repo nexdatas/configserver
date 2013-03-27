@@ -1324,7 +1324,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group name="entry"/></definition>')
+        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry2"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)

@@ -94,7 +94,7 @@ class Merger(object):
         name1 = elem1.getAttribute("name")
         name2 = elem2.getAttribute("name")
 
-        if name1 != name2 :
+        if name1 != name2 and name1 and name2:
             if tagName in self.singles:
                 raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
                 
@@ -109,7 +109,7 @@ class Merger(object):
                     tags.append((str(self.__getAncestors(at1)),
                                  str(at1.nodeValue) , str(at2.nodeValue)))
 
-        if not status  and ( tagName in self.singles  or name1 ): 
+        if not status  and ( tagName in self.singles  or (name1  and name1 == name2)): 
             raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
                 
 

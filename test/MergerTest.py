@@ -275,7 +275,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group name='entry'/></definition>","<definition><group type='NXentry2'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry"/> <group type="NXentry2"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry2"/></definition>')
 
 
     ## test collect
