@@ -87,7 +87,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         if self.__man:
             el = self.openConfig(self.__args)
-            el.setMandatoryComponents[self.__man]
+            el.setMandatoryComponents([self.__man])
             el.close()
 
     ## Exception tester
