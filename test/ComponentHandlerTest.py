@@ -85,6 +85,17 @@ class ComponentHandlerTest(unittest.TestCase):
 
 
 
+    ## constructor test
+    # \brief It tests default settings
+    def test_constructor_param(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler("myds")
+        self.assertEqual(el.datasources, {})
+
+
+
 
     ## tests start element method
     # \brief It tests default settings
@@ -162,6 +173,202 @@ class ComponentHandlerTest(unittest.TestCase):
         self.assertEqual(el.startElement(name, attr), None)
         self.assertEqual(el.datasources, 
                          {'__unnamed__0': '', '__unnamed__1': 'TANGO', 'myds2': 'CLIENT', 'myds': ''} )
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_attribute(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "group" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fields(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fields_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattribute(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattribute2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattributestrategy(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement("strategy", attr), None)
+        self.assertEqual(el.endElement("strategy"), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_groupfieldattributestrategy(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement("group", attr), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement("strategy", attr), None)
+        self.assertEqual(el.characters("$datasources.my"), None)
+        self.assertEqual(el.endElement("strategy"), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+        self.assertEqual(el.endElement("group"), None)
 
 
 

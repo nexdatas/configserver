@@ -78,14 +78,16 @@ class ComponentHandler(sax.ContentHandler):
     ## parses the closing tag
     # \param name tag name
     def endElement(self, name):
-        if self.__stack[-1] in self.__withDS: 
-            text = "".join(self.__content[self.__stack[-1]]).strip()
+        tag = self.__stack[-1]
+        if tag in self.__withDS: 
+            text = "".join(self.__content[tag]).strip()
             index = text.find("$%s." % self.__dsLabel)
             if index != -1:
                 aName = (text[(index+len(self.__dsLabel)+2):].split(None,1))
                 if aName:
                     self.datasources[aName[0]] = "__FROM_DB__"
                 
+            self.__content[tag] = []
         self.__stack.pop()
 
 
