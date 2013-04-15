@@ -175,7 +175,9 @@ class XMLConfigurator(object):
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
-        self.xmlConfig = mgr.toString()
+        cnf = mgr.toString()
+        
+        self.xmlConfig = cnf
         print "create configuration"
 
 

@@ -31,18 +31,36 @@ class ComponentHandler(sax.ContentHandler):
 
     ## constructor
     # \brief It constructs parser and sets variables to default values 
-    def __init__(self):
+    def __init__(self, dsLabel = "datasources"):
         sax.ContentHandler.__init__(self)
         ##  dictionary with datasources
         self.datasources = {}
         ## unnamed datasource counter
         self.__counter = 0 
+        ## datasource label
+        self.__dsLabel  = dsLabel
+        ## containing datasources
+        self.__withDS = ["field", "attribute"]
+        ## content flag
+        self.__stack = []
+        ##
+        self.__content = {}
+        for tag in self.__withDS:
+            self.__content[tag] = []
+            
 
+
+    ## adds the tag content 
+    # \param ch partial content of the tag    
+    def characters(self, ch):
+        if self.__stack[-1] in self.__withDS: 
+            self.__content[self.__stack[-1]].append(ch)
 
     ##  parses the opening tag
     # \param name tag name
     # \param attrs attribute dictionary
     def startElement(self, name, attrs):
+        self.__stack.append(name)
         if name == "datasource":
             if "name" in attrs.keys():
                 aName = attrs["name"]
@@ -55,9 +73,18 @@ class ComponentHandler(sax.ContentHandler):
                 aType = ""
             self.datasources[aName] = aType    
             
-            
-
-
+    ## parses the closing tag
+    # \param name tag name
+    def endElement(self, name):
+        if self.__stack[-1] in self.__withDS: 
+            text = "".join(self.__content[self.__stack[-1]]).strip()
+            index = text.find("$%s." % self.__dsLabel)
+            if index != -1:
+                name = (text[(index+len(self.__dsLabel)+1):].split())
+                if name:
+                    self.datasources[name[0]] = "__FROM_DB__"
+                
+        self.__stack.pop()
 
 
 if __name__ == "__main__":

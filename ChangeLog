@@ -1,3 +1,7 @@
+2013-XX-XX Jan Kotanski <jankotan@gmail.com>
+	* change the package name from mcs to ndtsconfigserver
+	* tagged as v1.1.0
+
 2013-03-26 Jan Kotanski <jankotan@gmail.com>
 	* impoving merging algorithm
 	* adding unittests
