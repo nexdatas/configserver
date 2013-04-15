@@ -193,11 +193,14 @@ class XMLConfigurator(object):
         index = component.find("$%s." % self.__dsLabel)
         dsources = self.availableDataSources()
         while index != -1:
-            name = (component[(index+len(self.__dsLabel)+1):].split())
+            name = (component[(index+len(self.__dsLabel)+2):].split(None, 1))
             if name and name[0] and name[0] in dsources:
                 ds = self.dataSources([name[0]])
-                component = component.replace("$%s.$s" % (self.__dsLabel, name[0]), ds)
-                index = component.find("$%s." % self.__dsLabel, index)
+                if ds:
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name[0]), ds[0])
+                    index = component.find("$%s." % self.__dsLabel, index)
+                else:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
             else:
                 raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
                 
