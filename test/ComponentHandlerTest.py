@@ -26,7 +26,7 @@ import struct
 
 from xml import sax
 
-from mcs.ComponentParser import ComponentHandler
+from ndtsconfigserver.ComponentParser import ComponentHandler
 
 
 
