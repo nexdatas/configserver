@@ -24,7 +24,10 @@ from MYSQLDataBase import MYSQLDataBase as MyDB
 from ComponentParser import ComponentHandler
 import json
 from xml import  sax
+from xml.dom.minidom import parseString
 from Merger import Merger 
+from Errors import NonregisteredDBRecordError
+
 
 ## XML Configurator
 class XMLConfigurator(object):
@@ -178,8 +181,13 @@ class XMLConfigurator(object):
         mgr.collect(comps)
         mgr.merge()
         cnf = mgr.toString()
-        cnfWithDs = self.__attachDataSources(cnf)
-        self.xmlConfig = cnfWithDs
+        cnfWithDS = self.__attachDataSources(cnf)
+#        self.xmlConfig = cnfWithDS
+        if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
+            reparsed = parseString(cnfWithDS)
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))).replace("\n \n "," ").replace("\n\n","\n")
+        else:
+            self.xmlConfig = None
         print "create configuration"
 
 
@@ -193,11 +201,12 @@ class XMLConfigurator(object):
         index = component.find("$%s." % self.__dsLabel)
         dsources = self.availableDataSources()
         while index != -1:
-            name = (component[(index+len(self.__dsLabel)+2):].split(None, 1))
-            if name and name[0] and name[0] in dsources:
-                ds = self.dataSources([name[0]])
+            subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
+            name = subc[0].strip() if subc else None
+            if name and name in dsources:
+                ds = self.dataSources([name])
                 if ds:
-                    component = component.replace("$%s.%s" % (self.__dsLabel, name[0]), ds[0])
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"%s" % ds[0])
                     index = component.find("$%s." % self.__dsLabel, index)
                 else:
                     raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name

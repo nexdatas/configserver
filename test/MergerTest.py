@@ -126,7 +126,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition/>","<definition><group type='NXentry'/></definition>"]), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group type="NXentry"/></definition>')
 
 
     ## test collect
@@ -137,7 +137,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'/></definition>"]*5), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry"/> <group type="NXentry"/> <group type="NXentry"/> <group type="NXentry"/></definition>')
+        self.assertEqual(el.toString(),'<?xml version="1.0" ?>\n<definition><group type="NXentry"/><group type="NXentry"/><group type="NXentry"/><group type="NXentry"/><group type="NXentry"/></definition>' )
 
 
     ## test collect
@@ -148,7 +148,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry2"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"/><group type="NXentry2"/></definition>' )
 
 
     ## test collect
@@ -178,7 +178,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'><field type='field'/></group></definition>"]*3), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group> <group type="NXentry">  <field type="field"/> </group> <group type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group type="NXentry"><field type="field"/></group><group type="NXentry"><field type="field"/></group><group type="NXentry"><field type="field"/></group></definition>')
 
 
    ## test collect
@@ -189,7 +189,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'><field name='field1'/></group></definition>","<definition><group type='NXentry2'/><field name='field1'/></definition>"]), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field name="field1"/> </group> <group type="NXentry2"/> <field name="field1"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"><field name="field1"/></group><group type="NXentry2"/><field name="field1"/></definition>' )
 
 
 
@@ -238,7 +238,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition/>","<definition><group type='NXentry'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group type="NXentry"/></definition>')
 
 
     ## test collect
@@ -250,7 +250,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'/></definition>"]*5), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"/></definition>' )
 
 
 
@@ -263,7 +263,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry2"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"/><group type="NXentry2"/></definition>' )
 
 
     ## test collect
@@ -275,7 +275,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group name='entry'/></definition>","<definition><group type='NXentry2'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry2"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry2"/></definition>')
 
 
     ## test collect
@@ -287,7 +287,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group name='entry'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/></definition>' )
 
 
     ## test collect
@@ -299,7 +299,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group name='entry2'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry2"/> <group name="entry" type="NXentry"/></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry2"/><group name="entry" type="NXentry"/></definition>')
 
 
 
@@ -312,7 +312,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'><field type='field'/></group></definition>"]*3), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"><field type="field"/></group></definition>' )
 
 
  
@@ -325,7 +325,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group type='NXentry'><field type='field'/></group></definition>"]*10), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group type="NXentry"><field type="field"/></group></definition>')
 
 
     ## test collect
@@ -337,7 +337,7 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry'><field type='field'/></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"/></group></definition>')
 
 
     ## test collect
@@ -362,7 +362,7 @@ class MergerTest(unittest.TestCase):
         el.singles = []
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group> <group name="entry2" type="NXentry2">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"/></group><group name="entry2" type="NXentry2"><field type="field"/></group></definition>')
 
 
     ## test collect
@@ -388,7 +388,7 @@ class MergerTest(unittest.TestCase):
         el.singles = ['field']
         self.assertEqual(el.collect(["<definition><group  type='NXentry'><field type='field'/></group></definition>","<definition><group type='NXentry2'><field type='field'/></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group> <group type="NXentry2">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group type="NXentry"><field type="field"/></group><group type="NXentry2"><field type="field"/></group></definition>')
 
 
     ## test collect
@@ -414,7 +414,7 @@ class MergerTest(unittest.TestCase):
         el.uniqueText = []
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>My text </field></group></definition>","<definition><group  name='entry' type='NXentry'><field type='field'>My text 2 </field></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field">   My text    My text 2   </field> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">My text My text 2 </field></group></definition>')
 
 
 
@@ -463,7 +463,7 @@ class MergerTest(unittest.TestCase):
             }
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"/></group></definition>')
 
 
     ## test collect
@@ -505,7 +505,7 @@ class MergerTest(unittest.TestCase):
             }
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group  name='entry' type='NXentry'><field /></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>')
+        self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"/></group></definition>')
 
 
 

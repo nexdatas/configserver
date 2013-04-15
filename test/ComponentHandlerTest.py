@@ -516,6 +516,42 @@ class ComponentHandlerTest(unittest.TestCase):
 
 
 
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field_no(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler("ds")
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO' + \
+                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field_ds(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler("ds")
+        sax.parseString(
+            '<group><field name="myfield" >$ds.myTANGO' + \
+                '<attribute name="myattr" >$ds.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+
     ## constructor test
     # \brief It tests default settings
     def test_XML_datasource_type(self):
