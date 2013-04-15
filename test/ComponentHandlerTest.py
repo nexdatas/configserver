@@ -400,6 +400,22 @@ class ComponentHandlerTest(unittest.TestCase):
 
         self.assertEqual(el.datasources, {u'__unnamed__0': ''}) 
 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_empty(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString('<field name="myfield" >$datasources.</field>', el)
+ 
+
+        self.assertEqual(el.datasources, {}) 
+
     ## constructor test
     # \brief It tests default settings
     def test_XML_datasource_name(self):
@@ -409,10 +425,94 @@ class ComponentHandlerTest(unittest.TestCase):
 
         parser = sax.make_parser()
         el = ComponentHandler()
-        sax.parseString('<field name="myfield" ><datasource name="myTANGO">NXentry</datasource></field>', el)
+        sax.parseString(
+            '<field name="myfield" ><datasource name="myTANGO">NXentry</datasource></field>', el)
+        self.assertEqual(el.datasources, {u'myTANGO': ''}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_ext(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString('<field name="myfield" >$datasources.myTANGO</field>', el)
  
 
-        self.assertEqual(el.datasources, {u'myTANGO': ''}) 
+        self.assertEqual(el.datasources, {u'myTANGO':'__FROM_DB__'}) 
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO</field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group>$datasources.myTANGO<field name="myfield" >$datasources.myTANGO</field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields_withtags(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO<strategy/></field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2<doc/></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO' + \
+                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
 
 
 
