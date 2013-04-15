@@ -38,6 +38,8 @@ class XMLConfigurator(object):
 
         self.__mydb = MyDB()
 
+        self.__dsLabel = "datasources"
+
     ## opens database connection
     # \brief It opens connection to the give database by JSON string
     def open(self): 
@@ -81,7 +83,7 @@ class XMLConfigurator(object):
         if self.__mydb:
             cpl = self.__mydb.components([name])   
             if len(cpl)>0:
-                handler = ComponentHandler()
+                handler = ComponentHandler(self.__dsLabel)
                 sax.parseString(str(cpl[0]).strip(), handler)
                 return tuple(handler.datasources.keys())
 
@@ -176,10 +178,30 @@ class XMLConfigurator(object):
         mgr.collect(comps)
         mgr.merge()
         cnf = mgr.toString()
-        
-        self.xmlConfig = cnf
+        cnfWithDs = self.__attachDataSources(cnf)
+        self.xmlConfig = cnfWithDs
         print "create configuration"
 
+
+
+    ## attaches datasrouces to component
+    # \param component given component
+    # \returns component with attached datasources
+    def __attachDataSources(self, component):
+        if not component:
+            return
+        index = component.find("$%s." % self.__dsLabel)
+        dsources = self.availableDataSources()
+        while index != -1:
+            name = (component[(index+len(self.__dsLabel)+1):].split())
+            if name and name[0] and name[0] in dsources:
+                ds = self.dataSources([name[0]])
+                component = component.replace("$%s.$s" % (self.__dsLabel, name[0]), ds)
+                index = component.find("$%s." % self.__dsLabel, index)
+            else:
+                raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                
+        return component
 
 if __name__ == "__main__":
     
