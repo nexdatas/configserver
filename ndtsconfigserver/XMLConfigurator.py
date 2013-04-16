@@ -24,7 +24,10 @@ from MYSQLDataBase import MYSQLDataBase as MyDB
 from ComponentParser import ComponentHandler
 import json
 from xml import  sax
+from xml.dom.minidom import parseString
 from Merger import Merger 
+from Errors import NonregisteredDBRecordError
+
 
 ## XML Configurator
 class XMLConfigurator(object):
@@ -37,6 +40,8 @@ class XMLConfigurator(object):
         self.jsonSettings = "{}"
 
         self.__mydb = MyDB()
+
+        self.__dsLabel = "datasources"
 
     ## opens database connection
     # \brief It opens connection to the give database by JSON string
@@ -81,7 +86,7 @@ class XMLConfigurator(object):
         if self.__mydb:
             cpl = self.__mydb.components([name])   
             if len(cpl)>0:
-                handler = ComponentHandler()
+                handler = ComponentHandler(self.__dsLabel)
                 sax.parseString(str(cpl[0]).strip(), handler)
                 return tuple(handler.datasources.keys())
 
@@ -175,9 +180,41 @@ class XMLConfigurator(object):
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
-        self.xmlConfig = mgr.toString()
+        cnf = mgr.toString()
+        cnfWithDS = self.__attachDataSources(cnf)
+#        self.xmlConfig = cnfWithDS
+        if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
+            reparsed = parseString(cnfWithDS)
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
+                                 ).replace("\n \n "," ").replace("\n\n","\n")
+        else:
+            self.xmlConfig = None
         print "create configuration"
 
+
+
+    ## attaches datasrouces to component
+    # \param component given component
+    # \returns component with attached datasources
+    def __attachDataSources(self, component):
+        if not component:
+            return
+        index = component.find("$%s." % self.__dsLabel)
+        dsources = self.availableDataSources()
+        while index != -1:
+            subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
+            name = subc[0].strip() if subc else None
+            if name and name in dsources:
+                ds = self.dataSources([name])
+                if ds:
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds[0])
+                    index = component.find("$%s." % self.__dsLabel, index)
+                else:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+            else:
+                raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                
+        return component
 
 if __name__ == "__main__":
     

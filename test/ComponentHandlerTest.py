@@ -26,7 +26,7 @@ import struct
 
 from xml import sax
 
-from mcs.ComponentParser import ComponentHandler
+from ndtsconfigserver.ComponentParser import ComponentHandler
 
 
 
@@ -81,6 +81,17 @@ class ComponentHandlerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_constructor_param(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler("myds")
         self.assertEqual(el.datasources, {})
 
 
@@ -165,6 +176,202 @@ class ComponentHandlerTest(unittest.TestCase):
 
 
 
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_attribute(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "group" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fields(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fields_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattribute(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattribute2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_fieldattributestrategy(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement("strategy", attr), None)
+        self.assertEqual(el.endElement("strategy"), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+
+
+
+    ## tests start element method
+    # \brief It tests default settings
+    def test_startendElement_groupfieldattributestrategy(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = ComponentHandler()
+        self.assertEqual(el.datasources, {})
+        name = "field" 
+        aname = "attribute" 
+        attr = {"name2":"mydt"}
+        ds = "extr_mot1" 
+        ds2 = "extr_mot2"
+        self.assertEqual(el.startElement("group", attr), None)
+        self.assertEqual(el.startElement(name, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds), None)
+        self.assertEqual(el.startElement(aname, attr), None)
+        self.assertEqual(el.characters("$datasources.%s" % ds2), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.startElement("strategy", attr), None)
+        self.assertEqual(el.characters("$datasources.my"), None)
+        self.assertEqual(el.endElement("strategy"), None)
+        self.assertEqual(el.endElement(name), None)
+        self.assertEqual(el.datasources, {'extr_mot1': '__FROM_DB__', 'extr_mot2': '__FROM_DB__'})
+        self.assertEqual(el.endElement("group"), None)
+
+
+
     ## constructor test
     # \brief It tests default settings
     def test_XML_empty(self):
@@ -193,6 +400,22 @@ class ComponentHandlerTest(unittest.TestCase):
 
         self.assertEqual(el.datasources, {u'__unnamed__0': ''}) 
 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_empty(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString('<field name="myfield" >$datasources.</field>', el)
+ 
+
+        self.assertEqual(el.datasources, {}) 
+
     ## constructor test
     # \brief It tests default settings
     def test_XML_datasource_name(self):
@@ -202,10 +425,130 @@ class ComponentHandlerTest(unittest.TestCase):
 
         parser = sax.make_parser()
         el = ComponentHandler()
-        sax.parseString('<field name="myfield" ><datasource name="myTANGO">NXentry</datasource></field>', el)
+        sax.parseString(
+            '<field name="myfield" ><datasource name="myTANGO">NXentry</datasource></field>', el)
+        self.assertEqual(el.datasources, {u'myTANGO': ''}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_ext(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString('<field name="myfield" >$datasources.myTANGO</field>', el)
  
 
-        self.assertEqual(el.datasources, {u'myTANGO': ''}) 
+        self.assertEqual(el.datasources, {u'myTANGO':'__FROM_DB__'}) 
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO</field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields_group(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group>$datasources.myTANGO<field name="myfield" >$datasources.myTANGO</field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_two_fields_withtags(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO<strategy/></field>' + \
+                '<field name="myfield2" >$datasources.myTANGO2<doc/></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler()
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO' + \
+                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
+
+
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field_no(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler("ds")
+        sax.parseString(
+            '<group><field name="myfield" >$datasources.myTANGO' + \
+                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {}) 
+
+
+    ## constructor test
+    # \brief It tests default settings
+    def test_XML_datasource_name_attr_field_ds(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+
+        parser = sax.make_parser()
+        el = ComponentHandler("ds")
+        sax.parseString(
+            '<group><field name="myfield" >$ds.myTANGO' + \
+                '<attribute name="myattr" >$ds.myTANGO2</attribute></field></group>', el)
+ 
+
+        self.assertEqual(el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'}) 
 
 
 

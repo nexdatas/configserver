@@ -32,9 +32,9 @@ import time
 IS64BIT = (struct.calcsize("P") == 8)
 
 
-from mcs.XMLConfigurator  import XMLConfigurator
-from mcs.Merger import Merger
-from mcs.Errors import NonregisteredDBRecordError, UndefinedTagError, IncompatibleNodeError
+from ndtsconfigserver.XMLConfigurator  import XMLConfigurator
+from ndtsconfigserver.Merger import Merger
+from ndtsconfigserver.Errors import NonregisteredDBRecordError, UndefinedTagError, IncompatibleNodeError
 
 ## test fixture
 class XMLConfiguratorTest(unittest.TestCase):

@@ -29,7 +29,7 @@ import numpy
 
 
 
-from mcs.Errors import (IncompatibleNodeError, UndefinedTagError, NonregisteredDBRecordError)
+from ndtsconfigserver.Errors import (IncompatibleNodeError, UndefinedTagError, NonregisteredDBRecordError)
                          
 
 ## test fixture

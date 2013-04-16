@@ -22,7 +22,7 @@ from distutils.core import setup
 from distutils.command.install import install
 
 ## package name
-NDTS = "mcs"
+NDTS = "ndtsconfigserver"
 ## ndts imported package
 INDTS = __import__(NDTS)
 
@@ -54,7 +54,7 @@ SETUPDATA=dict(
     license = "GNU GENERAL PUBLIC LICENSE v3",
     keywords = "configuration MySQL writer Tango server nexus data",
     url = "http://code.google.com/p/nexdatas/",
-    packages=['mcs'],
+    packages=[NDTS],
     requires=required,
     scripts = ['XMLConfigServer.py', 'XMLConfigServer'],
 #    scripts = ['TangoDataServer.py'],

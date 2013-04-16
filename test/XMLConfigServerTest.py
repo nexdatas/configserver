@@ -29,7 +29,7 @@ import PyTango
 
 import ServerSetUp
 import XMLConfiguratorTest
-from mcs import XMLConfigurator
+from ndtsconfigserver import XMLConfigurator
 
 ## test fixture
 class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
