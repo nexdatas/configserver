@@ -185,7 +185,8 @@ class XMLConfigurator(object):
 #        self.xmlConfig = cnfWithDS
         if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
             reparsed = parseString(cnfWithDS)
-            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))).replace("\n \n "," ").replace("\n\n","\n")
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
+                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
             self.xmlConfig = None
         print "create configuration"
@@ -206,7 +207,7 @@ class XMLConfigurator(object):
             if name and name in dsources:
                 ds = self.dataSources([name])
                 if ds:
-                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"%s" % ds[0])
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds[0])
                     index = component.find("$%s." % self.__dsLabel, index)
                 else:
                     raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
