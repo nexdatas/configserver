@@ -2633,5 +2633,95 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_componentDataSources_external(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+
+        xds  = [
+            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            ]
+
+
+        odsname = "mcs_test_datasource"
+        avds = el.availableDataSources()
+        self.assertTrue(isinstance(avds, list))
+        dsnp = len(xds)
+        print "DSNP", dsnp
+        dsname = []
+        for i in range(dsnp):
+            
+            dsname.append(odsname +'_%s' % i )
+            while dsname[i] in avds:
+                dsname[i] = dsname[i] + '_%s' %i
+
+                
+        for i in range(dsnp):
+            el.xmlConfig = xds[i] % dsname[i]
+            print "DDSS",dsname[i],xds[i] % dsname[i]
+            self.assertEqual(el.storeDataSource(dsname[i]),None)
+            self.__ds.append(dsname[i])
+
+
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[0]),
+               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[1]),
+               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[2] ,"$datasources.%s" % dsname[3] )
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            el.xmlConfig = xml[i]
+            print "CP", name[i], xml[i]
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[0],name[2]]
+        cmps = []
+        for cs in css:
+            mdss = el.componentDataSources(cs)
+            print mdss
+            cmps.extend(mdss)
+        self.assertEqual(cmps,[dsname[0],dsname[2],dsname[3]])
+        
+        
+
+        el.setMandatoryComponents(man)
+        el.close()
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
