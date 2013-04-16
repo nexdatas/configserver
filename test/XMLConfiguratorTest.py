@@ -2523,8 +2523,15 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration([name[2]]), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),
-                         '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry3"/> <group type="NXentry"/></definition>')
+        self.assertTrue( 
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry3"/> <group type="NXentry"/></definition>') | 
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry2"/> <group type="NXentry"/></definition>') |
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry"/> <group type="NXentry2"/></definition>') |
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/> <group type="NXentry3"/></definition>') |
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry2"/> <group type="NXentry3"/></definition>') |
+            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry3"/> <group type="NXentry2"/></definition>') 
+                         )
+        
 
         el.unsetMandatoryComponents([name[1]])
 
@@ -2573,7 +2580,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
-        print "DSNP", dsnp
         dsname = []
         for i in range(dsnp):
             
@@ -2584,7 +2590,6 @@ class XMLConfiguratorTest(unittest.TestCase):
                 
         for i in range(dsnp):
             el.xmlConfig = xds[i] % dsname[i]
-            print "DDSS",dsname[i],xds[i] % dsname[i]
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2614,7 +2619,6 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for i in range(np):
             el.xmlConfig = xml[i]
-            print "CP", name[i], xml[i]
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2624,7 +2628,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         cmps = []
         for cs in css:
             mdss = el.componentDataSources(cs)
-            print mdss
             cmps.extend(mdss)
         self.assertEqual(cmps,[dsname[0],dsname[2],dsname[3]])
         
@@ -2663,7 +2666,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
-        print "DSNP", dsnp
         dsname = []
         for i in range(dsnp):
             
@@ -2674,7 +2676,6 @@ class XMLConfiguratorTest(unittest.TestCase):
                 
         for i in range(dsnp):
             el.xmlConfig = xds[i] % dsname[i]
-            print "DDSS",dsname[i],xds[i] % dsname[i]
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2704,7 +2705,6 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for i in range(np):
             el.xmlConfig = xml[i]
-            print "CP", name[i], xml[i]
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2714,7 +2714,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         cmps = []
         for cs in css:
             mdss = el.componentDataSources(cs)
-            print mdss
             cmps.extend(mdss)
         self.assertEqual(cmps,[dsname[0],dsname[2],dsname[3]])
         
@@ -2752,7 +2751,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
-        print "DSNP", dsnp
         dsname = []
         for i in range(dsnp):
             
@@ -2763,7 +2761,6 @@ class XMLConfiguratorTest(unittest.TestCase):
                 
         for i in range(dsnp):
             el.xmlConfig = xds[i] % dsname[i]
-            print "DDSS",dsname[i],xds[i] % dsname[i]
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2793,7 +2790,6 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for i in range(np):
             el.xmlConfig = xml[i]
-            print "CP", name[i], xml[i]
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2844,7 +2840,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
-        print "DSNP", dsnp
         dsname = []
         for i in range(dsnp):
             
@@ -2855,7 +2850,6 @@ class XMLConfiguratorTest(unittest.TestCase):
                 
         for i in range(dsnp):
             el.xmlConfig = xds[i] % dsname[i]
-            print "DDSS",dsname[i],xds[i] % dsname[i]
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2882,8 +2876,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
-            print "CP", name[i], xml[i]
+            el.xmlConfig = xml[i] 
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2891,7 +2884,6 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         css = [name[0],name[2]]
 
-        print "CSS", css
         self.assertEqual(el.createConfiguration(css), None)
         self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
 
