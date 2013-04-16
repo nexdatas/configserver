@@ -2519,7 +2519,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         el.setMandatoryComponents([name[0],name[1]])
-        self.assertEqual(el.mandatoryComponents(),[name[0],name[1]])
+        self.assertEqual(el.mandatoryComponents().sort(),[name[0],name[1]].sort())
 
         
         self.assertEqual(el.createConfiguration([name[2]]), None)
