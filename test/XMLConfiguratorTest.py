@@ -2968,7 +2968,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
         css = [name[0],name[2]]
-
+        print el.components([name[0],name[2]])
+        print "CSS",css
+        print "MAND", el.mandatoryComponents()
         self.assertEqual(el.createConfiguration(css), None)
         self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
 

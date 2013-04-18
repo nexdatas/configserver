@@ -216,27 +216,38 @@ class Merger(object):
     def collect(self, components):	
         self.__root = None
         rootDef = None
-        
         for cp in components:
+            print "CPP", cp
             dcp = None
             if cp:
                 dcp = parseString(cp)   
+            print "DCP" , dcp.toxml()
+            print "CPP", cp, parseString(cp).toxml() 
             if not dcp:
                 continue
             
+            print "XDCP" , dcp.toxml()
             if self.__root is None:
                 self.__root = dcp
+                print "DCP2" , dcp.toxml()
+                print "ROOT" , self.__root.toxml()
                 rdef = dcp.getElementsByTagName("definition")
                 if not rdef: 
                     raise  UndefinedTagError, "<definition> not defined"
                 rootDef = rdef[0]
+                print "RDEF", rootDef.toxml()
             else:
                 defin = dcp.getElementsByTagName("definition")
                 if not defin: 
                     raise  UndefinedTagError, "<definition> not defined"
+                print "DEF", defin[0].toxml()
                 for cd in defin[0].childNodes:
+                    print "KIDDEF", cd.toxml()
                     icd = self.__root.importNode(cd, True) 
                     rootDef.appendChild(icd)
+                    print "RDEF", rootDef.toxml()
+                    print "ROOT2" , self.__root.toxml()
+        print "COLLECTED" , self.__root.toxml()
 
     ## Converts DOM trer to string
     #  \returns DOM tree in XML string
