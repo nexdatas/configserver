@@ -247,7 +247,8 @@ class Merger(object):
                     rootDef.appendChild(icd)
                     print "RDEF", rootDef.toxml()
                     print "ROOT2" , self.__root.toxml()
-        print "COLLECTED" , self.__root.toxml()
+        if self.__root:            
+            print "COLLECTED" , self.__root.toxml()
 
     ## Converts DOM trer to string
     #  \returns DOM tree in XML string
