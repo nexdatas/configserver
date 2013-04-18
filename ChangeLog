@@ -1,3 +1,7 @@
+2013-04-18 Jan Kotanski <jankotan@gmail.com>
+	* fixing bug for linked $datasources
+	* tagged as v1.1.1
+
 2013-04-16 Jan Kotanski <jankotan@gmail.com>
 	* change the package name from mcs to ndtsconfigserver
 	* adding support for $datasources Cheetah syntax

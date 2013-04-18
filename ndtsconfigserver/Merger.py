@@ -216,7 +216,6 @@ class Merger(object):
     def collect(self, components):	
         self.__root = None
         rootDef = None
-        
         for cp in components:
             dcp = None
             if cp:

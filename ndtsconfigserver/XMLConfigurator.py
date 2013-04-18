@@ -205,9 +205,16 @@ class XMLConfigurator(object):
             subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
             name = subc[0].strip() if subc else None
             if name and name in dsources:
-                ds = self.dataSources([name])
+                xmlds = self.dataSources([name])
+                if not xmlds:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name 
+                dom = parseString(xmlds[0])
+                domds = dom.getElementsByTagName("datasource")
+                if not domds:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                ds = domds[0].toxml()
                 if ds:
-                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds[0])
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
                     index = component.find("$%s." % self.__dsLabel, index)
                 else:
                     raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
