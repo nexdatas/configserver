@@ -177,12 +177,10 @@ class XMLConfigurator(object):
     def createConfiguration(self, names):
         if self.__mydb:
             comps = self.__mydb.components(list(set(self.__mydb.mandatory() + names)))   
-        print "CCON", comps 
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
         cnf = mgr.toString()
-        print "CNF", cnf 
         cnfWithDS = self.__attachDataSources(cnf)
 #        self.xmlConfig = cnfWithDS
         if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
@@ -199,7 +197,6 @@ class XMLConfigurator(object):
     # \param component given component
     # \returns component with attached datasources
     def __attachDataSources(self, component):
-        print "COMP", component
         if not component:
             return
         index = component.find("$%s." % self.__dsLabel)
@@ -207,26 +204,23 @@ class XMLConfigurator(object):
         while index != -1:
             subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
             name = subc[0].strip() if subc else None
-            print "DS NAME", name
             if name and name in dsources:
                 xmlds = self.dataSources([name])
-                print "DS XML", xmlds
                 if not xmlds:
-                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name                    
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name 
                 dom = parseString(xmlds[0])
                 domds = dom.getElementsByTagName("datasource")
-                ds = dom.toxml()
-                print "PURE DS XML", ds
+                if not domds:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                ds = domds[0].toxml()
                 if ds:
-                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds[0])
-                    print "COMP2", component
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
                     index = component.find("$%s." % self.__dsLabel, index)
                 else:
                     raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
             else:
                 raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
                 
-        print "COMP", component
         return component
 
 if __name__ == "__main__":
