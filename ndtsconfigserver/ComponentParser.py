@@ -83,7 +83,8 @@ class ComponentHandler(sax.ContentHandler):
             text = "".join(self.__content[tag]).strip()
             index = text.find("$%s." % self.__dsLabel)
             if index != -1:
-                aName = (text[(index+len(self.__dsLabel)+2):].split(None,1))
+                aName = text[(index+len(self.__dsLabel)+2):].split("<",1)
+                aName = aName[0].split(None,1) if aName else ""
                 if aName:
                     self.datasources[aName[0]] = "__FROM_DB__"
                 
