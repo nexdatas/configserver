@@ -203,7 +203,9 @@ class XMLConfigurator(object):
         dsources = self.availableDataSources()
         while index != -1:
             subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
-            name = subc[0].strip() if subc else None
+            name = subc[0].strip() if subc else ""
+            name = name.split(None,1) if name else []
+            name = name[0] if name else ""
             if name and name in dsources:
                 xmlds = self.dataSources([name])
                 if not xmlds:
