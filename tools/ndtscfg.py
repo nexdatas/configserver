@@ -40,7 +40,7 @@ class ConfigServer(object):
         self.cnfServer = PyTango.DeviceProxy(device)
 #        print self.cnfServer.state() 
         if self.cnfServer.state() != PyTango.DevState.OPEN:
-#            self.cnfServer.Init()
+            self.cnfServer.Init()
             self.cnfServer.Open()
 #            print "OK2"
 #        else:
