@@ -60,11 +60,21 @@ class ConfigServer(object):
 
     def showCmd(self, ds, args, mandatory=False):
         if ds:
-            if not mandatory:
-                return self.cnfServer.DataSources(args)
+            dsrc = self.cnfServer.AvailableDataSources()
+            for ar in args:
+                if ar not in dsrc:
+                    sys.stderr.write("Error: DataSource %s not stored in configuration server\n"% ar)
+                    sys.stderr.flush()
+                    return []
+            return self.cnfServer.DataSources(args)
         else:
+            cmps = self.cnfServer.AvailableComponents()
+            for ar in args:
+                if ar not in cmps:
+                    sys.stderr.write("Error: Component %s not stored in configuration server\n"% ar)
+                    sys.stderr.flush()
+                    return []
             if mandatory:
-                
                 mand =  list(self.cnfServer.MandatoryComponents())
                 mand.extend(args)    
                 return self.cnfServer.Components(mand)
@@ -73,11 +83,28 @@ class ConfigServer(object):
         return []    
 
 
+    def getCmd(self, ds, args):
+        if ds:
+            return ""
+        else:
+            cmps = self.cnfServer.AvailableComponents()
+            for ar in args:
+                if ar not in cmps:
+                    sys.stderr.write("Error: Component %s not stored in configuration server\n"% ar)
+                    sys.stderr.flush()
+                    return ""
+            self.cnfServer.CreateConfiguration(args)
+            return self.cnfServer.XMLString
+        return ""    
+
+
     def performCommand(self, command, ds, args, mandatory=False):
         if command == 'list':
             return  " ".join(self.listCmd(ds, mandatory)) 
         if command == 'show':
             return  " ".join(self.showCmd(ds, args, mandatory)) 
+        if command == 'get':
+            return  self.getCmd(ds, args) 
             
 
 def main():
@@ -93,11 +120,11 @@ def main():
         + "   list -s <config_server> -d  \n"\
         + "          list names of available datasources\n"\
         + "   show -s <config_server>  name1 name2 ...  \n"\
-        + "          list components with given names \n"\
+        + "          show components with given names \n"\
         + "   show -s <config_server> -d name1 name2 ...  \n"\
-        + "          list datasources with given names \n"\
+        + "          show datasources with given names \n"\
         + "   get -s <config_server>  name1 name2 ...  \n"\
-        + "          get merged configuration of given components \n"\
+        + "          get merged configuration of components \n"\
         + " "
 
     ## option parser
