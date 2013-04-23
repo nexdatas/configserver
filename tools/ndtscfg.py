@@ -46,16 +46,40 @@ class ConfigServer(object):
 #        else:
 #            print "OK"
 
-    def listCmd(self, ds):
+    def listCmd(self, ds, mandatory=False):
         if ds:
-            return self.cnfServer.AvailableDataSources()
+            if not mandatory:
+                return self.cnfServer.AvailableDataSources()
         else:
-            return self.cnfServer.AvailableComponents()
-            
+            if mandatory:
+                return self.cnfServer.MandatoryComponents()
+            else:
+                return self.cnfServer.AvailableComponents()
+        return []    
 
-    def performCommand(self, command, ds, args):
+
+    def showCmd(self, ds, args, mandatory=False):
+        if ds:
+            if not mandatory:
+                return self.cnfServer.DataSources(args)
+        else:
+            if mandatory:
+                
+#                mand =  self.cnfServer.MandatoryComponents()
+#                mm = [m for m in mand]
+#                mm.append(args)
+#                return self.cnfServer.Components(mm)
+                return self.cnfServer.Components(args)
+            else:
+                return self.cnfServer.Components(args)
+        return []    
+
+
+    def performCommand(self, command, ds, args, mandatory=False):
         if command == 'list':
-            return  " ".join(self.listCmd(ds))
+            return  " ".join(self.listCmd(ds, mandatory)) 
+        if command == 'show':
+            return  " ".join(self.showCmd(ds, args, mandatory)) 
             
 
 def main():
@@ -63,7 +87,7 @@ def main():
     ## run options
     options = None
     ## usage example
-    usage = "usage: %prog <command> -s <config_server> [-d] [name1] [name2] [name3] ... \n"\
+    usage = "usage: %prog <command> -s <config_server> [-d] [-m] [name1] [name2] [name3] ... \n"\
         +" e.g.: %prog list -s p09/xmlconfigserver/exp.01 -d\n\n"\
         + "Commands: \n"\
         + "   list -s <config_server>   \n"\
@@ -85,6 +109,9 @@ def main():
     parser.add_option("-d","--datasources",  action="store_true",
                       default=False, dest="datasources", 
                       help="perform operation on datasources")
+    parser.add_option("-m","--mandatory",  action="store_true",
+                      default=False, dest="mandatory", 
+                      help="lists only mandatory components")
 
     (options, args) = parser.parse_args()
 
@@ -96,8 +123,10 @@ def main():
 
     
     cnfserver = ConfigServer(options.server)
-    string = cnfserver.performCommand(args[0], options.datasources, args[1:])
-    print string
+    string = cnfserver.performCommand(args[0], options.datasources, 
+                                      args[1:], options.mandatory)
+    if string.strip():
+        print string
 
 
 
