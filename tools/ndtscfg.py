@@ -65,11 +65,9 @@ class ConfigServer(object):
         else:
             if mandatory:
                 
-#                mand =  self.cnfServer.MandatoryComponents()
-#                mm = [m for m in mand]
-#                mm.append(args)
-#                return self.cnfServer.Components(mm)
-                return self.cnfServer.Components(args)
+                mand =  list(self.cnfServer.MandatoryComponents())
+                mand.extend(args)    
+                return self.cnfServer.Components(mand)
             else:
                 return self.cnfServer.Components(args)
         return []    
