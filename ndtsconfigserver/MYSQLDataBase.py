@@ -44,7 +44,10 @@ class MYSQLDataBase(object):
     # \brief It closes connection to the open database
     def close(self):
         if self.__db:
-            self.__db.close()
+            try:
+                self.__db.close()
+            except:
+                pass
 
 
     ## fetches the required components
