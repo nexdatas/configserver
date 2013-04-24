@@ -67,26 +67,36 @@ class NexusServer(object):
             sys.exit(255)
 
             
-
+    ## opens the h5 file
+    # \param filename h5 file name        
     def openFile(self, filename):
         self.tdwServer.Init()
         self.tdwServer.FileName = str(filename)
         self.tdwServer.OpenFile()
 
 
+    ## sets the global JSON data
+    # \param jsondata global JSON data
     def setData(self, jsondata):
         self.tdwServer.TheJSONRecord = str(jsondata)
 
+    ## opens an entry
+    # \param xmlconfig xml configuration string
     def openEntry(self, xmlconfig):
         self.tdwServer.TheXMLSettings = str(xmlconfig)
         self.tdwServer.OpenEntry()
 
+    ## records one step
+    # \param jsondata step JSON data
     def record(self, jsondata):
         self.tdwServer.Record(jsondata)
 
+
+    ## closes the entry
     def closeEntry(self):
         self.tdwServer.CloseEntry()
 
+    ## closes the file
     def closeFile(self):
         self.tdwServer.CloseFile()
         
