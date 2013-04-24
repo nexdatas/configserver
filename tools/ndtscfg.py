@@ -49,9 +49,10 @@ class ConfigServer(object):
                 found = False
             cnt +=1
 
-        sys.stderr.write("Error: Cannot connect into configuration server: %s\n"% device)
-        sys.stderr.flush()
-        sys.exit(255)
+        if not found:
+            sys.stderr.write("Error: Cannot connect into configuration server: %s\n"% device)
+            sys.stderr.flush()
+            sys.exit(255)
 
             
         if self.cnfServer.state() != PyTango.DevState.OPEN:
