@@ -29,23 +29,18 @@ from optparse import OptionParser
 import PyTango
 
 
-
-# ndtscfg list [-c,--components] [-d,--datasources]
-# ndtscfg show [-c,--components] [-d,--datasources] obj1 obj2 obj3
-# ndtscfg get comp1 comp2 comp3 ...
-
 ## configuration server adapter
 class ConfigServer(object):
     ## constructor
     # \param device device name of configuration server
     def __init__(self, device):
-        ## configuration server proxy
         found = False
         cnt = 0
         while not found and cnt < 1000:
             if cnt > 1:
                 time.sleep(0.01)
             try:
+                ## configuration server proxy
                 self.cnfServer = PyTango.DeviceProxy(device)
                 if self.cnfServer.state() != PyTango.DevState.RUNNING:
                     found = True
@@ -54,7 +49,11 @@ class ConfigServer(object):
                 found = False
             cnt +=1
 
+        sys.stderr.write("Error: Cannot connect into configuration server: %s\n"% device)
+        sys.stderr.flush()
+        sys.exit(255)
 
+            
         if self.cnfServer.state() != PyTango.DevState.OPEN:
 #            self.cnfServer.Init()
             self.cnfServer.Open()
