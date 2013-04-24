@@ -56,7 +56,7 @@ class ConfigServer(object):
 
 
         if self.cnfServer.state() != PyTango.DevState.OPEN:
-            self.cnfServer.Init()
+#            self.cnfServer.Init()
             self.cnfServer.Open()
 
     ## lists the DB item names
