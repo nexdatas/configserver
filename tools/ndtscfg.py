@@ -36,8 +36,17 @@ class ConfigServer(object):
     def __init__(self, device):
         found = False
         cnt = 0
-        ## configuration server proxy
-        self.cnfServer = PyTango.DeviceProxy(device)
+
+        try:
+            ## configuration server proxy
+            self.cnfServer = PyTango.DeviceProxy(device)
+        except:
+            found = True
+            
+        if found:
+            sys.stderr.write("Error: Cannot connect into configuration server: %s\n"% device)
+            sys.stderr.flush()
+            sys.exit(255)
 
         while not found and cnt < 1000:
             if cnt > 1:
@@ -51,7 +60,7 @@ class ConfigServer(object):
             cnt +=1
 
         if not found:
-            sys.stderr.write("Error: Cannot connect into configuration server: %s\n"% device)
+            sys.stderr.write("Error: Setting up %s lasts to long\n"% device)
             sys.stderr.flush()
             sys.exit(255)
 
