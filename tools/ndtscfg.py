@@ -39,7 +39,7 @@ class ConfigServer(object):
         cnt = 0
         ## spliting character
         self.__char = " " if nonewline else "\n"
-
+        
         try:
             ## configuration server proxy
             self.cnfServer = PyTango.DeviceProxy(device)
@@ -150,6 +150,14 @@ class ConfigServer(object):
             
 ## the main function
 def main():
+    
+    
+    ## pipe arguments
+    pipe = []
+    if not sys.stdin.isatty():
+        ## system pipe 
+        pipe = sys.stdin.readlines()
+
     commands = ['list','show','get']
     ## run options
     options = None
@@ -194,9 +202,17 @@ def main():
 
     ## configuration server     
     cnfserver = ConfigServer(options.server, options.nonewlines)
+    
+    ## command-line and pipe arguments
+    parg = args[1:]
+    if pipe:
+        parg.extend([p.strip() for p in pipe ])
+
+
+
     ## result to print
     result = cnfserver.performCommand(args[0], options.datasources, 
-                                      args[1:], options.mandatory)
+                                      parg, options.mandatory)
     if result.strip():
         print result
 
