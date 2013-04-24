@@ -185,8 +185,9 @@ class XMLConfigurator(object):
 #        self.xmlConfig = cnfWithDS
         if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
             reparsed = parseString(cnfWithDS)
-            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
-                                 ).replace("\n \n "," ").replace("\n\n","\n")
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl="")))
+#            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
+#                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
             self.xmlConfig = None
         print "create configuration"

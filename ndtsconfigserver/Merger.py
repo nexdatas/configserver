@@ -234,8 +234,11 @@ class Merger(object):
                 if not defin: 
                     raise  UndefinedTagError, "<definition> not defined"
                 for cd in defin[0].childNodes:
-                    icd = self.__root.importNode(cd, True) 
-                    rootDef.appendChild(icd)
+                    if cd.nodeType != cd.TEXT_NODE or\
+                            (cd.nodeType == cd.TEXT_NODE and str(cd.data).strip()):
+                        
+                        icd = self.__root.importNode(cd, True) 
+                        rootDef.appendChild(icd)
 
     ## Converts DOM trer to string
     #  \returns DOM tree in XML string

@@ -43,7 +43,8 @@ class ConfigServer(object):
         try:
             ## configuration server proxy
             self.cnfServer = PyTango.DeviceProxy(device)
-        except:
+        except Exception, e:
+#            sys.stderr.write(str(e))
             found = True
             
         if found:
@@ -57,13 +58,14 @@ class ConfigServer(object):
             try:
                 if self.cnfServer.state() != PyTango.DevState.RUNNING:
                     found = True
-            except:    
+            except Exception,e:
+#                sys.stderr.write(str(e))
                 time.sleep(0.01)
                 found = False
             cnt +=1
 
         if not found:
-            sys.stderr.write("Error: Setting up %s lasts to long\n"% device)
+            sys.stderr.write("Error: Setting up %s takes to long\n"% device)
             sys.stderr.flush()
             sys.exit(255)
 
