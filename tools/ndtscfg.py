@@ -188,6 +188,7 @@ def main():
 
     if not args or args[0] not in commands or not options.server :
         parser.print_help()
+        print ""
         sys.exit(255)
 
 
