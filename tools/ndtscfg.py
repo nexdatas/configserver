@@ -165,7 +165,7 @@ def main():
     ## result to print
     result = cnfserver.performCommand(args[0], options.datasources, 
                                       args[1:], options.mandatory)
-    if string.strip():
+    if result.strip():
         print result
 
 
