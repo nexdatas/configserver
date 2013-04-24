@@ -128,9 +128,9 @@ class ConfigServer(object):
     # \param mandatory flag set True for mandatory components        
     def performCommand(self, command, ds, args, mandatory=False):
         if command == 'list':
-            return  " ".join(self.listCmd(ds, mandatory)) 
+            return  "\n".join(self.listCmd(ds, mandatory)) 
         if command == 'show':
-            return  " ".join(self.showCmd(ds, args, mandatory)) 
+            return  "\n".join(self.showCmd(ds, args, mandatory)) 
         if command == 'get':
             return  self.getCmd(ds, args) 
             
