@@ -34,18 +34,20 @@ import PyTango
 # ndtscfg show [-c,--components] [-d,--datasources] obj1 obj2 obj3
 # ndtscfg get comp1 comp2 comp3 ...
 
+## configuration server adapter
 class ConfigServer(object):
+    ## constructor
+    # \param device device name of configuration server
     def __init__(self, device):
-#        print "DEV", device
+        ## configuration server proxy
         self.cnfServer = PyTango.DeviceProxy(device)
-#        print self.cnfServer.state() 
         if self.cnfServer.state() != PyTango.DevState.OPEN:
             self.cnfServer.Init()
             self.cnfServer.Open()
-#            print "OK2"
-#        else:
-#            print "OK"
-
+            
+    ## lists the DB item names
+    # \param ds flag set True for datasources
+    # \param mandatory flag set True for mandatory components        
     def listCmd(self, ds, mandatory=False):
         if ds:
             if not mandatory:
@@ -58,6 +60,10 @@ class ConfigServer(object):
         return []    
 
 
+    ## shows the DB items
+    # \param ds flag set True for datasources
+    # \param args list of item names
+    # \param mandatory flag set True for mandatory components        
     def showCmd(self, ds, args, mandatory=False):
         if ds:
             dsrc = self.cnfServer.AvailableDataSources()
@@ -83,6 +89,9 @@ class ConfigServer(object):
         return []    
 
 
+    ## Provides final configuration
+    # \param ds flag set True for datasources
+    # \param args list of item names
     def getCmd(self, ds, args):
         if ds:
             return ""
@@ -98,6 +107,11 @@ class ConfigServer(object):
         return ""    
 
 
+    ## perform requested command
+    # \param command called command
+    # \param ds flag set True for datasources
+    # \param args list of item names
+    # \param mandatory flag set True for mandatory components        
     def performCommand(self, command, ds, args, mandatory=False):
         if command == 'list':
             return  " ".join(self.listCmd(ds, mandatory)) 
@@ -106,14 +120,14 @@ class ConfigServer(object):
         if command == 'get':
             return  self.getCmd(ds, args) 
             
-
+## the main function
 def main():
     commands = ['list','show','get']
     ## run options
     options = None
     ## usage example
     usage = "usage: %prog <command> -s <config_server> [-d] [-m] [name1] [name2] [name3] ... \n"\
-        +" e.g.: %prog list -s p09/xmlconfigserver/exp.01 -d\n\n"\
+        +" e.g.: %prog list -s p02/xmlconfigserver/exp.01 -d\n\n"\
         + "Commands: \n"\
         + "   list -s <config_server>   \n"\
         + "          list names of available components\n"\
@@ -146,12 +160,13 @@ def main():
 #    print "ARGS", args
 
 
-    
+    ## configuration server     
     cnfserver = ConfigServer(options.server)
-    string = cnfserver.performCommand(args[0], options.datasources, 
+    ## result to print
+    result = cnfserver.performCommand(args[0], options.datasources, 
                                       args[1:], options.mandatory)
     if string.strip():
-        print string
+        print result
 
 
 
