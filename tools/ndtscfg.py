@@ -40,11 +40,25 @@ class ConfigServer(object):
     # \param device device name of configuration server
     def __init__(self, device):
         ## configuration server proxy
-        self.cnfServer = PyTango.DeviceProxy(device)
+        found = False
+        cnt = 0
+        while not found and cnt < 1000:
+            if cnt > 1:
+                time.sleep(0.01)
+            try:
+                self.cnfServer = PyTango.DeviceProxy(device)
+                if self.cnfServer.state() != PyTango.DevState.RUNNING:
+                    found = True
+            except:    
+                time.sleep(0.01)
+                found = False
+            cnt +=1
+
+
         if self.cnfServer.state() != PyTango.DevState.OPEN:
             self.cnfServer.Init()
             self.cnfServer.Open()
-            
+
     ## lists the DB item names
     # \param ds flag set True for datasources
     # \param mandatory flag set True for mandatory components        
