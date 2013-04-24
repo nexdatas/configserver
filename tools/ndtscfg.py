@@ -36,12 +36,13 @@ class ConfigServer(object):
     def __init__(self, device):
         found = False
         cnt = 0
+        ## configuration server proxy
+        self.cnfServer = PyTango.DeviceProxy(device)
+
         while not found and cnt < 1000:
             if cnt > 1:
                 time.sleep(0.01)
             try:
-                ## configuration server proxy
-                self.cnfServer = PyTango.DeviceProxy(device)
                 if self.cnfServer.state() != PyTango.DevState.RUNNING:
                     found = True
             except:    
