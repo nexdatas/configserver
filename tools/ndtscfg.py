@@ -33,9 +33,12 @@ import PyTango
 class ConfigServer(object):
     ## constructor
     # \param device device name of configuration server
-    def __init__(self, device):
+    # \param nonewline no newline flag
+    def __init__(self, device, nonewline=False):
         found = False
         cnt = 0
+        ## spliting character
+        self.__char = " " if nonewline else "\n"
 
         try:
             ## configuration server proxy
@@ -123,7 +126,8 @@ class ConfigServer(object):
             cmps = self.cnfServer.AvailableComponents()
             for ar in args:
                 if ar not in cmps:
-                    sys.stderr.write("Error: Component %s not stored in configuration server\n"% ar)
+                    sys.stderr.write(
+                        "Error: Component %s not stored in configuration server\n"% ar)
                     sys.stderr.flush()
                     return ""
             self.cnfServer.CreateConfiguration(args)
@@ -138,9 +142,9 @@ class ConfigServer(object):
     # \param mandatory flag set True for mandatory components        
     def performCommand(self, command, ds, args, mandatory=False):
         if command == 'list':
-            return  "\n".join(self.listCmd(ds, mandatory)) 
+            return  self.__char.join(self.listCmd(ds, mandatory)) 
         if command == 'show':
-            return  "\n".join(self.showCmd(ds, args, mandatory)) 
+            return  self.__char.join(self.showCmd(ds, args, mandatory)) 
         if command == 'get':
             return  self.getCmd(ds, args) 
             
@@ -150,20 +154,21 @@ def main():
     ## run options
     options = None
     ## usage example
-    usage = "usage: %prog <command> -s <config_server> [-d] [-m] [name1] [name2] [name3] ... \n"\
-        +" e.g.: %prog list -s p02/xmlconfigserver/exp.01 -d\n\n"\
-        + "Commands: \n"\
-        + "   list -s <config_server>   \n"\
-        + "          list names of available components\n"\
-        + "   list -s <config_server> -d  \n"\
-        + "          list names of available datasources\n"\
-        + "   show -s <config_server>  name1 name2 ...  \n"\
-        + "          show components with given names \n"\
-        + "   show -s <config_server> -d name1 name2 ...  \n"\
-        + "          show datasources with given names \n"\
-        + "   get -s <config_server>  name1 name2 ...  \n"\
-        + "          get merged configuration of components \n"\
-        + " "
+    usage = "usage: %prog <command> -s <config_server> "\
+            +" [-d] [-m] [name1] [name2] [name3] ... \n"\
+            +" e.g.: %prog list -s p02/xmlconfigserver/exp.01 -d\n\n"\
+            + "Commands: \n"\
+            + "   list -s <config_server>   \n"\
+            + "          list names of available components\n"\
+            + "   list -s <config_server> -d  \n"\
+            + "          list names of available datasources\n"\
+            + "   show -s <config_server>  name1 name2 ...  \n"\
+            + "          show components with given names \n"\
+            + "   show -s <config_server> -d name1 name2 ...  \n"\
+            + "          show datasources with given names \n"\
+            + "   get -s <config_server>  name1 name2 ...  \n"\
+            + "          get merged configuration of components \n"\
+            + " "
 
     ## option parser
     parser = OptionParser(usage=usage)
@@ -174,18 +179,20 @@ def main():
                       help="perform operation on datasources")
     parser.add_option("-m","--mandatory",  action="store_true",
                       default=False, dest="mandatory", 
-                      help="lists only mandatory components")
+                      help="make use mandatory components as well")
+    parser.add_option("-n","--no-newlines",  action="store_true",
+                      default=False, dest="nonewlines", 
+                      help="split result with spaces")
 
     (options, args) = parser.parse_args()
 
     if not args or args[0] not in commands or not options.server :
         parser.print_help()
         sys.exit(255)
-#    print "ARGS", args
 
 
     ## configuration server     
-    cnfserver = ConfigServer(options.server)
+    cnfserver = ConfigServer(options.server, options.nonewlines)
     ## result to print
     result = cnfserver.performCommand(args[0], options.datasources, 
                                       args[1:], options.mandatory)
