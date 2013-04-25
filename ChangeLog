@@ -1,5 +1,4 @@
 2013-XX-XX Jan Kotanski <jankotan@gmail.com>
-	* adding ndtscfg command-line tool
 	* fixing reconnection and re-close issue
 	* making merge xmlString morereadable
 	* tagged as v1.1.2
