@@ -32,19 +32,25 @@ class MYSQLDataBase(object):
     def __init__(self):
         ## db instance
         self.__db = None 
+        self.__args  = None
 
     ## connects to the database
     # \param args arguments of the MySQLdb connect method    
     def connect(self, args):
         print "connect:", args
         self.__db = MySQLdb.connect(**args)
+        self.__args = args
 
 
     ## closes database connection
     # \brief It closes connection to the open database
     def close(self):
         if self.__db:
-            self.__db.close()
+            try:
+                if self.__db.open:
+                    self.__db.close()
+            except:
+                pass
 
 
     ## fetches the required components
@@ -54,6 +60,8 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 for ar in names:
                     cursor.execute("select xml from components where name = '%s';" % ar.replace("'","\\\'"))
@@ -76,6 +84,8 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 for ar in names:
                     cursor.execute("select xml from datasources where name = '%s';" % ar.replace("'","\\\'"))
@@ -118,6 +128,8 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select name from datasources;")
                 data=cursor.fetchall()
@@ -136,6 +148,8 @@ class MYSQLDataBase(object):
     def storeComponent(self, name, xml):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
@@ -163,6 +177,8 @@ class MYSQLDataBase(object):
     def storeDataSource(self, name, xml):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
@@ -187,6 +203,8 @@ class MYSQLDataBase(object):
     def deleteComponent(self, name):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
@@ -210,6 +228,8 @@ class MYSQLDataBase(object):
     def setMandatory(self, name):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
@@ -231,6 +251,8 @@ class MYSQLDataBase(object):
     def unsetMandatory(self, name):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
@@ -255,6 +277,8 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select name from components where mandatory = 1")
                 data=cursor.fetchall()
@@ -272,6 +296,8 @@ class MYSQLDataBase(object):
     def deleteDataSource(self, name):
         if self.__db is not None:
             try:
+                if not self.__db.open:
+                    self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
                 data=cursor.fetchone()

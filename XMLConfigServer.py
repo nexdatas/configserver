@@ -69,9 +69,12 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def delete_device(self):
 		print "[Device delete_device method] for device",self.get_name()
-		if hasattr(self.xmlc, "close"):
-			self.xmlc.close()
-
+		if hasattr(self,"xmlc") and self.xmlc:
+			if hasattr(self.xmlc, "close"):
+				self.xmlc.close()
+			del self.xmlc
+			self.xmlc =None
+		self.set_state(PyTango.DevState.OFF)
 
 #------------------------------------------------------------------
 #	Device initialization
