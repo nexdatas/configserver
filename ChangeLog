@@ -1,4 +1,4 @@
-2013-XX-XX Jan Kotanski <jankotan@gmail.com>
+2013-04-26 Jan Kotanski <jankotan@gmail.com>
 	* fixing reconnection and re-close issue
 	* making merge xmlString morereadable
 	* tagged as v1.1.2
