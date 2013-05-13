@@ -48,7 +48,7 @@ from ndtsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
 #
 #   DevState.OPEN :     Open connection to the database
 #   DevState.ON :       Server is ON
-#   DevState.RUNNING :
+#   DevState.RUNNING :  Performing a query
 #==================================================================
 
 
