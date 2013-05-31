@@ -181,6 +181,7 @@ class Merger(object):
                 child1 = children.item(c1)
                 c2 = c1 + 1
                 while c2 < children.length:
+                    child2 = children.item(c2)
                     if child1 != child2:
                         if isinstance(child1, Element) and isinstance(child2, Element):
                             if self.__areMergeable(child1, child2):
@@ -188,24 +189,6 @@ class Merger(object):
                                 c2 -= 1
                     c2 += 1
                 c1 += 1
-#            while changes:
-#                children = node.childNodes
-#                changes = False
-#                for c1 in range(children.length):
-#                    child1 = children.item(c1)
-#                    for c2 in range(children.length):
-#                        child2 = children.item(c2)
-#                        if child1 != child2:
-#                            if isinstance(child1, Element) and isinstance(child2, Element):
-#                                #                            if elem1 is not None and elem2 is not None:
-#                                if self.__areMergeable(child1, child2):
-#                                    self.__mergeNodes(child1, child2)
-#                                    changes = True
-#                                    status = True
-#                        if changes:
-#                            break
-#                    if changes:
-#                        break
                         
             child = node.firstChild
             nName = unicode(node.nodeName) if isinstance(node, Element) else ""
