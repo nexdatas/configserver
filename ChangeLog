@@ -1,6 +1,6 @@
 2013-06-24 Jan Kotanski <jankotan@gmail.com>
 	* changing to faster merging algorithm
-	* making configuration server sensitive for letter cases'
+	* making configuration server sensitive for letter cases
 	* tagged as v1.1.3
 
 2013-04-26 Jan Kotanski <jankotan@gmail.com>
