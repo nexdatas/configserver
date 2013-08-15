@@ -218,7 +218,7 @@ class XMLConfigurator(object):
                 ds = domds[0].toxml()
                 if ds:
                     component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
-                    index = component.find("$%s." % self.__dsLabel, index)
+                    index = component.find("$%s." % self.__dsLabel)
                 else:
                     raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
             else:

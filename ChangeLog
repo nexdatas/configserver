@@ -1,3 +1,7 @@
+2013-XX-XX Jan Kotanski <jankotan@gmail.com>
+	* adding recursive replacing of datasources
+	* tagged as v1.1.4
+
 2013-06-24 Jan Kotanski <jankotan@gmail.com>
 	* changing to faster merging algorithm
 	* making configuration server sensitive for letter cases
