@@ -62,8 +62,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__cmps = []
         self.__ds = []
         self.__man = []
-
-
+        self.children = ("record", "doc", "device", "database", "query", "datasource", "result")
+        
     ## test starter
     # \brief Common set up
     def setUp(self):
@@ -1716,7 +1716,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
-        uts = el.children['datasource']
+        uts = self.children
         for ut in uts:
         
             el = self.openConfig(self.__args)
@@ -1769,7 +1769,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = []
         for k in el.children:
             for w in el.children[k]:
-                if w not in  el.children["datasource"]:
+                if w not in  self.children:
                     uts.append(w)
 
         uts = set(uts)
@@ -1800,8 +1800,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
-
-            self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
+            el.createConfiguration(name)
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)

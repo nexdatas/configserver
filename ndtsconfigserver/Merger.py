@@ -31,7 +31,7 @@ class Merger(object):
         ## DOM root node
         self.__root = None
         ## tags which cannot have the same siblings
-        self.singles =['datasource', 'strategy', 'dimensions', 'definition',
+        self.singles =['strategy', 'dimensions', 'definition',
                        'record', 'device', 'query', 'database']
 
         ## allowed children
@@ -96,7 +96,9 @@ class Merger(object):
 
         if name1 != name2 and name1 and name2:
             if tagName in self.singles:
-                raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
+                raise IncompatibleNodeError(
+                    "Incompatible element attributes  %s: " \
+                        % str((str(self.__getAncestors(elem1)),str(name2))), [elem1, elem2])
                 
             return False
 
