@@ -15,9 +15,34 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package mcs nexdatas
-## \file __init__.py
-# package constructor
+## \package ndts nexdatas
+## \file Errors.py
+# Error classes
 
-## version number
-__version__ = "1.0.2"
+
+## Incompatible class Exception
+class IncompatibleNodeError(Exception): 
+    ## constructor
+    # \param value string wit error message
+    # \param nodes list of nodes with errors
+    def __init__(self, value, nodes = []):
+        ## exception value 
+        self.value = value
+        ## nodes with errors
+        self.nodes = nodes
+    
+    ## tostring method
+    # \brief It shows the error message
+    def __str__(self):
+           return repr(self.value)    
+
+## Exception for undefined tags
+class UndefinedTagError(Exception): 
+    pass
+
+##  Error for non-existing database records
+class NonregisteredDBRecordError(Exception): 
+    pass
+
+
+

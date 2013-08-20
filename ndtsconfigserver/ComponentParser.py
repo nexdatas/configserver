@@ -31,33 +31,65 @@ class ComponentHandler(sax.ContentHandler):
 
     ## constructor
     # \brief It constructs parser and sets variables to default values 
-    def __init__(self):
+    def __init__(self, dsLabel = "datasources"):
         sax.ContentHandler.__init__(self)
         ##  dictionary with datasources
         self.datasources = {}
-        ## datasource counter
-        self.counter = 0 
+        ## unnamed datasource counter
+        self.__counter = 0 
+        ## datasource label
+        self.__dsLabel  = dsLabel
+        ## containing datasources
+        self.__withDS = ["field", "attribute"]
+        ## content flag
+        self.__stack = []
+        ##
+        self.__content = {}
+        for tag in self.__withDS:
+            self.__content[tag] = []
+            
 
+
+    ## adds the tag content 
+    # \param ch partial content of the tag    
+    def characters(self, ch):
+        if self.__stack[-1] in self.__withDS: 
+            self.__content[self.__stack[-1]].append(ch)
+            
 
     ##  parses the opening tag
     # \param name tag name
     # \param attrs attribute dictionary
     def startElement(self, name, attrs):
+        self.__stack.append(name)
         if name == "datasource":
             if "name" in attrs.keys():
                 aName = attrs["name"]
             else:
-                aName = "__unnamed__%s" % self.counter
-                self.counter += 1
+                aName = "__unnamed__%s" % self.__counter
+                self.__counter += 1
             if "type" in attrs.keys():
                 aType = attrs["type"]
             else:
                 aType = ""
             self.datasources[aName] = aType    
-            
-            
 
 
+    ## parses the closing tag
+    # \param name tag name
+    def endElement(self, name):
+        tag = self.__stack[-1]
+        if tag in self.__withDS: 
+            text = "".join(self.__content[tag]).strip()
+            index = text.find("$%s." % self.__dsLabel)
+            if index != -1:
+                aName = text[(index+len(self.__dsLabel)+2):].split("<",1)
+                aName = aName[0].split(None,1) if aName else ""
+                if aName:
+                    self.datasources[aName[0]] = "__FROM_DB__"
+                
+            self.__content[tag] = []
+        self.__stack.pop()
 
 
 if __name__ == "__main__":

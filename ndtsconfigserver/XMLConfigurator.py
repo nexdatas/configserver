@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \package mcs nexdatas.configserver
-## \file XMLConfigurer.py
+## \file XMLConfigurator.py
 # Allows the access to a database with NDTS configuration files 
 #
 
@@ -24,10 +24,13 @@ from MYSQLDataBase import MYSQLDataBase as MyDB
 from ComponentParser import ComponentHandler
 import json
 from xml import  sax
+from xml.dom.minidom import parseString
 from Merger import Merger 
+from Errors import NonregisteredDBRecordError
 
-## XML Configurer
-class XMLConfigurer(object):
+
+## XML Configurator
+class XMLConfigurator(object):
     ## constructor
     # \brief It allows to construct XML configurer object
     def __init__(self):
@@ -36,7 +39,9 @@ class XMLConfigurer(object):
         ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
 
-        self._mydb = MyDB()
+        self.__mydb = MyDB()
+
+        self.__dsLabel = "datasources"
 
     ## opens database connection
     # \brief It opens connection to the give database by JSON string
@@ -49,16 +54,17 @@ class XMLConfigurer(object):
             for k in targs.keys():
                 args[str(k)] = targs[k]
         except:
+            print args
             args = {}
-        self._mydb.connect(args)    
+        self.__mydb.connect(args)    
             
             
 
     ## closes database connection
     # \brief It closes connection to the open database
     def close(self):
-        if self._mydb:
-            self._mydb.close()    
+        if self.__mydb:
+            self.__mydb.close()    
         print "Close connection"
 
 
@@ -67,8 +73,8 @@ class XMLConfigurer(object):
     # \returns list of given components
     def components(self, names):
         argout = []
-        if self._mydb:
-            argout = self._mydb.components(names)   
+        if self.__mydb:
+            argout = self.__mydb.components(names)   
         return argout
 
 
@@ -77,10 +83,10 @@ class XMLConfigurer(object):
     # \returns tuple of datasource names from the given component
     def componentDataSources(self, name):
         cpl = []
-        if self._mydb:
-            cpl = self._mydb.components([name])   
+        if self.__mydb:
+            cpl = self.__mydb.components([name])   
             if len(cpl)>0:
-                handler = ComponentHandler()
+                handler = ComponentHandler(self.__dsLabel)
                 sax.parseString(str(cpl[0]).strip(), handler)
                 return tuple(handler.datasources.keys())
 
@@ -90,8 +96,8 @@ class XMLConfigurer(object):
     # \returns list of given datasources
     def dataSources(self, names):
         argout = []
-        if self._mydb:
-            argout = self._mydb.dataSources(names)   
+        if self.__mydb:
+            argout = self.__mydb.dataSources(names)   
         return argout
 
 
@@ -99,8 +105,8 @@ class XMLConfigurer(object):
     # \returns list of available components
     def availableComponents(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.availableComponents()   
+        if self.__mydb:
+            argout = self.__mydb.availableComponents()   
         return argout
 
 
@@ -108,44 +114,44 @@ class XMLConfigurer(object):
     # \returns list of available datasources
     def availableDataSources(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.availableDataSources()   
+        if self.__mydb:
+            argout = self.__mydb.availableDataSources()   
         return argout
 
 
     ## stores the component from the xmlConfig attribute
     # \param name name of the component to store
     def storeComponent(self, name):
-        if self._mydb:
-            self._mydb.storeComponent(name, self.xmlConfig )   
+        if self.__mydb:
+            self.__mydb.storeComponent(name, self.xmlConfig )   
 
 
     ## stores the datasource from the xmlConfig attribute
     # \param name name of the datasource to store
     def storeDataSource(self, name):
-        if self._mydb:
-           self._mydb.storeDataSource(name, self.xmlConfig )   
+        if self.__mydb:
+           self.__mydb.storeDataSource(name, self.xmlConfig )   
 
 
     ## deletes the given component
     # \param name of the component to delete
     def deleteComponent(self, name):
-        if self._mydb:
-            self._mydb.deleteComponent(name)   
+        if self.__mydb:
+            self.__mydb.deleteComponent(name)   
 
 
     ## deletes the given datasource 
     # \param name of the datasource to delete
     def deleteDataSource(self, name):
-        if self._mydb:
-           self._mydb.deleteDataSource(name)   
+        if self.__mydb:
+           self.__mydb.deleteDataSource(name)   
 
 
-    ## sets the mandatory components
+    ## sets the mandtaory components
     # \param names list of component names
     def setMandatoryComponents(self, names):
         for name in names:
-            self._mydb.setMandatory(name)
+            self.__mydb.setMandatory(name)
                 
 
 
@@ -153,15 +159,15 @@ class XMLConfigurer(object):
     # \param names list of component names
     def unsetMandatoryComponents(self, names):
         for name in names:
-            self._mydb.unsetMandatory(name)
+            self.__mydb.unsetMandatory(name)
 
 
     ## Provides names of the mandatory components
     # \returns mandatory components
     def mandatoryComponents(self):
         argout = []
-        if self._mydb:
-            argout = self._mydb.mandatory()   
+        if self.__mydb:
+            argout = self.__mydb.mandatory()   
         return argout
 
 
@@ -169,21 +175,63 @@ class XMLConfigurer(object):
     # \param names list of component names
     # \returns list of given components
     def createConfiguration(self, names):
-        if self._mydb:
-            comps = self._mydb.components(list(set(self._mydb.mandatory() + names)))   
+        if self.__mydb:
+            comps = self.__mydb.components(list(set(self.__mydb.mandatory() + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
-        self.xmlConfig = mgr.toString()
+        cnf = mgr.toString()
+        cnfWithDS = self.__attachDataSources(cnf)
+#        self.xmlConfig = cnfWithDS
+        if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
+            reparsed = parseString(cnfWithDS)
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl="")))
+#            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
+#                                 ).replace("\n \n "," ").replace("\n\n","\n")
+        else:
+            self.xmlConfig = None
         print "create configuration"
 
+
+
+    ## attaches datasrouces to component
+    # \param component given component
+    # \returns component with attached datasources
+    def __attachDataSources(self, component):
+        if not component:
+            return
+        index = component.find("$%s." % self.__dsLabel)
+        dsources = self.availableDataSources()
+        while index != -1:
+            subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
+            name = subc[0].strip() if subc else ""
+            name = name.split(None,1) if name else []
+            name = name[0] if name else ""
+            if name and name in dsources:
+                xmlds = self.dataSources([name])
+                if not xmlds:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name 
+                dom = parseString(xmlds[0])
+                domds = dom.getElementsByTagName("datasource")
+                if not domds:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                ds = domds[0].toxml()
+                if ds:
+                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
+                    index = component.find("$%s." % self.__dsLabel, index)
+                else:
+                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+            else:
+                raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                
+        return component
 
 if __name__ == "__main__":
     
     import time
     try:
         ## configurer object
-        conf = XMLConfigurer()
+        conf = XMLConfigurator()
         conf.jsonSettings = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()

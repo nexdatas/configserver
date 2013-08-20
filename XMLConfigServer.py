@@ -34,8 +34,8 @@
 import PyTango
 import sys
 
-import mcs
-from mcs.XMLConfigurer import XMLConfigurer as XMLC
+import ndtsconfigserver
+from ndtsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
 
 
 #==================================================================
@@ -48,7 +48,7 @@ from mcs.XMLConfigurer import XMLConfigurer as XMLC
 #
 #   DevState.OPEN :     Open connection to the database
 #   DevState.ON :       Server is ON
-#   DevState.RUNNING :
+#   DevState.RUNNING :  Performing a query
 #==================================================================
 
 
@@ -69,9 +69,12 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
 	def delete_device(self):
 		print "[Device delete_device method] for device",self.get_name()
-		if hasattr(self.xmlc, "close"):
-			self.xmlc.close()
-
+		if hasattr(self,"xmlc") and self.xmlc:
+			if hasattr(self.xmlc, "close"):
+				self.xmlc.close()
+			del self.xmlc
+			self.xmlc =None
+		self.set_state(PyTango.DevState.OFF)
 
 #------------------------------------------------------------------
 #	Device initialization
