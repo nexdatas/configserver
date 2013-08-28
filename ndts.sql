@@ -20,3 +20,16 @@ CREATE TABLE `datasources` (
   `xml` mediumtext BINARY NOT NULL,
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `properties`
+--
+
+DROP TABLE IF EXISTS `properties`;
+CREATE TABLE `properties` (
+  `name` varchar(100) BINARY NOT NULL,
+  `value` varchar(100) BINARY NOT NULL,
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+INSERT INTO properties values('revision','0');

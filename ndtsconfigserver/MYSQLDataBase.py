@@ -56,8 +56,33 @@ class MYSQLDataBase(object):
     ## provides DB configuration version        
     # \returns DB configuration version    
     def version(self):
-        return ''
+        argout = None
+        if self.__db is not None:
+            try:
+                if not self.__db.open:
+                    self.connect(self.__args)
+                cursor = self.__db.cursor()
+                cursor.execute("select value from properties where name = 'revision';")
+                data=cursor.fetchone()
+                if not data or not data[0]:
+                    raise NonregisteredDBRecordError, "Component %s not registered in the database" % ar
+                argout = data[0]
+                cursor.close()    
+            except:
+                cursor.close()    
+                raise
+        return argout
     
+    ## increases revision number
+    # \param cursor transaction cursor
+    def __incRevision(self, cursor):
+        cursor.execute("select value from properties where name = 'revision';")
+        data=cursor.fetchone()
+        new = str(long(data[0])+1)
+        cursor.execute("update properties set value = '%s' where name = 'revision';" 
+                       % (new.replace("'","\\\'")))
+    
+                                   
 
         
 
@@ -167,7 +192,7 @@ class MYSQLDataBase(object):
                 else:
                     cursor.execute("insert into components values('%s', '%s', 0);" 
                                    % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
-                    
+                self.__incRevision(cursor)                    
                 self.__db.commit()
                 cursor.close()    
             except:
@@ -197,6 +222,7 @@ class MYSQLDataBase(object):
                     cursor.execute("insert into datasources values('%s', '%s');" 
                                    % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
+                self.__incRevision(cursor)                    
                 self.__db.commit()
                 cursor.close()    
             except:
@@ -220,6 +246,7 @@ class MYSQLDataBase(object):
                     cursor.execute("delete from components where name = '%s';" % name.replace("'","\\\'"))
                     
                     self.__db.commit()
+                self.__incRevision(cursor)                    
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -245,6 +272,7 @@ class MYSQLDataBase(object):
                     cursor.execute("update components set mandatory = 1 where name = '%s';" %  name.replace("'","\\\'"))
                     
                     self.__db.commit()
+                self.__incRevision(cursor)                    
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -268,6 +296,7 @@ class MYSQLDataBase(object):
                     cursor.execute("update components set mandatory = 0 where name = '%s';" %  name.replace("'","\\\'"))
                     
                     self.__db.commit()
+                self.__incRevision(cursor)                    
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -313,6 +342,7 @@ class MYSQLDataBase(object):
                     cursor.execute("delete from datasources where name = '%s';" % name.replace("'","\\\'"))
                     
                     self.__db.commit()
+                self.__incRevision(cursor)                    
                 cursor.close()    
             except:
                 self.__db.rollback()
