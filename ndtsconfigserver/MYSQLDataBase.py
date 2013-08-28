@@ -53,6 +53,14 @@ class MYSQLDataBase(object):
                 pass
 
 
+    ## provides DB configuration version        
+    # \returns DB configuration version    
+    def version(self):
+        return ''
+    
+
+        
+
     ## fetches the required components
     # \param names list of component names
     # \returns list of given components
