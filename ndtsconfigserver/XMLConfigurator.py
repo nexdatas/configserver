@@ -205,7 +205,7 @@ class XMLConfigurator(object):
 #            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
 #                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
-            self.xmlConfig = None
+            self.xmlConfig = ''
         print "create configuration"
 
 

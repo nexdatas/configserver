@@ -475,7 +475,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
 
 
 
-
+        
     ##  datasource test
     # \brief It tests default settings
     def test_available_dsrc_update(self):
@@ -493,7 +493,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         cpx = el.dataSources(avc)
-
+        
         self.assertEqual(el.storeDataSource(name, xml),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
