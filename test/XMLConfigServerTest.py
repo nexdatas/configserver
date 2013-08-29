@@ -31,7 +31,7 @@ import ServerSetUp
 import XMLConfiguratorTest
 #import XMLConTest as XMLConfiguratorTest
 from ndtsconfigserver import XMLConfigurator
-
+import ndtsconfigserver
 ## test fixture
 class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
@@ -86,6 +86,15 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
         if xmlc.state()== PyTango.DevState.ON:
             xmlc.JSONSettings = args
             xmlc.Open()
+        version = xmlc.version
+        vv = version.split('.')
+        self.revision = long(vv[-1])
+        self.version = ".".join(vv[0:3])
+        self.label = ".".join(vv[3:-1])
+
+        self.assertEqual(self.version, ndtsconfigserver.__version__ )
+        self.assertEqual(self.label, '.'.join(xmlc.Version.split('.')[3:-1]))
+
         
         self.assertEqual(xmlc.state(), PyTango.DevState.OPEN)
         
