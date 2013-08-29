@@ -668,7 +668,7 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 		'VersionLabel':
 			[PyTango.DevString,
 			"version label",
-			[ ".XCS." ] ],
+			[ "XCS" ] ],
 		}
 
 
