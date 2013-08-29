@@ -85,6 +85,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		self.xmlc = XMLC()
 		self.set_state(PyTango.DevState.ON)
 		self.get_device_properties(self.get_device_class())
+		self.xmlc.versionLabel = self.VersionLabel
 
 #------------------------------------------------------------------
 #	Always excuted hook method
@@ -178,7 +179,8 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		print "In ", self.get_name(), "::read_Version()"
 		
 		#	Add your own code here
-		
+		self.get_device_properties(self.get_device_class())
+		self.xmlc.versionLabel = self.VersionLabel
 		attr.set_value(self.xmlc.version)
 
 
@@ -663,6 +665,10 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 
 	#	Device Properties
 	device_property_list = {
+		'VersionLabel':
+			[PyTango.DevString,
+			"version label",
+			[ ".XCS." ] ],
 		}
 
 

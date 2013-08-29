@@ -43,13 +43,15 @@ class XMLConfigurator(object):
         self.__mydb = MyDB()
 
         self.__dsLabel = "datasources"
+        
+        self.versionLabel = ".XCS."
 
 
     
     ## get method for version attribute
     # \returns server and configuration version
     def __getVersion(self):
-        version = ndtsconfigserver.__version__ + '.XCS.' + self.__mydb.version() 
+        version = ndtsconfigserver.__version__ + self.versionLabel + self.__mydb.version() 
         return version
 
     ## the json data string
