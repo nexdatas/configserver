@@ -76,6 +76,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 			self.xmlc =None
 		self.set_state(PyTango.DevState.OFF)
 
+
 #------------------------------------------------------------------
 #	Device initialization
 #------------------------------------------------------------------
@@ -84,6 +85,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 		self.xmlc = XMLC()
 		self.set_state(PyTango.DevState.ON)
 		self.get_device_properties(self.get_device_class())
+		self.xmlc.versionLabel = self.VersionLabel
 
 #------------------------------------------------------------------
 #	Always excuted hook method
@@ -163,6 +165,28 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #---- JSONSettings attribute State Machine -----------------
 	def is_JSONSettings_allowed(self, req_type):
 		if self.get_state() in [PyTango.DevState.OPEN,
+		                        PyTango.DevState.RUNNING]:
+			#	End of Generated Code
+			#	Re-Start of Generated Code
+			return False
+		return True
+
+
+#------------------------------------------------------------------
+#	Read Version attribute
+#------------------------------------------------------------------
+	def read_Version(self, attr):
+		print "In ", self.get_name(), "::read_Version()"
+		
+		#	Add your own code here
+		self.get_device_properties(self.get_device_class())
+		self.xmlc.versionLabel = self.VersionLabel
+		attr.set_value(self.xmlc.version)
+
+
+#---- Version attribute State Machine -----------------
+	def is_Version_allowed(self, req_type):
+		if self.get_state() in [PyTango.DevState.ON,
 		                        PyTango.DevState.RUNNING]:
 			#	End of Generated Code
 			#	Re-Start of Generated Code
@@ -641,6 +665,10 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 
 	#	Device Properties
 	device_property_list = {
+		'VersionLabel':
+			[PyTango.DevString,
+			"version label",
+			[ "XCS" ] ],
 		}
 
 
@@ -712,6 +740,14 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 				'label':"Arguments of MySQLdb.connect(...)",
 				'description':"The JSON string with parameters of MySQLdb.connect(...).",
 				'Memorized':"true",
+			} ],
+		'Version':
+			[[PyTango.DevString,
+			PyTango.SCALAR,
+			PyTango.READ],
+			{
+				'label':"configuration version",
+				'description':"configuration version",
 			} ],
 		}
 

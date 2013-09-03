@@ -24,13 +24,14 @@ import os
 import sys
 import subprocess
 import random
-
+import time
 import PyTango
 
 import ServerSetUp
 import XMLConfiguratorTest
+#import XMLConTest as XMLConfiguratorTest
 from ndtsconfigserver import XMLConfigurator
-
+import ndtsconfigserver
 ## test fixture
 class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
@@ -52,19 +53,48 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
     ## test closer
     # \brief Common tear down oif Tango Server
     def tearDown(self): 
-        self._sv.tearDown()
         XMLConfiguratorTest.XMLConfiguratorTest.tearDown(self)
+        self._sv.tearDown()
         
     ## opens config server
     # \param args connection arguments
     # \returns XMLConfigServer instance   
-    def openWriter(self, args):
-
-        xmlc = PyTango.DeviceProxy(self._sv.new_device_info_writer.name)
-        xmlc.JSONSettings = args
-        self.assertEqual(xmlc.state(), PyTango.DevState.ON)
+    def openConfig(self, args):
         
-        xmlc.Open()
+        found = False
+        cnt = 0
+        while not found and cnt < 1000:
+            try:
+                print "\b.",
+                xmlc = PyTango.DeviceProxy(self._sv.new_device_info_writer.name)
+                time.sleep(0.01)
+                if xmlc.state() == PyTango.DevState.ON:
+                    found = True
+                found = True
+            except Exception,e:    
+                print self._sv.new_device_info_writer.name,e
+                found = False
+            except:
+                found = False
+                
+            cnt +=1
+
+        if not found:
+            raise Exception, "Cannot connect to %s" % self._sv.new_device_info_writer.name
+
+
+        if xmlc.state()== PyTango.DevState.ON:
+            xmlc.JSONSettings = args
+            xmlc.Open()
+        version = xmlc.version
+        vv = version.split('.')
+        self.revision = long(vv[-1])
+        self.version = ".".join(vv[0:3])
+        self.label = ".".join(vv[3:-1])
+
+        self.assertEqual(self.version, ndtsconfigserver.__version__ )
+        self.assertEqual(self.label, '.'.join(xmlc.Version.split('.')[3:-1]))
+
         
         self.assertEqual(xmlc.state(), PyTango.DevState.OPEN)
         
@@ -73,18 +103,27 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
     ## closes opens config server
     # \param xmlc XMLConfigurator instance   
-    def closeWriter(self, xmlc):
+    def closeConfig(self, xmlc):
         self.assertEqual(xmlc.state(), PyTango.DevState.OPEN)
 
         xmlc.Close()
         self.assertEqual(xmlc.state(), PyTango.DevState.ON)
                 
+    ## sets xmlconfiguration
+    # \param xmlc configuration instance
+    # \param xml xml configuration string
+    def setXML(self, xmlc, xml):
+        xmlc.XMLString = xml
 
 
+    ## gets xmlconfiguration
+    # \param xmlc configuration instance
+    # \returns xml configuration string
+    def getXML(self, xmlc):
+        return xmlc.XMLString 
+        
 
-#    ## performs one record step
-#    def record(self, tdw, string):
-#        tdw.Record(string)
+
 
 if __name__ == '__main__':
     unittest.main()

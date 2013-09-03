@@ -43,12 +43,17 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.__args = {'host': u'localhost', 'db': u'ndts', 'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
         self.__cmps = []
         self.__ds = []
+        self.version  = None
 
     ## test starter
     # \brief Common set up
     def setUp(self):
         ## file handle
         print "\nsetting up..."        
+        el = MYSQLDataBase()
+        el.connect(self.__args)
+        self.version  = long(el.version())
+        el.close()
 
     ## test closer
     # \brief Common tear down
@@ -100,6 +105,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.assertEqual(el.connect(self.__args),None)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -139,6 +145,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+2)
         self.assertEqual(el.close(),None)
 
 
@@ -188,6 +195,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+2)
         self.assertEqual(el.close(),None)
 
 
@@ -208,6 +216,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
 #        print avc
         self.myAssertRaise(NonregisteredDBRecordError,el.components, [name])
         
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -279,6 +288,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+3)
         self.assertEqual(el.close(),None)
 
 
@@ -360,6 +370,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+4)
         self.assertEqual(el.close(),None)
 
 
@@ -402,6 +413,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+2)
         self.assertEqual(el.close(),None)
 
 
@@ -451,6 +463,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+2)
         self.assertEqual(el.close(),None)
 
 
@@ -471,11 +484,12 @@ class MYSQLDataBaseTest(unittest.TestCase):
 #        print avc
         self.myAssertRaise(NonregisteredDBRecordError,el.dataSources, [name])
         
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
 
-
+        
     ##  datasource test
     # \brief It tests default settings
     def test_available_dsrc_update(self):
@@ -493,7 +507,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         cpx = el.dataSources(avc)
-
+        
         self.assertEqual(el.storeDataSource(name, xml),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -542,6 +556,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+3)
         self.assertEqual(el.close(),None)
 
 
@@ -623,6 +638,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version()),self.version+4)
         self.assertEqual(el.close(),None)
 
 
@@ -655,6 +671,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in man2)
             
 
+        self.assertEqual(long(el.version()),self.version+1)
         self.assertEqual(el.close(),None)
 
 
@@ -708,6 +725,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertTrue(not name in man2)
             
 
+        self.assertEqual(long(el.version()),self.version+4)
         self.assertEqual(el.close(), None)
 
 
@@ -794,6 +812,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertTrue(not name in man2)
             
 
+        self.assertEqual(long(el.version()),self.version+8)
         self.assertEqual(el.close(), None)
 
 

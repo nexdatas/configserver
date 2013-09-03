@@ -23,6 +23,7 @@
 from MYSQLDataBase import MYSQLDataBase as MyDB
 from ComponentParser import ComponentHandler
 import json
+import ndtsconfigserver
 from xml import  sax
 from xml.dom.minidom import parseString
 from Merger import Merger 
@@ -42,6 +43,21 @@ class XMLConfigurator(object):
         self.__mydb = MyDB()
 
         self.__dsLabel = "datasources"
+        
+        self.versionLabel = "XCS"
+
+
+    
+    ## get method for version attribute
+    # \returns server and configuration version
+    def __getVersion(self):
+        version = ndtsconfigserver.__version__ + \
+            "." + self.versionLabel + "." + self.__mydb.version() 
+        return version
+
+    ## the json data string
+    version = property(__getVersion)
+
 
     ## opens database connection
     # \brief It opens connection to the give database by JSON string
@@ -189,7 +205,7 @@ class XMLConfigurator(object):
 #            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
 #                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
-            self.xmlConfig = None
+            self.xmlConfig = ''
         print "create configuration"
 
 

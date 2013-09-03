@@ -35,6 +35,7 @@ IS64BIT = (struct.calcsize("P") == 8)
 from ndtsconfigserver.XMLConfigurator  import XMLConfigurator
 from ndtsconfigserver.Merger import Merger
 from ndtsconfigserver.Errors import NonregisteredDBRecordError, UndefinedTagError, IncompatibleNodeError
+import ndtsconfigserver
 
 ## test fixture
 class XMLConfiguratorTest(unittest.TestCase):
@@ -99,7 +100,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         try:
             error =  False
             method(*args, **kwargs)
-        except exception, e:
+        except :
             error = True
         self.assertEqual(error, True)
 
@@ -116,12 +117,35 @@ class XMLConfiguratorTest(unittest.TestCase):
         xmlc.jsonSettings = args
         print args
         xmlc.open()
+
+        version = xmlc.version
+        vv = version.split('.')
+        self.revision = long(vv[-1])
+        self.version = ".".join(vv[0:3])
+        self.label = ".".join(vv[3:-1])
+
+        self.assertEqual(self.version, ndtsconfigserver.__version__ )
+        self.assertEqual(self.label, xmlc.versionLabel)
         return xmlc
 
     ## closes configurator
     # \param xmlc XMLConfigurator instance   
     def closeConfig(self, xmlc):
         xmlc.close()
+
+    ## sets xmlconfiguration
+    # \param xmlc configuration instance
+    # \param xml xml configuration string
+    def setXML(self, xmlc, xml):
+        xmlc.xmlConfig = xml
+
+
+    ## gets xmlconfiguration
+    # \param xmlc configuration instance
+    # \returns xml configuration string
+    def getXML(self, xmlc):
+        return xmlc.xmlConfig
+
 
     ## open close test test
     # \brief It tests XMLConfigurator
@@ -130,8 +154,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
         xmlc = self.openConfig(self.__args)
+        self.assertEqual(long(xmlc.version.split('.')[-1]),self.revision)
+        label = 'asdd@aff.asdf'
+        if hasattr(xmlc,"versionLabel"):
+            xmlc.versionLabel = label
+        self.assertEqual(long(xmlc.version.split('.')[-1]),self.revision)
+        if hasattr(xmlc,"versionLabel"):
+            self.assertEqual(".".join(xmlc.version.split('.')[3:-1]),label)
         xmlc.close()
-
 
 
     ## comp_available test
@@ -149,7 +179,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -171,6 +201,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -189,7 +220,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         cpx = el.components(avc)
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -220,6 +251,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         self.assertEqual(el.close(),None)
 
 
@@ -239,6 +271,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         self.myAssertRaise(NonregisteredDBRecordError,el.components, [name])
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
         self.assertEqual(el.close(),None)
 
 
@@ -261,7 +294,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         cpx = el.components(avc)
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -279,7 +312,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        el.xmlConfig = xml2
+        self.setXML(el, xml2)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -311,6 +344,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+3)
         self.assertEqual(el.close(),None)
 
 
@@ -337,7 +371,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         cpx = el.components(avc)
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -354,7 +388,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cpx2[j], xml)
 
 
-        el.xmlConfig = xml2
+        self.setXML(el, xml2)
         self.assertEqual(el.storeComponent(name2),None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
@@ -393,6 +427,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+4)
         self.assertEqual(el.close(),None)
 
 
@@ -418,7 +453,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -440,6 +475,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2 )
         el.close()
 
 
@@ -458,7 +494,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         cpx = el.dataSources(avc)
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -489,6 +525,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         self.assertEqual(el.close(),None)
 
 
@@ -508,6 +545,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         self.myAssertRaise(NonregisteredDBRecordError,el.dataSources, [name])
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
         self.assertEqual(el.close(),None)
 
 
@@ -530,7 +568,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         cpx = el.dataSources(avc)
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -548,7 +586,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        el.xmlConfig = xml2
+        self.setXML(el, xml2)
         self.assertEqual(el.storeDataSource(name),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -580,6 +618,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+3)
         self.assertEqual(el.close(),None)
 
 
@@ -606,7 +645,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         cpx = el.dataSources(avc)
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -623,7 +662,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cpx2[j], xml)
 
 
-        el.xmlConfig = xml2
+        self.setXML(el, xml2)
         self.assertEqual(el.storeDataSource(name2),None)
         self.__ds.append(name2)
         avc2 = el.availableDataSources()
@@ -662,6 +701,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+4)
         self.assertEqual(el.close(),None)
 
 
@@ -715,7 +755,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
 
@@ -748,6 +788,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(not name in man2)
             
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         self.assertEqual(el.close(), None)
 
 
@@ -773,7 +814,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
 
@@ -786,7 +827,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name in man2)
 
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name2),None)
         self.__cmps.append(name2)
 
@@ -834,6 +875,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(not name in man2)
             
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 8 )
         self.assertEqual(el.close(), None)
 
 
@@ -853,8 +895,11 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        xml = self.getXML(el)
+        self.assertEqual(self.getXML(el), '')
         self.assertEqual(el.createConfiguration([]), None)
-        self.assertEqual(el.xmlConfig, None)
+        xml = self.getXML(el)
+        self.assertEqual(self.getXML(el), '')
         el.setMandatoryComponents(man)
         el.close()
 
@@ -879,7 +924,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -895,7 +940,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cpx[0], xml)
         
         self.assertEqual(el.createConfiguration([name]), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        xml = self.getXML(el)
+        self.assertEqual(xml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name),None)
         self.__cmps.pop()
@@ -908,6 +954,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -935,7 +982,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
-        el.xmlConfig = xml
+        self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
@@ -963,6 +1010,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -989,17 +1037,19 @@ class XMLConfiguratorTest(unittest.TestCase):
         while name[1] in avc:
             name[1] = name[1] + '_2'
 #        print avc
-        el.xmlConfig = xml[0]
+        self.setXML(el, xml[0])    
         self.assertEqual(el.storeComponent(name[0]),None)
         self.__cmps.append(name[0])
 
-        el.xmlConfig = xml[1]
+        self.setXML(el, xml[1])    
         self.assertEqual(el.storeComponent(name[1]),None)
         self.__cmps.append(name[1])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),
+                         '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name[1]),None)
         self.__cmps.pop()
@@ -1009,6 +1059,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1042,13 +1093,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1057,6 +1109,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 10)
         el.close()
 
 
@@ -1090,13 +1143,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1105,6 +1159,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1135,7 +1190,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -1179,7 +1234,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -1193,6 +1248,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1225,13 +1281,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1240,6 +1297,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -1270,13 +1328,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <field name="field1"/> <group type="NXentry">  <field name="field1"/> </group></definition>' )
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <field name="field1"/> <group type="NXentry">  <field name="field1"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1285,6 +1344,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1318,13 +1378,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry2"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry2"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1333,6 +1394,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1365,13 +1427,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1380,6 +1443,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1412,13 +1476,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/> <group name="entry2"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry"/> <group name="entry2"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1427,6 +1492,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1457,13 +1523,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry">  <field type="field"/> </group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1472,6 +1539,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 30)
         el.close()
 
 
@@ -1503,13 +1571,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1518,6 +1587,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
         el.close()
 
 
@@ -1549,7 +1619,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -1563,6 +1633,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1593,13 +1664,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
         
         self.assertEqual(el.createConfiguration(name), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry2" type="NXentry2">  <field type="field"/> </group> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry2" type="NXentry2">  <field type="field"/> </group> <group name="entry" type="NXentry">  <field type="field"/> </group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1608,6 +1680,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1641,7 +1714,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -1656,6 +1729,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1689,7 +1763,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -1703,6 +1777,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1739,13 +1814,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <datasource type="TANGO">   <%s/>  </datasource> </field></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <datasource type="TANGO">   <%s/>  </datasource> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1754,6 +1830,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -1796,7 +1873,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -1809,6 +1886,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -1843,13 +1921,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <attribute type="TANGO">   <%s/>  </attribute> </field></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <field name="entry">  <attribute type="TANGO">   <%s/>  </attribute> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1858,6 +1937,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -1898,7 +1978,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -1912,6 +1992,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -1946,13 +2027,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <%s name="entry"/></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <%s name="entry"/></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -1961,6 +2043,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -2002,7 +2085,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -2016,6 +2099,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
         el.close()
 
 
@@ -2052,13 +2136,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <dimensions type="TANGO">   <%s/>  </dimensions> </field></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <dimensions type="TANGO">   <%s/>  </dimensions> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2067,6 +2152,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2 )
         el.close()
 
 
@@ -2106,7 +2192,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -2121,6 +2207,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +2)
         el.close()
 
 
@@ -2154,13 +2241,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <%s/> </field></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <field name="entry">  <%s/> </field></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2169,6 +2257,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +2 )
         el.close()
 
 
@@ -2207,7 +2296,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -2221,6 +2310,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +2)
         el.close()
 
 
@@ -2253,13 +2343,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry">  <%s/> </group></definition>' % (ut) )
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group name="entry">  <%s/> </group></definition>' % (ut) )
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]),None)
@@ -2268,6 +2359,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2306,7 +2398,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -2320,6 +2412,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2355,13 +2448,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
 
             self.assertEqual(el.createConfiguration(name), None)
-            self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),
+            gxml = self.getXML(el)
+            self.assertEqual(gxml.replace("?>\n<","?><"),
                              '<?xml version="1.0" ?><definition> <link name="entry">  <%s/> </link></definition>' % (ut) )
 
             for i in range(np):
@@ -2371,6 +2465,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2409,7 +2504,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
             for i in range(np):
-                el.xmlConfig = xml[i]
+                self.setXML(el, xml[i])
                 self.assertEqual(el.storeComponent(name[i]),None)
                 self.__cmps.append(name[i])
 
@@ -2423,6 +2518,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2458,7 +2554,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2467,7 +2563,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         self.assertEqual(el.createConfiguration([name[1]]), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/></definition>')
 
         el.unsetMandatoryComponents([name[0]])
         self.assertEqual(el.mandatoryComponents(),[])
@@ -2479,6 +2576,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -2513,7 +2611,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2522,13 +2620,15 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
         self.assertEqual(el.createConfiguration([name[2]]), None)
+        gxml = self.getXML(el)
+
         self.assertTrue( 
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry3"/> <group type="NXentry"/></definition>') | 
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry2"/> <group type="NXentry"/></definition>') |
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry"/> <group type="NXentry2"/></definition>') |
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/> <group type="NXentry3"/></definition>') |
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry2"/> <group type="NXentry3"/></definition>') |
-            (el.xmlConfig.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry3"/> <group type="NXentry2"/></definition>') 
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry3"/> <group type="NXentry"/></definition>') | 
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry2"/> <group type="NXentry"/></definition>') |
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry3"/> <group type="NXentry"/> <group type="NXentry2"/></definition>') |
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry2"/> <group type="NXentry"/> <group type="NXentry3"/></definition>') |
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry2"/> <group type="NXentry3"/></definition>') |
+            (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <group type="NXentry3"/> <group type="NXentry2"/></definition>') 
                          )
         
 
@@ -2544,6 +2644,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.mandatoryComponents(),[])
         
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 9)
         el.setMandatoryComponents(man)
         el.close()
 
@@ -2588,7 +2689,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
                 
         for i in range(dsnp):
-            el.xmlConfig = xds[i] % dsname[i]
+            self.setXML(el,xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2617,7 +2718,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2633,6 +2734,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -2674,7 +2776,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
                 
         for i in range(dsnp):
-            el.xmlConfig = xds[i] % dsname[i]
+            self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2703,7 +2805,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2719,6 +2821,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+7)
         el.close()
 
 
@@ -2759,7 +2862,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
                 
         for i in range(dsnp):
-            el.xmlConfig = xds[i] % dsname[i]
+            self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
             
@@ -2787,7 +2890,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i]
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2804,6 +2907,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -2847,7 +2951,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
                 
         for i in range(dsnp):
-            el.xmlConfig = xds[i] % dsname[i]
+            self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             print "DS store", dsname[i]
             self.__ds.append(dsname[i])
@@ -2877,7 +2981,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i] 
+            self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2887,7 +2991,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         print "AVAIL2", el.availableDataSources()    
 
         self.assertEqual(el.createConfiguration(css), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
 
         
 
@@ -2895,6 +3000,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -2921,7 +3027,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
             '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
             ]
-
+ 
 
         odsname = "mcs_test_datasource"
         avds = el.availableDataSources()
@@ -2936,7 +3042,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
                 
         for i in range(dsnp):
-            el.xmlConfig = "<?xml version=\'1.0\'?><definition>%s</definition>" % (xds[i] % dsname[i])
+            self.setXML(el, "<?xml version=\'1.0\'?><definition>%s</definition>" % (xds[i] % dsname[i]))
             self.assertEqual(el.storeDataSource(dsname[i]),None)
             self.__ds.append(dsname[i])
 
@@ -2963,7 +3069,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
 
         for i in range(np):
-            el.xmlConfig = xml[i] 
+            self.setXML(el, xml[i] )
             self.assertEqual(el.storeComponent(name[i]),None)
             self.__cmps.append(name[i])
 
@@ -2974,7 +3080,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         print "CSS",css
         print "MAND", el.mandatoryComponents()
         self.assertEqual(el.createConfiguration(css), None)
-        self.assertEqual(el.xmlConfig.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % ( dsname[2], dsname[3], dsname[0] ) )
 
         
 
@@ -2982,6 +3089,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
         el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
