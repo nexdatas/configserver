@@ -184,16 +184,21 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
+                cursor.execute("select xml from components where name = '%s';" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
-                if data[0]:
-                    cursor.execute("update components set xml = '%s' where name = '%s';" 
-                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                if data and len(data)>0 and data[0]:
+                    if data[0] != xml:
+                        cursor.execute("update components set xml = '%s' where name = '%s';" 
+                                       % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                        self.__incRevision(cursor)                    
+                        self.__db.commit()
+                    else:
+                        self.__db.rollback()
                 else:
                     cursor.execute("insert into components values('%s', '%s', 0);" 
                                    % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
-                self.__incRevision(cursor)                    
-                self.__db.commit()
+                    self.__incRevision(cursor)                    
+                    self.__db.commit()
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -213,17 +218,22 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
+                cursor.execute("select xml from datasources where name = '%s';" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
-                if data[0]:
-                    cursor.execute("update datasources set xml = '%s' where name = '%s';" 
-                                   % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                if data and len(data)>0 and data[0]:
+                    if data[0] != xml:
+                        cursor.execute("update datasources set xml = '%s' where name = '%s';" 
+                                       % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                        self.__incRevision(cursor)                    
+                        self.__db.commit()
+                    else:
+                        self.__db.rollback()
                 else:
                     cursor.execute("insert into datasources values('%s', '%s');" 
                                    % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
                     
-                self.__incRevision(cursor)                    
-                self.__db.commit()
+                    self.__incRevision(cursor)                    
+                    self.__db.commit()
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -266,13 +276,15 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
+                cursor.execute("select mandatory from components where name = '%s';" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
-                if data[0]:
-                    cursor.execute("update components set mandatory = 1 where name = '%s';" %  name.replace("'","\\\'"))
-                    
+                if data and len(data)>0 and data[0] != 1:
+                    cursor.execute(
+                        "update components set mandatory = 1 where name = '%s';" %  name.replace("'","\\\'"))
                     self.__db.commit()
-                self.__incRevision(cursor)                    
+                    self.__incRevision(cursor)                    
+                else:
+                    self.__db.rollback()
                 cursor.close()    
             except:
                 self.__db.rollback()
@@ -290,13 +302,16 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
+                cursor.execute("select mandatory from components where name = '%s';" % name.replace("'","\\\'"))
                 data=cursor.fetchone()
-                if data[0]:
+                if data and len(data)>0 and data[0] != 0:
                     cursor.execute("update components set mandatory = 0 where name = '%s';" %  name.replace("'","\\\'"))
                     
                     self.__db.commit()
-                self.__incRevision(cursor)                    
+                    self.__incRevision(cursor)                    
+                else:
+                    self.__db.rollback()
+
                 cursor.close()    
             except:
                 self.__db.rollback()
