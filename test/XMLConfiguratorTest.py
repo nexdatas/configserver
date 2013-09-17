@@ -181,6 +181,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name),None)
+        self.assertEqual(el.storeComponent(name),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
 #        print avc2
@@ -454,6 +455,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         self.setXML(el, xml)
+        self.assertEqual(el.storeDataSource(name),None)
         self.assertEqual(el.storeDataSource(name),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -761,6 +763,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 #        print man
         self.assertEqual(el.setMandatoryComponents([name]), None)
+        self.assertEqual(el.setMandatoryComponents([name]), None)
         man2 = el.mandatoryComponents()
         self.assertEqual(len(man)+1,len(man2))
         for cp in man:
@@ -768,6 +771,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name in man2)
 
+        self.assertEqual(el.unsetMandatoryComponents([name]), None)
         self.assertEqual(el.unsetMandatoryComponents([name]), None)
 
         man2 = el.mandatoryComponents()

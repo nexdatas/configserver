@@ -1,3 +1,7 @@
+2013-09-17 Jan Kotanski <jankotan@gmail.com>
+	* improving realease number counter
+	* tagged as v1.2.2
+
 2013-09-03 Jan Kotanski <jankotan@gmail.com>
 	* adding release version into database
 	* adding tests for XMLConfigServer

@@ -125,6 +125,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             name = name + '_1'
 #        print avc
         self.assertEqual(el.storeComponent(name, xml),None)
+        self.assertEqual(el.storeComponent(name, xml),None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
 #        print avc2
@@ -392,6 +393,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         while name in avc:
             name = name + '_1'
 #        print avc
+        self.assertEqual(el.storeDataSource(name, xml),None)
         self.assertEqual(el.storeDataSource(name, xml),None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
@@ -661,6 +663,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
 #        print avc
 
         self.assertEqual(el.setMandatory(name), None)
+        self.assertEqual(el.setMandatory(name), None)
         man2 = el.mandatory()
 #        for cp in man:
 #            self.assertTrue(cp in man2)
@@ -671,7 +674,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in man2)
             
 
-        self.assertEqual(long(el.version()),self.version+1)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -698,6 +701,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
 
 #        print man
         self.assertEqual(el.setMandatory(name), None)
+        self.assertEqual(el.setMandatory(name), None)
         man2 = el.mandatory()
         self.assertEqual(len(man)+1,len(man2))
         for cp in man:
@@ -705,6 +709,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name in man2)
 
+        self.assertEqual(el.unsetMandatory(name), None)
         self.assertEqual(el.unsetMandatory(name), None)
 
         man2 = el.mandatory()
