@@ -5,7 +5,10 @@ MCS Configuration Server
 Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic
 Introduction
 
-MCS Configuration Server is a Tango Server with its implementation based on a MySQL database. It allows to store XML configuration datasources and components. It also gives possibility to select mandatory components and perform the process of component merging.
+MCS Configuration Server is a Tango Server with its implementation based 
+on a MySQL database. It allows to store XML configuration datasources 
+and components. It also gives possibility to select mandatory components 
+and perform the process of component merging.
 
 
 ============================
@@ -30,3 +33,148 @@ Next, run the installation script
 
 $ python setup.py install
 
+============================
+Description
+============================
+
+Configuration Server is dedicated to store NXDL-like configuration needed for 
+Tango Data Writer runs. The server uses as a storage system a MYSQL database. 
+To create required DB tables one can use ndts.sql script from the repository.
+
+In Configuration Server the configuration is memorized in separate elements: 
+datasources or components. DataSources describe access to input data, 
+i.e to specific hardware TANGO devices or other databases as well to client data. 
+Components specify Nexus tree with positions of datasets for particular pieces 
+of hardware and writing strategy for corresponding to them data. 
+They can include links to datasources as well as datasources directly.
+
+All elements of configuration can be created by GUI tool - ComponentDesigner. 
+The tool can also connnect to Configuration Server and fetch or store 
+the separate elements of the XML configuration.
+
+During creation of the final configuration Configuration Server merges all 
+required components as well connected to them datasources providing 
+a single XML string. This XML string can be pass directly into the dedicated 
+Tango Data Writer attribute.
+
+
+============================
+Client code
+============================
+
+# In this section we present an example how to communicate with 
+# Configuration Server making use of PyTango.
+
+import PyTango
+
+cnfServer = PyTango.DeviceProxy("p00/xmlconfigserver/exp.01")
+
+cnfServer.JSONSettings = \
+    '{"host":"localhost","db":"ndts_p02","read_default_file":"/etc/my.cnf","use_unicode":true}'
+
+# opens DB connection
+cnfServer.Open()
+
+# After creating the server proxy we can set configuration for connection to the MYSQL DB. 
+# The JSONSettings attribute is memorized so you have to write it only when you 
+# change configuration of DB connection. Next, we open connection to DB specified by our JSONSettings.
+
+# stores default component
+cpxml = open("default.xml", 'r').read()
+cnfServer.XMLString = cpxml
+cnfServer.StoreComponent('default')
+
+# stores slit1 component in DB
+cpxml = open("slit1.xml", 'r').read()
+cnfServer.XMLString = cpxml
+cnfServer.StoreComponent('slit1')
+
+# stores slit2 component in DB
+cpxml = open("slit2.xml", 'r').read()
+cnfServer.XMLString = cpxml
+cnfServer.StoreComponent('slit2')
+
+# stores slit3 component in DB
+cpxml = open("slit3.xml", 'r').read()
+cnfServer.XMLString = cpxml
+cnfServer.StoreComponent('slit3')
+
+# stores pilatus300k component in DB
+cpxml = open("pilatus.xml", 'r').read()
+cnfServer.XMLString = cpxml
+cnfServer.StoreComponent('pilatus300k')
+
+
+# stores motor01 datasource in DB
+dsxml = open("motor.ds.xml", 'r').read()
+cnfServer.XMLString = dsxml
+cnfServer.StoreDataSource('motor01')
+
+# stores motor02 datasource in DB
+dsxml = open("motor.ds.xml", 'r').read()
+cnfServer.XMLString = dsxml
+cnfServer.StoreDataSource('motor02')
+
+
+# removes slit3 component from DB
+cnfServer.DeleteComponent('slit3')
+
+# removes motor02 datasource from DB
+cnfServer.DeleteDataSource('motor02')
+
+# If someone cannot use ComponentDesigner it is also an option to store 
+# or delete components and datasources using directly tango interface as it is shown above.
+
+# provides names of available components
+cmpNameList = cnfServer.AvailableComponents()
+# provides names of available datasources
+dsNameList = cnfServer.AvailableDataSources()
+
+# To get information about names of available components and datasources 
+# in Configuration Server we use the above commands.
+
+# provides a list of required components
+cmpList = cnfServer.Components(cmpNameList)
+# provides a list of required Datasources
+dsList = cnfServer.DataSources(dsNameList)
+
+# Having names of stored elements we can get their XML code
+
+# provides a list of Datasources from a given Component
+dsList =cnf.Server.ComponentDataSources('pilatus300k')
+
+# as well as query Configuration Server which datasource 
+are related to the particular component.
+
+# sets given component as mandatory for the final configuration
+cnfServer.SetMandatoryComponents(['default','slit1'])
+# un-sets given component as mandatory for the final configuration
+cnfServer.UnsetMandatoryComponents(['slit1'])
+
+# provides names of mandatory components
+man =  cnfServer.MandatoryComponents()
+
+# Some of the component can be set as mandatory in 
+# the final configuration. To define them Configuration Server provides above commands.
+
+# provides the current configuration version
+version =  cnfServer.Version
+
+# Each configuration has a revision number. It can be found 
+# together with Configuration Server version in Version attribute.
+
+# creates the final configuration from slit2 and pilatus300k 
+# as well as all mandatory components
+cnfServer.CreateConfiguration('slit2', 'pilatus300k')
+# XML string ready to use by Tango Data Server
+finalXML = cnfServer.XMLString 
+
+# In order to create our final configuration we execute CreateConfiguration 
+# command with a list of names of required components. The command merges 
+# these components with mandatory ones and provides the resulting NXDL-like 
+# configuration in the XMLString attribute.
+
+# closes connection to DB
+cnfServer.close()
+
+# Command close terminates our connection to the DB server. 
