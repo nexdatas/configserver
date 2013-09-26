@@ -20,14 +20,14 @@
 # Allows the access to a database with NDTS configuration files 
 #
 
-from MYSQLDataBase import MYSQLDataBase as MyDB
-from ComponentParser import ComponentHandler
 import json
 import ndtsconfigserver
 from xml import  sax
 from xml.dom.minidom import parseString
-from Merger import Merger 
-from Errors import NonregisteredDBRecordError
+from .MYSQLDataBase import MYSQLDataBase as MyDB
+from .ComponentParser import ComponentHandler
+from .Merger import Merger 
+from .Errors import NonregisteredDBRecordError
 
 
 ## XML Configurator
@@ -140,13 +140,13 @@ class XMLConfigurator(object):
     def storeComponent(self, name):
         if self.__mydb:
             self.__mydb.storeComponent(name, self.xmlConfig )   
-
+            
 
     ## stores the datasource from the xmlConfig attribute
     # \param name name of the datasource to store
     def storeDataSource(self, name):
         if self.__mydb:
-           self.__mydb.storeDataSource(name, self.xmlConfig )   
+            self.__mydb.storeDataSource(name, self.xmlConfig )   
 
 
     ## deletes the given component
@@ -160,7 +160,7 @@ class XMLConfigurator(object):
     # \param name of the datasource to delete
     def deleteDataSource(self, name):
         if self.__mydb:
-           self.__mydb.deleteDataSource(name)   
+            self.__mydb.deleteDataSource(name)   
 
 
     ## sets the mandtaory components
@@ -192,7 +192,8 @@ class XMLConfigurator(object):
     # \returns list of given components
     def createConfiguration(self, names):
         if self.__mydb:
-            comps = self.__mydb.components(list(set(self.__mydb.mandatory() + names)))   
+            comps = self.__mydb.components(list(set(self.__mydb.mandatory() 
+                                                    + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
@@ -201,7 +202,7 @@ class XMLConfigurator(object):
 #        self.xmlConfig = cnfWithDS
         if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
             reparsed = parseString(cnfWithDS)
-            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl="")))
+            self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
 #            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
 #                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
@@ -221,34 +222,39 @@ class XMLConfigurator(object):
         while index != -1:
             subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
             name = subc[0].strip() if subc else ""
-            name = name.split(None,1) if name else []
+            name = name.split(None, 1) if name else []
             name = name[0] if name else ""
             if name and name in dsources:
                 xmlds = self.dataSources([name])
                 if not xmlds:
-                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name 
+                    raise NonregisteredDBRecordError, \
+                        "DataSource %s not registered in the database" % name 
                 dom = parseString(xmlds[0])
                 domds = dom.getElementsByTagName("datasource")
                 if not domds:
-                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                    raise NonregisteredDBRecordError, \
+                        "DataSource %s not registered in the database" % name
                 ds = domds[0].toxml()
                 if ds:
-                    component = component.replace("$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
+                    component = component.replace(
+                        "$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
                     index = component.find("$%s." % self.__dsLabel)
                 else:
-                    raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                    raise NonregisteredDBRecordError, \
+                        "DataSource %s not registered in the database" % name
             else:
-                raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % name
+                raise NonregisteredDBRecordError, \
+                    "DataSource %s not registered in the database" % name
                 
         return component
 
 if __name__ == "__main__":
     
-    import time
     try:
         ## configurer object
         conf = XMLConfigurator()
-        conf.jsonSettings = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf"}'
+        conf.jsonSettings = '{"host":"localhost", "db":"ndts", '\
+            '"read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
 #        conf.createConfiguration(["scan1", "scan2"])

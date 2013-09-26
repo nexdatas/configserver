@@ -19,8 +19,8 @@
 ## \file Merger.py
 # Class for merging DOM component trees
 
-from xml.dom.minidom import Document, parseString, Element
-from Errors import IncompatibleNodeError, UndefinedTagError
+from xml.dom.minidom import parseString, Element
+from .Errors import IncompatibleNodeError, UndefinedTagError
 
 ## merges the components
 class Merger(object):
@@ -31,26 +31,30 @@ class Merger(object):
         ## DOM root node
         self.__root = None
         ## tags which cannot have the same siblings
-        self.singles =['strategy', 'dimensions', 'definition',
-                       'record', 'device', 'query', 'database']
+        self.singles = ['strategy', 'dimensions', 'definition',
+                        'record', 'device', 'query', 'database']
 
         ## allowed children
-        self.children ={
-#            "datasource":("record", "doc", "device", "database", "query", "datasource", "result"),
-            "attribute":("datasource", "strategy", "enumeration", "doc", "dimensions"),
-            "definition":("group", "field", "attribute", "link", "component", "doc", "symbols"),
+        self.children = {
+            "attribute":("datasource", "strategy", "enumeration", 
+                         "doc", "dimensions"),
+            "definition":("group", "field", "attribute", "link", 
+                          "component", "doc", "symbols"),
             "dimensions":("dim", "doc"),
-            "field":("attribute", "datasource", "doc", "dimensions", "enumeration", "strategy"),
-            "group":("group", "field", "attribute", "link", "component", "doc"),
+            "field":("attribute", "datasource", "doc", "dimensions", 
+                     "enumeration", "strategy"),
+            "group":("group", "field", "attribute", "link", "component", 
+                     "doc"),
             "link":("doc")
             }
 
         ## with unique text
-        self.uniqueText = ['field', 'attribute','query','strategy', 'result']
+        self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
     ## collects text from text child nodes
     # \param node parent node    
-    def __getText(self, node):
+    @classmethod    
+    def __getText(cls, node):
         text = ""
         if node:
             child = node.firstChild
@@ -65,7 +69,6 @@ class Merger(object):
     # \returns xml path
     def __getAncestors(self, node):
         res = "" 
-        attr = node.attributes
 
         name = node.getAttribute("name") if isinstance(node, Element) else "" 
 
@@ -98,7 +101,8 @@ class Merger(object):
             if tagName in self.singles:
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: " \
-                        % str((str(self.__getAncestors(elem1)),str(name2))), [elem1, elem2])
+                        % str((str(self.__getAncestors(elem1)),str(name2))), 
+                    [elem1, elem2])
                 
             return False
 
@@ -106,20 +110,23 @@ class Merger(object):
             for i2 in range(attr2.length):
                 at1 = attr1.item(i1)
                 at2 = attr2.item(i2)
-                if at1.nodeName == at2.nodeName and at1.nodeValue != at2.nodeValue:
+                if at1.nodeName == at2.nodeName \
+                        and at1.nodeValue != at2.nodeValue:
                     status = False
                     tags.append((str(self.__getAncestors(at1)),
                                  str(at1.nodeValue) , str(at2.nodeValue)))
 
-        if not status  and ( tagName in self.singles  or (name1  and name1 == name2)): 
-            raise IncompatibleNodeError("Incompatible element attributes  %s: " % str(tags), [elem1, elem2])
+        if not status  and ( tagName in self.singles  \
+                                 or (name1  and name1 == name2)): 
+            raise IncompatibleNodeError(
+                "Incompatible element attributes  %s: " \
+                    % str(tags), [elem1, elem2])
                 
 
 
         if tagName in self.uniqueText:
-            text1=unicode(self.__getText(elem1)).strip()
-            text2=unicode(self.__getText(elem2)).strip()         
-            ## TODO white spaces?
+            text1 = unicode(self.__getText(elem1)).strip()
+            text2 = unicode(self.__getText(elem2)).strip()         
             if text1 != text2 and text1 and text2:
                 raise IncompatibleNodeError(
                     "Incompatible \n%s element value\n%s \n%s "  \
@@ -132,9 +139,8 @@ class Merger(object):
     ## merges two dom elements 
     # \param elem1 first element
     # \param elem2 second element
-    def __mergeNodes(self,elem1, elem2):
-        tagName = elem1.nodeName
-        attr1 = elem1.attributes
+    @classmethod
+    def __mergeNodes(cls, elem1, elem2):
         attr2 = elem2.attributes
         texts = []
 
@@ -172,11 +178,8 @@ class Merger(object):
     ## merge the given node
     # \param node the given node
     def __mergeChildren(self, node):
-        status = False
         if node:
-#            print "merging the children of: ", node.nodeName()
-            changes = True
- 
+
             children = node.childNodes
             c1 = 0 
             while c1 < children.length:
@@ -185,7 +188,8 @@ class Merger(object):
                 while c2 < children.length:
                     child2 = children.item(c2)
                     if child1 != child2:
-                        if isinstance(child1, Element) and isinstance(child2, Element):
+                        if isinstance(child1, Element) \
+                                and isinstance(child2, Element):
                             if self.__areMergeable(child1, child2):
                                 self.__mergeNodes(child1, child2)
                                 c2 -= 1
@@ -197,7 +201,8 @@ class Merger(object):
 
             while child:
                 if nName and nName in self.children.keys():
-                    cName = unicode(child.nodeName) if isinstance(child, Element)  else ""
+                    cName = unicode(child.nodeName) \
+                        if isinstance(child, Element)  else ""
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"  \
@@ -232,8 +237,9 @@ class Merger(object):
                 if not defin: 
                     raise  UndefinedTagError, "<definition> not defined"
                 for cd in defin[0].childNodes:
-                    if cd.nodeType != cd.TEXT_NODE or\
-                            (cd.nodeType == cd.TEXT_NODE and str(cd.data).strip()):
+                    if cd.nodeType != cd.TEXT_NODE or \
+                            (cd.nodeType == cd.TEXT_NODE \
+                                 and str(cd.data).strip()):
                         
                         icd = self.__root.importNode(cd, True) 
                         rootDef.appendChild(icd)
@@ -250,5 +256,5 @@ class Merger(object):
         self.__mergeChildren(self.__root)
 
 if __name__ == "__main__":
-    import sys
-
+    pass
+    

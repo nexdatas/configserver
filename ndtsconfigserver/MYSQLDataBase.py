@@ -22,7 +22,7 @@
 
 import MySQLdb
 
-from Errors import NonregisteredDBRecordError
+from .Errors import NonregisteredDBRecordError
 
 
 ## XML Configurer
@@ -62,10 +62,13 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select value from properties where name = 'revision';")
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select value from properties where name = 'revision';")
+                data = cursor.fetchone()
                 if not data or not data[0]:
-                    raise NonregisteredDBRecordError, "Component %s not registered in the database" % ar
+                    raise NonregisteredDBRecordError, \
+                        "Component %s not registered in the database" \
+                        % self.__args
                 argout = data[0]
                 cursor.close()    
             except:
@@ -75,12 +78,15 @@ class MYSQLDataBase(object):
     
     ## increases revision number
     # \param cursor transaction cursor
-    def __incRevision(self, cursor):
-        cursor.execute("select value from properties where name = 'revision';")
-        data=cursor.fetchone()
+    @classmethod
+    def __incRevision(cls, cursor):
+        cursor.execute(
+            "select value from properties where name = 'revision';")
+        data = cursor.fetchone()
         new = str(long(data[0])+1)
-        cursor.execute("update properties set value = '%s' where name = 'revision';" 
-                       % (new.replace("'","\\\'")))
+        cursor.execute(
+            "update properties set value = '%s' where name = 'revision';"\
+                % (new.replace("'","\\\'")))
     
                                    
 
@@ -97,10 +103,13 @@ class MYSQLDataBase(object):
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
                 for ar in names:
-                    cursor.execute("select xml from components where name = '%s';" % ar.replace("'","\\\'"))
-                    data=cursor.fetchone()
+                    cursor.execute(
+                        "select xml from components where name = '%s';" \
+                            % ar.replace("'","\\\'"))
+                    data = cursor.fetchone()
                     if not data or not data[0]:
-                        raise NonregisteredDBRecordError, "Component %s not registered in the database" % ar
+                        raise NonregisteredDBRecordError, \
+                            "Component %s not registered in the database" % ar
                     argout.append(data[0])
                 cursor.close()    
             except:
@@ -121,10 +130,14 @@ class MYSQLDataBase(object):
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
                 for ar in names:
-                    cursor.execute("select xml from datasources where name = '%s';" % ar.replace("'","\\\'"))
-                    data=cursor.fetchone()
+                    cursor.execute(
+                        "select xml from datasources where name = '%s';" \
+                            % ar.replace("'","\\\'"))
+                    data = cursor.fetchone()
                     if not data or not data[0]:
-                        raise NonregisteredDBRecordError, "DataSource %s not registered in the database" % ar
+                        raise NonregisteredDBRecordError, \
+                            "DataSource %s not registered in the database" \
+                            % ar
                     argout.append(data[0])
                 cursor.close()    
             except:
@@ -143,7 +156,7 @@ class MYSQLDataBase(object):
             try:
                 cursor = self.__db.cursor()
                 cursor.execute("select name from components;")
-                data=cursor.fetchall()
+                data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()    
             except:
@@ -165,7 +178,7 @@ class MYSQLDataBase(object):
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
                 cursor.execute("select name from datasources;")
-                data=cursor.fetchall()
+                data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()    
             except:
@@ -184,19 +197,27 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select xml from components where name = '%s';" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select xml from components where name = '%s';" \
+                        % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data and len(data)>0 and data[0]:
                     if data[0] != xml:
-                        cursor.execute("update components set xml = '%s' where name = '%s';" 
-                                       % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                        cursor.execute(
+                            "update components set xml"\
+                                " = '%s' where name = '%s';" \
+                                % (xml.replace("'","\\\'"), 
+                                   name.replace("'","\\\'")))
                         self.__incRevision(cursor)                    
                         self.__db.commit()
                     else:
                         self.__db.rollback()
                 else:
-                    cursor.execute("insert into components values('%s', '%s', 0);" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                    cursor.execute(
+                        "insert into components "\
+                            "values('%s', '%s', 0);" \
+                            % (name.replace("'","\\\'"), 
+                               xml.replace("'","\\\'")))
                     self.__incRevision(cursor)                    
                     self.__db.commit()
                 cursor.close()    
@@ -218,19 +239,27 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select xml from datasources where name = '%s';" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select xml from datasources where name = '%s';" \
+                        % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data and len(data)>0 and data[0]:
                     if data[0] != xml:
-                        cursor.execute("update datasources set xml = '%s' where name = '%s';" 
-                                       % (xml.replace("'","\\\'"), name.replace("'","\\\'")))
+                        cursor.execute(
+                            "update datasources set "\
+                                "xml = '%s' where name = '%s';" \
+                                % (xml.replace("'","\\\'"), 
+                                   name.replace("'","\\\'")))
                         self.__incRevision(cursor)                    
                         self.__db.commit()
                     else:
                         self.__db.rollback()
                 else:
-                    cursor.execute("insert into datasources values('%s', '%s');" 
-                                   % (name.replace("'","\\\'"), xml.replace("'","\\\'")))
+                    cursor.execute(
+                        "insert into datasources "\
+                            "values('%s', '%s');" \
+                            % (name.replace("'","\\\'"), 
+                               xml.replace("'","\\\'")))
                     
                     self.__incRevision(cursor)                    
                     self.__db.commit()
@@ -250,10 +279,14 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from components where name = '%s');" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select exists(select 1 from components where "\
+                        "name = '%s');" % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data[0]:
-                    cursor.execute("delete from components where name = '%s';" % name.replace("'","\\\'"))
+                    cursor.execute(
+                        "delete from components where name = '%s';" \
+                            % name.replace("'","\\\'"))
                     
                     self.__db.commit()
                 self.__incRevision(cursor)                    
@@ -276,11 +309,14 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select mandatory from components where name = '%s';" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select mandatory from components where name = '%s';" \
+                        % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data and len(data)>0 and data[0] != 1:
                     cursor.execute(
-                        "update components set mandatory = 1 where name = '%s';" %  name.replace("'","\\\'"))
+                        "update components set mandatory = 1 where "\
+                            "name = '%s';" %  name.replace("'","\\\'"))
                     self.__db.commit()
                     self.__incRevision(cursor)                    
                 else:
@@ -302,10 +338,14 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select mandatory from components where name = '%s';" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select mandatory from components where name = '%s';" \
+                        % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data and len(data)>0 and data[0] != 0:
-                    cursor.execute("update components set mandatory = 0 where name = '%s';" %  name.replace("'","\\\'"))
+                    cursor.execute(
+                        "update components set mandatory = 0 where "\
+                            "name = '%s';" %  name.replace("'","\\\'"))
                     
                     self.__db.commit()
                     self.__incRevision(cursor)                    
@@ -332,8 +372,9 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select name from components where mandatory = 1")
-                data=cursor.fetchall()
+                cursor.execute(
+                    "select name from components where mandatory = 1")
+                data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()    
             except:
@@ -351,10 +392,14 @@ class MYSQLDataBase(object):
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
-                cursor.execute("select exists(select 1 from datasources where name = '%s');" % name.replace("'","\\\'"))
-                data=cursor.fetchone()
+                cursor.execute(
+                    "select exists(select 1 from datasources where "\
+                        "name = '%s');" % name.replace("'","\\\'"))
+                data = cursor.fetchone()
                 if data[0]:
-                    cursor.execute("delete from datasources where name = '%s';" % name.replace("'","\\\'"))
+                    cursor.execute(
+                        "delete from datasources where name = '%s';" \
+                            % name.replace("'","\\\'"))
                     
                     self.__db.commit()
                 self.__incRevision(cursor)                    
@@ -367,8 +412,7 @@ class MYSQLDataBase(object):
 
 
 if __name__ == "__main__":
-
-    import time
+    pass
 
             
                 
