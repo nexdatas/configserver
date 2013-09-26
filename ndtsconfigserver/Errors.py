@@ -19,6 +19,7 @@
 ## \file Errors.py
 # Error classes
 
+""" Error classes  """
 
 ## Incompatible class Exception
 class IncompatibleNodeError(Exception): 

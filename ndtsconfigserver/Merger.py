@@ -19,6 +19,8 @@
 ## \file Merger.py
 # Class for merging DOM component trees
 
+""" Classes for merging DOM component trees """
+
 from xml.dom.minidom import parseString, Element
 from .Errors import IncompatibleNodeError, UndefinedTagError
 

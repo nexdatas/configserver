@@ -19,5 +19,7 @@
 ## \file __init__.py
 # package constructor
 
+""" Implementation of NexDaTaS Configuration Server """
+
 ## version number
 __version__ = "1.2.2"
