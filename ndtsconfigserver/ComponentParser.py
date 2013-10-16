@@ -19,6 +19,7 @@
 ## \file ComponentParser.py
 # Class for searching database names in components
 
+""" Parser for searching database names in components """
 
 from xml import sax
 
@@ -51,10 +52,10 @@ class ComponentHandler(sax.ContentHandler):
 
 
     ## adds the tag content 
-    # \param ch partial content of the tag    
-    def characters(self, ch):
+    # \param content partial content of the tag    
+    def characters(self, content):
         if self.__stack[-1] in self.__withDS: 
-            self.__content[self.__stack[-1]].append(ch)
+            self.__content[self.__stack[-1]].append(content)
             
 
     ##  parses the opening tag
@@ -83,8 +84,9 @@ class ComponentHandler(sax.ContentHandler):
             text = "".join(self.__content[tag]).strip()
             index = text.find("$%s." % self.__dsLabel)
             if index != -1:
-                aName = text[(index+len(self.__dsLabel)+2):].split("<",1)
-                aName = aName[0].split(None,1) if aName else ""
+                aName = text[(index+len(self.__dsLabel)+2):].\
+                    split("<",1)
+                aName = aName[0].split(None, 1) if aName else ""
                 if aName:
                     self.datasources[aName[0]] = "__FROM_DB__"
                 
@@ -224,12 +226,11 @@ if __name__ == "__main__":
 
             ## a SAX2 handler object
             handler = ComponentHandler()
-#            sax.parseString("<datasource name ='myds' type = 'CLIENT'/> ", handler)
             sax.parseString(str(www2).strip(), handler)
             print handler.datasources
     
 
 
 if __name__ == "__main__":
-    import sys
+    pass
 
