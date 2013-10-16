@@ -199,12 +199,9 @@ class XMLConfigurator(object):
         mgr.merge()
         cnf = mgr.toString()
         cnfWithDS = self.__attachDataSources(cnf)
-#        self.xmlConfig = cnfWithDS
         if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
             reparsed = parseString(cnfWithDS)
             self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
-#            self.xmlConfig = str((reparsed.toprettyxml(indent=" ",newl=""))
-#                                 ).replace("\n \n "," ").replace("\n\n","\n")
         else:
             self.xmlConfig = ''
         print "create configuration"
@@ -236,8 +233,7 @@ class XMLConfigurator(object):
                         "DataSource %s not registered in the database" % name
                 ds = domds[0].toxml()
                 if ds:
-                    component = component.replace(
-                        "$%s.%s" % (self.__dsLabel, name),"\n%s" % ds)
+                    component = component[0:index] + ("\n%s" % ds) + component[(index+len(subc[0])+len(self.__dsLabel)+2):]
                     index = component.find("$%s." % self.__dsLabel)
                 else:
                     raise NonregisteredDBRecordError, \
