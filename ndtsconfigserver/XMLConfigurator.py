@@ -20,6 +20,8 @@
 # Allows the access to a database with NDTS configuration files 
 #
 
+""" Provides the access to a database with NDTS configuration files """
+
 import json
 import ndtsconfigserver
 from xml import  sax

@@ -19,6 +19,7 @@
 ## \file ComponentParser.py
 # Class for searching database names in components
 
+""" Parser for searching database names in components """
 
 from xml import sax
 

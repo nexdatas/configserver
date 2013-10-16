@@ -20,6 +20,8 @@
 # Allows the access to MYSQL database with NDTS configuration files 
 #
 
+""" Providesthe access to MYSQL database with NDTS configuration files """
+
 import MySQLdb
 
 from .Errors import NonregisteredDBRecordError
