@@ -2830,6 +2830,93 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_componentDataSources_external_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+
+        xds  = [
+            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            ]
+
+
+        odsname = "mcs_test_datasource"
+        avds = el.availableDataSources()
+        self.assertTrue(isinstance(avds, list))
+        dsnp = len(xds)
+        dsname = []
+        dsname.append(odsname +'_1')
+        dsname.append(odsname +'_11')
+        rname = odsname
+        while dsname[0] in avds or dsname[1] in avds:
+            rname = rename + "_1"
+            dsname[0] = rname + '_1'
+            dsname[1] = rname + '_11'
+
+                
+        for i in range(dsnp):
+            self.setXML(el, xds[i] % dsname[i])
+            self.assertEqual(el.storeDataSource(dsname[i]),None)
+            self.__ds.append(dsname[i])
+
+
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[0]),
+               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[1]),
+               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[0] ,"$datasources.%s" % dsname[1] )
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[0],name[2]]
+        cmps = []
+        for cs in css:
+            mdss = el.componentDataSources(cs)
+            cmps.extend(mdss)
+        self.assertEqual(cmps,[dsname[0],dsname[1],dsname[0]])
+        
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+5)
+        el.close()
+
+
+
     ## creatConf test
     # \brief It tests XMLConfigurator
     def test_componentDataSources_mixed(self):
@@ -3005,6 +3092,102 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         el.setMandatoryComponents(man)
         self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
+        el.close()
+
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConfiguraton_mixed_2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+
+        xds  = [
+            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            ]
+
+
+
+        odsname = "mcs_test_datasource"
+        avds = el.availableDataSources()
+        self.assertTrue(isinstance(avds, list))
+        dsnp = len(xds)
+        dsname = []
+        dsname.append(odsname +'_1')
+        dsname.append(odsname +'_11')
+        rname = odsname
+        while dsname[0] in avds or dsname[1] in avds:
+            rname = rename + "_1"
+            dsname[0] = rname + '_1'
+            dsname[1] = rname + '_11'
+                
+        for i in range(dsnp):
+            self.setXML(el, xds[i] % dsname[i])
+            self.assertEqual(el.storeDataSource(dsname[i]),None)
+            print "DS store", dsname[i]
+            self.__ds.append(dsname[i])
+
+        print "AVAIL", el.availableDataSources()    
+
+
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
+               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
+               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>' 
+               % (xds[0] % dsname[0] ,"$datasources.%s" % dsname[1] ),
+               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>' 
+               % ("$datasources.%s" % dsname[0] ,"$datasources.%s" % dsname[1] )
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[0],name[2]]
+        print "AVAIL2", el.availableDataSources()    
+
+        self.assertEqual(el.createConfiguration(css), None)
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field4">  \n  <datasource name="mcs_test_datasource_11" type="CLIENT">   <record name="r2"/>  </datasource> </field> <field name="field1">  \n  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>')
+
+        
+
+      
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
