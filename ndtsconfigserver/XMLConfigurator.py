@@ -235,7 +235,8 @@ class XMLConfigurator(object):
                         "DataSource %s not registered in the database" % name
                 ds = domds[0].toxml()
                 if ds:
-                    component = component[0:index] + ("\n%s" % ds) + component[(index+len(subc[0])+len(self.__dsLabel)+2):]
+                    component = component[0:index] + ("\n%s" % ds) \
+                        + component[(index+len(subc[0])+len(self.__dsLabel)+2):]
                     index = component.find("$%s." % self.__dsLabel)
                 else:
                     raise NonregisteredDBRecordError, \
