@@ -91,10 +91,7 @@ class Merger(object):
         if elem1.nodeName != elem2.nodeName:
             return False
         tagName = unicode(elem1.nodeName)
-        attr1 = elem1.attributes
-        attr2 = elem2.attributes
         status = True
-        tags = []
  
         name1 = elem1.getAttribute("name")
         name2 = elem2.getAttribute("name")
@@ -105,26 +102,17 @@ class Merger(object):
                     "Incompatible element attributes  %s: " \
                         % str((str(self.__getAncestors(elem1)),str(name2))), 
                     [elem1, elem2])
-                
             return False
-
-        for i1 in range(attr1.length):
-            for i2 in range(attr2.length):
-                at1 = attr1.item(i1)
-                at2 = attr2.item(i2)
-                if at1.nodeName == at2.nodeName \
-                        and at1.nodeValue != at2.nodeValue:
-                    status = False
-                    tags.append((str(self.__getAncestors(at1)),
-                                 str(at1.nodeValue) , str(at2.nodeValue)))
-
-        if not status  and ( tagName in self.singles  \
-                                 or (name1  and name1 == name2)): 
-            raise IncompatibleNodeError(
-                "Incompatible element attributes  %s: " \
-                    % str(tags), [elem1, elem2])
+        
+        tags = self.__checkAttributes(elem1, elem2)
+        if tags:
+            status = False
+            if ( tagName in self.singles  \
+                     or (name1  and name1 == name2)): 
+                raise IncompatibleNodeError(
+                    "Incompatible element attributes  %s: " \
+                        % str(tags), [elem1, elem2])
                 
-
 
         if tagName in self.uniqueText:
             text1 = unicode(self.__getText(elem1)).strip()
@@ -137,6 +125,24 @@ class Merger(object):
                     
             
         return status
+
+    ## checks if two elements are mergeable
+    # \param elem1 first element
+    # \param elem2 second element
+    # \returns tags with not mergeable attributes
+    def __checkAttributes(self, elem1, elem2):
+        tags = []
+        attr1 = elem1.attributes
+        attr2 = elem2.attributes
+        for i1 in range(attr1.length):
+            for i2 in range(attr2.length):
+                at1 = attr1.item(i1)
+                at2 = attr2.item(i2)
+                if at1.nodeName == at2.nodeName \
+                        and at1.nodeValue != at2.nodeValue:
+                    tags.append((str(self.__getAncestors(at1)),
+                                 str(at1.nodeValue), str(at2.nodeValue)))
+        return tags            
 
     ## merges two dom elements 
     # \param elem1 first element
