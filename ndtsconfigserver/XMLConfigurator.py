@@ -219,7 +219,7 @@ class XMLConfigurator(object):
         index = component.find("$%s." % self.__dsLabel)
         dsources = self.availableDataSources()
         while index != -1:
-            subc = (component[(index+len(self.__dsLabel)+2):].split("<", 1))
+            subc = ((component[(index+len(self.__dsLabel)+2):].split("<", 1))[0].split("$",1))
             name = subc[0].strip() if subc else ""
             name = name.split(None, 1) if name else []
             name = name[0] if name else ""
