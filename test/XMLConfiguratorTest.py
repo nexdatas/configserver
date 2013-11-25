@@ -34,7 +34,8 @@ IS64BIT = (struct.calcsize("P") == 8)
 
 from ndtsconfigserver.XMLConfigurator  import XMLConfigurator
 from ndtsconfigserver.Merger import Merger
-from ndtsconfigserver.Errors import NonregisteredDBRecordError, UndefinedTagError, IncompatibleNodeError
+from ndtsconfigserver.Errors import (NonregisteredDBRecordError, UndefinedTagError, 
+                                     IncompatibleNodeError)
 import ndtsconfigserver
 
 ## test fixture
@@ -3265,7 +3266,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field4">  \n  <datasource name="mcs_test_datasource_11" type="CLIENT">   <record name="r2"/>  </datasource> </field> <field name="field1">  \n  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>')
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r2"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0],dsname[1],dsname[0]))
 
         
 
@@ -3359,7 +3360,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="mcs_test_datasource_1" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="mcs_test_datasource_11" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>')
+        print "GXML2:\n", gxml
+        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (
+                dsname[0], dsname[1], dsname[0] ))
 
         
 
@@ -3389,7 +3392,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         xds  = [
             '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
             '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>import ndts</result></datasource>'
+            """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
+import ndts
+ds.result = ndts.version</result></datasource>"""
             ]
 
 
@@ -3456,7 +3461,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  datasources.\n  <datasource name="mcs_test_datasource_111" type="CLIENT">   \n   <datasource name="mcs_test_datasource_1" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="mcs_test_datasource_11" type="CLIENT">    <record name="r2"/>   </datasource>   <result>    import ndts   </result>  </datasource> </field> <field name="field1">  \n  <datasource name="mcs_test_datasource_1" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>')
+        print "GXML3:\n", gxml
+        self.assertEqual(gxml.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  datasources.\n  <datasource name="%s" type="CLIENT">   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>   <result>    \nimport ndts\nds.result = ndts.version   </result>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0]))
 
         
 
