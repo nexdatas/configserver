@@ -946,7 +946,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        self.assertEqual(xml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
+        self.assertEqual(
+            xml.replace("?>\n<","?><"),
+            '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name),None)
         self.__cmps.pop()
@@ -3462,7 +3464,11 @@ ds.result = ndts.version</result></datasource>"""
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         print "GXML3:\n", gxml
-        self.assertEqual(gxml.replace("?>\n<","?><"),  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  datasources.\n  <datasource name="%s" type="CLIENT">   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>   <result>    \nimport ndts\nds.result = ndts.version   </result>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0]))
+        self.assertEqual(
+            gxml.replace(">    ",">").replace(">   ",">").replace(">  ",">").replace("> ",">")\
+                .replace("    <","<").replace("   <","<").replace("  <","<").replace(" <","<")\
+                .replace("?>\n<","?><"),  
+            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">datasources.\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0]))
 
         
 
