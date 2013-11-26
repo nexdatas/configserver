@@ -84,7 +84,8 @@ class XMLConfigurator(object):
         if Streams.log_info:
             print >> Streams.log_info , \
                 "XMLConfigurator::open() - Open connection"
-        print "XMLConfigurator::open() - Open connection"
+        else:  
+            print "XMLConfigurator::open() - Open connection"
         try:
             js = json.loads(self.jsonSettings)
             targs = dict(js.items())
@@ -108,7 +109,8 @@ class XMLConfigurator(object):
         if Streams.log_info:
             print >> Streams.log_info , \
                 "XMLConfigurator::close() - Close connection"
-        print "XMLConfigurator::close() - Close connection"
+        else:    
+            print "XMLConfigurator::close() - Close connection"
 
 
     ## fetches the required components
@@ -235,8 +237,9 @@ class XMLConfigurator(object):
             print >> Streams.log_info , \
                 "XMLConfigurator::createConfiguration() " \
                 "- Create configuration"
-        print "XMLConfigurator::createConfiguration() - " \
-            "Create configuration"
+        else:    
+            print "XMLConfigurator::createConfiguration() - " \
+                "Create configuration"
 
 
 

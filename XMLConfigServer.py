@@ -82,7 +82,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
     def init_device(self):
         print >> self.log_info, "In ", self.get_name(), "::init_device()"
-        self.xmlc = XMLC()
+        self.xmlc = XMLC(self)
         self.set_state(PyTango.DevState.ON)
         self.get_device_properties(self.get_device_class())
         self.xmlc.versionLabel = self.VersionLabel

@@ -43,7 +43,8 @@ class MYSQLDataBase(object):
         if Streams.log_info:
             print >> Streams.log_info , \
                 "MYSQLDataBase::connect() - connect:", args
-        print "MYSQLDataBase::connect() - connect:", args
+        else:    
+            print "MYSQLDataBase::connect() - connect:", args
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
@@ -232,7 +233,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::storeComponent() - store component", name
-            print "MYSQLDataBase::storeComponent() - store component", name
+            else:    
+                print "MYSQLDataBase::storeComponent() - store component", name
 
 
     ## stores the given datasource
@@ -276,7 +278,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::storeDataSource() - store datasource", name
-            print "MYSQLDataBase::storeDataSource() - store datasource", name
+            else:    
+                print "MYSQLDataBase::storeDataSource() - store datasource", name
 
 
     ## deletes the given component
@@ -308,7 +311,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::deleteComponent() - delete component", name
-            print "MYSQLDataBase::deleteComponent() - delete component", name
+            else:    
+                print "MYSQLDataBase::deleteComponent() - delete component", name
 
 
 
@@ -340,7 +344,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::setMandatory() - component", name
-            print "MYSQLDataBase::setMandatory() - component", name
+            else:    
+                print "MYSQLDataBase::setMandatory() - component", name
 
 
     ## sets components as not mandatory
@@ -375,7 +380,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::unsetMandatory() - component", name
-            print "MYSQLDataBase::unsetMandatory() - component", name
+            else:    
+                print "MYSQLDataBase::unsetMandatory() - component", name
 
 
 
@@ -425,7 +431,8 @@ class MYSQLDataBase(object):
             if Streams.log_info:
                 print >> Streams.log_info , \
                     "MYSQLDataBase::deleteDataSource() - datasource", name
-            print "MYSQLDataBase::deleteDataSource() - datasource", name
+            else:    
+                print "MYSQLDataBase::deleteDataSource() - datasource", name
 
 
 if __name__ == "__main__":
