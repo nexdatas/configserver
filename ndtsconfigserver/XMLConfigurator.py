@@ -30,13 +30,14 @@ from .MYSQLDataBase import MYSQLDataBase as MyDB
 from .ComponentParser import ComponentHandler
 from .Merger import Merger 
 from .Errors import NonregisteredDBRecordError
+from . import Streams
 
 
 ## XML Configurator
 class XMLConfigurator(object):
     ## constructor
     # \brief It allows to construct XML configurer object
-    def __init__(self):
+    def __init__(self, server = None):
         ## XML config string
         self.xmlConfig = ""
         ## JSON string with arguments to connect to database
@@ -46,8 +47,23 @@ class XMLConfigurator(object):
 
         self.__dsLabel = "datasources"
         
+        ## version label
         self.versionLabel = "XCS"
 
+        ## Tango server
+        self.__server = server
+
+        if server:
+            if  hasattr(self.__server, "log_fatal"):
+                Streams.log_fatal = server.log_fatal
+            if  hasattr(self.__server, "log_error"):
+                Streams.log_error = server.log_error
+            if  hasattr(self.__server, "log_warn"):
+                Streams.log_warn = server.log_warn
+            if  hasattr(self.__server, "log_info"):
+                Streams.log_info = server.log_info
+            if  hasattr(self.__server, "log_debug"):
+                Streams.log_debug = server.log_debug
 
     
     ## get method for version attribute
@@ -65,13 +81,19 @@ class XMLConfigurator(object):
     # \brief It opens connection to the give database by JSON string
     def open(self): 
         args = {}
-        print "Open connection"
+        if Streams.log_info:
+            print >> Streams.log_info , \
+                "XMLConfigurator::open() - Open connection"
+        print "XMLConfigurator::open() - Open connection"
         try:
             js = json.loads(self.jsonSettings)
             targs = dict(js.items())
             for k in targs.keys():
                 args[str(k)] = targs[k]
         except:
+            if Streams.log_info:
+                print >> Streams.log_info , "XMLConfigurator::open() - ", \
+                    args
             print args
             args = {}
         self.__mydb.connect(args)    
@@ -83,7 +105,10 @@ class XMLConfigurator(object):
     def close(self):
         if self.__mydb:
             self.__mydb.close()    
-        print "Close connection"
+        if Streams.log_info:
+            print >> Streams.log_info , \
+                "XMLConfigurator::close() - Close connection"
+        print "XMLConfigurator::close() - Close connection"
 
 
     ## fetches the required components
@@ -206,7 +231,12 @@ class XMLConfigurator(object):
             self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlConfig = ''
-        print "create configuration"
+        if Streams.log_info:
+            print >> Streams.log_info , \
+                "XMLConfigurator::createConfiguration() " \
+                "- Create configuration"
+        print "XMLConfigurator::createConfiguration() - " \
+            "Create configuration"
 
 
 

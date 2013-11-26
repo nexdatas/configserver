@@ -25,6 +25,7 @@
 import MySQLdb
 
 from .Errors import NonregisteredDBRecordError
+from . import Streams
 
 
 ## XML Configurer
@@ -39,7 +40,10 @@ class MYSQLDataBase(object):
     ## connects to the database
     # \param args arguments of the MySQLdb connect method    
     def connect(self, args):
-        print "connect:", args
+        if Streams.log_info:
+            print >> Streams.log_info , \
+                "MYSQLDataBase::connect() - connect:", args
+        print "MYSQLDataBase::connect() - connect:", args
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
@@ -117,7 +121,6 @@ class MYSQLDataBase(object):
             except:
                 cursor.close()    
                 raise
-        print "components"
         return argout
 
 
@@ -145,7 +148,6 @@ class MYSQLDataBase(object):
             except:
                 cursor.close()    
                 raise
-#        print "dataSources",argout
         return argout
 
 
@@ -165,7 +167,6 @@ class MYSQLDataBase(object):
                 cursor.close()    
                 raise
 
-#        print "available components"
         return argout
 
 
@@ -186,7 +187,6 @@ class MYSQLDataBase(object):
             except:
                 cursor.close()    
                 raise
-#        print "available datasources"
         return argout
 
 
@@ -229,7 +229,10 @@ class MYSQLDataBase(object):
                 raise
     
 
-            print "store component", name
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::storeComponent() - store component", name
+            print "MYSQLDataBase::storeComponent() - store component", name
 
 
     ## stores the given datasource
@@ -270,7 +273,10 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()    
                 raise
-            print "store DataSource", name
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::storeDataSource() - store datasource", name
+            print "MYSQLDataBase::storeDataSource() - store datasource", name
 
 
     ## deletes the given component
@@ -299,7 +305,10 @@ class MYSQLDataBase(object):
                 raise
     
 
-            print "delete component", name
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::deleteComponent() - delete component", name
+            print "MYSQLDataBase::deleteComponent() - delete component", name
 
 
 
@@ -328,9 +337,11 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()    
                 raise
-    
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::setMandatory() - component", name
+            print "MYSQLDataBase::setMandatory() - component", name
 
-            print "unset mandatory", name
 
     ## sets components as not mandatory
     # \param name of the component to delete
@@ -361,7 +372,10 @@ class MYSQLDataBase(object):
                 raise
     
 
-            print "unset mandatory", name
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::unsetMandatory() - component", name
+            print "MYSQLDataBase::unsetMandatory() - component", name
 
 
 
@@ -382,8 +396,6 @@ class MYSQLDataBase(object):
             except:
                 raise
     
-
-        print "mandatory"
         return argout   
             
     ## deletes the given datasource 
@@ -410,7 +422,10 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()    
                 raise
-            print "delete DataSource", name
+            if Streams.log_info:
+                print >> Streams.log_info , \
+                    "MYSQLDataBase::deleteDataSource() - datasource", name
+            print "MYSQLDataBase::deleteDataSource() - datasource", name
 
 
 if __name__ == "__main__":

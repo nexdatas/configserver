@@ -75,7 +75,6 @@ class Merger(object):
         name = node.getAttribute("name") if isinstance(node, Element) else "" 
 
         if node and node.parentNode and node.parentNode.nodeName != '#document':
-#            print node.nodeName()
             res =  self.__getAncestors(node.parentNode) 
         res += "/" + unicode(node.nodeName) 
         if name:

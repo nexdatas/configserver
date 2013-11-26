@@ -68,7 +68,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Device destructor
 #------------------------------------------------------------------
     def delete_device(self):
-        print "[Device delete_device method] for device", self.get_name()
+        print >> self.log_info, "[Device delete_device method] for device", self.get_name()
         if hasattr(self,"xmlc") and self.xmlc:
             if hasattr(self.xmlc, "close"):
                 self.xmlc.close()
@@ -81,7 +81,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Device initialization
 #------------------------------------------------------------------
     def init_device(self):
-        print "In ", self.get_name(), "::init_device()"
+        print >> self.log_info, "In ", self.get_name(), "::init_device()"
         self.xmlc = XMLC()
         self.set_state(PyTango.DevState.ON)
         self.get_device_properties(self.get_device_class())
@@ -91,7 +91,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Always excuted hook method
 #------------------------------------------------------------------
     def always_executed_hook(self):
-        print "In ", self.get_name(), "::always_excuted_hook()"
+        print >> self.log_info, "In ", self.get_name(), "::always_excuted_hook()"
 
 #==================================================================
 #
@@ -102,7 +102,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Read Attribute Hardware
 #------------------------------------------------------------------
     def read_attr_hardware(self, _):
-        print "In ", self.get_name(), "::read_attr_hardware()"
+        print >> self.log_info, "In ", self.get_name(), "::read_attr_hardware()"
 
 
 
@@ -110,7 +110,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Read XMLString attribute
 #------------------------------------------------------------------
     def read_XMLString(self, attr):
-        print "In ", self.get_name(), "::read_XMLString()"
+        print >> self.log_info, "In ", self.get_name(), "::read_XMLString()"
         
         #    Add your own code here
         
@@ -122,10 +122,10 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Write XMLString attribute
 #------------------------------------------------------------------
     def write_XMLString(self, attr):
-        print "In ", self.get_name(), "::write_XMLString()"
+        print >> self.log_info, "In ", self.get_name(), "::write_XMLString()"
         
         self.xmlc.xmlConfig = attr.get_write_value()
-        print "Attribute value = ", self.xmlc.xmlConfig
+        print >> self.log_info, "Attribute value = ", self.xmlc.xmlConfig
 
         #    Add your own code here
 
@@ -144,7 +144,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Read JSONSettings attribute
 #------------------------------------------------------------------
     def read_JSONSettings(self, attr):
-        print "In ", self.get_name(), "::read_JSONSettings()"
+        print >> self.log_info, "In ", self.get_name(), "::read_JSONSettings()"
         
         #    Add your own code here
         
@@ -155,9 +155,9 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Write JSONSettings attribute
 #------------------------------------------------------------------
     def write_JSONSettings(self, attr):
-        print "In ", self.get_name(), "::write_JSONSettings()"
+        print >> self.log_info, "In ", self.get_name(), "::write_JSONSettings()"
         self.xmlc.jsonSettings = attr.get_write_value()
-        print "Attribute value = ", self.xmlc.jsonSettings
+        print >> self.log_info, "Attribute value = ", self.xmlc.jsonSettings
 
         #    Add your own code here
 
@@ -176,7 +176,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    Read Version attribute
 #------------------------------------------------------------------
     def read_Version(self, attr):
-        print "In ", self.get_name(), "::read_Version()"
+        print >> self.log_info, "In ", self.get_name(), "::read_Version()"
         
         #    Add your own code here
         self.get_device_properties(self.get_device_class())
@@ -208,7 +208,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #                
 #------------------------------------------------------------------
     def Open(self):
-        print "In ", self.get_name(), "::Open()"
+        print >> self.log_info, "In ", self.get_name(), "::Open()"
         #    Add your own code here
         try:
             if self.get_state() == PyTango.DevState.OPEN:
@@ -238,7 +238,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #                
 #------------------------------------------------------------------
     def Close(self):
-        print "In ", self.get_name(), "::Close()"
+        print >> self.log_info, "In ", self.get_name(), "::Close()"
         #    Add your own code here
 
         try:
@@ -269,7 +269,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    list of required components
 #------------------------------------------------------------------
     def Components(self, argin):
-        print "In ", self.get_name(), "::Components()"
+        print >> self.log_info, "In ", self.get_name(), "::Components()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -301,7 +301,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    list of required DataSources
 #------------------------------------------------------------------
     def DataSources(self, argin):
-        print "In ", self.get_name(), "::DataSources()"
+        print >> self.log_info, "In ", self.get_name(), "::DataSources()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -332,7 +332,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    list of available component names
 #------------------------------------------------------------------
     def AvailableComponents(self):
-        print "In ", self.get_name(), "::AvailableComponents()"
+        print >> self.log_info, "In ", self.get_name(), "::AvailableComponents()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -363,7 +363,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    list of available DataSource names
 #------------------------------------------------------------------
     def AvailableDataSources(self):
-        print "In ", self.get_name(), "::AvailableDataSources()"
+        print >> self.log_info, "In ", self.get_name(), "::AvailableDataSources()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -394,7 +394,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevString    component name
 #------------------------------------------------------------------
     def StoreComponent(self, argin):
-        print "In ", self.get_name(), "::StoreComponent()"
+        print >> self.log_info, "In ", self.get_name(), "::StoreComponent()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -423,7 +423,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevString    datasource name
 #------------------------------------------------------------------
     def StoreDataSource(self, argin):
-        print "In ", self.get_name(), "::StoreDataSource()"
+        print >> self.log_info, "In ", self.get_name(), "::StoreDataSource()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -453,7 +453,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevVarStringArray    list of component names
 #------------------------------------------------------------------
     def CreateConfiguration(self, argin):
-        print "In ", self.get_name(), "::CreateConfiguration()"
+        print >> self.log_info, "In ", self.get_name(), "::CreateConfiguration()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -482,7 +482,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevString    component name
 #------------------------------------------------------------------
     def DeleteComponent(self, argin):
-        print "In ", self.get_name(), "::DeleteComponent()"
+        print >> self.log_info, "In ", self.get_name(), "::DeleteComponent()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -511,7 +511,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevString    datasource name
 #------------------------------------------------------------------
     def DeleteDataSource(self, argin):
-        print "In ", self.get_name(), "::DeleteDataSource()"
+        print >> self.log_info, "In ", self.get_name(), "::DeleteDataSource()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -540,7 +540,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevVarStringArray    component names
 #------------------------------------------------------------------
     def SetMandatoryComponents(self, argin):
-        print "In ", self.get_name(), "::SetMandatoryComponents()"
+        print >> self.log_info, "In ", self.get_name(), "::SetMandatoryComponents()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -568,7 +568,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    component names
 #------------------------------------------------------------------
     def MandatoryComponents(self):
-        print "In ", self.get_name(), "::MandatoryComponents()"
+        print >> self.log_info, "In ", self.get_name(), "::MandatoryComponents()"
         #    Add your own code here
         
         try:
@@ -598,7 +598,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argin:  DevVarStringArray    list of component names
 #------------------------------------------------------------------
     def UnsetMandatoryComponents(self, argin):
-        print "In ", self.get_name(), "::UnsetMandatoryComponents()"
+        print >> self.log_info, "In ", self.get_name(), "::UnsetMandatoryComponents()"
         #    Add your own code here
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -628,10 +628,10 @@ class XMLConfigServer(PyTango.Device_4Impl):
 #    argout: DevVarStringArray    list of datasource names
 #------------------------------------------------------------------
     def ComponentDataSources(self, argin):
-        print "In ", self.get_name(), "::ComponentDataSources()"
+        print >> self.log_info, "In ", self.get_name(), "::ComponentDataSources()"
         #    Add your own code here
         try:
-            print "component name", argin
+            print >> self.log_info, "component name", argin
             self.set_state(PyTango.DevState.RUNNING)
             argout = self.xmlc.componentDataSources(argin)
             self.set_state(PyTango.DevState.OPEN)
