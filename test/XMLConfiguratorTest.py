@@ -1731,6 +1731,55 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
+    def test_createConf_group_field_var(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group  name='$var.entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='$var.entry' type='NXentry'><field type='field'>$var.value</field></group></definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+        
+        el.variables = '{"entry":"entry", "value":"myvalue"}'
+        self.assertEqual(el.createConfiguration(name), None)
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field">   myvalue  </field> </group></definition>' )
+
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]),None)
+            self.__cmps.pop(0)
+
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
+        el.close()
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
     def test_createConf_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
