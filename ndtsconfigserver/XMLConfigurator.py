@@ -44,10 +44,10 @@ class XMLConfigurator(object):
         ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
 
-        ## XML variables
+        ## string with XML variables
         self.variables = "{}"
         
-        ## local XML variables
+        ## XML variables
         self.__variables = {}
         
         self.__mydb = MyDB()
@@ -225,8 +225,8 @@ class XMLConfigurator(object):
         return argout
 
     def __getVariable(self, name):
-        if len(name)>0 and name[0] and name[0] in self.__variable:
-            return [self.__variable[name[0]]]
+        if len(name)>0 and name[0] and name[0] in self.__variables:
+            return [self.__variables[name[0]]]
         else:
             return []
 
@@ -245,32 +245,38 @@ class XMLConfigurator(object):
             subc = re.finditer(
                 r"[\w]+", 
                 component[(index+len(label)+2):]).next().group(0)
-
             name = subc.strip() if subc else ""
+            print "name '%s'" % name , keys 
             if name and name in keys:
                 xmlds = funValue([name])
                 if not xmlds:
                     raise NonregisteredDBRecordError, \
-                        "Variable %s not registered in the DataBase" % name 
+                        "The %s %s not registered" % (
+                        tag if tag else "variable", name)
                 if tag:
                     dom = parseString(xmlds[0])
                     domds = dom.getElementsByTagName(tag)
                     if not domds:
                         raise NonregisteredDBRecordError, \
-                            "Variable %s not registered in the DataBase" % name
+                            "The %s %s not registered in the DataBase" % (
+                        tag if tag else "variable", name)
                     ds = domds[0].toxml()
                 else:
                     ds = xmlds[0]    
                 if ds:
-                    component = component[0:index] + ("\n%s" % ds) \
+                    if tag:
+                        ds = "\n" + ds
+                    component = component[0:index] + ("%s" % ds) \
                         + component[(index+len(subc)+len(label)+2):]
                     index = component.find("$%s." % label)
                 else:
                     raise NonregisteredDBRecordError, \
-                        "Variable %s not registered " % name
+                        "The %s %s not registered" % (
+                        tag if tag else "variable", name)
             else:
-                raise NonregisteredDBRecordError, \
-                    "Variable %s not registered " % name
+                    raise NonregisteredDBRecordError, \
+                        "The %s %s not registered" % (
+                        tag if tag else "variable", name)
                 
         return component
         
@@ -287,11 +293,10 @@ class XMLConfigurator(object):
         targs = dict(js.items())
         for k in targs.keys():
             self.__variables[str(k)] = str(targs[k])
-            return self.__attachElement(
-                component, self.__varLabel, 
-                self.__variables.keys(), self.__getVariable)   
+        return self.__attachElement(
+            component, self.__varLabel, 
+            self.__variables.keys(), self.__getVariable)   
                 
-        return component
 
     ## attaches datasources to component
     # \param component given component
@@ -318,7 +323,7 @@ class XMLConfigurator(object):
         mgr.merge()
         cnf = mgr.toString()
         cnfWithDS = self.__attachDataSources(cnf)
-        cnfWithVar= self.__attachVariables(cnfWithDS)
+        cnfWithVar = self.__attachVariables(cnfWithDS)
         if cnfWithVar and hasattr(cnfWithVar,"strip") and  cnfWithVar.strip():
             reparsed = parseString(cnfWithVar)
             self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
