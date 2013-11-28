@@ -735,7 +735,8 @@ class XMLConfigServerClass(PyTango.DeviceClass):
             PyTango.READ_WRITE],
             {
                 'label':"XML configuration variables",
-                'description':"XML configuration variables",
+                'description':"The JSON string with "\
+                    "XML configuration variables",
             } ],
         }
 
