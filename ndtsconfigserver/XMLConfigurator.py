@@ -23,6 +23,7 @@
 """ Provides the access to a database with NDTS configuration files """
 
 import json
+import re
 import ndtsconfigserver
 from xml import  sax
 from xml.dom.minidom import parseString
@@ -43,9 +44,17 @@ class XMLConfigurator(object):
         ## JSON string with arguments to connect to database
         self.jsonSettings = "{}"
 
+        ## XML variables
+        self.variables = "{}"
+        
+        ## local XML variables
+        self.__variables = {}
+        
         self.__mydb = MyDB()
 
         self.__dsLabel = "datasources"
+
+        self.__varLabel = "var"
         
         ## version label
         self.versionLabel = "XCS"
@@ -215,6 +224,87 @@ class XMLConfigurator(object):
             argout = self.__mydb.mandatory()   
         return argout
 
+    def __getVariable(self, name):
+        if len(name)>0 and name[0] and name[0] in self.__variable:
+            return [self.__variable[name[0]]]
+        else:
+            return []
+
+
+    ## attaches variables to component
+    # \param component given component
+    # \param label element label
+    # \param keys element names
+    # \param funValue function of element value    
+    # \param tag xml tag
+    # \returns component with attached variables
+    def __attachElement(self, component, label, keys, funValue, tag = None):
+        
+        index = component.find("$%s." % label)
+        while index != -1:
+            subc = re.finditer(
+                r"[\w]+", 
+                component[(index+len(label)+2):]).next().group(0)
+
+            name = subc.strip() if subc else ""
+            if name and name in keys:
+                xmlds = funValue([name])
+                if not xmlds:
+                    raise NonregisteredDBRecordError, \
+                        "Variable %s not registered in the DataBase" % name 
+                if tag:
+                    dom = parseString(xmlds[0])
+                    domds = dom.getElementsByTagName(tag)
+                    if not domds:
+                        raise NonregisteredDBRecordError, \
+                            "Variable %s not registered in the DataBase" % name
+                    ds = domds[0].toxml()
+                else:
+                    ds = xmlds[0]    
+                if ds:
+                    component = component[0:index] + ("\n%s" % ds) \
+                        + component[(index+len(subc)+len(label)+2):]
+                    index = component.find("$%s." % label)
+                else:
+                    raise NonregisteredDBRecordError, \
+                        "Variable %s not registered " % name
+            else:
+                raise NonregisteredDBRecordError, \
+                    "Variable %s not registered " % name
+                
+        return component
+        
+
+
+    ## attaches variables to component
+    # \param component given component
+    # \returns component with attached variables
+    def __attachVariables(self, component):
+        if not component:
+            return
+        self.__variables = {}
+        js = json.loads(self.variables)
+        targs = dict(js.items())
+        for k in targs.keys():
+            self.__variables[str(k)] = str(targs[k])
+            return self.__attachElement(
+                component, self.__varLabel, 
+                self.__variables.keys(), self.__getVariable)   
+                
+        return component
+
+    ## attaches datasources to component
+    # \param component given component
+    # \returns component with attached datasources
+    def __attachDataSources(self, component):
+        if not component:
+            return
+        return self.__attachElement(
+            component, self.__dsLabel, 
+            self.availableDataSources(), self.dataSources, 
+            "datasource")   
+                
+        return component
 
     ## creates the final configuration string in the xmlConfig attribute
     # \param names list of component names
@@ -228,8 +318,9 @@ class XMLConfigurator(object):
         mgr.merge()
         cnf = mgr.toString()
         cnfWithDS = self.__attachDataSources(cnf)
-        if cnfWithDS and hasattr(cnfWithDS,"strip") and  cnfWithDS.strip():
-            reparsed = parseString(cnfWithDS)
+        cnfWithVar= self.__attachVariables(cnfWithDS)
+        if cnfWithVar and hasattr(cnfWithVar,"strip") and  cnfWithVar.strip():
+            reparsed = parseString(cnfWithVar)
             self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlConfig = ''
@@ -243,45 +334,6 @@ class XMLConfigurator(object):
 
 
 
-    ## attaches datasrouces to component
-    # \param component given component
-    # \returns component with attached datasources
-    def __attachDataSources(self, component):
-        if not component:
-            return
-#        component = component.replace("$%s." % self.__dsLabel,"$%s_" % self.__dsLabel)
-        index = component.find("$%s." % self.__dsLabel)
-        dsources = self.availableDataSources()
-        while index != -1:
-            subc = ((component[
-                        (index+len(self.__dsLabel)+2):].split("<", 1)
-                     )[0].split("$", 1))
-            name = subc[0].strip() if subc else ""
-            name = name.split(None, 1) if name else []
-            name = name[0] if name else ""
-            if name and name in dsources:
-                xmlds = self.dataSources([name])
-                if not xmlds:
-                    raise NonregisteredDBRecordError, \
-                        "DataSource %s not registered in the database" % name 
-                dom = parseString(xmlds[0])
-                domds = dom.getElementsByTagName("datasource")
-                if not domds:
-                    raise NonregisteredDBRecordError, \
-                        "DataSource %s not registered in the database" % name
-                ds = domds[0].toxml()
-                if ds:
-                    component = component[0:index] + ("\n%s" % ds) \
-                        + component[(index+len(subc[0])+len(self.__dsLabel)+2):]
-                    index = component.find("$%s." % self.__dsLabel)
-                else:
-                    raise NonregisteredDBRecordError, \
-                        "DataSource %s not registered in the database" % name
-            else:
-                raise NonregisteredDBRecordError, \
-                    "DataSource %s not registered in the database" % name
-                
-        return component
 
 if __name__ == "__main__":
     
