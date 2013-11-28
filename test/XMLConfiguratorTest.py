@@ -3436,7 +3436,7 @@ ds.result = ndts.version</result></datasource>"""
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
                '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>' 
                % (xds[0] % dsname[0] ,"$datasources.%s" % dsname[1] ),
-               '<definition><group type="NXentry"/><field name="field3">datasources.%s</field></definition>' 
+               '<definition><group type="NXentry"/><field name="field3">%s</field></definition>' 
                % ("$datasources.%s" % dsname[2] )
                ]
 
@@ -3468,10 +3468,8 @@ ds.result = ndts.version</result></datasource>"""
             gxml.replace(">    ",">").replace(">   ",">").replace(">  ",">").replace("> ",">")\
                 .replace("    <","<").replace("   <","<").replace("  <","<").replace(" <","<")\
                 .replace("?>\n<","?><"),  
-            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">datasources.\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0]))
-
+            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0]))
         
-
         el.setMandatoryComponents(man)
         self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()

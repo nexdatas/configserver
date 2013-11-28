@@ -249,6 +249,7 @@ class XMLConfigurator(object):
     def __attachDataSources(self, component):
         if not component:
             return
+#        component = component.replace("$%s." % self.__dsLabel,"$%s_" % self.__dsLabel)
         index = component.find("$%s." % self.__dsLabel)
         dsources = self.availableDataSources()
         while index != -1:
