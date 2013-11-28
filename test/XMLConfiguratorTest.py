@@ -969,6 +969,135 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+            
+        self.assertTrue(name in avc2)
+
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        
+        
+        self.myAssertRaise(NonregisteredDBRecordError,
+                           el.createConfiguration,[name])
+        el.variables = '{"myentry":"entry1"}'
+        self.assertEqual(el.createConfiguration([name]), None)
+
+        
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<","?><"),
+            '<?xml version="1.0" ?><definition> <group name="entry1" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
+        el.close()
+
+
+
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        xml = "<?xml version='1.0'?><definition><group type='$var.entryType' name='$var.myentry'/></definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+            
+        self.assertTrue(name in avc2)
+
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        
+        
+        self.myAssertRaise(NonregisteredDBRecordError,
+                           el.createConfiguration,[name])
+        el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
+        self.assertEqual(el.createConfiguration([name]), None)
+
+        
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<","?><"),
+            '<?xml version="1.0" ?><definition> <group name="entry1" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
+        el.close()
+
+
+
+
+
+
     ## creatConf test
     # \brief It tests XMLConfigurator
     def test_createConf_def(self):
@@ -2204,7 +2333,6 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
 
-            print i    
             self.myAssertRaise(IncompatibleNodeError,el.createConfiguration,name)
 
             for i in range(np):
