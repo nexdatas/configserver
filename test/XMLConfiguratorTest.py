@@ -1760,7 +1760,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         
-        el.variables = '{"entry":"entry", "value":"myvalue"}'
+        el.variables = '{"entry":"entry", "value":"myvalue", "some":"ble"}'
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
         self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field">   myvalue  </field> </group></definition>' )
