@@ -1,3 +1,7 @@
+2013-11-27 Jan Kotanski <jankotan@gmail.com>
+	* adding XML variables with $var.<name> syntax
+	* tagged as v1.2.7
+
 2013-11-26 Jan Kotanski <jankotan@gmail.com>
 	* adding logging streams
 	* tagged as v1.2.6
