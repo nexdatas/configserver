@@ -624,6 +624,134 @@ class XMLConfigServer(PyTango.Device_4Impl):
         return True
 
 
+#------------------------------------------------------------------
+#    ComponentsDataSources command:
+#
+#    Description: returns a list of datasource names for a given components
+#                
+#    argin:  DevVarStringArray    component names
+#    argout: DevVarStringArray    list of datasource names
+#------------------------------------------------------------------
+    def ComponentsDataSources(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::ComponentsDataSources()"
+        try:
+            print >> self.log_info, "component names", argin
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.componentsDataSources(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+        
+        return argout
+
+
+#---- ComponentsDataSources command State Machine -----------------
+    def is_ComponentsDataSources_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            #    End of Generated Code
+            #    Re-Start of Generated Code
+            return False
+        return True
+
+
+#------------------------------------------------------------------
+#    ComponentsVariables command:
+#
+#    Description: returns a list of variable names for a given components
+#                
+#    argin:  DevVarStringArray    component names
+#    argout: DevVarStringArray    list of variable names
+#------------------------------------------------------------------
+    def ComponentsVariables(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::ComponentsVariables()"
+        try:
+            print >> self.log_info, "component names", argin
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.componentsVariables(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+        
+        return argout
+
+
+#---- ComponentsVariables command State Machine -----------------
+    def is_ComponentsVariables_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            #    End of Generated Code
+            #    Re-Start of Generated Code
+            return False
+        return True
+
+
+#------------------------------------------------------------------
+#    ComponentVariables command:
+#
+#    Description: returns a list of variable names for a given component
+#                
+#    argin:  DevString    component name
+#    argout: DevVarStringArray    list of variable names
+#------------------------------------------------------------------
+    def ComponentVariables(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::ComponentVariables()"
+        try:
+            print >> self.log_info, "component name", argin
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.componentVariables(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+        
+        return argout
+
+
+
+#---- ComponentVariables command State Machine -----------------
+    def is_ComponentVariables_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            #    End of Generated Code
+            #    Re-Start of Generated Code
+            return False
+        return True
+
+
+#------------------------------------------------------------------
+#    Merge command:
+#
+#    Description: Merges give components
+#                
+#    argin:  DevVarStringArray    list of component names
+#    argout: DevString    merged components
+#------------------------------------------------------------------
+    def Merge(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::Merge()"
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.merge(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+        
+        return argout
+
+#---- Merge command State Machine -----------------
+    def is_Merge_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            #    End of Generated Code
+            #    Re-Start of Generated Code
+            return False
+        return True
+
+
+
 #==================================================================
 #
 #    XMLConfigServerClass class definition
@@ -692,6 +820,18 @@ class XMLConfigServerClass(PyTango.DeviceClass):
         'ComponentDataSources':
             [[PyTango.DevString, "component name"],
             [PyTango.DevVarStringArray, "list of datasource names"]],
+        'ComponentsDataSources':
+            [[PyTango.DevVarStringArray, "component names"],
+            [PyTango.DevVarStringArray, "list of datasource names"]],
+        'ComponentsVariables':
+            [[PyTango.DevVarStringArray, "component names"],
+            [PyTango.DevVarStringArray, "list of variable names"]],
+        'ComponentVariables':
+            [[PyTango.DevString, "component name"],
+            [PyTango.DevVarStringArray, "list of variable names"]],
+        'Merge':
+            [[PyTango.DevVarStringArray, "list of component names"],
+            [PyTango.DevString, "merged components"]],
         }
 
 
