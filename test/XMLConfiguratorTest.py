@@ -1771,7 +1771,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{"entry":"entry", "value":"myvalue", "some":"ble"}'
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group name="entry" type="NXentry">  <field type="field">   myvalue  </field> </group></definition>' )
+        self.assertEqual(gxml.replace("> ", ">").replace(">  ", ">").replace(">   ", ">").replace(" <", "<").replace("  <", "<").replace("   <", "<").replace("?>\n<","?><"), 
+                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">myvalue</field></group></definition>' )
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)

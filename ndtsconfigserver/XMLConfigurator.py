@@ -389,13 +389,15 @@ class XMLConfigurator(object):
     # \param names list of component names
     # \return merged components
     def merge(self, names): 
+        xml = ""
         if self.__mydb:
             comps = self.__mydb.components(
                 list(set(self.__mydb.mandatory() + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
-        return mgr.toString()
+        xml = mgr.toString()
+        return xml  
        
 
 
