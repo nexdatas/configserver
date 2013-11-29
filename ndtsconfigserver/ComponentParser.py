@@ -24,7 +24,7 @@
 from xml import sax
 
 import sys, os
-
+import re
 
 
 ## SAX2 parser 
@@ -32,10 +32,14 @@ class ComponentHandler(sax.ContentHandler):
 
     ## constructor
     # \brief It constructs parser and sets variables to default values 
-    def __init__(self, dsLabel = "datasources"):
+    def __init__(self, dsLabel = "datasources", delimiter = '.'):
         sax.ContentHandler.__init__(self)
         ##  dictionary with datasources
         self.datasources = {}
+        ## tag name
+        self.__tag = "datasource"
+        ## delimiter
+        self.__delimiter = delimiter
         ## unnamed datasource counter
         self.__counter = 0 
         ## datasource label
@@ -44,7 +48,7 @@ class ComponentHandler(sax.ContentHandler):
         self.__withDS = ["field", "attribute"]
         ## content flag
         self.__stack = []
-        ##
+        ## content
         self.__content = {}
         for tag in self.__withDS:
             self.__content[tag] = []
@@ -63,7 +67,7 @@ class ComponentHandler(sax.ContentHandler):
     # \param attrs attribute dictionary
     def startElement(self, name, attrs):
         self.__stack.append(name)
-        if name == "datasource":
+        if self.__tag and name == self.__tag:
             if "name" in attrs.keys():
                 aName = attrs["name"]
             else:
@@ -82,13 +86,22 @@ class ComponentHandler(sax.ContentHandler):
         tag = self.__stack[-1]
         if tag in self.__withDS: 
             text = "".join(self.__content[tag]).strip()
-            index = text.find("$%s." % self.__dsLabel)
-            if index != -1:
-                aName = text[(index+len(self.__dsLabel)+2):].\
-                    split("<",1)
-                aName = aName[0].split(None, 1) if aName else ""
+            index = text.find("$%s%s" % (
+                    self.__dsLabel, self.__delimiter))
+            while index != -1:
+                try:
+                    subc = re.finditer(
+                        r"[\w]+", 
+                        text[(index+len(self.__dsLabel)+2):]
+                        ).next().group(0)
+                except:
+                    subc = ""
+                aName = subc.strip() if subc else ""
                 if aName:
-                    self.datasources[aName[0]] = "__FROM_DB__"
+                    self.datasources[aName] = "__FROM_DB__"
+                index = text.find("$%s%s" % (
+                        self.__dsLabel, self.__delimiter), index+1)
+
                 
             self.__content[tag] = []
         self.__stack.pop()

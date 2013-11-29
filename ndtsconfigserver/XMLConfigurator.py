@@ -56,6 +56,9 @@ class XMLConfigurator(object):
 
         self.__varLabel = "var"
         
+        ## delimiter
+        self.__delimiter = '.'
+
         ## version label
         self.versionLabel = "XCS"
 
@@ -132,9 +135,9 @@ class XMLConfigurator(object):
         return argout
 
 
-    ## provides a tuple of datasources from the given component
+    ## provides a list of datasources from the given component
     # \param name given component 
-    # \returns tuple of datasource names from the given component
+    # \returns list of datasource names from the given component
     def componentDataSources(self, name):
         cpl = []
         if self.__mydb:
@@ -142,7 +145,73 @@ class XMLConfigurator(object):
             if len(cpl)>0:
                 handler = ComponentHandler(self.__dsLabel)
                 sax.parseString(str(cpl[0]).strip(), handler)
-                return tuple(handler.datasources.keys())
+                return list(handler.datasources.keys())
+            else:
+                return []
+
+    ## provides a list of datasources from the given components
+    # \param names given components 
+    # \returns list of datasource names from the given components
+    def componentsDataSources(self, names):
+        cnf = str(self.merge(names)).strip()
+        if cnf:
+            handler = ComponentHandler(self.__dsLabel)
+            sax.parseString(cnf, handler)
+            return list(handler.datasources.keys())
+        else:
+            return []
+
+    ## provides a list of elements from the given text
+    # \param text give text
+    # \param label element label
+    # \returns list of element names from the given text
+    def __findElements(self, text, label):
+        variables = []
+        index = text.find("$%s%s" % (
+                label, self.__delimiter))
+        while index != -1:
+            try:
+                subc = re.finditer(
+                    r"[\w]+", 
+                    text[(index+len(label)+2):]
+                    ).next().group(0)
+            except:
+                subc = ""
+            name = subc.strip() if subc else ""
+            if name:
+                variables.append(name)
+            index = text.find("$%s%s" % (
+                    label, self.__delimiter), index+1)
+                    
+        return variables
+
+
+
+    ## provides a list of variables from the given components
+    # \param names given components 
+    # \returns list of variable names from the given components
+    def componentVariables(self, name):
+        cpl = []
+        if self.__mydb:
+            cpl = self.__mydb.components([name])   
+            if len(cpl)>0:
+                text = str(cpl[0]).strip()
+                return list(self.__findElements(text, self.__varLabel))
+            else:
+                return [] 
+
+
+    ## provides a tuple of variables from the given components
+    # \param names given components 
+    # \returns tuple of variable names from the given components
+    def componentsVariables(self, names):
+        cnf = str(self.merge(names)).strip()
+        if cnf:
+            return list(self.__findElements(cnf, self.__varLabel))
+        else:
+            return [] 
+
+
 
 
     ## fetches the required datasources
@@ -228,27 +297,33 @@ class XMLConfigurator(object):
         if len(name)>0 and name[0] and name[0] in self.__variables:
             return [self.__variables[name[0]]]
         else:
-            return []
+            return [""]
 
 
-    ## attaches variables to component
+    ## attaches elements to component
     # \param component given component
     # \param label element label
     # \param keys element names
     # \param funValue function of element value    
     # \param tag xml tag
     # \returns component with attached variables
-    def __attachElement(self, component, label, keys, funValue, tag = None):
+    def __attachElements(self, component, label, keys, funValue, 
+                        tag = None):
         
-        index = component.find("$%s." % label)
+        index = component.find("$%s%s" % (label, self.__delimiter))
         while index != -1:
-            subc = re.finditer(
-                r"[\w]+", 
-                component[(index+len(label)+2):]).next().group(0)
+            try:
+                subc = re.finditer(
+                    r"[\w]+", 
+                    component[(index+len(label)+2):]).next().group(0)
+            except:
+                subc = ''
             name = subc.strip() if subc else ""
-            print "name '%s'" % name , keys 
-            if name and name in keys:
-                xmlds = funValue([name])
+            if name:
+                try:
+                    xmlds = funValue([name])
+                except:
+                    xmlds = []
                 if not xmlds:
                     raise NonregisteredDBRecordError, \
                         "The %s %s not registered" % (
@@ -261,18 +336,17 @@ class XMLConfigurator(object):
                             "The %s %s not registered in the DataBase" % (
                         tag if tag else "variable", name)
                     ds = domds[0].toxml()
+                    if not ds:
+                        raise NonregisteredDBRecordError, \
+                            "The %s %s not registered" % (
+                            tag if tag else "variable", name)
+                    ds = "\n" + ds
                 else:
                     ds = xmlds[0]    
-                if ds:
-                    if tag:
-                        ds = "\n" + ds
-                    component = component[0:index] + ("%s" % ds) \
-                        + component[(index+len(subc)+len(label)+2):]
-                    index = component.find("$%s." % label)
-                else:
-                    raise NonregisteredDBRecordError, \
-                        "The %s %s not registered" % (
-                        tag if tag else "variable", name)
+                component = component[0:index] + ("%s" % ds) \
+                    + component[(index+len(subc)+len(label)+2):]
+                index = component.find("$%s%s" % (label, 
+                                                  self.__delimiter))
             else:
                     raise NonregisteredDBRecordError, \
                         "The %s %s not registered" % (
@@ -293,7 +367,7 @@ class XMLConfigurator(object):
         targs = dict(js.items())
         for k in targs.keys():
             self.__variables[str(k)] = str(targs[k])
-        return self.__attachElement(
+        return self.__attachElements(
             component, self.__varLabel, 
             self.__variables.keys(), self.__getVariable)   
                 
@@ -304,24 +378,31 @@ class XMLConfigurator(object):
     def __attachDataSources(self, component):
         if not component:
             return
-        return self.__attachElement(
+        return self.__attachElements(
             component, self.__dsLabel, 
             self.availableDataSources(), self.dataSources, 
             "datasource")   
                 
         return component
-
-    ## creates the final configuration string in the xmlConfig attribute
+   
+    ## merges the give components
     # \param names list of component names
-    # \returns list of given components
-    def createConfiguration(self, names):
+    # \return merged components
+    def merge(self, names): 
         if self.__mydb:
-            comps = self.__mydb.components(list(set(self.__mydb.mandatory() 
-                                                    + names)))   
+            comps = self.__mydb.components(
+                list(set(self.__mydb.mandatory() + names)))   
         mgr = Merger()
         mgr.collect(comps)
         mgr.merge()
-        cnf = mgr.toString()
+        return mgr.toString()
+       
+
+
+    ## creates the final configuration string in the xmlConfig attribute
+    # \param names list of component names
+    def createConfiguration(self, names):
+        cnf = self.merge(names)
         cnfWithDS = self.__attachDataSources(cnf)
         cnfWithVar = self.__attachVariables(cnfWithDS)
         if cnfWithVar and hasattr(cnfWithVar,"strip") and  cnfWithVar.strip():
