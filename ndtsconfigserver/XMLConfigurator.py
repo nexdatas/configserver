@@ -397,8 +397,7 @@ class XMLConfigurator(object):
         mgr.collect(comps)
         mgr.merge()
         xml = mgr.toString()
-        return xml  
-       
+        return xml if xml is not None else ""        
 
 
     ## creates the final configuration string in the xmlConfig attribute

@@ -738,7 +738,6 @@ class XMLConfigServer(PyTango.Device_4Impl):
         finally:
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
-        
         return argout
 
 #---- Merge command State Machine -----------------
