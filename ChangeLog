@@ -1,7 +1,7 @@
 2013-11-XX Jan Kotanski <jankotan@gmail.com>
 	* adding merge, componentsDataSources, componentVariables
-	and componentsVariables into XMLConfigurator
-	* tagged as v1.3.1
+	and componentsVariables dependentComponents into XMLConfigurator
+	* tagged as v1.4.0
 
 2013-11-29 Jan Kotanski <jankotan@gmail.com>
 	* adding Varaibles attribute with JSON string data
