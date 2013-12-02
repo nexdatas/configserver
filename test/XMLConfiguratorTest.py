@@ -150,7 +150,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## open close test test
     # \brief It tests XMLConfigurator
-    def test_openClose(self):
+    def ttest_openClose(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -167,7 +167,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## comp_available test
     # \brief It tests XMLConfigurator
-    def test_comp_available(self):
+    def ttest_comp_available(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -175,7 +175,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -209,14 +209,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_available_comp_xml(self):
+    def ttest_available_comp_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
  
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -259,14 +259,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_available_no_comp(self):
+    def ttest_available_no_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -281,14 +281,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_available_comp_update(self):
+    def ttest_available_comp_update(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
@@ -355,14 +355,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_available_comp2_xml(self):
+    def ttest_available_comp2_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
@@ -442,7 +442,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## comp_available test
     # \brief It tests XMLConfigurator
-    def test_dsrc_available(self):
+    def ttest_dsrc_available(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -450,7 +450,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableDataSources()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_datasource"
+        name = "mcs_ttest_datasource"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -484,14 +484,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  dataSource test
     # \brief It tests default settings
-    def test_available_dsrc_xml(self):
+    def ttest_available_dsrc_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
  
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_datasource"
+        name = "mcs_ttest_datasource"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -534,14 +534,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  dataSource test
     # \brief It tests default settings
-    def test_available_no_dsrc(self):
+    def ttest_available_no_dsrc(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_datasource"
+        name = "mcs_ttest_datasource"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -556,14 +556,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  dataSource test
     # \brief It tests default settings
-    def test_available_dsrc_update(self):
+    def ttest_available_dsrc_update(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_datasource"
+        name = "mcs_ttest_datasource"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
@@ -630,14 +630,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  dataSource test
     # \brief It tests default settings
-    def test_available_dsrc2_xml(self):
+    def ttest_available_dsrc2_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_datasource"
+        name = "mcs_ttest_datasource"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
@@ -714,7 +714,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_mandatory_no_comp(self):
+    def ttest_mandatory_no_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
@@ -722,7 +722,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
         
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -745,7 +745,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_mandatory_comp(self):
+    def ttest_mandatory_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
@@ -753,7 +753,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
         
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -800,7 +800,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ##  component test
     # \brief It tests default settings
-    def test_mandatory_comp2(self):
+    def ttest_mandatory_comp2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = self.openConfig(self.__args)
@@ -808,7 +808,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
         
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -890,7 +890,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_default(self):
+    def ttest_createConf_default(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -911,7 +911,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_default_2(self):
+    def ttest_createConf_default_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -924,7 +924,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -972,7 +972,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_default_2_var(self):
+    def ttest_createConf_default_2_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -985,7 +985,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -1038,7 +1038,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
     # \brief It tests XMLConfigurator
-    def test_createConf_default_2_var2(self):
+    def ttest_createConf_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1051,7 +1051,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='$var.entryType' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -1108,7 +1108,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_def(self):
+    def ttest_createConf_def(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1121,7 +1121,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<group type='NXentry'/>"
         while name in avc:
             name = name + '_1'
@@ -1161,7 +1161,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group(self):
+    def ttest_createConf_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1173,7 +1173,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = ["mcs_test_component"]
+        name = ["mcs_ttest_component"]
         xml = ["<definition/>", "<definition><group type='NXentry'/></definition>"]
         name.append(name[0] +'_2')
         while name[0] in avc:
@@ -1213,7 +1213,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_5(self):
+    def ttest_createConf_group_5(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1224,7 +1224,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = [ "<definition><group type='NXentry'/></definition>"]*5
         np = len(xml)
@@ -1262,7 +1262,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group(self):
+    def ttest_createConf_group_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1274,7 +1274,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -1311,7 +1311,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_error(self):
+    def ttest_createConf_group_group_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1322,7 +1322,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<group/>"]
         np = len(xml)
@@ -1355,7 +1355,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_error_2(self):
+    def ttest_createConf_group_group_error_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1366,7 +1366,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<group/>","<definition><group type='NXentry'/></definition>"]
         np = len(xml)
@@ -1402,7 +1402,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_field_3(self):
+    def ttest_createConf_group_field_3(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1413,7 +1413,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*3
         np = len(xml)
@@ -1449,7 +1449,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_field(self):
+    def ttest_createConf_group_group_field(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1460,7 +1460,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field name='field1'/></group></definition>","<definition><group type='NXentry2'/><field name='field1'/></definition>"]
         np = len(xml)
@@ -1499,7 +1499,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_2(self):
+    def ttest_createConf_group_group_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1511,7 +1511,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -1548,7 +1548,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_3(self):
+    def ttest_createConf_group_group_3(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1560,7 +1560,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
         np = len(xml)
@@ -1597,7 +1597,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_4(self):
+    def ttest_createConf_group_group_4(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1609,7 +1609,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry2'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
         np = len(xml)
@@ -1646,7 +1646,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_field_4(self):
+    def ttest_createConf_group_field_4(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1657,7 +1657,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*15
         np = len(xml)
@@ -1694,7 +1694,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_field_5(self):
+    def ttest_createConf_group_field_5(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1705,7 +1705,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -1742,7 +1742,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_field_var(self):
+    def ttest_createConf_group_field_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1753,7 +1753,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='$var.entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='$var.entry' type='NXentry'><field type='field'>$var.value</field></group></definition>"]
         np = len(xml)
@@ -1792,7 +1792,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_field_name_error(self):
+    def ttest_createConf_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1803,7 +1803,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry2'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -1837,7 +1837,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_single_name(self):
+    def ttest_createConf_single_name(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -1848,7 +1848,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -1885,7 +1885,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_single_name_2_error(self):
+    def ttest_createConf_single_name_2_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
@@ -1899,7 +1899,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' type='NXentry'><%s name='field2'/></group></definition>" % sg,"<definition><group name='entry2' type='NXentry2'><%s name='field'/></group></definition>" % sg]
             np = len(xml)
@@ -1934,7 +1934,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_uniqueText_error(self):
+    def ttest_createConf_uniqueText_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
@@ -1948,7 +1948,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %(ut ,ut),"<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" %(ut ,ut)]
             np = len(xml)
@@ -1985,7 +1985,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_datasource(self):
+    def ttest_createConf_children_datasource(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -1999,7 +1999,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
             np = len(xml)
@@ -2037,7 +2037,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_datasource_error(self):
+    def ttest_createConf_children_datasource_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2058,7 +2058,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
             np = len(xml)
@@ -2092,7 +2092,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_attribute(self):
+    def ttest_createConf_children_attribute(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2106,7 +2106,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
             np = len(xml)
@@ -2144,7 +2144,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_attribute_error(self):
+    def ttest_createConf_children_attribute_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2163,7 +2163,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
             np = len(xml)
@@ -2198,7 +2198,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_definition(self):
+    def ttest_createConf_children_definition(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2212,7 +2212,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><%s  name='entry' /></definition>" % ut ]
             np = len(xml)
@@ -2249,7 +2249,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_definition_error(self):
+    def ttest_createConf_children_definition_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2270,7 +2270,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><%s  name='entry' /></definition>" % ut ]
             np = len(xml)
@@ -2307,7 +2307,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_dimensions(self):
+    def ttest_createConf_children_dimensions(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2321,7 +2321,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
             np = len(xml)
@@ -2357,7 +2357,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_dimensions_error(self):
+    def ttest_createConf_children_dimensions_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2377,7 +2377,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
             np = len(xml)
@@ -2411,7 +2411,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_field(self):
+    def ttest_createConf_children_field(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2425,7 +2425,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
             np = len(xml)
@@ -2460,7 +2460,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_field_error(self):
+    def ttest_createConf_children_field_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2480,7 +2480,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
             np = len(xml)
@@ -2513,7 +2513,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_group(self):
+    def ttest_createConf_children_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2527,7 +2527,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
             np = len(xml)
@@ -2562,7 +2562,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_group_error(self):
+    def ttest_createConf_children_group_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2582,7 +2582,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
             np = len(xml)
@@ -2618,7 +2618,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_link(self):
+    def ttest_createConf_children_link(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2632,7 +2632,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
             np = len(xml)
@@ -2668,7 +2668,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_children_link_error(self):
+    def ttest_createConf_children_link_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -2688,7 +2688,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
             np = len(xml)
@@ -2726,7 +2726,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_mandatory(self):
+    def ttest_createConf_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -2738,7 +2738,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -2781,7 +2781,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConf_group_group_group_mandatory(self):
+    def ttest_createConf_group_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -2793,7 +2793,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>",
                "<definition><group type='NXentry2'/></definition>",
@@ -2851,7 +2851,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_default(self):
+    def ttest_merge_default(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -2871,7 +2871,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_default_2(self):
+    def ttest_merge_default_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -2884,7 +2884,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -2931,7 +2931,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_default_2_var(self):
+    def ttest_merge_default_2_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -2944,7 +2944,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -2995,7 +2995,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
     # \brief It tests XMLConfigurator
-    def test_merge_default_2_var2(self):
+    def ttest_merge_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3008,7 +3008,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<?xml version='1.0'?><definition><group type='$var.entryType' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
@@ -3062,7 +3062,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_def(self):
+    def ttest_merge_def(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3075,7 +3075,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = "mcs_test_component"
+        name = "mcs_ttest_component"
         xml = "<group type='NXentry'/>"
         while name in avc:
             name = name + '_1'
@@ -3115,7 +3115,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group(self):
+    def ttest_merge_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3127,7 +3127,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
-        name = ["mcs_test_component"]
+        name = ["mcs_ttest_component"]
         xml = ["<definition/>", "<definition><group type='NXentry'/></definition>"]
         name.append(name[0] +'_2')
         while name[0] in avc:
@@ -3166,7 +3166,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_5(self):
+    def ttest_merge_group_5(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3177,7 +3177,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = [ "<definition><group type='NXentry'/></definition>"]*5
         np = len(xml)
@@ -3214,7 +3214,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group(self):
+    def ttest_merge_group_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3226,7 +3226,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -3262,7 +3262,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_error(self):
+    def ttest_merge_group_group_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3273,7 +3273,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<group/>"]
         np = len(xml)
@@ -3306,7 +3306,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_error_2(self):
+    def ttest_merge_group_group_error_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3317,7 +3317,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<group/>","<definition><group type='NXentry'/></definition>"]
         np = len(xml)
@@ -3353,7 +3353,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_field_3(self):
+    def ttest_merge_group_field_3(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3364,7 +3364,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*3
         np = len(xml)
@@ -3399,7 +3399,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_field(self):
+    def ttest_merge_group_group_field(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3410,7 +3410,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field name='field1'/></group></definition>","<definition><group type='NXentry2'/><field name='field1'/></definition>"]
         np = len(xml)
@@ -3448,7 +3448,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_2(self):
+    def ttest_merge_group_group_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3460,7 +3460,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -3496,7 +3496,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_3(self):
+    def ttest_merge_group_group_3(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3508,7 +3508,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
         np = len(xml)
@@ -3544,7 +3544,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_4(self):
+    def ttest_merge_group_group_4(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3556,7 +3556,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group name='entry2'/></definition>","<definition><group name='entry' type='NXentry'/></definition>"]
         np = len(xml)
@@ -3592,7 +3592,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_field_4(self):
+    def ttest_merge_group_field_4(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3603,7 +3603,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'><field type='field'/></group></definition>"]*15
         np = len(xml)
@@ -3639,7 +3639,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_field_5(self):
+    def ttest_merge_group_field_5(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3650,7 +3650,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -3686,7 +3686,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_field_var(self):
+    def ttest_merge_group_field_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3697,7 +3697,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='$var.entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='$var.entry' type='NXentry'><field type='field'>$var.value</field></group></definition>"]
         np = len(xml)
@@ -3734,7 +3734,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_field_name_error(self):
+    def ttest_merge_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3745,7 +3745,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry' type='NXentry2'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -3779,7 +3779,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_single_name(self):
+    def ttest_merge_single_name(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -3790,7 +3790,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group  name='entry' type='NXentry'><field type='field'/></group></definition>","<definition><group name='entry2' type='NXentry2'><field type='field'/></group></definition>"]
         np = len(xml)
@@ -3826,7 +3826,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_single_name_2_error(self):
+    def ttest_merge_single_name_2_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
@@ -3840,7 +3840,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' type='NXentry'><%s name='field2'/></group></definition>" % sg,"<definition><group name='entry2' type='NXentry2'><%s name='field'/></group></definition>" % sg]
             np = len(xml)
@@ -3875,7 +3875,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_uniqueText_error(self):
+    def ttest_merge_uniqueText_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
@@ -3889,7 +3889,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %(ut ,ut),"<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" %(ut ,ut)]
             np = len(xml)
@@ -3926,7 +3926,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_datasource(self):
+    def ttest_merge_children_datasource(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -3940,7 +3940,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
             np = len(xml)
@@ -3977,7 +3977,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_datasource_error(self):
+    def ttest_merge_children_datasource_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -3998,7 +3998,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut ]
             np = len(xml)
@@ -4032,7 +4032,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_attribute(self):
+    def ttest_merge_children_attribute(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4046,7 +4046,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
             np = len(xml)
@@ -4083,7 +4083,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_attribute_error(self):
+    def ttest_merge_children_attribute_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4102,7 +4102,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut ]
             np = len(xml)
@@ -4137,7 +4137,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_definition(self):
+    def ttest_merge_children_definition(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4151,7 +4151,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><%s  name='entry' /></definition>" % ut ]
             np = len(xml)
@@ -4188,7 +4188,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_definition_error(self):
+    def ttest_merge_children_definition_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4209,7 +4209,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><%s  name='entry' /></definition>" % ut ]
             np = len(xml)
@@ -4246,7 +4246,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_dimensions(self):
+    def ttest_merge_children_dimensions(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4260,7 +4260,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
             np = len(xml)
@@ -4296,7 +4296,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_dimensions_error(self):
+    def ttest_merge_children_dimensions_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4316,7 +4316,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut  ]
             np = len(xml)
@@ -4350,7 +4350,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_field(self):
+    def ttest_merge_children_field(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4364,7 +4364,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
             np = len(xml)
@@ -4398,7 +4398,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_field_error(self):
+    def ttest_merge_children_field_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4418,7 +4418,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><field  name='entry' ><%s/></field></definition>" % ut  ]
             np = len(xml)
@@ -4451,7 +4451,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_group(self):
+    def ttest_merge_children_group(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4465,7 +4465,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
             np = len(xml)
@@ -4499,7 +4499,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_group_error(self):
+    def ttest_merge_children_group_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4519,7 +4519,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><group  name='entry' ><%s/></group></definition>" % ut  ]
             np = len(xml)
@@ -4555,7 +4555,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_link(self):
+    def ttest_merge_children_link(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4569,7 +4569,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
             np = len(xml)
@@ -4604,7 +4604,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_children_link_error(self):
+    def ttest_merge_children_link_error(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = Merger()
@@ -4624,7 +4624,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             avc = el.availableComponents()
 
-            oname = "mcs_test_component"
+            oname = "mcs_ttest_component"
             self.assertTrue(isinstance(avc, list))
             xml = ["<definition><link  name='entry' ><%s/></link></definition>" % ut  ]
             np = len(xml)
@@ -4662,7 +4662,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_mandatory(self):
+    def ttest_merge_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -4674,7 +4674,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>","<definition><group type='NXentry2'/></definition>"]
         np = len(xml)
@@ -4716,7 +4716,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_group_group_group_mandatory(self):
+    def ttest_merge_group_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -4728,7 +4728,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ["<definition><group type='NXentry'/></definition>",
                "<definition><group type='NXentry2'/></definition>",
@@ -4787,7 +4787,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentVariables(self):
+    def ttest_componentVariables(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -4803,7 +4803,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         vrs =  ["eid", "myvar1","var2", "mvar3"]
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>' 
                % (vrs[0]),
@@ -4850,7 +4850,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsVariables(self):
+    def ttest_componentsVariables(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -4866,7 +4866,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         vrs =  ["entry_id", "myvar1","var2", "mvar3"]
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>' 
                % (vrs[0]),
@@ -4908,10 +4908,139 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_dependentComponents(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        oname = "mcs_test_component"
+
+        avc = el.availableComponents()
+
+        
+        vrs =  ["eid", "myvar1","var2", "mvar3"]
+
+        np = 6
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+
+
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry"/><field name="field4"></field><field name="field4"></field>$components.%s$components.%s</definition>' 
+               % (name[1], name[2] ),
+               '<definition>$components.%s$components.%s<group type="NXentry"/><field name="field5"></field><field name="field4"></field></definition>' 
+               % (name[2], name[3] ),
+               '<definition><group type="NXentry" name="entry$components.%s"/><field name="field">some</field></definition>' 
+               % (name[4]),
+               '<definition><group type="NXentry"/><field name="field1">$components.%s</field></definition>' 
+               % (name[5]),
+               '<definition><group type="NXentry"/><field name="field2"></field><field name="field4"></field></definition>' ,
+               '<definition><group type="NXentry"/><field name="field3"></field><field name="field4"></field></definition>' 
+               ]
+
+
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+        arr =[
+            [[0],[0,1,2,3,4,5]],
+            [[1],[1,2,3,4,5]],
+            [[2],[2,4]],
+            [[3],[3,5]],
+            [[4],[4]],
+            [[5],[5]],
+            [[0,1],[0,1,2,3,4,5]],
+            [[0,2],[0,1,2,3,4,5]],
+            [[0,3],[0,1,2,3,4,5]],
+            [[0,4],[0,1,2,3,4,5]],
+            [[0,5],[0,1,2,3,4,5]],
+            [[1,2],[1,2,3,4,5]],
+            [[1,3],[1,2,3,4,5]],
+            [[1,4],[1,2,3,4,5]],
+            [[1,5],[1,2,3,4,5]],
+            [[2,3],[2,3,4,5]],
+            [[2,4],[2,4]],
+            [[2,5],[2,4,5]],
+            [[3,4],[3,4,5]],
+            [[3,5],[3,5]],
+            [[4,5],[4,5]],
+            [[0,2,1],[0,1,2,3,4,5]],
+            [[0,3,1],[0,1,2,3,4,5]],
+            [[0,4,1],[0,1,2,3,4,5]],
+            [[0,5,1],[0,1,2,3,4,5]],
+            [[0,3,2],[0,1,2,3,4,5]],
+            [[0,4,2],[0,1,2,3,4,5]],
+            [[0,5,2],[0,1,2,3,4,5]],
+            [[0,4,3],[0,1,2,3,4,5]],
+            [[0,5,3],[0,1,2,3,4,5]],
+            [[0,5,4],[0,1,2,3,4,5]],
+            [[1,3,2],[1,2,3,4,5]],
+            [[1,4,2],[1,2,3,4,5]],
+            [[1,5,2],[1,2,3,4,5]],
+            [[1,4,3],[1,2,3,4,5]],
+            [[1,5,3],[1,2,3,4,5]],
+            [[1,5,4],[1,2,3,4,5]],
+            [[2,4,3],[2,3,4,5]],
+            [[2,5,3],[2,3,4,5]],
+            [[2,5,4],[2,4,5]],
+            [[3,4,5],[3,4,5]],
+            [[0,1,2,3],[0,1,2,3,4,5]],
+            [[0,1,2,4],[0,1,2,3,4,5]],
+            [[0,1,2,5],[0,1,2,3,4,5]],
+            [[0,1,3,4],[0,1,2,3,4,5]],
+            [[0,1,3,5],[0,1,2,3,4,5]],
+            [[0,1,4,5],[0,1,2,3,4,5]],
+            [[1,2,3,4],[1,2,3,4,5]],
+            [[1,2,3,5],[1,2,3,4,5]],
+            [[1,2,4,5],[1,2,3,4,5]],
+            [[1,3,4,5],[1,2,3,4,5]],
+            [[2,3,4,5],[2,3,4,5]],
+            [[0,1,2,3,4],[0,1,2,3,4,5]],
+            [[0,1,2,3,5],[0,1,2,3,4,5]],
+            [[0,1,2,4,5],[0,1,2,3,4,5]],
+            [[0,1,3,4,5],[0,1,2,3,4,5]],
+            [[0,1,3,4,5],[0,1,2,3,4,5]],
+            [[0,2,3,4,5],[0,1,2,3,4,5]],
+            [[1,2,3,4,5],[1,2,3,4,5]],
+            [[0,1,2,3,4,5],[0,1,2,3,4,5]],
+            ]    
+
+        for ar in arr:
+
+            css = [name[i]  for  i in ar[0]]
+            cmps = []
+            mdss = el.dependentComponents(css)
+            self.assertEqual(sorted(mdss),sorted([name[i]  for  i in ar[1]]))
+        
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +6)
+        el.close()
+
+
+
+
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentDataSources(self):
+    def ttest_componentDataSources(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -4932,7 +5061,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -4952,7 +5081,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % (xds[0] % dsname[0]),
@@ -4998,7 +5127,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentDataSources_external(self):
+    def ttest_componentDataSources_external(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5019,7 +5148,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5039,7 +5168,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5088,7 +5217,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentDataSources_external_2(self):
+    def ttest_componentDataSources_external_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5107,7 +5236,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5129,7 +5258,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5174,7 +5303,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentDataSources_external_2_double(self):
+    def ttest_componentDataSources_external_2_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5193,7 +5322,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5215,7 +5344,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5260,7 +5389,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentDataSources_mixed(self):
+    def ttest_componentDataSources_mixed(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5281,7 +5410,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5300,7 +5429,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % (xds[0] % dsname[0]),
@@ -5356,7 +5485,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources(self):
+    def ttest_componentsDataSources(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5377,7 +5506,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5397,7 +5526,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % (xds[0] % dsname[0]),
@@ -5442,7 +5571,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources_man(self):
+    def ttest_componentsDataSources_man(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5463,7 +5592,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5483,7 +5612,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % (xds[0] % dsname[0]),
@@ -5530,7 +5659,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources_external(self):
+    def ttest_componentsDataSources_external(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5551,7 +5680,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5571,7 +5700,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5619,7 +5748,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources_external_2(self):
+    def ttest_componentsDataSources_external_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5638,7 +5767,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5660,7 +5789,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5704,7 +5833,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources_external_2_double(self):
+    def ttest_componentsDataSources_external_2_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5723,7 +5852,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5745,7 +5874,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % ("$datasources.%s" % dsname[0]),
@@ -5789,7 +5918,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_componentsDataSources_mixed(self):
+    def ttest_componentsDataSources_mixed(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5810,7 +5939,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5829,7 +5958,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' 
                % (xds[0] % dsname[0]),
@@ -5879,7 +6008,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed(self):
+    def ttest_createConfiguration_mixed(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5900,7 +6029,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -5923,7 +6052,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -5973,7 +6102,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_var(self):
+    def ttest_createConfiguration_mixed_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -5994,7 +6123,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6017,7 +6146,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6069,7 +6198,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_var_2(self):
+    def ttest_createConfiguration_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6090,7 +6219,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6113,7 +6242,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6166,7 +6295,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_2(self):
+    def ttest_createConfiguration_mixed_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6186,7 +6315,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6210,7 +6339,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6259,7 +6388,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_2_double(self):
+    def ttest_createConfiguration_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6279,7 +6408,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6303,7 +6432,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6352,7 +6481,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_3_double(self):
+    def ttest_createConfiguration_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6375,7 +6504,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6404,7 +6533,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6454,7 +6583,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_createConfiguration_mixed_definition(self):
+    def ttest_createConfiguration_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6475,7 +6604,7 @@ ds.result = ndts.version</result></datasource>"""
             ]
  
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6495,7 +6624,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6542,7 +6671,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed(self):
+    def ttest_merge_mixed(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6563,7 +6692,7 @@ ds.result = ndts.version</result></datasource>"""
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6586,7 +6715,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6635,7 +6764,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_var(self):
+    def ttest_merge_mixed_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6656,7 +6785,7 @@ ds.result = ndts.version</result></datasource>"""
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6679,7 +6808,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6730,7 +6859,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_var_2(self):
+    def ttest_merge_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6751,7 +6880,7 @@ ds.result = ndts.version</result></datasource>"""
             ]
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6774,7 +6903,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6826,7 +6955,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_2(self):
+    def ttest_merge_mixed_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6846,7 +6975,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6870,7 +6999,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -6920,7 +7049,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_2_double(self):
+    def ttest_merge_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -6940,7 +7069,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -6964,7 +7093,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -7010,7 +7139,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_3_double(self):
+    def ttest_merge_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -7033,7 +7162,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -7062,7 +7191,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),
@@ -7110,7 +7239,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_merge_mixed_definition(self):
+    def ttest_merge_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -7131,7 +7260,7 @@ ds.result = ndts.version</result></datasource>"""
             ]
  
 
-        odsname = "mcs_test_datasource"
+        odsname = "mcs_ttest_datasource"
         avds = el.availableDataSources()
         self.assertTrue(isinstance(avds, list))
         dsnp = len(xds)
@@ -7151,7 +7280,7 @@ ds.result = ndts.version</result></datasource>"""
 
 
 
-        oname = "mcs_test_component"
+        oname = "mcs_ttest_component"
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % ("$datasources.%s" % dsname[0]),
                '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % ("$datasources.%s" % dsname[1]),

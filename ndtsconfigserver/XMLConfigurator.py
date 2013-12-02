@@ -50,11 +50,17 @@ class XMLConfigurator(object):
         ## XML variables
         self.__variables = {}
         
+        ## instance of MYSQLDataBase
         self.__mydb = MyDB()
 
+        ## datasource label
         self.__dsLabel = "datasources"
 
+        ## variable label
         self.__varLabel = "var"
+
+        ## component label
+        self.__cpLabel = "components"
         
         ## delimiter
         self.__delimiter = '.'
@@ -211,7 +217,20 @@ class XMLConfigurator(object):
         else:
             return [] 
 
-
+    ## provides dependent components
+    # \param names component names to check
+    # \param deps dictionery with dependent components
+    # \returns list of depending components   
+    def dependentComponents(self, names, deps = None):
+        dps = deps if deps else {}
+        for nm in names:
+            if nm not in dps:
+                dps[nm] = []
+                cpl = self.__mydb.components([nm])
+                if cpl:
+                    dps[nm] = self.__findElements(cpl[0], self.__cpLabel)
+                    self.dependentComponents(dps[nm], dps)
+        return dps.keys()
 
 
     ## fetches the required datasources
@@ -391,13 +410,22 @@ class XMLConfigurator(object):
     def merge(self, names): 
         xml = ""
         if self.__mydb:
-            comps = self.__mydb.components(
-                list(set(self.__mydb.mandatory() + names)))   
-        mgr = Merger()
-        mgr.collect(comps)
-        mgr.merge()
-        xml = mgr.toString()
+            allnames = self.dependentComponents(
+                list(set(self.__mydb.mandatory() + names)))
+            comps = self.__mydb.components(list(set(allnames)))   
+            xml = self.__merge(comps)    
         return xml if xml is not None else ""        
+   
+
+    ## merges the give component xmls
+    # \param xmls list of component xmls
+    # \return merged components
+    def __merge(self, xmls):
+        mgr = Merger()
+        mgr.collect(xmls)
+        mgr.merge()
+        return mgr.toString()
+        
 
 
     ## creates the final configuration string in the xmlConfig attribute
@@ -406,11 +434,7 @@ class XMLConfigurator(object):
         cnf = self.merge(names)
         cnfWithDS = self.__attachDataSources(cnf)
         cnfWithVar = self.__attachVariables(cnfWithDS)
-
-        mgr = Merger()
-        mgr.collect([cnfWithVar])
-        mgr.merge()
-        cnfMerged = mgr.toString()
+        cnfMerged = self.__merge([cnfWithVar])    
 
         if cnfMerged and hasattr(cnfMerged,"strip") and  cnfMerged.strip():
             reparsed = parseString(cnfMerged)
