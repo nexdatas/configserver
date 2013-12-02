@@ -4785,6 +4785,128 @@ class XMLConfiguratorTest(unittest.TestCase):
 
 
 
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_componentVariables(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        
+        vrs =  ["eid", "myvar1","var2", "mvar3"]
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>' 
+               % (vrs[0]),
+               '<definition><group type="NXentry"/><field name="field2">$var.%s</field></definition>' 
+               % (vrs[1]),
+               '<definition><group type="NXentry"/><field name="field3">$var.%s</field><field name="field4">$var.%s</field></definition>' 
+               % (vrs[2], vrs[3] )
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[0],name[2]]
+        cmps = []
+        for cs in css:
+            mdss = el.componentVariables(cs)
+            cmps.extend(mdss)
+        self.assertEqual(sorted(cmps),sorted([vrs[0],vrs[2],vrs[3]]))
+        
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +3)
+        el.close()
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_componentsVariables(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+        
+        vrs =  ["eid", "myvar1","var2", "mvar3"]
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>' 
+               % (vrs[0]),
+               '<definition><group type="NXentry"/><field name="field2">$var.%s</field></definition>' 
+               % (vrs[1]),
+               '<definition><group type="NXentry"/><field name="field3">$var.%s</field><field name="field4">$var.%s</field></definition>' 
+               % (vrs[2], vrs[3] )
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[0],name[2]]
+        cmps = []
+        mdss = el.componentsVariables(css)
+        cmps.extend(mdss)
+        self.assertEqual(sorted(cmps),sorted([vrs[0],vrs[2],vrs[3]]))
+        
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision +3)
+        el.close()
+
+
 
 
     ## creatConf test

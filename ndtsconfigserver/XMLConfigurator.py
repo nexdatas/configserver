@@ -406,8 +406,14 @@ class XMLConfigurator(object):
         cnf = self.merge(names)
         cnfWithDS = self.__attachDataSources(cnf)
         cnfWithVar = self.__attachVariables(cnfWithDS)
-        if cnfWithVar and hasattr(cnfWithVar,"strip") and  cnfWithVar.strip():
-            reparsed = parseString(cnfWithVar)
+
+        mgr = Merger()
+        mgr.collect([cnfWithVar])
+        mgr.merge()
+        cnfMerged = mgr.toString()
+
+        if cnfMerged and hasattr(cnfMerged,"strip") and  cnfMerged.strip():
+            reparsed = parseString(cnfMerged)
             self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlConfig = ''
