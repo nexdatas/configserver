@@ -4863,7 +4863,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         
-        vrs =  ["eid", "myvar1","var2", "mvar3"]
+        vrs =  ["entry_id", "myvar1","var2", "mvar3"]
 
 
         oname = "mcs_test_component"
