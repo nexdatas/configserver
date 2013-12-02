@@ -339,6 +339,11 @@ class XMLConfigurator(object):
                 subc = ''
             name = subc.strip() if subc else ""
             if name:
+                if tag and name not in keys:
+                    raise NonregisteredDBRecordError, \
+                        "The %s %s not registered in the DataBase" % (
+                        tag if tag else "variable", name)
+                    
                 try:
                     xmlds = funValue([name])
                 except:
@@ -367,9 +372,9 @@ class XMLConfigurator(object):
                 index = component.find("$%s%s" % (label, 
                                                   self.__delimiter))
             else:
-                    raise NonregisteredDBRecordError, \
-                        "The %s %s not registered" % (
-                        tag if tag else "variable", name)
+                raise NonregisteredDBRecordError, \
+                    "The %s %s not registered" % (
+                    tag if tag else "variable", name)
                 
         return component
         
@@ -389,6 +394,16 @@ class XMLConfigurator(object):
         return self.__attachElements(
             component, self.__varLabel, 
             self.__variables.keys(), self.__getVariable)   
+
+
+    ## attaches variables to component
+    # \param component given component
+    # \returns component with attached variables
+    def __attachComponents(self, component):
+        if not component:
+            return
+        return self.__attachElements(
+            component, self.__cpLabel, [], lambda x: [""])   
                 
 
     ## attaches datasources to component
@@ -401,8 +416,8 @@ class XMLConfigurator(object):
             component, self.__dsLabel, 
             self.availableDataSources(), self.dataSources, 
             "datasource")   
+
                 
-        return component
    
     ## merges the give components
     # \param names list of component names
@@ -420,7 +435,8 @@ class XMLConfigurator(object):
     ## merges the give component xmls
     # \param xmls list of component xmls
     # \return merged components
-    def __merge(self, xmls):
+    @classmethod
+    def __merge(cls, xmls):
         mgr = Merger()
         mgr.collect(xmls)
         mgr.merge()
@@ -434,7 +450,8 @@ class XMLConfigurator(object):
         cnf = self.merge(names)
         cnfWithDS = self.__attachDataSources(cnf)
         cnfWithVar = self.__attachVariables(cnfWithDS)
-        cnfMerged = self.__merge([cnfWithVar])    
+        cnfCutCP = self.__attachComponents(cnfWithVar)
+        cnfMerged = self.__merge([cnfCutCP])    
 
         if cnfMerged and hasattr(cnfMerged,"strip") and  cnfMerged.strip():
             reparsed = parseString(cnfMerged)

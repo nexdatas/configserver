@@ -279,7 +279,8 @@ class MYSQLDataBase(object):
                 print >> Streams.log_info , \
                     "MYSQLDataBase::storeDataSource() - store datasource", name
             else:    
-                print "MYSQLDataBase::storeDataSource() - store datasource", name
+                print "MYSQLDataBase::storeDataSource() - store datasource", \
+                    name
 
 
     ## deletes the given component
@@ -312,7 +313,8 @@ class MYSQLDataBase(object):
                 print >> Streams.log_info , \
                     "MYSQLDataBase::deleteComponent() - delete component", name
             else:    
-                print "MYSQLDataBase::deleteComponent() - delete component", name
+                print "MYSQLDataBase::deleteComponent() - delete component", \
+                    name
 
 
 
