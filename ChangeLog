@@ -1,4 +1,4 @@
-2013-11-XX Jan Kotanski <jankotan@gmail.com>
+2013-12-03 Jan Kotanski <jankotan@gmail.com>
 	* adding merge, componentsDataSources, componentVariables
 	and componentsVariables dependentComponents into XMLConfigurator
 	* tagged as v1.4.0
