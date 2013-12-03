@@ -29,8 +29,8 @@ import numpy
 
 
 
-from ndtsconfigserver.MYSQLDataBase import MYSQLDataBase
-from ndtsconfigserver.Errors import NonregisteredDBRecordError                         
+from nxsconfigserver.MYSQLDataBase import MYSQLDataBase
+from nxsconfigserver.Errors import NonregisteredDBRecordError                         
 
 ## test fixture
 class MYSQLDataBaseTest(unittest.TestCase):

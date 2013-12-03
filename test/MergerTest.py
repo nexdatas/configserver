@@ -26,7 +26,7 @@ import struct
 
 from xml import sax
 
-from ndtsconfigserver.Merger import Merger, UndefinedTagError, IncompatibleNodeError
+from nxsconfigserver.Merger import Merger, UndefinedTagError, IncompatibleNodeError
 
 
 ## if 64-bit machione

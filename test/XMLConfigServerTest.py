@@ -30,8 +30,8 @@ import PyTango
 import ServerSetUp
 import XMLConfiguratorTest
 #import XMLConTest as XMLConfiguratorTest
-from ndtsconfigserver import XMLConfigurator
-import ndtsconfigserver
+from nxsconfigserver import XMLConfigurator
+import nxsconfigserver
 ## test fixture
 class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
@@ -92,7 +92,7 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
         self.version = ".".join(vv[0:3])
         self.label = ".".join(vv[3:-1])
 
-        self.assertEqual(self.version, ndtsconfigserver.__version__ )
+        self.assertEqual(self.version, nxsconfigserver.__version__ )
         self.assertEqual(self.label, '.'.join(xmlc.Version.split('.')[3:-1]))
 
         

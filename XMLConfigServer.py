@@ -35,7 +35,7 @@
 import PyTango
 import sys
 
-from ndtsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
+from nxsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
 
 
 #==================================================================

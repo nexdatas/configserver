@@ -15,36 +15,19 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package ndts nexdatas
-## \file Errors.py
-# Error classes
+## \package nxsconfigserver nexdatas
+## \file Streams.py
 
-""" Error classes  """
+""" labels to Tango Streams """
 
-## Incompatible class Exception
-class IncompatibleNodeError(Exception): 
-    ## constructor
-    # \param value string with error message
-    # \param nodes list of nodes with errors
-    def __init__(self, value, nodes = None):
-        Exception.__init__(self, value)
-        ## exception value 
-        self.value = value
-        ## nodes with errors
-        self.nodes = nodes if nodes else []
-    
-    ## tostring method
-    # \brief It shows the error message
-    def __str__(self):
-        return repr(self.value)
-
-## Exception for undefined tags
-class UndefinedTagError(Exception): 
-    pass
-
-##  Error for non-existing database records
-class NonregisteredDBRecordError(Exception): 
-    pass
-
-
+## Tango fatal log
+log_fatal = None  
+## Tango error log
+log_error = None 
+## Tango warn log
+log_warn = None 
+## Tango info log
+log_info = None 
+## Tango debug log
+log_debug = None 
 

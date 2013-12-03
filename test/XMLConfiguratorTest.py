@@ -32,11 +32,11 @@ import time
 IS64BIT = (struct.calcsize("P") == 8)
 
 
-from ndtsconfigserver.XMLConfigurator  import XMLConfigurator
-from ndtsconfigserver.Merger import Merger
-from ndtsconfigserver.Errors import (NonregisteredDBRecordError, UndefinedTagError, 
+from nxsconfigserver.XMLConfigurator  import XMLConfigurator
+from nxsconfigserver.Merger import Merger
+from nxsconfigserver.Errors import (NonregisteredDBRecordError, UndefinedTagError, 
                                      IncompatibleNodeError)
-import ndtsconfigserver
+import nxsconfigserver
 
 ## test fixture
 class XMLConfiguratorTest(unittest.TestCase):
@@ -125,7 +125,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.version = ".".join(vv[0:3])
         self.label = ".".join(vv[3:-1])
 
-        self.assertEqual(self.version, ndtsconfigserver.__version__ )
+        self.assertEqual(self.version, nxsconfigserver.__version__ )
         self.assertEqual(self.label, xmlc.versionLabel)
         return xmlc
 

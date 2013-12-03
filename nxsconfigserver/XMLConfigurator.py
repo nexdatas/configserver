@@ -24,7 +24,7 @@
 
 import json
 import re
-import ndtsconfigserver
+import nxsconfigserver
 from xml import  sax
 from xml.dom.minidom import parseString
 from .MYSQLDataBase import MYSQLDataBase as MyDB
@@ -87,7 +87,7 @@ class XMLConfigurator(object):
     ## get method for version attribute
     # \returns server and configuration version
     def __getVersion(self):
-        version = ndtsconfigserver.__version__ + \
+        version = nxsconfigserver.__version__ + \
             "." + self.versionLabel + "." + self.__mydb.version() 
         return version
 

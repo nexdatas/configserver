@@ -16,18 +16,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \file setup.py
-# ndts installer 
+# nxsconfigserver installer 
 import os,sys
 from distutils.core import setup
 from distutils.command.install import install
 
 ## package name
-NDTS = "ndtsconfigserver"
-## ndts imported package
-INDTS = __import__(NDTS)
+NXS = "nxsconfigserver"
+## nxs imported package
+INXS = __import__(NXS)
 
 
-#__requires__ = 'nextdata ==%s' % INDTS.__version__
+#__requires__ = 'nextdata ==%s' % INXS.__version__
 
 ## reading a file
 def read(fname):
@@ -47,18 +47,18 @@ required = [
 ## metadata for distutils
 SETUPDATA=dict(
     name = "nexdatas.configserver",
-    version = INDTS.__version__,
+    version = INXS.__version__,
     author = "Jan Kotanski, Eugen Wintersberger , Halil Pasic",
     author_email = "jankotan@gmail.com, eugen.wintersberger@gmail.com, halil.pasic@gmail.com",
     description = ("Nexus Data writer implemented as a Tango Server"),
     license = "GNU GENERAL PUBLIC LICENSE v3",
     keywords = "configuration MySQL writer Tango server nexus data",
     url = "http://code.google.com/p/nexdatas/",
-    packages=[NDTS],
+    packages=[NXS],
     requires=required,
     scripts = ['XMLConfigServer.py', 'XMLConfigServer'],
 #    scripts = ['TangoDataServer.py'],
-#    package_data={'ndts': ['TDS']},
+#    package_data={'nxs': ['TDS']},
     long_description= read('README')
 )
 

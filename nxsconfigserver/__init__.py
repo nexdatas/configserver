@@ -15,19 +15,11 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package ndtsconfigserver nexdatas
-## \file Streams.py
+## \package mcs nexdatas
+## \file __init__.py
+# package constructor
 
-""" labels to Tango Streams """
+""" Implementation of NexDaTaS Configuration Server """
 
-## Tango fatal log
-log_fatal = None  
-## Tango error log
-log_error = None 
-## Tango warn log
-log_warn = None 
-## Tango info log
-log_info = None 
-## Tango debug log
-log_debug = None 
-
+## version number
+__version__ = "1.5.0"
