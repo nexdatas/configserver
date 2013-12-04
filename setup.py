@@ -17,9 +17,11 @@
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \file setup.py
 # nxsconfigserver installer 
-import os,sys
+
+""" setup.py for NXS configuration server """
+
+import os
 from distutils.core import setup
-from distutils.command.install import install
 
 ## package name
 NXS = "nxsconfigserver"
@@ -45,11 +47,12 @@ required = [
     ]
 
 ## metadata for distutils
-SETUPDATA=dict(
+SETUPDATA = dict(
     name = "nexdatas.configserver",
     version = INXS.__version__,
     author = "Jan Kotanski, Eugen Wintersberger , Halil Pasic",
-    author_email = "jankotan@gmail.com, eugen.wintersberger@gmail.com, halil.pasic@gmail.com",
+    author_email = "jankotan@gmail.com, eugen.wintersberger@gmail.com, " \
+        + "halil.pasic@gmail.com",
     description = ("Nexus Data writer implemented as a Tango Server"),
     license = "GNU GENERAL PUBLIC LICENSE v3",
     keywords = "configuration MySQL writer Tango server nexus data",
