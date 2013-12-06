@@ -58,6 +58,7 @@ pieces of hardware and writing strategy for corresponding to them data.
  + Finally, the components can contains variables. The variables are defined 
    in XML code by $var.<var_name> syntax and can be provided to 
    the Configuration Server by passing a JSON string. 
+   The default value for variables is an empty string. 
 
 All elements of configuration can be created by GUI tool - ComponentDesigner. 
 The tool can connect to Configuration Server and fetch or store 
