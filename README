@@ -42,20 +42,33 @@ Tango Data Writer runs. The server uses as a storage system a MYSQL database.
 To create required DB tables one can use ndts.sql script from the repository.
 
 In Configuration Server the configuration is memorized in separate elements: 
-datasources or components. DataSources describe access to input data, 
-i.e to specific hardware TANGO devices or other databases as well to client data. 
-Components specify Nexus tree with positions of datasets for particular pieces 
-of hardware and writing strategy for corresponding to them data. 
-They can include links to datasources as well as datasources directly.
+datasources or components. 
+
+*DataSources* describe access to input data, i.e to specific hardware 
+TANGO devices or other databases as well to client data. 
+
+*Components* specify Nexus tree with positions of datasets for particular 
+pieces of hardware and writing strategy for corresponding to them data. 
+
+ + They can include datasources directly as well as links to datasources 
+   defined in the server. To this end template syntax of 
+   $datasources.<ds_name> type is used.
+ + Moreover, they can holds links to other components which describe their 
+   dependences. In this case $components.<comp_name> syntax is used.
+ + Finally, the components can contains variables. The variables are defined 
+   in XML code by $var.<var_name> syntax and can be provided to 
+   the Configuration Server by passing a JSON string. 
 
 All elements of configuration can be created by GUI tool - ComponentDesigner. 
-The tool can also connnect to Configuration Server and fetch or store 
+The tool can connect to Configuration Server and fetch or store 
 the separate elements of the XML configuration.
 
-During creation of the final configuration Configuration Server merges all 
-required components as well connected to them datasources providing 
-a single XML string. This XML string can be pass directly into the dedicated 
-Tango Data Writer attribute.
+During creation of the final configuration Configuration Server merges 
+all required and dependent components, connected to them datasources and
+provided values of the variables. As a result it returns a single XML string. 
+This XML string can be pass directly into the dedicated Tango Data Writer 
+attribute. 
+
 
 
 ============================
@@ -75,9 +88,13 @@ cnfServer.JSONSettings = \
 # opens DB connection
 cnfServer.Open()
 
-# After creating the server proxy we can set configuration for connection to the MYSQL DB. 
+# After creating the server proxy we can set configuration for connection to 
+#  the MYSQL DB. 
 # The JSONSettings attribute is memorized so you have to write it only when you 
-# change configuration of DB connection. Next, we open connection to DB specified by our JSONSettings.
+# change configuration of DB connection. Next, we open connection to 
+# DB specified by our JSONSettings.
+
+
 
 # stores default component
 cpxml = open("default.xml", 'r').read()
@@ -116,6 +133,7 @@ cnfServer.XMLString = dsxml
 cnfServer.StoreDataSource('motor02')
 
 
+
 # removes slit3 component from DB
 cnfServer.DeleteComponent('slit3')
 
@@ -123,7 +141,10 @@ cnfServer.DeleteComponent('slit3')
 cnfServer.DeleteDataSource('motor02')
 
 # If someone cannot use ComponentDesigner it is also an option to store 
-# or delete components and datasources using directly tango interface as it is shown above.
+# or delete components and datasources using directly tango interface 
+# as it is shown above.
+
+
 
 # provides names of available components
 cmpNameList = cnfServer.AvailableComponents()
@@ -133,18 +154,42 @@ dsNameList = cnfServer.AvailableDataSources()
 # To get information about names of available components and datasources 
 # in Configuration Server we use the above commands.
 
+
+
 # provides a list of required components
 cmpList = cnfServer.Components(cmpNameList)
 # provides a list of required Datasources
 dsList = cnfServer.DataSources(dsNameList)
 
-# Having names of stored elements we can get their XML code
+# Having names of stored elements we can get their XML code.
 
 # provides a list of Datasources from a given Component
-dsList =cnf.Server.ComponentDataSources('pilatus300k')
+dsList = cnf.Server.ComponentDataSources('pilatus300k')
+dsList = cnf.Server.ComponentsDataSources(['pilatus300k', 'slit1'])
 
 # as well as query Configuration Server which datasource 
-are related to the particular component.
+# are related to the particular component.
+
+# provides a dependent components
+cpList = cnf.Server.DependentComponents(['pilatus300k', 'slit3'])
+
+
+# Moreover, one can also query Configuration Server for a list of 
+# dependent components
+
+# provides a list of Variables from a given components
+varList = cnf.Server.ComponentVariables('pilatus300k')
+varList = cnf.Server.ComponentsVariables(['pilatus300k', 'slit3'])
+
+#or ask for a list of variables which are related to the particular components.
+
+# sets values of variables
+cnf.Server.Variables = '{"entry_id":"123","beamtime_id":"123453535453"}'
+
+#The variable values can be passed to the Configuration Server 
+# via a JSON string. 
+
+
 
 # sets given component as mandatory for the final configuration
 cnfServer.SetMandatoryComponents(['default','slit1'])
@@ -155,7 +200,10 @@ cnfServer.UnsetMandatoryComponents(['slit1'])
 man =  cnfServer.MandatoryComponents()
 
 # Some of the component can be set as mandatory in 
-# the final configuration. To define them Configuration Server provides above commands.
+# the final configuration. To define them Configuration Server provides 
+# above commands.
+
+
 
 # provides the current configuration version
 version =  cnfServer.Version
@@ -173,6 +221,16 @@ finalXML = cnfServer.XMLString
 # command with a list of names of required components. The command merges 
 # these components with mandatory ones and provides the resulting NXDL-like 
 # configuration in the XMLString attribute.
+
+
+
+
+# merges given components
+mergedComp = cnfServer.Merge(['slit2', 'pilatus300k'])
+
+# Similarly, the Merge command provides configuration by unresolved links 
+# to datasoures and with non-assigned variable values. 
+
 
 # closes connection to DB
 cnfServer.close()
