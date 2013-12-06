@@ -91,8 +91,9 @@ class XMLConfigurator(object):
             "." + self.versionLabel + "." + self.__mydb.version() 
         return version
 
-    ## the json data string
-    version = property(__getVersion)
+    ## configuration version
+    version = property(__getVersion, 
+                       doc = 'configuration version')
 
 
     ## opens database connection
