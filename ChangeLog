@@ -1,4 +1,5 @@
 2013-12-06 Jan Kotanski <jankotan@gmail.com>
+	* changing XMLConfigServer into NXSConfigServer
 	* changing ndtsconfigserver into nxsconfigserver
 	* tagged as v1.5.0
 

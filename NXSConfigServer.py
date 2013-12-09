@@ -2,13 +2,13 @@
 #    "$Header:  $";
 #=============================================================================
 #
-# file :        XMLConfigServer.py
+# file :        NXSConfigServer.py
 #
-# description : Python source for the XMLConfigServer and its commands. 
+# description : Python source for the NXSConfigServer and its commands. 
 #                The class is derived from Device. It represents the
 #                CORBA servant object which will be accessed from the
 #                network. All commands which can be executed on the
-#                XMLConfigServer are implemented in this file.
+#                NXSConfigServer are implemented in this file.
 #
 # project :     TANGO Device Server
 #
@@ -39,7 +39,7 @@ from nxsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
 
 
 #==================================================================
-#   XMLConfigServer Class Description:
+#   NXSConfigServer Class Description:
 #
 #         Configuration Server based on MySQL database
 #
@@ -52,7 +52,7 @@ from nxsconfigserver.XMLConfigurator import XMLConfigurator as XMLC
 #==================================================================
 
 
-class XMLConfigServer(PyTango.Device_4Impl):
+class NXSConfigServer(PyTango.Device_4Impl):
 
 #------------------------------------------------------------------
 #    Device constructor
@@ -60,7 +60,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
     def __init__(self, cl, name):
         self.xmlc = None
         PyTango.Device_4Impl.__init__(self, cl, name)
-        XMLConfigServer.init_device(self)
+        NXSConfigServer.init_device(self)
 
 #------------------------------------------------------------------
 #    Device destructor
@@ -95,7 +95,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #==================================================================
 #
-#    XMLConfigServer read/write attribute methods
+#    NXSConfigServer read/write attribute methods
 #
 #==================================================================
 #------------------------------------------------------------------
@@ -206,7 +206,7 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #==================================================================
 #
-#    XMLConfigServer command methods
+#    NXSConfigServer command methods
 #
 #==================================================================
 
@@ -793,10 +793,10 @@ class XMLConfigServer(PyTango.Device_4Impl):
 
 #==================================================================
 #
-#    XMLConfigServerClass class definition
+#    NXSConfigServerClass class definition
 #
 #==================================================================
-class XMLConfigServerClass(PyTango.DeviceClass):
+class NXSConfigServerClass(PyTango.DeviceClass):
 
     #    Class Properties
     class_property_list = {
@@ -924,23 +924,23 @@ class XMLConfigServerClass(PyTango.DeviceClass):
 
 
 #------------------------------------------------------------------
-#    XMLConfigServerClass Constructor
+#    NXSConfigServerClass Constructor
 #------------------------------------------------------------------
     def __init__(self, name):
         PyTango.DeviceClass.__init__(self, name)
         self.set_type(name)
-        print "In XMLConfigServerClass  constructor"
+        print "In NXSConfigServerClass  constructor"
 
 #==================================================================
 #
-#    XMLConfigServer class main method
+#    NXSConfigServer class main method
 #
 #==================================================================
 if __name__ == '__main__':
     try:
         py = PyTango.Util(sys.argv)
-        py.add_TgClass(XMLConfigServerClass, 
-                       XMLConfigServer, 'XMLConfigServer')
+        py.add_TgClass(NXSConfigServerClass, 
+                       NXSConfigServer, 'NXSConfigServer')
 
         U = PyTango.Util.instance()
         U.server_init()

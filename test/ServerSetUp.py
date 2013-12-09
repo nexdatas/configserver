@@ -36,8 +36,8 @@ class ServerSetUp(object):
     def __init__(self):
         ## information about tango writer
         self.new_device_info_writer = PyTango.DbDevInfo()
-        self.new_device_info_writer._class = "XMLConfigServer"
-        self.new_device_info_writer.server = "XMLConfigServer/MCSTEST"
+        self.new_device_info_writer._class = "NXSConfigServer"
+        self.new_device_info_writer.server = "NXSConfigServer/MCSTEST"
         self.new_device_info_writer.name = "testp09/testmcs/testr228"
 
         self._psub = None
@@ -52,13 +52,13 @@ class ServerSetUp(object):
         db.add_device(self.new_device_info_writer)
         db.add_server(self.new_device_info_writer.server, self.new_device_info_writer)
         
-        if os.path.isfile("../XMLConfigServer"):
+        if os.path.isfile("../NXSConfigServer"):
             self._psub = subprocess.call(
-                "cd ..; ./XMLConfigServer MCSTEST &",stdout =  None, 
+                "cd ..; ./NXSConfigServer MCSTEST &",stdout =  None, 
                 stderr =  None,  shell= True)
         else:
             self._psub = subprocess.call(
-                "XMLConfigServer MCSTEST &",stdout =  None, 
+                "NXSConfigServer MCSTEST &",stdout =  None, 
                 stderr = None , shell= True)
         print "waiting for server",
         
@@ -86,7 +86,7 @@ class ServerSetUp(object):
         
         output = ""
         pipe = subprocess.Popen(
-            "ps -ef | grep 'XMLConfigServer.py MCSTEST'", stdout=subprocess.PIPE , shell= True).stdout
+            "ps -ef | grep 'NXSConfigServer.py MCSTEST'", stdout=subprocess.PIPE , shell= True).stdout
 
         res = pipe.read().split("\n")
         for r in res:

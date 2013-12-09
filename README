@@ -1,11 +1,11 @@
 ============================
-MCS Configuration Server
+NeXuS Configuration Server
 ============================
 
 Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic
 Introduction
 
-MCS Configuration Server is a Tango Server with its implementation based 
+NeXuS Configuration Server is a Tango Server with its implementation based 
 on a MySQL database. It allows to store XML configuration datasources 
 and components. It also gives possibility to select mandatory components 
 and perform the process of component merging.
@@ -19,9 +19,9 @@ Install the dependencies:
 
     MySQLdb, PyTango 
 
-Download the latest version of MCS Configuration Server from
+Download the latest version of NeXuS Configuration Server from
 
-    MCS Configuration Server 
+    NeXuS Configuration Server 
 
 and extract the sources.
 

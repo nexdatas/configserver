@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \package test nexdatas
-## \file XMLConfigServerTest.py
+## \file NXSConfigServerTest.py
 # unittests for field Tags running Tango Server
 #
 import unittest
@@ -33,7 +33,7 @@ import XMLConfiguratorTest
 from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
 ## test fixture
-class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
+class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
     ## constructor
     # \param methodName name of the test method
@@ -58,7 +58,7 @@ class XMLConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
         
     ## opens config server
     # \param args connection arguments
-    # \returns XMLConfigServer instance   
+    # \returns NXSConfigServer instance   
     def openConfig(self, args):
         
         found = False

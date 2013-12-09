@@ -62,7 +62,7 @@ if "MYSQL" in DB_AVAILABLE:
 
 if PYTANGO_AVAILABLE :
     if "MYSQL" in DB_AVAILABLE:
-        import XMLConfigServerTest
+        import NXSConfigServerTest
 
 
 #import TestServerSetUp
@@ -103,7 +103,7 @@ def main():
 
         if "MYSQL" in DB_AVAILABLE:
             suite.addTests(
-                unittest.defaultTestLoader.loadTestsFromModule(XMLConfigServerTest) )
+                unittest.defaultTestLoader.loadTestsFromModule(NXSConfigServerTest) )
 
 
     
