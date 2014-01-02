@@ -53,7 +53,7 @@ SETUPDATA = dict(
     author = "Jan Kotanski, Eugen Wintersberger , Halil Pasic",
     author_email = "jankotan@gmail.com, eugen.wintersberger@gmail.com, " \
         + "halil.pasic@gmail.com",
-    description = ("Nexus Data writer implemented as a Tango Server"),
+    description = ("Configuration Server for Nexus Data Writer"),
     license = "GNU GENERAL PUBLIC LICENSE v3",
     keywords = "configuration MySQL writer Tango server nexus data",
     url = "http://code.google.com/p/nexdatas/",
@@ -86,3 +86,4 @@ def main():
 if __name__ == '__main__':
     main()
 
+?
