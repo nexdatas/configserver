@@ -939,7 +939,7 @@ class NXSConfigServerClass(PyTango.DeviceClass):
 if __name__ == '__main__':
     try:
         py = PyTango.Util(sys.argv)
-        py.add_TgClass(NXSConfigServerClass, 
+        py.add_class(NXSConfigServerClass, 
                        NXSConfigServer, 'NXSConfigServer')
 
         U = PyTango.Util.instance()
