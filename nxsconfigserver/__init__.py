@@ -23,3 +23,22 @@
 
 ## version number
 __version__ = "1.5.1"
+
+import sys
+
+def run(argv):
+    import PyTango
+    from NXSConfigServer import NXSConfigServer as NXSCnfSrv
+    from NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
+    try:
+        py = PyTango.Util(argv)
+        py.add_class(NXSCnfSrvClass, NXSCnfSrv, 'NXSConfigServer')
+
+        U = PyTango.Util.instance()
+        U.server_init()
+        U.server_run()
+
+    except PyTango.DevFailed, e:
+        print '-------> Received a DevFailed exception:', e
+    except Exception, e:
+        print '-------> An unforeseen exception occured....', e
