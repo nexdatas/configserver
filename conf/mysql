@@ -1,0 +1,6 @@
+source /usr/share/nxsconfigserver/create_db_tables.sql
+
+#
+# Init the revision counter if not exists
+#
+INSERT INTO properties  (name, value) SELECT * FROM (SELECT 'revision', '0') AS tmp WHERE NOT EXISTS ( SELECT name FROM properties WHERE name ='revision' ) LIMIT 1;

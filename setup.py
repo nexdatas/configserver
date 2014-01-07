@@ -60,8 +60,9 @@ SETUPDATA = dict(
     packages=[NXS],
     requires=required,
     scripts = ['NXSConfigServer.py', 'NXSConfigServer'],
-#    scripts = ['TangoDataServer.py'],
-#    package_data={'nxs': ['TDS']},
+    data_files=[('share/nxsconfigserver', ['conf/my.cnf']),
+                ('share/nxsconfigserver', ['conf/mysql']),
+                ('share/nxsconfigserver', ['conf/create_db_tables.sql'])],
     long_description= read('README')
 )
 
