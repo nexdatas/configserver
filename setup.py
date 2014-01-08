@@ -61,7 +61,7 @@ SETUPDATA = dict(
     requires=required,
     scripts = ['NXSConfigServer.py', 'NXSConfigServer'],
     data_files=[('share/nxsconfigserver', ['conf/my.cnf']),
-                ('share/nxsconfigserver', ['conf/mysql'])
+                ('share/nxsconfigserver', ['conf/mysql_create.sql'])
                 ],
     long_description= read('README')
 )
