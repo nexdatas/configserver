@@ -5377,10 +5377,11 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
-
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
+            print "AVDS", avds 
+            print "WW ", rename, dsname[0], dsname[1]
                 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -5463,9 +5464,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
 
                 
         for i in range(dsnp):
@@ -5908,9 +5909,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
 
                 
         for i in range(dsnp):
@@ -5993,9 +5994,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
 
                 
         for i in range(dsnp):
@@ -6330,6 +6331,98 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     ## creatConf test
     # \brief It tests XMLConfigurator
+    def test_createConfiguration_mixed_var_1(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        
+        el = self.openConfig(self.__args)
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+
+        avc = el.availableComponents()
+
+
+        xds  = [
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
+            ]
+
+
+        odsname = "mcs_test_datasource"
+        avds = el.availableDataSources()
+        self.assertTrue(isinstance(avds, list))
+        dsnp = len(xds)
+        dsname = []
+        for i in range(dsnp):
+            
+            dsname.append(odsname +'_%s' % i )
+            while dsname[i] in avds:
+                dsname[i] = dsname[i] + '_%s' %i
+
+                
+        for i in range(dsnp):
+            self.setXML(el, xds[i] % dsname[i])
+            self.assertEqual(el.storeDataSource(dsname[i]),None)
+            print "DS store", dsname[i]
+            self.__ds.append(dsname[i])
+
+        print "AVAIL", el.availableDataSources()    
+
+
+
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = [
+            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (xds[0] % dsname[0]),
+            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % ("$datasources.$var.source"),
+            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % ("$datasources.%s" % dsname[0])
+               ]
+
+
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+            
+            name.append(oname +'_%s' % i )
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]),None)
+            self.__cmps.append(name[i])
+
+
+
+        css = [name[i] for i in range(len(xml))]
+        print "AVAIL2", el.availableDataSources()    
+
+        el.variables = '{"name1":"r1","source":"%s"}' % dsname[0]
+        self.assertEqual(el.createConfiguration(css), None)
+        gxml = self.getXML(el)
+        self.assertEqual(gxml.replace("?>\n<","?><"), '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>'   % ( dsname[0] )  )
+
+        
+
+      
+        
+
+        el.setMandatoryComponents(man)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
+        el.close()
+
+
+
+
+
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
@@ -6456,9 +6549,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
                 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -6549,9 +6642,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
                 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -6598,8 +6691,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         print "GXML2:\n", gxml
-        self.assertEqual(gxml.replace("?>\n<","?><"),'<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (
-                dsname[0], dsname[1], dsname[0] ))
+        self.assertTrue((gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0], dsname[1], dsname[0] )) |
+                        (gxml.replace("?>\n<","?><") ==  '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field></definition>'  % (dsname[0], dsname[0], dsname[1] ))
+)
 
         
 
@@ -6646,10 +6740,10 @@ ds.result = ndts.version</result></datasource>"""
         dsname.append(odsname +'_111')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds or dsname[2] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
-            dsname[2] = rname + '_111'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
+            dsname[2] = rename + '_111'
                 
         for i in range(dsnp):
             if i < 2:
@@ -7066,6 +7160,9 @@ ds.result = ndts.version</result></datasource>"""
 
         el.variables = '{"name1":"r1","name2":"r2","name3":"r3","name4":"r4"}'
         gxml = el.merge(css)
+        print "W1:",  gxml.replace("?>\n<","?><")   
+        print "W2:", '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % ( dsname[2], dsname[3], dsname[0] )  
+        print "W3:", '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % ( dsname[0], dsname[2], dsname[3] ) 
         self.assertTrue((gxml.replace("?>\n<","?><") =='<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % ( dsname[2], dsname[3], dsname[0] )  ) | 
                          (gxml.replace("?>\n<","?><") =='<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % ( dsname[0], dsname[2], dsname[3] )  ))
 
@@ -7116,9 +7213,9 @@ ds.result = ndts.version</result></datasource>"""
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
                 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -7210,9 +7307,9 @@ ds.result = ndts.version</result></datasource>"""
         dsname.append(odsname +'_11')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
                 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -7304,10 +7401,10 @@ ds.result = ndts.version</result></datasource>"""
         dsname.append(odsname +'_111')
         rename = odsname
         while dsname[0] in avds or dsname[1] in avds or dsname[2] in avds:
-            rname = rename + "_1"
-            dsname[0] = rname + '_1'
-            dsname[1] = rname + '_11'
-            dsname[2] = rname + '_111'
+            rename = rename + "_1"
+            dsname[0] = rename + '_1'
+            dsname[1] = rename + '_11'
+            dsname[2] = rename + '_111'
                 
         for i in range(dsnp):
             if i < 2:
