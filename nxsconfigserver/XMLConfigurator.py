@@ -449,10 +449,11 @@ class XMLConfigurator(object):
     # \param names list of component names
     def createConfiguration(self, names):
         cnf = self.merge(names)
-        cnfWithDS = self.__attachDataSources(cnf)
-        cnfWithVar = self.__attachVariables(cnfWithDS)
-        cnfCutCP = self.__attachComponents(cnfWithVar)
-        cnfMerged = self.__merge([cnfCutCP])    
+        cnf = self.__attachVariables(cnf)
+        cnf = self.__attachDataSources(cnf)
+        cnf = self.__attachVariables(cnf)
+        cnf = self.__attachComponents(cnf)
+        cnfMerged = self.__merge([cnf])    
 
         if cnfMerged and hasattr(cnfMerged,"strip") and  cnfMerged.strip():
             reparsed = parseString(cnfMerged)
