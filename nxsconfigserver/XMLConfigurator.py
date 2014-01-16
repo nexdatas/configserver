@@ -418,12 +418,20 @@ class XMLConfigurator(object):
             self.availableDataSources(), self.dataSources, 
             "datasource")   
 
+    ## merges the give components
+    # \param names list of component names
+    # \return merged components
+    def merge(self, names): 
+        return self.__mergeVars(names, False)
+   
+
                 
    
     ## merges the give components
     # \param names list of component names
+    # \param withVariables if true variables will be substituted
     # \return merged components
-    def merge(self, names, withVariables = False): 
+    def __mergeVars(self, names, withVariables = False): 
         xml = ""
         if self.__mydb:
             allnames = self.dependentComponents(
@@ -434,6 +442,7 @@ class XMLConfigurator(object):
             xml = self.__merge(comps)    
         return xml if xml is not None else ""        
    
+
 
     ## merges the give component xmls
     # \param xmls list of component xmls
@@ -450,7 +459,7 @@ class XMLConfigurator(object):
     ## creates the final configuration string in the xmlConfig attribute
     # \param names list of component names
     def createConfiguration(self, names):
-        cnf = self.merge(names, withVariables = True)
+        cnf = self.__mergeVars(names, withVariables = True)
         cnf = self.__attachDataSources(cnf)
         cnf = self.__attachVariables(cnf)
         cnf = self.__attachComponents(cnf)

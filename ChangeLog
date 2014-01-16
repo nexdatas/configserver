@@ -1,5 +1,6 @@
 2014-01-15 Jan Kotanski <jankotan@gmail.com>
 	* enabling variable usage in datasource names
+	* comming back to nexdatas.configserver package name
 	* tagged as v1.5.3
 
 2014-01-09 Jan Kotanski <jankotan@gmail.com>
