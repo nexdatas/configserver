@@ -7160,9 +7160,6 @@ ds.result = ndts.version</result></datasource>"""
 
         el.variables = '{"name1":"r1","name2":"r2","name3":"r3","name4":"r4"}'
         gxml = el.merge(css)
-        print "W1:",  gxml.replace("?>\n<","?><")   
-        print "W2:", '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % ( dsname[2], dsname[3], dsname[0] )  
-        print "W3:", '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % ( dsname[0], dsname[2], dsname[3] ) 
         self.assertTrue((gxml.replace("?>\n<","?><") =='<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % ( dsname[2], dsname[3], dsname[0] )  ) | 
                          (gxml.replace("?>\n<","?><") =='<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % ( dsname[0], dsname[2], dsname[3] )  ))
 
