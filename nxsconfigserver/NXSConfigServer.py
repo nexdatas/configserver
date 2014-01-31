@@ -147,16 +147,22 @@ class NXSConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
     def write_JSONSettings(self, attr):
         print >> self.log_info, "In ", self.get_name(), "::write_JSONSettings()"
-        self.xmlc.jsonSettings = attr.get_write_value()
-        print >> self.log_info, "Attribute value = ", self.xmlc.jsonSettings
+        if self.is_JSONSettings_write_allowed():
+            self.xmlc.jsonSettings = attr.get_write_value()
+            print >> self.log_info, "Attribute value = ", self.xmlc.jsonSettings
+        else:
+            print >> self.log_warn , \
+                "To change the settings please close the server."
+            raise Exception, \
+                "To change the settings please close the server." 
 
-
-#---- JSONSettings attribute State Machine -----------------
-    def is_JSONSettings_allowed(self, _):
+#---- JSONSettings attribute Write State Machine -----------------
+    def is_JSONSettings_write_allowed(self):
         if self.get_state() in [PyTango.DevState.OPEN,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
+
 
 
 #------------------------------------------------------------------
