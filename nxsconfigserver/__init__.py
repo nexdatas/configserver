@@ -22,10 +22,12 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "1.5.4"
+__version__ = "1.6.0"
 
 import sys
 
+## runs the TANGO server
+# \param argv command-line arguments
 def run(argv):
     import PyTango
     from NXSConfigServer import NXSConfigServer as NXSCnfSrv

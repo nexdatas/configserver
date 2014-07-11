@@ -41,7 +41,7 @@ from .XMLConfigurator import XMLConfigurator as XMLC
 #==================================================================
 #   NXSConfigServer Class Description:
 #
-#         Configuration Server based on MySQL database
+##         Configuration Server based on MySQL database
 #
 #==================================================================
 #     Device States Description:
@@ -113,7 +113,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         print >> self.log_info, "In ", self.get_name(), "::read_XMLString()"
         
 #        attr_XMLString_read = "Hello Tango world"
-        attr.set_value(self.xmlc.xmlConfig)
+        attr.set_value(self.xmlc.xmlstring)
 
 
 #------------------------------------------------------------------
@@ -122,8 +122,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def write_XMLString(self, attr):
         print >> self.log_info, "In ", self.get_name(), "::write_XMLString()"
         
-        self.xmlc.xmlConfig = attr.get_write_value()
-        print >> self.log_info, "Attribute value = ", self.xmlc.xmlConfig
+        self.xmlc.xmlstring = attr.get_write_value()
+        print >> self.log_info, "Attribute value = ", self.xmlc.xmlstring
 
 
 #---- XMLString attribute State Machine -----------------
@@ -139,7 +139,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
     def read_JSONSettings(self, attr):
         print >> self.log_info, "In ", self.get_name(), "::read_JSONSettings()"
-        attr.set_value(self.xmlc.jsonSettings)
+        attr.set_value(self.xmlc.jsonsettings)
 
 
 #------------------------------------------------------------------
@@ -148,8 +148,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def write_JSONSettings(self, attr):
         print >> self.log_info, "In ", self.get_name(), "::write_JSONSettings()"
         if self.is_JSONSettings_write_allowed():
-            self.xmlc.jsonSettings = attr.get_write_value()
-            print >> self.log_info, "Attribute value = ", self.xmlc.jsonSettings
+            self.xmlc.jsonsettings = attr.get_write_value()
+            print >> self.log_info, "Attribute value = ", self.xmlc.jsonsettings
         else:
             print >> self.log_warn , \
                 "To change the settings please close the server."
@@ -799,17 +799,17 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
 #==================================================================
 #
-#    NXSConfigServerClass class definition
+##    NXSConfigServerClass class definition
 #
 #==================================================================
 class NXSConfigServerClass(PyTango.DeviceClass):
 
-    #    Class Properties
+    ##    Class Properties
     class_property_list = {
         }
 
 
-    #    Device Properties
+    ##    Device Properties
     device_property_list = {
         'VersionLabel':
             [PyTango.DevString,
@@ -818,7 +818,7 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         }
 
 
-    #    Command definitions
+    ##    Command definitions
     cmd_list = {
         'Open':
             [[PyTango.DevVoid, ""],
@@ -883,7 +883,7 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         }
 
 
-    #    Attribute definitions
+    ##    Attribute definitions
     attr_list = {
         'XMLString':
             [[PyTango.DevString,
@@ -930,7 +930,8 @@ class NXSConfigServerClass(PyTango.DeviceClass):
 
 
 #------------------------------------------------------------------
-#    NXSConfigServerClass Constructor
+##    NXSConfigServerClass Constructor
+#
 #------------------------------------------------------------------
     def __init__(self, name):
         PyTango.DeviceClass.__init__(self, name)

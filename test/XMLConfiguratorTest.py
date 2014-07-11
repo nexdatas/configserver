@@ -113,9 +113,9 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \returns XMLConfigurator instance   
     def openConfig(self, args):
         xmlc = XMLConfigurator()
-        self.assertEqual(xmlc.jsonSettings, "{}")
-        self.assertEqual(xmlc.xmlConfig, "")
-        xmlc.jsonSettings = args
+        self.assertEqual(xmlc.jsonsettings, "{}")
+        self.assertEqual(xmlc.xmlstring, "")
+        xmlc.jsonsettings = args
         print args
         xmlc.open()
 
@@ -138,14 +138,14 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \param xmlc configuration instance
     # \param xml xml configuration string
     def setXML(self, xmlc, xml):
-        xmlc.xmlConfig = xml
+        xmlc.xmlstring = xml
 
 
     ## gets xmlconfiguration
     # \param xmlc configuration instance
     # \returns xml configuration string
     def getXML(self, xmlc):
-        return xmlc.xmlConfig
+        return xmlc.xmlstring
 
 
     ## open close test test
@@ -155,11 +155,11 @@ class XMLConfiguratorTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
         xmlc = self.openConfig(self.__args)
-        self.assertEqual(long(xmlc.version.split('.')[-1]),self.revision)
+        self.assertEqual(long(xmlc.version.split('.')[-1]), self.revision)
         label = 'asdd@aff.asdf'
         if hasattr(xmlc,"versionLabel"):
             xmlc.versionLabel = label
-        self.assertEqual(long(xmlc.version.split('.')[-1]),self.revision)
+        self.assertEqual(long(xmlc.version.split('.')[-1]), self.revision)
         if hasattr(xmlc,"versionLabel"):
             self.assertEqual(".".join(xmlc.version.split('.')[3:-1]),label)
         xmlc.close()
@@ -920,7 +920,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
+        
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
@@ -950,7 +952,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             xml.replace("?>\n<","?><"),
             '<?xml version="1.0" ?><definition> <group type="NXentry"/></definition>')
 
-        self.assertEqual(el.deleteComponent(name),None)
+        self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
         
         avc3 = el.availableComponents()
@@ -960,8 +962,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -981,6 +983,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1031,8 +1034,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -1047,6 +1050,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1097,8 +1101,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -1117,6 +1121,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1153,8 +1158,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -1169,6 +1174,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1202,8 +1209,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__cmps.pop()
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1221,6 +1228,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1252,8 +1261,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 10)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 10)
         el.close()
 
 
@@ -1271,6 +1280,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1303,8 +1313,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1320,6 +1330,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
         avc = el.availableComponents()
 
         oname = "mcs_test_component"
@@ -1364,6 +1375,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+
         avc = el.availableComponents()
 
         oname = "mcs_test_component"
@@ -1392,8 +1405,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1411,7 +1424,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+
         avc = el.availableComponents()
+
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -1441,8 +1457,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -1457,6 +1473,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1489,8 +1506,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1508,6 +1525,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1539,8 +1557,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1557,6 +1575,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1588,8 +1607,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1606,6 +1625,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1635,11 +1655,11 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]),None)
             self.__cmps.pop(0)
+ 
+       
 
-        
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1654,6 +1674,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1685,8 +1707,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 30)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 30)
         el.close()
 
 
@@ -1702,6 +1724,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1732,9 +1756,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.pop(0)
 
         
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4 )
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
         el.close()
 
 
@@ -1750,6 +1773,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1783,8 +1808,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4 )
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
         el.close()
 
 
@@ -1800,6 +1825,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1829,8 +1856,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1845,6 +1872,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -1877,8 +1906,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + np*2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -1897,6 +1926,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             el.unsetMandatoryComponents(man)
             self.__man += man
 
+            revision = long(el.version.split('.')[-1])
+        
             avc = el.availableComponents()
 
             oname = "mcs_test_component"
@@ -1926,9 +1957,10 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
-        el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
-        el.close()
+            self.assertEqual(long(el.version.split('.')[-1]), revision + 2*np)
+            
+            el.setMandatoryComponents(man)
+            el.close()
 
 
 
@@ -1945,6 +1977,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
+
+            revision = long(el.version.split('.')[-1])
 
             avc = el.availableComponents()
 
@@ -1974,8 +2008,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2*np)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -2686,6 +2720,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             el.unsetMandatoryComponents(man)
             self.__man += man
 
+            revision = long(el.version.split('.')[-1])
+
             avc = el.availableComponents()
 
             oname = "mcs_test_component"
@@ -2714,8 +2750,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2735,6 +2771,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -2773,8 +2810,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -2790,6 +2827,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -2842,10 +2880,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.mandatoryComponents(),[])
         
 
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 9)
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 9) 
         el.setMandatoryComponents(man)
         el.close()
-
+       
 
 
 
@@ -2860,6 +2898,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
 
         xml = self.getXML(el)
         self.assertEqual(self.getXML(el), '')
@@ -2880,6 +2919,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -2919,8 +2959,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -2940,6 +2980,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -2988,8 +3029,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -3004,6 +3045,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3051,8 +3093,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -3071,6 +3113,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3106,9 +3149,9 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
 
-
+ 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -3123,6 +3166,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3155,8 +3200,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__cmps.pop()
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3174,6 +3219,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3204,8 +3251,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + np*2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 10)
         el.close()
 
 
@@ -3223,6 +3270,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3254,8 +3302,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + np*2) 
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3315,6 +3363,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+
+        revision = long(el.version.split('.')[-1])
+
         avc = el.availableComponents()
 
         oname = "mcs_test_component"
@@ -3343,8 +3394,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3361,6 +3413,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3391,8 +3445,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -3407,6 +3461,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3438,8 +3494,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3457,6 +3513,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3487,8 +3544,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3505,6 +3562,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3535,8 +3593,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3553,6 +3611,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3584,8 +3643,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4) 
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3600,6 +3659,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3630,8 +3691,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 30)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 30)
         el.close()
 
 
@@ -3647,6 +3708,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3677,8 +3740,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4 )
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
         el.close()
 
 
@@ -3694,6 +3757,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3725,8 +3790,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4 )
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4 )
         el.close()
 
 
@@ -3742,6 +3807,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3771,8 +3837,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -3787,6 +3853,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -3818,8 +3885,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -4622,6 +4689,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             el.unsetMandatoryComponents(man)
             self.__man += man
 
+            revision = long(el.version.split('.')[-1])
+
             avc = el.availableComponents()
 
             oname = "mcs_test_component"
@@ -4650,8 +4719,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 2)
         el.close()
 
 
@@ -4671,6 +4740,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -4708,8 +4778,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -4725,6 +4795,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -4776,7 +4847,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.mandatoryComponents(),[])
         
 
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 9)
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 9)
         el.setMandatoryComponents(man)
         el.close()
 
@@ -4796,6 +4867,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -4840,8 +4912,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +3)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +3)
         el.close()
 
 
@@ -4859,6 +4931,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -4902,8 +4975,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +3)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +3)
         el.close()
 
 
@@ -4918,6 +4991,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         oname = "mcs_test_component"
 
@@ -5031,8 +5106,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision +6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +6)
         el.close()
 
 
@@ -5047,6 +5123,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
         oname = "mcs_test_component"
 
@@ -5161,9 +5239,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(sorted(mdss),sorted([name[i]  for  i in ar[2]]))
         
         
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision +148)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +148)
         el.close()
 
 
@@ -5181,6 +5258,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -5250,8 +5328,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -5267,6 +5345,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
 
         avc = el.availableComponents()
@@ -5336,9 +5416,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cmps,[dsname[0],dsname[2],dsname[3]])
         
         
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision+7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+7)
         el.close()
 
 
@@ -5358,6 +5437,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -5428,8 +5508,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision+5)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+5)
         el.close()
 
 
@@ -5444,6 +5525,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
 
         avc = el.availableComponents()
@@ -5513,9 +5596,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(cmps,[dsname[0], '__unnamed__0'])
         
         
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision+5)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+5)
         el.close()
 
 
@@ -5531,6 +5613,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -5600,8 +5683,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -5627,6 +5710,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -5694,9 +5779,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(sorted(cmps),sorted([dsname[0],dsname[2],dsname[3]]))
         
         
+        
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -5713,6 +5799,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -5783,8 +5870,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         el.unsetMandatoryComponents([name[0]])
 
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision +9)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +9)
         el.close()
 
 
@@ -5801,6 +5889,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -5869,8 +5959,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision+7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+7)
         el.close()
 
 
@@ -5890,6 +5980,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -5958,8 +6050,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision+5)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+5)
         el.close()
 
 
@@ -5975,6 +6067,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -6043,8 +6137,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision+5)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+5)
         el.close()
 
 
@@ -6060,6 +6154,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -6126,10 +6222,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         cmps.extend(mdss)
         self.assertEqual(sorted(cmps),sorted([dsname[0],dsname[2],dsname[3]]))
         
-        
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision +7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision +7)
         el.close()
 
 
@@ -6150,6 +6245,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6224,8 +6320,8 @@ class XMLConfiguratorTest(unittest.TestCase):
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7) 
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6245,6 +6341,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__man += man
 
 
+        revision = long(el.version.split('.')[-1])
         avc = el.availableComponents()
 
 
@@ -6319,8 +6416,8 @@ class XMLConfiguratorTest(unittest.TestCase):
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6340,6 +6437,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -6409,10 +6508,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         
 
       
-        
-
+ 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 4)
         el.close()
 
 
@@ -6432,6 +6530,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6507,8 +6606,8 @@ class XMLConfiguratorTest(unittest.TestCase):
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6529,6 +6628,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6603,8 +6703,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -6621,6 +6721,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
 
         avc = el.availableComponents()
@@ -6696,9 +6798,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 )
 
         
-
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -6716,6 +6817,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6800,8 +6902,9 @@ ds.result = ndts.version</result></datasource>"""
         self.assertTrue((mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0])) |  
                         (mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field></definition>' % (dsname[0], dsname[2], dsname[0], dsname[1])))
         
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6818,6 +6921,7 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6890,8 +6994,8 @@ ds.result = ndts.version</result></datasource>"""
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6905,7 +7009,9 @@ ds.result = ndts.version</result></datasource>"""
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+        revision = long(el.version.split('.')[-1])
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -6978,9 +7084,10 @@ ds.result = ndts.version</result></datasource>"""
 
       
         
+        
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -6999,6 +7106,8 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -7073,8 +7182,8 @@ ds.result = ndts.version</result></datasource>"""
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -7094,6 +7203,8 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -7166,10 +7277,9 @@ ds.result = ndts.version</result></datasource>"""
         
 
       
-        
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -7189,6 +7299,8 @@ ds.result = ndts.version</result></datasource>"""
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
+
+        revision = long(el.version.split('.')[-1])
 
 
         avc = el.availableComponents()
@@ -7265,8 +7377,8 @@ ds.result = ndts.version</result></datasource>"""
       
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -7284,6 +7396,7 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -7355,8 +7468,8 @@ ds.result = ndts.version</result></datasource>"""
 
         
 
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 6)
         el.close()
 
 
@@ -7374,6 +7487,7 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
 
         avc = el.availableComponents()
 
@@ -7456,8 +7570,8 @@ ds.result = ndts.version</result></datasource>"""
         self.assertTrue((mxml  == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2],  dsname[0])) |
                         (mxml  == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3">$datasources.%s</field></definition>' % (dsname[0],  dsname[2])))
         
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
@@ -7474,6 +7588,8 @@ ds.result = ndts.version</result></datasource>"""
         el.unsetMandatoryComponents(man)
         self.__man += man
 
+        revision = long(el.version.split('.')[-1])
+        
 
         avc = el.availableComponents()
 
@@ -7545,8 +7661,9 @@ ds.result = ndts.version</result></datasource>"""
       
         
 
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision + 7)
         el.close()
 
 
