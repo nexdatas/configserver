@@ -40,9 +40,9 @@ class XMLConfigurator(object):
     # \brief It allows to construct XML configurer object
     def __init__(self, server = None):
         ## XML config string
-        self.xmlConfig = ""
+        self.xmlstring = ""
         ## JSON string with arguments to connect to database
-        self.jsonSettings = "{}"
+        self.jsonsettings = "{}"
 
         ## string with XML variables
         self.variables = "{}"
@@ -106,7 +106,7 @@ class XMLConfigurator(object):
         else:  
             print "XMLConfigurator::open() - Open connection"
         try:
-            js = json.loads(self.jsonSettings)
+            js = json.loads(self.jsonsettings)
             targs = dict(js.items())
             for k in targs.keys():
                 args[str(k)] = targs[k]
@@ -195,7 +195,7 @@ class XMLConfigurator(object):
 
 
     ## provides a list of variables from the given components
-    # \param names given components 
+    # \param name given component 
     # \returns list of variable names from the given components
     def componentVariables(self, name):
         cpl = []
@@ -262,18 +262,18 @@ class XMLConfigurator(object):
         return argout
 
 
-    ## stores the component from the xmlConfig attribute
+    ## stores the component from the xmlstring attribute
     # \param name name of the component to store
     def storeComponent(self, name):
         if self.__mydb:
-            self.__mydb.storeComponent(name, self.xmlConfig )   
+            self.__mydb.storeComponent(name, self.xmlstring )   
             
 
-    ## stores the datasource from the xmlConfig attribute
+    ## stores the datasource from the xmlstring attribute
     # \param name name of the datasource to store
     def storeDataSource(self, name):
         if self.__mydb:
-            self.__mydb.storeDataSource(name, self.xmlConfig )   
+            self.__mydb.storeDataSource(name, self.xmlstring )   
 
 
     ## deletes the given component
@@ -456,7 +456,7 @@ class XMLConfigurator(object):
         
 
 
-    ## creates the final configuration string in the xmlConfig attribute
+    ## creates the final configuration string in the xmlstring attribute
     # \param names list of component names
     def createConfiguration(self, names):
         cnf = self.__mergeVars(names, withVariables = True)
@@ -467,9 +467,9 @@ class XMLConfigurator(object):
 
         if cnfMerged and hasattr(cnfMerged,"strip") and  cnfMerged.strip():
             reparsed = parseString(cnfMerged)
-            self.xmlConfig = str((reparsed.toprettyxml(indent=" ", newl="")))
+            self.xmlstring = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
-            self.xmlConfig = ''
+            self.xmlstring = ''
         if Streams.log_info:
             print >> Streams.log_info , \
                 "XMLConfigurator::createConfiguration() " \
@@ -486,14 +486,14 @@ if __name__ == "__main__":
     try:
         ## configurer object
         conf = XMLConfigurator()
-        conf.jsonSettings = '{"host":"localhost", "db":"ndts", '\
+        conf.jsonsettings = '{"host":"localhost", "db":"ndts", '\
             '"read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
 #        conf.createConfiguration(["scan1", "scan2"])
 #        conf.createConfiguration(["scan1", "scan1"])
         conf.createConfiguration(["scan2", "scan2", "scan2"])
-        print conf.xmlConfig
+        print conf.xmlstring
     finally:
         if conf:
             conf.close()
