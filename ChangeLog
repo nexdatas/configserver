@@ -2,6 +2,7 @@
 	* making python API similar to Tango API:
 	*   	xmlConfig -> xmlstring
 	*	jsonSettings -> jsonSettings
+	* fixing checks for revision in tests
 	* tagged as v1.6.0
 
 2014-01-31 Jan Kotanski <jankotan@gmail.com>
