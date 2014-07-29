@@ -1,3 +1,7 @@
+2014-07-29 Jan Kotanski <jankotan@gmail.com>
+	* removing my.cnf and mysql_create.sql fron the setup.py
+	* tagged as v1.6.1
+
 2014-07-11 Jan Kotanski <jankotan@gmail.com>
 	* making python API similar to Tango API:
 	*   	xmlConfig -> xmlstring
