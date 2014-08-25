@@ -1,5 +1,9 @@
+2014-07-XX Jan Kotanski <jankotan@gmail.com>
+	* adding tests for $HOME/.my.cfg configuration
+	* tagged as v1.6.2
+
 2014-07-29 Jan Kotanski <jankotan@gmail.com>
-	* removing my.cnf and mysql_create.sql fron the setup.py
+	* removing my.cnf and mysql_create.sql from the setup.py
 	* tagged as v1.6.1
 
 2014-07-11 Jan Kotanski <jankotan@gmail.com>

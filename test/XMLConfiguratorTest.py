@@ -66,6 +66,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.__man = []
         self.children = ("record", "doc", "device", "database", "query", "datasource", "result")
         
+        from os.path import expanduser
+        home = expanduser("~")
+        self.__args2 = '{"host":"localhost", "db":"ndts", "read_default_file":"%s/.my.cnf", "use_unicode":true}' % home
+
     ## test starter
     # \brief Common set up
     def setUp(self):
@@ -77,20 +81,27 @@ class XMLConfiguratorTest(unittest.TestCase):
     def tearDown(self):
         print "tearing down ..."
         if self.__cmps:
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             for cp in self.__cmps:
                 el.deleteComponent(cp)
             el.close()
         if self.__ds:
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             for ds in self.__ds:
                 el.deleteDataSource(ds)
             el.close()
 
         if self.__man:
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             el.setMandatoryComponents(self.__man)
             el.close()
+
+    def openConf(self):
+        try:
+            el = self.openConfig(self.__args)
+        except:
+            el = self.openConfig(self.__args2)
+        return el    
 
     ## Exception tester
     # \param exception expected exception
@@ -154,7 +165,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        xmlc = self.openConfig(self.__args)
+        xmlc = self.openConf()
         self.assertEqual(long(xmlc.version.split('.')[-1]), self.revision)
         label = 'asdd@aff.asdf'
         if hasattr(xmlc,"versionLabel"):
@@ -171,7 +182,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         avc = el.availableComponents()
 
         self.assertTrue(isinstance(avc, list))
@@ -212,7 +223,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_comp_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
  
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
@@ -262,7 +273,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_no_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
@@ -284,7 +295,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_comp_update(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
@@ -358,7 +369,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_comp2_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
@@ -446,7 +457,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         avc = el.availableDataSources()
 
         self.assertTrue(isinstance(avc, list))
@@ -487,7 +498,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_dsrc_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
  
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
@@ -537,7 +548,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_no_dsrc(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
@@ -559,7 +570,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_dsrc_update(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
@@ -633,7 +644,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_available_dsrc2_xml(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
@@ -717,7 +728,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_mandatory_no_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
@@ -748,7 +759,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_mandatory_comp(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
@@ -803,7 +814,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def test_mandatory_comp2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
@@ -894,7 +905,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
@@ -915,7 +926,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -978,7 +989,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1045,7 +1056,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1116,7 +1127,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1170,7 +1181,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1224,7 +1235,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1275,7 +1286,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1325,7 +1336,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1370,7 +1381,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1419,7 +1430,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1469,7 +1480,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1520,7 +1531,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1570,7 +1581,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1620,7 +1631,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1670,7 +1681,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1720,7 +1731,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1769,7 +1780,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1821,7 +1832,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1868,7 +1879,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -1921,7 +1932,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         mr = Merger()
         for sg in mr.singles:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -1973,7 +1984,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         mr = Merger()
         for ut in mr.uniqueText:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2026,7 +2037,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = self.children
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2085,7 +2096,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2133,7 +2144,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['attribute']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2190,7 +2201,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2239,7 +2250,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['definition']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2297,7 +2308,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2348,7 +2359,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['dimensions']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2404,7 +2415,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2452,7 +2463,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['field']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2507,7 +2518,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2554,7 +2565,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['group']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2609,7 +2620,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2659,7 +2670,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['link']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2715,7 +2726,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -2766,7 +2777,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -2822,7 +2833,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -2893,7 +2904,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
 
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
@@ -2914,7 +2925,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -2975,7 +2986,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3040,7 +3051,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3108,7 +3119,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3162,7 +3173,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3215,7 +3226,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3265,7 +3276,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3314,7 +3325,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3358,7 +3369,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3409,7 +3420,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3457,7 +3468,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3508,7 +3519,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3557,7 +3568,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3606,7 +3617,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3655,7 +3666,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3704,7 +3715,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3753,7 +3764,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3803,7 +3814,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3849,7 +3860,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -3900,7 +3911,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         mr = Merger()
         for sg in mr.singles:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -3949,7 +3960,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         mr = Merger()
         for ut in mr.uniqueText:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4000,7 +4011,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = self.children
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4058,7 +4069,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4106,7 +4117,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['attribute']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4162,7 +4173,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4211,7 +4222,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['definition']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4269,7 +4280,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4320,7 +4331,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['dimensions']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4376,7 +4387,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4424,7 +4435,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['field']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4478,7 +4489,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4525,7 +4536,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['group']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4579,7 +4590,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4629,7 +4640,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = el.children['link']
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4684,7 +4695,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         uts = set(uts)
         for ut in uts:
         
-            el = self.openConfig(self.__args)
+            el = self.openConf()
             man = el.mandatoryComponents()
             el.unsetMandatoryComponents(man)
             self.__man += man
@@ -4735,7 +4746,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -4790,7 +4801,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -4862,7 +4873,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -4926,7 +4937,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -4987,7 +4998,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5119,7 +5130,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5253,7 +5264,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5341,7 +5352,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5432,7 +5443,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5521,7 +5532,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5608,7 +5619,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5705,7 +5716,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5794,7 +5805,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5884,7 +5895,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -5975,7 +5986,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6062,7 +6073,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6149,7 +6160,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6240,7 +6251,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6335,7 +6346,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6432,7 +6443,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6525,7 +6536,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6623,7 +6634,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6717,7 +6728,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6812,7 +6823,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -6916,7 +6927,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7005,7 +7016,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7101,7 +7112,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7198,7 +7209,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7295,7 +7306,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7391,7 +7402,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7482,7 +7493,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man
@@ -7583,7 +7594,7 @@ ds.result = ndts.version</result></datasource>"""
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
-        el = self.openConfig(self.__args)
+        el = self.openConf()
         man = el.mandatoryComponents()
         el.unsetMandatoryComponents(man)
         self.__man += man

@@ -44,6 +44,11 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.__cmps = []
         self.__ds = []
         self.version  = None
+        from os.path import expanduser
+        home = expanduser("~")
+        self.__args2 = {'host': u'localhost', 'db': u'ndts',
+                        'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
+
 
     ## test starter
     # \brief Common set up
@@ -51,9 +56,17 @@ class MYSQLDataBaseTest(unittest.TestCase):
         ## file handle
         print "\nsetting up..."        
         el = MYSQLDataBase()
-        el.connect(self.__args)
+        self.connect(el)
         self.version  = long(el.version())
         el.close()
+
+    def connect(self, el):
+        try:
+            res = el.connect(self.__args)
+        except:
+            res = el.connect(self.__args2)
+        self.assertEqual(res, None)
+
 
     ## test closer
     # \brief Common tear down
@@ -61,13 +74,13 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "tearing down ..."
         if self.__cmps:
             el = MYSQLDataBase()
-            el.connect(self.__args)
+            self.connect(el)
             for cp in self.__cmps:
                 el.deleteComponent(cp)
             el.close()
         if self.__ds:
             el = MYSQLDataBase()
-            el.connect(self.__args)
+            self.connect(el)
             for ds in self.__ds:
                 el.deleteDataSource(ds)
             el.close()
@@ -104,7 +117,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
@@ -116,7 +129,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
@@ -157,7 +170,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
@@ -207,7 +220,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
@@ -230,7 +243,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
@@ -303,7 +316,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
@@ -385,7 +398,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
@@ -426,7 +439,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
@@ -476,7 +489,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
@@ -499,7 +512,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
@@ -572,7 +585,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
@@ -651,7 +664,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         man = el.mandatory()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
@@ -686,7 +699,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         man = el.mandatory()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
@@ -742,7 +755,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
-        self.assertEqual(el.connect(self.__args),None)
+        self.connect(el)
         man = el.mandatory()
         self.assertTrue(isinstance(man, list))
         avc = el.availableComponents()
