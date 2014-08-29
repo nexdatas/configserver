@@ -33,7 +33,6 @@
 """ Configuration Server for Nexus Data Writer """
 
 import PyTango
-import sys
 
 from .XMLConfigurator import XMLConfigurator as XMLC
 
