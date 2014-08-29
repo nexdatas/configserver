@@ -54,6 +54,7 @@ class MYSQLDataBase(object):
     def close(self):
         if self.__db:
             try:
+                self.__db.ping(True)
                 if self.__db.open:
                     self.__db.close()
             except:
@@ -66,6 +67,7 @@ class MYSQLDataBase(object):
         argout = None
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -106,6 +108,7 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -132,6 +135,7 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -159,6 +163,7 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 cursor = self.__db.cursor()
                 cursor.execute("select name from components;")
                 data = cursor.fetchall()
@@ -178,6 +183,7 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -197,6 +203,7 @@ class MYSQLDataBase(object):
     def storeComponent(self, name, xml):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -243,6 +250,7 @@ class MYSQLDataBase(object):
     def storeDataSource(self, name, xml):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -288,6 +296,7 @@ class MYSQLDataBase(object):
     def deleteComponent(self, name):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -323,6 +332,7 @@ class MYSQLDataBase(object):
     def setMandatory(self, name):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -355,6 +365,7 @@ class MYSQLDataBase(object):
     def unsetMandatory(self, name):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -393,6 +404,7 @@ class MYSQLDataBase(object):
         argout = []
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -411,6 +423,7 @@ class MYSQLDataBase(object):
     def deleteDataSource(self, name):
         if self.__db is not None:
             try:
+                self.__db.ping(True)
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()

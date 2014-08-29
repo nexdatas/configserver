@@ -22,7 +22,7 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "1.6.2"
+__version__ = "1.6.3"
 
 import sys
 
@@ -30,8 +30,8 @@ import sys
 # \param argv command-line arguments
 def run(argv):
     import PyTango
-    from NXSConfigServer import NXSConfigServer as NXSCnfSrv
-    from NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
+    from .NXSConfigServer import NXSConfigServer as NXSCnfSrv
+    from .NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
     try:
         py = PyTango.Util(argv)
         py.add_class(NXSCnfSrvClass, NXSCnfSrv, 'NXSConfigServer')
