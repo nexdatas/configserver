@@ -22,9 +22,10 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "1.6.3"
+__version__ = "1.6.4"
 
 import sys
+
 
 ## runs the TANGO server
 # \param argv command-line arguments

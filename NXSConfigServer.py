@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \file NXSConfigServer.py
-# nxsconfigserver installer 
+# nxsconfigserver installer
 
 
 """ Implementation of NexDaTaS Configuration Server """
@@ -26,4 +26,3 @@ import sys
 import nxsconfigserver
 
 nxsconfigserver.run(sys.argv)
-
