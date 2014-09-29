@@ -30,18 +30,19 @@ import sys
 ## runs the TANGO server
 # \param argv command-line arguments
 def run(argv):
+    """ runs the Configuration TANGO server """
     import PyTango
     from .NXSConfigServer import NXSConfigServer as NXSCnfSrv
     from .NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
     try:
-        py = PyTango.Util(argv)
-        py.add_class(NXSCnfSrvClass, NXSCnfSrv, 'NXSConfigServer')
+        pyutil = PyTango.Util(argv)
+        pyutil.add_class(NXSCnfSrvClass, NXSCnfSrv, 'NXSConfigServer')
 
-        U = PyTango.Util.instance()
-        U.server_init()
-        U.server_run()
+        util = PyTango.Util.instance()
+        util.server_init()
+        util.server_run()
 
-    except PyTango.DevFailed, e:
-        print '-------> Received a DevFailed exception:', e
-    except Exception, e:
-        print '-------> An unforeseen exception occured....', e
+    except PyTango.DevFailed as ex:
+        print '-------> Received a DevFailed exception:', ex
+    except Exception as ex:
+        print '-------> An unforeseen exception occured....', ex
