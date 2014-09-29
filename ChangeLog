@@ -1,3 +1,7 @@
+2014-XX-XX Jan Kotanski <jankotan@gmail.com>
+	* cleaning the code
+	* tagged as v1.6.4
+
 2014-08-29 Jan Kotanski <jankotan@gmail.com>
 	* reconnect by ping(True) before all transations
 	* tagged as v1.6.3

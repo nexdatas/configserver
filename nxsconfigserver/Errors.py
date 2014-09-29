@@ -21,30 +21,31 @@
 
 """ Error classes  """
 
+
 ## Incompatible class Exception
-class IncompatibleNodeError(Exception): 
+class IncompatibleNodeError(Exception):
+
     ## constructor
     # \param value string with error message
     # \param nodes list of nodes with errors
-    def __init__(self, value, nodes = None):
+    def __init__(self, value, nodes=None):
         Exception.__init__(self, value)
-        ## exception value 
+        ## exception value
         self.value = value
         ## nodes with errors
         self.nodes = nodes if nodes else []
-    
+
     ## tostring method
     # \brief It shows the error message
     def __str__(self):
         return repr(self.value)
 
+
 ## Exception for undefined tags
-class UndefinedTagError(Exception): 
+class UndefinedTagError(Exception):
     pass
+
 
 ##  Error for non-existing database records
-class NonregisteredDBRecordError(Exception): 
+class NonregisteredDBRecordError(Exception):
     pass
-
-
-

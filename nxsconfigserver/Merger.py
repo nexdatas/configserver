@@ -24,12 +24,13 @@
 from xml.dom.minidom import parseString, Element
 from .Errors import IncompatibleNodeError, UndefinedTagError
 
+
 ## merges the components
 class Merger(object):
-    
+
     ## constructor
     def __init__(self):
-        
+
         ## DOM root node
         self.__root = None
         ## tags which cannot have the same siblings
@@ -38,24 +39,24 @@ class Merger(object):
 
         ## allowed children
         self.children = {
-            "attribute":("datasource", "strategy", "enumeration", 
-                         "doc", "dimensions"),
-            "definition":("group", "field", "attribute", "link", 
-                          "component", "doc", "symbols"),
-            "dimensions":("dim", "doc"),
-            "field":("attribute", "datasource", "doc", "dimensions", 
-                     "enumeration", "strategy"),
-            "group":("group", "field", "attribute", "link", "component", 
-                     "doc"),
-            "link":("doc")
+            "attribute": ("datasource", "strategy", "enumeration",
+                          "doc", "dimensions"),
+            "definition": ("group", "field", "attribute", "link",
+                           "component", "doc", "symbols"),
+            "dimensions": ("dim", "doc"),
+            "field": ("attribute", "datasource", "doc", "dimensions",
+                      "enumeration", "strategy"),
+            "group": ("group", "field", "attribute", "link", "component",
+                      "doc"),
+            "link": ("doc")
             }
 
         ## with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
     ## collects text from text child nodes
-    # \param node parent node    
-    @classmethod    
+    # \param node parent node
+    @classmethod
     def __getText(cls, node):
         text = ""
         if node:
@@ -64,65 +65,64 @@ class Merger(object):
                 if child.nodeType == child.TEXT_NODE:
                     text += child.data
                 child = child.nextSibling
-        return text    
+        return text
 
     ## gets ancestors form the xml tree
-    # \param node dom node   
+    # \param node dom node
     # \returns xml path
     def __getAncestors(self, node):
-        res = "" 
+        res = ""
 
-        name = node.getAttribute("name") if isinstance(node, Element) else "" 
+        name = node.getAttribute("name") if isinstance(node, Element) else ""
 
-        if node and node.parentNode and node.parentNode.nodeName != '#document':
-            res =  self.__getAncestors(node.parentNode) 
-        res += "/" + unicode(node.nodeName) 
+        if node and node.parentNode and \
+                node.parentNode.nodeName != '#document':
+            res = self.__getAncestors(node.parentNode)
+        res += "/" + unicode(node.nodeName)
         if name:
             res += ":" + name
-        return res 
+        return res
 
     ## checks if two elements are mergeable
     # \param elem1 first element
     # \param elem2 second element
-    # \returns bool varaible if two elements are mergeable 
+    # \returns bool varaible if two elements are mergeable
     def __areMergeable(self, elem1, elem2):
 #        return False
         if elem1.nodeName != elem2.nodeName:
             return False
         tagName = unicode(elem1.nodeName)
         status = True
- 
+
         name1 = elem1.getAttribute("name")
         name2 = elem2.getAttribute("name")
 
         if name1 != name2 and name1 and name2:
             if tagName in self.singles:
                 raise IncompatibleNodeError(
-                    "Incompatible element attributes  %s: " \
-                        % str((str(self.__getAncestors(elem1)),str(name2))), 
+                    "Incompatible element attributes  %s: "
+                    % str((str(self.__getAncestors(elem1)), str(name2))),
                     [elem1, elem2])
             return False
-        
+
         tags = self.__checkAttributes(elem1, elem2)
         if tags:
             status = False
-            if ( tagName in self.singles  \
-                     or (name1  and name1 == name2)): 
+            if (tagName in self.singles
+                or (name1 and name1 == name2)):
                 raise IncompatibleNodeError(
-                    "Incompatible element attributes  %s: " \
-                        % str(tags), [elem1, elem2])
-                
+                    "Incompatible element attributes  %s: "
+                    % str(tags), [elem1, elem2])
 
         if tagName in self.uniqueText:
             text1 = unicode(self.__getText(elem1)).strip()
-            text2 = unicode(self.__getText(elem2)).strip()         
+            text2 = unicode(self.__getText(elem2)).strip()
             if text1 != text2 and text1 and text2:
                 raise IncompatibleNodeError(
-                    "Incompatible \n%s element value\n%s \n%s "  \
-                        % (str(self.__getAncestors(elem1)), text1, text2),
+                    "Incompatible \n%s element value\n%s \n%s "
+                    % (str(self.__getAncestors(elem1)), text1, text2),
                     [elem1, elem2])
-                    
-            
+
         return status
 
     ## checks if two elements are mergeable
@@ -141,9 +141,9 @@ class Merger(object):
                         and at1.nodeValue != at2.nodeValue:
                     tags.append((str(self.__getAncestors(at1)),
                                  str(at1.nodeValue), str(at2.nodeValue)))
-        return tags            
+        return tags
 
-    ## merges two dom elements 
+    ## merges two dom elements
     # \param elem1 first element
     # \param elem2 second element
     @classmethod
@@ -154,33 +154,30 @@ class Merger(object):
         for i2 in range(attr2.length):
             at2 = attr2.item(i2)
             elem1.setAttribute(at2.nodeName, at2.nodeValue)
-        
-            
+
         child1 = elem1.firstChild
-        while child1: 
+        while child1:
             if child1.nodeType == child1.TEXT_NODE:
                 texts.append(unicode(child1.data).strip())
-            child1 = child1.nextSibling    
+            child1 = child1.nextSibling
 
-        toMove = []    
+        toMove = []
 
         child2 = elem2.firstChild
-        while child2 : 
+        while child2:
             if child2.nodeType == child2.TEXT_NODE:
                 if unicode(child2.data).strip() not in texts:
                     toMove.append(child2)
-            else:    
+            else:
                 toMove.append(child2)
-            child2 = child2.nextSibling    
+            child2 = child2.nextSibling
 
         for child in toMove:
             elem1.appendChild(child)
-        toMove = []    
+        toMove = []
 
-
-        parent = elem2.parentNode    
+        parent = elem2.parentNode
         parent.removeChild(elem2)
-
 
     ## merge the given node
     # \param node the given node
@@ -188,7 +185,7 @@ class Merger(object):
         if node:
 
             children = node.childNodes
-            c1 = 0 
+            c1 = 0
             while c1 < children.length:
                 child1 = children.item(c1)
                 c2 = c1 + 1
@@ -202,53 +199,51 @@ class Merger(object):
                                 c2 -= 1
                     c2 += 1
                 c1 += 1
-                        
+
             child = node.firstChild
             nName = unicode(node.nodeName) if isinstance(node, Element) else ""
 
             while child:
                 if nName and nName in self.children.keys():
                     cName = unicode(child.nodeName) \
-                        if isinstance(child, Element)  else ""
+                        if isinstance(child, Element) else ""
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
-                            "Not allowed <%s> child of \n < %s > \n  parent"  \
-                                % (cName, self.__getAncestors(child)),
+                            "Not allowed <%s> child of \n < %s > \n  parent"
+                            % (cName, self.__getAncestors(child)),
                             [child])
-                                
+
                 self.__mergeChildren(child)
                 child = child.nextSibling
 
-
-                
     ## collects the given components in one DOM tree
-    # \param components given components        
-    def collect(self, components):	
+    # \param components given components
+    def collect(self, components):
         self.__root = None
         rootDef = None
         for cp in components:
             dcp = None
             if cp:
-                dcp = parseString(cp)   
+                dcp = parseString(cp)
             if not dcp:
                 continue
-            
+
             if self.__root is None:
                 self.__root = dcp
                 rdef = dcp.getElementsByTagName("definition")
-                if not rdef: 
-                    raise  UndefinedTagError, "<definition> not defined"
+                if not rdef:
+                    raise UndefinedTagError("<definition> not defined")
                 rootDef = rdef[0]
             else:
                 defin = dcp.getElementsByTagName("definition")
-                if not defin: 
-                    raise  UndefinedTagError, "<definition> not defined"
+                if not defin:
+                    raise UndefinedTagError("<definition> not defined")
                 for cd in defin[0].childNodes:
                     if cd.nodeType != cd.TEXT_NODE or \
-                            (cd.nodeType == cd.TEXT_NODE \
-                                 and str(cd.data).strip()):
-                        
-                        icd = self.__root.importNode(cd, True) 
+                            (cd.nodeType == cd.TEXT_NODE
+                             and str(cd.data).strip()):
+
+                        icd = self.__root.importNode(cd, True)
                         rootDef.appendChild(icd)
 
     ## Converts DOM trer to string
@@ -262,6 +257,6 @@ class Merger(object):
     def merge(self):
         self.__mergeChildren(self.__root)
 
+
 if __name__ == "__main__":
     pass
-    
