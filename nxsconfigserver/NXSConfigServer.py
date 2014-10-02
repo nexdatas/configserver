@@ -278,6 +278,34 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
 #------------------------------------------------------------------
+#    InstantiateComponents command:
+#
+#    Description: Returns a list of required components
+#
+#    argin:  DevVarStringArray    list of component names
+#    argout: DevVarStringArray    list of instantiated components
+#------------------------------------------------------------------
+    def InstantiateComponents(self, argin):
+        print >> self.log_info, "In ", self.get_name(), \
+            "::InstantiateComponents()"
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.instantiateComponents(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+        return argout
+
+#---- Components command State Machine -----------------
+    def is_InstantiateComponents_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
 #    DataSources command:
 #
 #    Description: Return a list of required DataSources
@@ -773,6 +801,9 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         'Components':
             [[PyTango.DevVarStringArray, "list of component names"],
             [PyTango.DevVarStringArray, "list of required components"]],
+        'InstantiateComponents':
+            [[PyTango.DevVarStringArray, "list of component names"],
+            [PyTango.DevVarStringArray, "list of instantiated components"]],
         'DataSources':
             [[PyTango.DevVarStringArray, "list of DataSource names"],
             [PyTango.DevVarStringArray, "list of required DataSources"]],
