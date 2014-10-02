@@ -1,5 +1,5 @@
 2014-10-02 Jan Kotanski <jankotan@gmail.com>
-	* adding instantiateComponents
+	* adding instantiatedComponents command
 	* cleaning the code
 	* tagged as v1.7.0
 
