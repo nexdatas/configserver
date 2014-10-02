@@ -139,7 +139,7 @@ class XMLConfigurator(object):
     ## instantiates the required components
     # \param names list of component names
     # \returns list of instantiated components
-    def instantiateComponents(self, names):
+    def instantiatedComponents(self, names):
         comps = []
         if self.__mydb:
             comps = self.__mydb.components(names)

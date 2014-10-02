@@ -7697,7 +7697,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed(self):
+    def test_instantiatedComponents_mixed(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -7771,7 +7771,7 @@ ds.result = ndts.version</result></datasource>"""
         css = [name[0],name[2]]
         print "AVAIL2", el.availableDataSources()    
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
@@ -7791,7 +7791,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_var(self):
+    def test_instantiatedComponents_mixed_var(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -7867,7 +7867,7 @@ ds.result = ndts.version</result></datasource>"""
 
         el.variables = '{"name1":"r1","name2":"r2","name3":"r3","name4":"r4"}'
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
@@ -7888,7 +7888,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_var_1(self):
+    def test_instantiatedComponents_mixed_var_1(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -7961,7 +7961,7 @@ ds.result = ndts.version</result></datasource>"""
         print "AVAIL2", el.availableDataSources()    
 
         el.variables = '{"name1":"r1","source":"%s"}' % dsname[0]
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),3)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field"><datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1" /></datasource></field></definition>')
         self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
@@ -7980,7 +7980,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_var_2(self):
+    def test_instantiatedComponents_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -8056,7 +8056,7 @@ ds.result = ndts.version</result></datasource>"""
 
         el.variables = '{"name1":"r1","name2":"r2","name3":"r3","name4":"r4"}'
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name=""/></datasource></field></definition>')
@@ -8074,7 +8074,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_2(self):
+    def test_instantiatedComponents_mixed_2(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -8150,7 +8150,7 @@ ds.result = ndts.version</result></datasource>"""
         css = [name[0],name[2]]
         print "AVAIL2", el.availableDataSources()    
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_11" type="CLIENT"><record name="r2"/></datasource></field></definition>')
@@ -8169,7 +8169,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_2_double(self):
+    def test_instantiatedComponents_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -8246,7 +8246,7 @@ ds.result = ndts.version</result></datasource>"""
         css = [name[0], name[3]]
         print "AVAIL2", el.availableDataSources()    
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource>\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="mcs_test_datasource_11" type="CLIENT"><record name="r2"/></datasource></datasource></field></definition>')
@@ -8262,7 +8262,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_3_double(self):
+    def test_instantiatedComponents_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -8346,7 +8346,7 @@ ds.result = ndts.version</result></datasource>"""
         css = [name[0], name[3]]
         print "AVAIL2", el.availableDataSources()    
 
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3">\n<datasource name="mcs_test_datasource_111" type="CLIENT">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="mcs_test_datasource_11" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field></definition>')
@@ -8359,7 +8359,7 @@ ds.result = ndts.version</result></datasource>"""
 
     ## creatConf test
     # \brief It tests XMLConfigurator
-    def test_instantiateComponents_mixed_definition(self):
+    def test_instantiatedComponents_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         
@@ -8431,7 +8431,7 @@ ds.result = ndts.version</result></datasource>"""
         print el.components([name[0],name[2]])
         print "CSS",css
         print "MAND", el.mandatoryComponents()
-        comps = el.instantiateComponents(css)
+        comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
         self.assertEqual(comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
