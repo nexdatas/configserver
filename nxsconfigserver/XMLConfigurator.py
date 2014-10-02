@@ -140,7 +140,7 @@ class XMLConfigurator(object):
     # \param names list of component names
     # \returns list of instantiated components
     def instantiateComponents(self, names):
-        argout = []
+        comps = []
         if self.__mydb:
             comps = self.__mydb.components(names)
             comps = [
@@ -149,8 +149,6 @@ class XMLConfigurator(object):
                         self.__attachDataSources(
                             self.__attachVariables(cp)))) for cp in comps]
         return comps
-
-
 
     ## provides a list of datasources from the given component
     # \param name given component
