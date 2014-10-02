@@ -1,6 +1,7 @@
-2014-XX-XX Jan Kotanski <jankotan@gmail.com>
+2014-10-02 Jan Kotanski <jankotan@gmail.com>
+	* adding instantiateComponents
 	* cleaning the code
-	* tagged as v1.6.4
+	* tagged as v1.7.0
 
 2014-08-29 Jan Kotanski <jankotan@gmail.com>
 	* reconnect by ping(True) before all transations
