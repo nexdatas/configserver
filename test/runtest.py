@@ -46,12 +46,25 @@ try:
     mydb = MySQLdb.connect(**args)
     mydb.close()
     DB_AVAILABLE.append("MYSQL")
-except ImportError, e:
-    print "MYSQL not available: %s" % e
-except Exception, e:
-    print "MYSQL not available: %s" % e
 except:
-    print "MYSQL not available"
+    try:
+        import MySQLdb    
+        from os.path import expanduser
+        home = expanduser("~")
+        ## connection arguments to MYSQL DB
+        args2 = {'host': u'localhost', 'db': u'ndts', 
+                'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
+        ## inscance of MySQLdb
+        mydb = MySQLdb.connect(**args2)
+        mydb.close()
+        DB_AVAILABLE.append("MYSQL")
+        
+    except ImportError, e:
+        print "MYSQL not available: %s" % e
+    except Exception, e:
+        print "MYSQL not available: %s" % e
+    except:
+        print "MYSQL not available"
 
 
 

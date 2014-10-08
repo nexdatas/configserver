@@ -1,3 +1,27 @@
+2014-10-02 Jan Kotanski <jankotan@gmail.com>
+	* adding instantiatedComponents command
+	* cleaning the code
+	* tagged as v1.7.0
+
+2014-08-29 Jan Kotanski <jankotan@gmail.com>
+	* reconnect by ping(True) before all transations
+	* tagged as v1.6.3
+
+2014-08-25 Jan Kotanski <jankotan@gmail.com>
+	* adding tests for $HOME/.my.cfg configuration
+	* tagged as v1.6.2
+
+2014-07-29 Jan Kotanski <jankotan@gmail.com>
+	* removing my.cnf and mysql_create.sql from the setup.py
+	* tagged as v1.6.1
+
+2014-07-11 Jan Kotanski <jankotan@gmail.com>
+	* making python API similar to Tango API:
+	*   	xmlConfig -> xmlstring
+	*	jsonSettings -> jsonSettings
+	* fixing checks for revision in tests
+	* tagged as v1.6.0
+
 2014-01-31 Jan Kotanski <jankotan@gmail.com>
 	* making JSONSettings readable
 	* tagged as v1.5.4

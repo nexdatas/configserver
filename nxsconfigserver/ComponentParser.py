@@ -23,16 +23,17 @@
 
 from xml import sax
 
-import sys, os
+import sys
+import os
 import re
 
 
-## SAX2 parser 
+## SAX2 parser
 class ComponentHandler(sax.ContentHandler):
 
     ## constructor
-    # \brief It constructs parser and sets variables to default values 
-    def __init__(self, dsLabel = "datasources", delimiter = '.'):
+    # \brief It constructs parser and sets variables to default values
+    def __init__(self, dsLabel="datasources", delimiter='.'):
         sax.ContentHandler.__init__(self)
         ##  dictionary with datasources
         self.datasources = {}
@@ -41,9 +42,9 @@ class ComponentHandler(sax.ContentHandler):
         ## delimiter
         self.__delimiter = delimiter
         ## unnamed datasource counter
-        self.__counter = 0 
+        self.__counter = 0
         ## datasource label
-        self.__dsLabel  = dsLabel
+        self.__dsLabel = dsLabel
         ## containing datasources
         self.__withDS = ["field", "attribute"]
         ## content flag
@@ -52,15 +53,12 @@ class ComponentHandler(sax.ContentHandler):
         self.__content = {}
         for tag in self.__withDS:
             self.__content[tag] = []
-            
 
-
-    ## adds the tag content 
-    # \param content partial content of the tag    
+    ## adds the tag content
+    # \param content partial content of the tag
     def characters(self, content):
-        if self.__stack[-1] in self.__withDS: 
+        if self.__stack[-1] in self.__withDS:
             self.__content[self.__stack[-1]].append(content)
-            
 
     ##  parses the opening tag
     # \param name tag name
@@ -77,22 +75,21 @@ class ComponentHandler(sax.ContentHandler):
                 aType = attrs["type"]
             else:
                 aType = ""
-            self.datasources[aName] = aType    
-
+            self.datasources[aName] = aType
 
     ## parses the closing tag
     # \param name tag name
     def endElement(self, name):
         tag = self.__stack[-1]
-        if tag in self.__withDS: 
+        if tag in self.__withDS:
             text = "".join(self.__content[tag]).strip()
             index = text.find("$%s%s" % (
                     self.__dsLabel, self.__delimiter))
             while index != -1:
                 try:
                     subc = re.finditer(
-                        r"[\w]+", 
-                        text[(index+len(self.__dsLabel)+2):]
+                        r"[\w]+",
+                        text[(index + len(self.__dsLabel) + 2):]
                         ).next().group(0)
                 except:
                     subc = ""
@@ -100,9 +97,8 @@ class ComponentHandler(sax.ContentHandler):
                 if aName:
                     self.datasources[aName] = "__FROM_DB__"
                 index = text.find("$%s%s" % (
-                        self.__dsLabel, self.__delimiter), index+1)
+                        self.__dsLabel, self.__delimiter), index + 1)
 
-                
             self.__content[tag] = []
         self.__stack.pop()
 
@@ -216,12 +212,8 @@ if __name__ == "__main__":
 </definition>
 """
 
-
-
-
-    if  len(sys.argv) <2:
+    if len(sys.argv) < 2:
         print "usage: ComponentParser.py  <XMLinput>"
-        
     else:
         ## input XML file
         fi = sys.argv[1]
@@ -229,18 +221,14 @@ if __name__ == "__main__":
 
             ## a parser object
             parser = sax.make_parser()
-            
+
             ## a SAX2 handler object
             handler = ComponentHandler()
             parser.setContentHandler(handler)
             parser.parse(open(fi))
-            print handler.datasources
-            
+            print(handler.datasources)
 
             ## a SAX2 handler object
             handler = ComponentHandler()
             sax.parseString(str(www2).strip(), handler)
-            print handler.datasources
-    
-
-
+            print(handler.datasources)

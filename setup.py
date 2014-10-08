@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 ## \file setup.py
-# nxsconfigserver installer 
+# nxsconfigserver installer
 
 """ setup.py for NXS configuration server """
 
@@ -33,10 +33,11 @@ INXS = __import__(NXS)
 
 ## reading a file
 def read(fname):
+    """ read the file """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 ## required files
-required = [
+REQUIRED = [
     'numpy (>=1.5.0)',
     'PyTango (>=7.2.2)',
     'pninx (>=4.0.2)'
@@ -48,42 +49,27 @@ required = [
 
 ## metadata for distutils
 SETUPDATA = dict(
-    name = "nexdatas.configserver",
-    version = INXS.__version__,
-    author = "Jan Kotanski, Eugen Wintersberger , Halil Pasic",
-    author_email = "jankotan@gmail.com, eugen.wintersberger@gmail.com, " \
-        + "halil.pasic@gmail.com",
-    description = ("Configuration Server for Nexus Data Writer"),
-    license = "GNU GENERAL PUBLIC LICENSE v3",
-    keywords = "configuration MySQL writer Tango server nexus data",
-    url = "http://code.google.com/p/nexdatas/",
+    name="nexdatas.configserver",
+    version=INXS.__version__,
+    author="Jan Kotanski, Eugen Wintersberger , Halil Pasic",
+    author_email="jankotan@gmail.com, eugen.wintersberger@gmail.com, "
+    + "halil.pasic@gmail.com",
+    description=("Configuration Server for Nexus Data Writer"),
+    license="GNU GENERAL PUBLIC LICENSE v3",
+    keywords="configuration MySQL writer Tango server nexus data",
+    url="http://code.google.com/p/nexdatas/",
     packages=[NXS],
-    requires=required,
-    scripts = ['NXSConfigServer.py', 'NXSConfigServer'],
-    data_files=[('share/python-nxsconfigserver', ['conf/my.cnf']),
-                ('share/python-nxsconfigserver', ['conf/mysql_create.sql'])
-                ],
-    long_description= read('README')
+    requires=REQUIRED,
+    scripts=['NXSConfigServer.py', 'NXSConfigServer'],
+    long_description=read('README')
 )
 
-## metadata for setuptools
-#SETUPTOOLSDATA= dict(
-#    include_package_data = True,
-#    install_requires = [
-#        'numpy>=1.5.0',
-#        'PyTango>=7.2.2',
-#        'libpninx-python>=0.1.2'
-#        ],
-#)
-
-
-        
 
 ## the main function
 def main():
+    """ the main function """
     setup(**SETUPDATA)
-        
+
 
 if __name__ == '__main__':
     main()
-
