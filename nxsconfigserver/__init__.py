@@ -22,7 +22,7 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "1.7.0"
+__version__ = "1.7.1"
 
 import sys
 
@@ -36,7 +36,7 @@ def run(argv):
     from .NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
     try:
         pyutil = PyTango.Util(argv)
-        pyutil.add_class(NXSCnfSrvClass, NXSCnfSrv, 'NXSConfigServer')
+        pyutil.add_class(NXSCnfSrvClass, NXSCnfSrv)
 
         util = PyTango.Util.instance()
         util.server_init()
