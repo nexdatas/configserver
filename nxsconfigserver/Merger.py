@@ -49,7 +49,7 @@ class Merger(object):
             "group": ("group", "field", "attribute", "link", "component",
                       "doc"),
             "link": ("doc"),
-            "dim": ("datasource", "doc"),
+            "dim": ("datasource", "strategy", "doc"),
             }
 
         ## with unique text

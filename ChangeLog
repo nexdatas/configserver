@@ -1,3 +1,7 @@
+2014-10-XX Jan Kotanski <jankotan@gmail.com>
+	* adding datasource into dim tag
+	* tagged as v1.8.0
+
 2014-10-13 Jan Kotanski <jankotan@gmail.com>
 	* workaround for Astor err stream cut
 	* tagged as v1.7.1
