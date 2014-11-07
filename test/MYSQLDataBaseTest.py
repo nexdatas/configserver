@@ -133,7 +133,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \'<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
 #        print avc
