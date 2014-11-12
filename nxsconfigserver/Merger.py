@@ -55,6 +55,15 @@ class Merger(object):
         ## with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
+        ## node which can have switched strategy
+        self.switchable = ["field", 'attribute']
+
+        ## strategy modes to switch
+        self.modesToSwitch = ["INIT", "FINAL"]
+
+        ## aliased to switch to STEP mode
+        self.stepdatasources = []
+
     ## collects text from text child nodes
     # \param node parent node
     @classmethod
@@ -205,9 +214,9 @@ class Merger(object):
             nName = unicode(node.nodeName) if isinstance(node, Element) else ""
 
             while child:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
                 if nName and nName in self.children.keys():
-                    cName = unicode(child.nodeName) \
-                        if isinstance(child, Element) else ""
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"
@@ -215,7 +224,35 @@ class Merger(object):
                             [child])
 
                 self.__mergeChildren(child)
+                if cName in self.switchable:
+                    self.__switch(child)
                 child = child.nextSibling
+
+    ## switch the given node to step mode
+    # \param node the given node
+    def __switch(self, node):
+        if node:
+            dsnode = None
+            stnode = None
+            children = node.childNodes
+
+            for child in node.childNodes:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
+                if cName == 'datasource':
+                    dsname = child.getAttribute("name")
+                    if dsname in self.stepdatasources:
+                        dsnode = child
+                    else:
+                        break
+                elif cName == 'strategy':
+                    stnode = child
+                if stnode and dsnode:
+                    break
+            if stnode and dsnode:
+                mode = stnode.getAttribute("mode")
+                if mode in self.modesToSwitch:
+                    stnode.setAttribute("mode", "STEP")
 
     ## collects the given components in one DOM tree
     # \param components given components

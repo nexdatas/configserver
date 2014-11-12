@@ -43,6 +43,8 @@ class XMLConfigurator(object):
         self.xmlstring = ""
         ## JSON string with arguments to connect to database
         self.jsonsettings = "{}"
+        ## datasources to be switched into STEP mode 
+        self.stepdatasources = []
 
         ## string with XML variables
         self.variables = "{}"
@@ -144,10 +146,11 @@ class XMLConfigurator(object):
         if self.__mydb:
             comps = self.__mydb.components(names)
             comps = [
-                self.__attachComponents(
-                    self.__attachVariables(
-                        self.__attachDataSources(
-                            self.__attachVariables(cp)))) for cp in comps]
+                self.__attachVariables(
+                    self.__attachDataSources(
+                        self.__attachVariables(
+                            self.__attachComponents(
+                                cp)))) for cp in comps]
         return comps
 
     ## provides a list of datasources from the given component
@@ -431,9 +434,9 @@ class XMLConfigurator(object):
     ## merges the give component xmls
     # \param xmls list of component xmls
     # \return merged components
-    @classmethod
-    def __merge(cls, xmls):
+    def __merge(self, xmls):
         mgr = Merger()
+        mgr.stepdatasources = list(self.stepdatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()
@@ -442,9 +445,9 @@ class XMLConfigurator(object):
     # \param names list of component names
     def createConfiguration(self, names):
         cnf = self.__mergeVars(names, withVariables=True)
+        cnf = self.__attachComponents(cnf)
         cnf = self.__attachDataSources(cnf)
         cnf = self.__attachVariables(cnf)
-        cnf = self.__attachComponents(cnf)
         cnfMerged = self.__merge([cnf])
 
         if cnfMerged and hasattr(cnfMerged, "strip") and cnfMerged.strip():

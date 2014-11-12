@@ -159,6 +159,35 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
 #------------------------------------------------------------------
+#    Read STEPDataSources attribute
+#------------------------------------------------------------------
+    def read_STEPDataSources(self, attr):
+        print >> self.log_info, "In ", self.get_name(), "::read_STEPDataSources()"
+        attr.set_value(self.xmlc.stepdatasources)
+
+#------------------------------------------------------------------
+#    Write STEPDataSources attribute
+#------------------------------------------------------------------
+    def write_STEPDataSources(self, attr):
+        print >> self.log_info, "In ", self.get_name(), \
+            "::write_STEPDataSources()"
+        if self.is_STEPDataSources_write_allowed():
+            self.xmlc.stepdatasources = attr.get_write_value()
+            print >> self.log_info, "Attribute value = ", \
+                self.xmlc.jsonsettings
+        else:
+            print >> self.log_warn, \
+                "To change the settings please close the server."
+            raise Exception(
+                "To change the settings please close the server.")
+
+#---- STEPDataSources attribute Write State Machine -----------------
+    def is_STEPDataSources_write_allowed(self):
+        if self.get_state() in [PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
 #    Read Version attribute
 #------------------------------------------------------------------
     def read_Version(self, attr):
@@ -896,9 +925,18 @@ class NXSConfigServerClass(PyTango.DeviceClass):
             PyTango.SCALAR,
             PyTango.READ_WRITE],
             {
-                'label':"XML configuration variables",
-                'description':"The JSON string with "
+                'label': "XML configuration variables",
+                'description': "The JSON string with "
                 "XML configuration variables",
+            }],
+        'STEPDataSources':
+            [[PyTango.DevString,
+            PyTango.SPECTRUM,
+            PyTango.READ_WRITE, 4096],
+            {
+                'label': "datasources to be switched into STEP mode",
+                'description': "datasources to be switched "
+                "into STEP mode during creating configuration process",
             }],
         }
 
