@@ -255,7 +255,15 @@ class Merger(object):
                     if dsname in self.stepdatasources:
                         dsnode = child
                     else:
-                        break
+                        for gchild in child.childNodes:
+                            gcName = unicode(gchild.nodeName) \
+                                if isinstance(gchild, Element) else ""
+                            if gcName == 'datasource':
+                                dsname = child.getAttribute("name")
+                                if dsname in self.stepdatasources:
+                                    dsnode = child
+                        if not dsnode:            
+                            break
                 elif cName == 'strategy':
                     mode = child.getAttribute("mode")
                     if mode in self.modesToSwitch:
