@@ -22,7 +22,7 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "1.9.0"
+__version__ = "1.9.1"
 
 import sys
 
