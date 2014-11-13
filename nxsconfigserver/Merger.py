@@ -64,6 +64,8 @@ class Merger(object):
         ## aliased to switch to STEP mode
         self.stepdatasources = []
 
+        self.__dsvars = "$datasources."
+
     ## collects text from text child nodes
     # \param node parent node
     @classmethod
@@ -232,9 +234,18 @@ class Merger(object):
     # \param node the given node
     def __switch(self, node):
         if node:
-            dsnode = None
             stnode = None
-            children = node.childNodes
+            mode = None
+            dsname = None
+            dsnode = None
+
+            text = unicode(self.__getText(node)).strip()
+            index = text.find(self.__dsvars)
+            if index >= 0:
+                name = text[index + len(self.__dsvars):]
+                if name in self.stepdatasources:
+                    dsnode = node
+                    dsname = name
 
             for child in node.childNodes:
                 cName = unicode(child.nodeName) \
@@ -246,13 +257,15 @@ class Merger(object):
                     else:
                         break
                 elif cName == 'strategy':
-                    stnode = child
+                    mode = child.getAttribute("mode")
+                    if mode in self.modesToSwitch:
+                        stnode = child
+                    else:
+                        break
                 if stnode and dsnode:
                     break
             if stnode and dsnode:
-                mode = stnode.getAttribute("mode")
-                if mode in self.modesToSwitch:
-                    stnode.setAttribute("mode", "STEP")
+                stnode.setAttribute("mode", "STEP")
 
     ## collects the given components in one DOM tree
     # \param components given components
