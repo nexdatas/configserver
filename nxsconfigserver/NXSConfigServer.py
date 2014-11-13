@@ -162,7 +162,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
 #    Read STEPDataSources attribute
 #------------------------------------------------------------------
     def read_STEPDataSources(self, attr):
-        print >> self.log_info, "In ", self.get_name(), "::read_STEPDataSources()"
+        print >> self.log_info, "In ", self.get_name(), \
+            "::read_STEPDataSources()"
         attr.set_value(self.xmlc.stepdatasources)
 
 #------------------------------------------------------------------

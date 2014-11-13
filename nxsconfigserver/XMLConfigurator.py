@@ -43,7 +43,7 @@ class XMLConfigurator(object):
         self.xmlstring = ""
         ## JSON string with arguments to connect to database
         self.jsonsettings = "{}"
-        ## datasources to be switched into STEP mode 
+        ## datasources to be switched into STEP mode
         self.stepdatasources = []
 
         ## string with XML variables
