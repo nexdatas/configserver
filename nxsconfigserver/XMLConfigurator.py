@@ -114,7 +114,8 @@ class XMLConfigurator(object):
             if Streams.log_info:
                 print >> Streams.log_info, "XMLConfigurator::open() - ", \
                     args
-            print args
+            else:    
+                print args
             args = {}
         self.__mydb.connect(args)
 
@@ -244,7 +245,7 @@ class XMLConfigurator(object):
     ## fetches the required datasources
     # \param names list of datasource names
     # \returns list of given datasources
-    def dataSources(self, names):
+    def dataSources(self, names, _=None):
         argout = []
         if self.__mydb:
             argout = self.__mydb.dataSources(names)
@@ -309,10 +310,12 @@ class XMLConfigurator(object):
         if self.__mydb:
             argout = self.__mydb.mandatory()
         return argout
-
-    def __getVariable(self, name):
+    
+    def __getVariable(self, name, default=None):
         if len(name) > 0 and name[0] and name[0] in self.__variables:
             return [self.__variables[name[0]]]
+        elif default is not None:
+            return [str(default)]
         else:
             return [""]
 
@@ -325,24 +328,36 @@ class XMLConfigurator(object):
     # \returns component with attached variables
     def __attachElements(self, component, label, keys, funValue,
                          tag=None):
-
         index = component.find("$%s%s" % (label, self.__delimiter))
         while index != -1:
+            defsubc = None
+            subc = ''
+            dsubc = ''
             try:
                 subc = re.finditer(
                     r"[\w]+",
                     component[(index + len(label) + 2):]).next().group(0)
+                if not tag:
+                    if component[index + len(subc) + len(label) + 2] == '#':
+                        dsubc = re.finditer(
+                            r"([\"'])(?:\\\1|.)*?\1", 
+                            component[(index + len(subc) + len(label) 
+                                       + 3):]).next().group(0)
+                        if dsubc:
+                            if dsubc[0] == "'":
+                                defsubc = dsubc[1:-1].replace("\\'","'")
+                            elif dsubc[0] == '"':
+                                defsubc = dsubc[1:-1].replace('\\"','"')
             except:
-                subc = ''
+                pass
             name = subc.strip() if subc else ""
             if name:
                 if tag and name not in keys:
                     raise NonregisteredDBRecordError(
                         "The %s %s not registered in the DataBase" % (
                             tag if tag else "variable", name))
-
                 try:
-                    xmlds = funValue([name])
+                    xmlds = funValue([name], defsubc)
                 except:
                     xmlds = []
                 if not xmlds:
@@ -365,14 +380,14 @@ class XMLConfigurator(object):
                 else:
                     ds = xmlds[0]
                 component = component[0:index] + ("%s" % ds) \
-                    + component[(index + len(subc) + len(label) + 2):]
-                index = component.find("$%s%s" % (label,
-                                                  self.__delimiter))
+                    + component[
+                    (index + len(subc) + len(label) + 2 + 
+                     ((len(dsubc) + 1) if defsubc is not None else 0)):]
+                index = component.find("$%s%s" % (label, self.__delimiter))
             else:
                 raise NonregisteredDBRecordError(
                     "The %s %s not registered" % (
                         tag if tag else "variable", name))
-
         return component
 
     ## attaches variables to component
@@ -397,7 +412,7 @@ class XMLConfigurator(object):
         if not component:
             return
         return self.__attachElements(
-            component, self.__cpLabel, [], lambda x: [""])
+            component, self.__cpLabel, [], lambda x,y: [""])
 
     ## attaches datasources to component
     # \param component given component
