@@ -1,3 +1,27 @@
+2014-11-17 Jan Kotanski <jankotan@gmail.com>
+	* adding default values for configuration variabls i.e. $var.name#'default_value'
+	* tagged as v1.9.2
+
+2014-11-13 Jan Kotanski <jankotan@gmail.com>
+	* adding support for STEP switches of PYEVAL datasources
+	* tagged as v1.9.1
+
+2014-11-13 Jan Kotanski <jankotan@gmail.com>
+	* adding STEPDataSources attribute for selecting ds to switch into STEP mode
+	* tagged as v1.9.0
+
+2014-11-07 Jan Kotanski <jankotan@gmail.com>
+	* fixes for storing '\\' character
+	* tagged as v1.8.1
+
+2014-10-29 Jan Kotanski <jankotan@gmail.com>
+	* adding datasource into dim tag
+	* tagged as v1.8.0
+
+2014-10-13 Jan Kotanski <jankotan@gmail.com>
+	* workaround for Astor err stream cut
+	* tagged as v1.7.1
+
 2014-10-02 Jan Kotanski <jankotan@gmail.com>
 	* adding instantiatedComponents command
 	* cleaning the code

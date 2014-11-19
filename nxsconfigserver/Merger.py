@@ -21,6 +21,8 @@
 
 """ Classes for merging DOM component trees """
 
+import re
+
 from xml.dom.minidom import parseString, Element
 from .Errors import IncompatibleNodeError, UndefinedTagError
 
@@ -48,11 +50,23 @@ class Merger(object):
                       "enumeration", "strategy"),
             "group": ("group", "field", "attribute", "link", "component",
                       "doc"),
-            "link": ("doc")
+            "link": ("doc"),
+            "dim": ("datasource", "strategy", "doc"),
             }
 
         ## with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
+
+        ## node which can have switched strategy
+        self.switchable = ["field", 'attribute']
+
+        ## strategy modes to switch
+        self.modesToSwitch = ["INIT", "FINAL"]
+
+        ## aliased to switch to STEP mode
+        self.stepdatasources = []
+
+        self.__dsvars = "$datasources."
 
     ## collects text from text child nodes
     # \param node parent node
@@ -204,9 +218,9 @@ class Merger(object):
             nName = unicode(node.nodeName) if isinstance(node, Element) else ""
 
             while child:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
                 if nName and nName in self.children.keys():
-                    cName = unicode(child.nodeName) \
-                        if isinstance(child, Element) else ""
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"
@@ -214,7 +228,77 @@ class Merger(object):
                             [child])
 
                 self.__mergeChildren(child)
+                if cName in self.switchable:
+                    self.__switch(child)
                 child = child.nextSibling
+
+    ## find first datasources node and name in text nodes of the node
+    # \params node the parent node
+    # \returns (node, name) of the searched datasource
+    def __getTextDataSource(self, node):            
+        dsname = None
+        dsnode = None
+        text = unicode(self.__getText(node)).strip()
+        index = text.find(self.__dsvars)
+        while index >= 0:
+            try:
+                subc = re.finditer(
+                    r"[\w]+",
+                    text[(index + len(self.__dsvars)):]).next().group(0)
+            except:
+                subc = ''
+            name = subc.strip() if subc else ""
+            if name in self.stepdatasources:
+                dsnode = node
+                dsname = name
+                break 
+            text =  text[(index + len(name) + len(self.__dsvars) + 2):]
+            index = text.find(self.__dsvars)
+        return dsname, dsnode    
+
+    ## switch the given node to step mode
+    # \param node the given node
+    def __switch(self, node):
+        if node:
+            stnode = None
+            mode = None
+            dsname = None
+            dsnode = None
+
+            dsname, dsnode = self.__getTextDataSource(node)
+                        
+            children = node.childNodes
+            cpname = node.getAttribute("name")
+            for child in children:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
+                if cName == 'datasource':
+                    dsname = child.getAttribute("name")
+                    if dsname in self.stepdatasources:
+                        dsnode = child
+                    else:
+                        dsname, dsnode = self.__getTextDataSource(child)
+                    if not dsnode:    
+                        gchildren = child.childNodes
+                        for gchild in gchildren:
+                            gcName = unicode(gchild.nodeName) \
+                                if isinstance(gchild, Element) else ""
+                            if gcName == 'datasource':
+                                gdsname = gchild.getAttribute("name")
+                                if gdsname in self.stepdatasources:
+                                    dsnode = child
+#                        if not dsnode:            
+#                            break
+                elif cName == 'strategy':
+                    mode = child.getAttribute("mode")
+                    if mode in self.modesToSwitch:
+                        stnode = child
+                    else:
+                        break
+                if stnode and dsnode:
+                    break
+            if stnode and dsnode:
+                stnode.setAttribute("mode", "STEP")
 
     ## collects the given components in one DOM tree
     # \param components given components

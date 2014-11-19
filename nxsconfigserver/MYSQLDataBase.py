@@ -204,7 +204,7 @@ class MYSQLDataBase(object):
                         cursor.execute(
                             "update components set xml"
                             " = '%s' where name = '%s';"
-                            % (xml.replace("'", "\\\'"),
+                            % (xml.replace("\\", "\\\\").replace("'", "\\\'"),
                                name.replace("'", "\\\'")))
                         self.__incRevision(cursor)
                         self.__db.commit()
@@ -215,7 +215,7 @@ class MYSQLDataBase(object):
                         "insert into components "
                         "values('%s', '%s', 0);"
                         % (name.replace("'", "\\\'"),
-                           xml.replace("'", "\\\'")))
+                           xml.replace("\\", "\\\\").replace("'", "\\\'")))
                     self.__incRevision(cursor)
                     self.__db.commit()
                 cursor.close()
@@ -249,7 +249,7 @@ class MYSQLDataBase(object):
                         cursor.execute(
                             "update datasources set "
                             "xml = '%s' where name = '%s';"
-                            % (xml.replace("'", "\\\'"),
+                            % (xml.replace("\\", "\\\\").replace("'", "\\\'"),
                                name.replace("'", "\\\'")))
                         self.__incRevision(cursor)
                         self.__db.commit()
@@ -260,7 +260,7 @@ class MYSQLDataBase(object):
                         "insert into datasources "
                         "values('%s', '%s');"
                         % (name.replace("'", "\\\'"),
-                           xml.replace("'", "\\\'")))
+                           xml.replace("\\", "\\\\").replace("'", "\\\'")))
 
                     self.__incRevision(cursor)
                     self.__db.commit()
