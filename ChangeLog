@@ -1,3 +1,7 @@
+2014-11-21 Jan Kotanski <jankotan@gmail.com>
+	* adding __escape method
+	* tagged as v1.9.3
+
 2014-11-17 Jan Kotanski <jankotan@gmail.com>
 	* adding default values for configuration variabls i.e. $var.name#'default_value'
 	* tagged as v1.9.2
