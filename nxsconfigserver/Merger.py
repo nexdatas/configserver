@@ -235,7 +235,7 @@ class Merger(object):
     ## find first datasources node and name in text nodes of the node
     # \params node the parent node
     # \returns (node, name) of the searched datasource
-    def __getTextDataSource(self, node):            
+    def __getTextDataSource(self, node):
         dsname = None
         dsnode = None
         text = unicode(self.__getText(node)).strip()
@@ -251,10 +251,10 @@ class Merger(object):
             if name in self.stepdatasources:
                 dsnode = node
                 dsname = name
-                break 
-            text =  text[(index + len(name) + len(self.__dsvars) + 2):]
+                break
+            text = text[(index + len(name) + len(self.__dsvars) + 2):]
             index = text.find(self.__dsvars)
-        return dsname, dsnode    
+        return dsname, dsnode
 
     ## switch the given node to step mode
     # \param node the given node
@@ -266,9 +266,9 @@ class Merger(object):
             dsnode = None
 
             dsname, dsnode = self.__getTextDataSource(node)
-                        
+
             children = node.childNodes
-            cpname = node.getAttribute("name")
+#            cpname = node.getAttribute("name")
             for child in children:
                 cName = unicode(child.nodeName) \
                     if isinstance(child, Element) else ""
@@ -278,7 +278,7 @@ class Merger(object):
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(child)
-                    if not dsnode:    
+                    if not dsnode:
                         gchildren = child.childNodes
                         for gchild in gchildren:
                             gcName = unicode(gchild.nodeName) \
@@ -287,7 +287,7 @@ class Merger(object):
                                 gdsname = gchild.getAttribute("name")
                                 if gdsname in self.stepdatasources:
                                     dsnode = child
-#                        if not dsnode:            
+#                        if not dsnode:
 #                            break
                 elif cName == 'strategy':
                     mode = child.getAttribute("mode")

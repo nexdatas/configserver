@@ -114,7 +114,7 @@ class XMLConfigurator(object):
             if Streams.log_info:
                 print >> Streams.log_info, "XMLConfigurator::open() - ", \
                     args
-            else:    
+            else:
                 print args
             args = {}
         self.__mydb.connect(args)
@@ -310,7 +310,7 @@ class XMLConfigurator(object):
         if self.__mydb:
             argout = self.__mydb.mandatory()
         return argout
-    
+
     def __getVariable(self, name, default=None):
         if len(name) > 0 and name[0] and name[0] in self.__variables:
             return [self.__variables[name[0]]]
@@ -340,14 +340,14 @@ class XMLConfigurator(object):
                 if not tag:
                     if component[index + len(subc) + len(label) + 2] == '#':
                         dsubc = re.finditer(
-                            r"([\"'])(?:\\\1|.)*?\1", 
-                            component[(index + len(subc) + len(label) 
+                            r"([\"'])(?:\\\1|.)*?\1",
+                            component[(index + len(subc) + len(label)
                                        + 3):]).next().group(0)
                         if dsubc:
                             if dsubc[0] == "'":
-                                defsubc = dsubc[1:-1].replace("\\'","'")
+                                defsubc = dsubc[1:-1].replace("\\'", "'")
                             elif dsubc[0] == '"':
-                                defsubc = dsubc[1:-1].replace('\\"','"')
+                                defsubc = dsubc[1:-1].replace('\\"', '"')
             except:
                 pass
             name = subc.strip() if subc else ""
@@ -381,7 +381,7 @@ class XMLConfigurator(object):
                     ds = xmlds[0]
                 component = component[0:index] + ("%s" % ds) \
                     + component[
-                    (index + len(subc) + len(label) + 2 + 
+                    (index + len(subc) + len(label) + 2 +
                      ((len(dsubc) + 1) if defsubc is not None else 0)):]
                 index = component.find("$%s%s" % (label, self.__delimiter))
             else:
@@ -412,7 +412,7 @@ class XMLConfigurator(object):
         if not component:
             return
         return self.__attachElements(
-            component, self.__cpLabel, [], lambda x,y: [""])
+            component, self.__cpLabel, [], lambda x, y: [""])
 
     ## attaches datasources to component
     # \param component given component
