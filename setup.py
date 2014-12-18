@@ -60,7 +60,7 @@ SETUPDATA = dict(
     url="http://code.google.com/p/nexdatas/",
     packages=[NXS],
     requires=REQUIRED,
-    scripts=['NXSConfigServer.py', 'NXSConfigServer'],
+    scripts=['NXSConfigServer'],
     long_description=read('README')
 )
 

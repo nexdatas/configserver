@@ -1,3 +1,7 @@
+2014-12-18 Jan Kotanski <jankotan@gmail.com>
+	* removing start-up shell script
+	* tagged as v1.9.4
+
 2014-11-21 Jan Kotanski <jankotan@gmail.com>
 	* adding __escape method
 	* tagged as v1.9.3
