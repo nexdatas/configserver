@@ -347,7 +347,7 @@ class MYSQLDataBase(object):
                             "selection = '%s' where name = '%s';"
                             % (self.__escape(selection),
                                self.__escape(name)))
-                        self.__incRevision(cursor)
+#                        self.__incRevision(cursor)
                         self.__db.commit()
                     else:
                         self.__db.rollback()
@@ -358,7 +358,7 @@ class MYSQLDataBase(object):
                         % (self.__escape(name),
                            self.__escape(selection)))
 
-                    self.__incRevision(cursor)
+#                    self.__incRevision(cursor)
                     self.__db.commit()
                 cursor.close()
             except:
@@ -424,7 +424,7 @@ class MYSQLDataBase(object):
                         % self.__escape(name))
 
                     self.__db.commit()
-                self.__incRevision(cursor)
+#                self.__incRevision(cursor)
                 cursor.close()
             except:
                 self.__db.rollback()

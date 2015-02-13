@@ -517,7 +517,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
         self.assertEqual(el.close(),None)
 
 
@@ -610,7 +610,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+3)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
         self.assertEqual(el.close(),None)
 
 
@@ -692,7 +692,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version.split('.')[-1]),self.revision+4)
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
         self.assertEqual(el.close(),None)
 
 

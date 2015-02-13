@@ -465,7 +465,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version()),self.version+2)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
     ##  selection test
@@ -505,7 +505,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             self.assertTrue(cp in avc3)
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version()),self.version+2)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -555,7 +555,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version()),self.version+2)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -648,7 +648,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version()),self.version+3)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
@@ -719,7 +719,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.__cmps.pop()
         
         avc3 = el.availableSelections()
-        cpx3 = el.components(avc3)
+        cpx3 = el.selections(avc3)
         self.assertTrue(isinstance(avc3, list))
 
 
@@ -730,7 +730,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
             
         self.assertTrue(name not in avc3)
         
-        self.assertEqual(long(el.version()),self.version+4)
+        self.assertEqual(long(el.version()),self.version)
         self.assertEqual(el.close(),None)
 
 
