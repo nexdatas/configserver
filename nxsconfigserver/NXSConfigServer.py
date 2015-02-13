@@ -129,6 +129,31 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
 #------------------------------------------------------------------
+#    Read Selection attribute
+#------------------------------------------------------------------
+    def read_Selection(self, attr):
+        print >> self.log_info, "In ", self.get_name(), "::read_Selection()"
+
+#        attr_Selection_read = "Hello Tango world"
+        attr.set_value(self.xmlc.selection)
+
+#------------------------------------------------------------------
+#    Write Selection attribute
+#------------------------------------------------------------------
+    def write_Selection(self, attr):
+        print >> self.log_info, "In ", self.get_name(), "::write_Selection()"
+
+        self.xmlc.selection = attr.get_write_value()
+        print >> self.log_info, "Attribute value = ", self.xmlc.selection
+
+#---- Selection attribute State Machine -----------------
+    def is_Selection_allowed(self, _):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
 #    Read JSONSettings attribute
 #------------------------------------------------------------------
     def read_JSONSettings(self, attr):
@@ -308,6 +333,34 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
 #------------------------------------------------------------------
+#    Selections command:
+#
+#    Description: Returns a list of required selections
+#
+#    argin:  DevVarStringArray    list of selection names
+#    argout: DevVarStringArray    list of required selections
+#------------------------------------------------------------------
+    def Selections(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::Selections()"
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.selections(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+        return argout
+
+#---- Selections command State Machine -----------------
+    def is_Selections_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+
+#------------------------------------------------------------------
 #    InstantiatedComponents command:
 #
 #    Description: Returns a list of required components
@@ -390,6 +443,33 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
 #------------------------------------------------------------------
+#    AvailableSelections command:
+#
+#    Description: Returns a list of available selection names
+#
+#    argout: DevVarStringArray    list of available selection names
+#------------------------------------------------------------------
+    def AvailableSelections(self):
+        print >> self.log_info, "In ", self.get_name(), \
+            "::AvailableSelections()"
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            argout = self.xmlc.availableSelections()
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+        return argout
+
+#---- AvailableSelections command State Machine -----------------
+    def is_AvailableSelections_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
 #    AvailableDataSources command:
 #
 #    Description: Returns a list of available DataSource names
@@ -437,6 +517,31 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
 #---- StoreComponent command State Machine -----------------
     def is_StoreComponent_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
+#    StoreSelection command:
+#
+#    Description: Stores the selection from XMLString
+#
+#    argin:  DevString    selection name
+#------------------------------------------------------------------
+    def StoreSelection(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::StoreSelection()"
+        #    Add your own code here
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            self.xmlc.storeSelection(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+#---- StoreSelection command State Machine -----------------
+    def is_StoreSelection_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
@@ -514,6 +619,31 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
 #---- DeleteComponent command State Machine -----------------
     def is_DeleteComponent_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+#------------------------------------------------------------------
+#    DeleteSelection command:
+#
+#    Description: Deletes the given selection
+#
+#    argin:  DevString    selection name
+#------------------------------------------------------------------
+    def DeleteSelection(self, argin):
+        print >> self.log_info, "In ", self.get_name(), "::DeleteSelection()"
+        #    Add your own code here
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            self.xmlc.deleteSelection(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+#---- DeleteSelection command State Machine -----------------
+    def is_DeleteSelection_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
@@ -831,6 +961,9 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         'Components':
             [[PyTango.DevVarStringArray, "list of component names"],
             [PyTango.DevVarStringArray, "list of required components"]],
+        'Selections':
+            [[PyTango.DevVarStringArray, "list of selection names"],
+            [PyTango.DevVarStringArray, "list of required selections"]],
         'InstantiatedComponents':
             [[PyTango.DevVarStringArray, "list of component names"],
             [PyTango.DevVarStringArray, "list of instantiated components"]],
@@ -840,9 +973,15 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         'AvailableComponents':
             [[PyTango.DevVoid, ""],
             [PyTango.DevVarStringArray, "list of available component names"]],
+        'AvailableSelections':
+            [[PyTango.DevVoid, ""],
+            [PyTango.DevVarStringArray, "list of available selection names"]],
         'AvailableDataSources':
             [[PyTango.DevVoid, ""],
             [PyTango.DevVarStringArray, "list of available DataSource names"]],
+        'StoreSelection':
+            [[PyTango.DevString, "selection name"],
+            [PyTango.DevVoid, ""]],
         'StoreComponent':
             [[PyTango.DevString, "component name"],
             [PyTango.DevVoid, ""]],
@@ -854,6 +993,9 @@ class NXSConfigServerClass(PyTango.DeviceClass):
             [PyTango.DevVoid, ""]],
         'DeleteComponent':
             [[PyTango.DevString, "component name"],
+            [PyTango.DevVoid, ""]],
+        'DeleteSelection':
+            [[PyTango.DevString, "selection name"],
             [PyTango.DevVoid, ""]],
         'DeleteDataSource':
             [[PyTango.DevString, "datasource name"],
@@ -900,6 +1042,17 @@ class NXSConfigServerClass(PyTango.DeviceClass):
                 "performing StoreComponent and StoreDataSource."
                 "\nMoreover, after performing CreateConfiguration "
                 "it contains the resulting XML configuration.",
+                'Display level':PyTango.DispLevel.EXPERT,
+            }],
+        'Selection':
+            [[PyTango.DevString,
+            PyTango.SCALAR,
+            PyTango.READ_WRITE],
+            {
+                'label':"Selected Component",
+                'description':
+                    "It allows to pass JSON strings into database during "
+                "performing StoreSelection.",
                 'Display level':PyTango.DispLevel.EXPERT,
             }],
         'JSONSettings':

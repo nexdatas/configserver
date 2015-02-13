@@ -126,6 +126,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         xmlc = XMLConfigurator()
         self.assertEqual(xmlc.jsonsettings, "{}")
         self.assertEqual(xmlc.xmlstring, "")
+        self.assertEqual(xmlc.selection, "{}")
         xmlc.jsonsettings = args
         print args
         xmlc.open()
@@ -151,12 +152,25 @@ class XMLConfiguratorTest(unittest.TestCase):
     def setXML(self, xmlc, xml):
         xmlc.xmlstring = xml
 
-
     ## gets xmlconfiguration
     # \param xmlc configuration instance
     # \returns xml configuration string
     def getXML(self, xmlc):
         return xmlc.xmlstring
+
+
+    ## sets selection configuration
+    # \param selectionc configuration instance
+    # \param selection selection configuration string
+    def setSelection(self, selectionc, selection):
+        selectionc.selection = selection
+
+
+    ## gets selectionconfiguration
+    # \param selectionc configuration instance
+    # \returns selection configuration string
+    def getSelection(self, selectionc):
+        return selectionc.selection
 
 
     ## open close test test
@@ -442,6 +456,245 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         self.assertEqual(long(el.version.split('.')[-1]),self.revision+4)
         self.assertEqual(el.close(),None)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ##  selection test
+    # \brief It tests default settings
+    def test_available_sel_xml(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = self.openConf()
+ 
+        avc = el.availableSelections()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_selection"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        while name in avc:
+            name = name + '_1'
+        print avc
+        cpx = el.selections(avc)
+        self.setSelection(el, xml)
+        self.assertEqual(el.storeSelection(name), None)
+        self.__cmps.append(name)
+        avc2 = el.availableSelections()
+        print avc2
+        cpx2 = el.selections(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+            
+        self.assertTrue(name in avc2)
+        j = avc2.index(name)
+        self.assertEqual(cpx2[j], xml)
+        
+        self.assertEqual(el.deleteSelection(name),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableSelections()
+        cpx3 = el.selections(avc3)
+        self.assertTrue(isinstance(avc3, list))
+
+
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc3)
+            j = avc3.index(avc[i])
+            self.assertEqual(cpx3[j], cpx[i])
+            
+        self.assertTrue(name not in avc3)
+        
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+2)
+        self.assertEqual(el.close(),None)
+
+
+    ##  selection test
+    # \brief It tests default settings
+    def test_available_no_sel(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = self.openConf()
+
+        avc = el.availableSelections()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_selection"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        self.myAssertRaise(NonregisteredDBRecordError,el.selections, [name])
+        
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision)
+        self.assertEqual(el.close(),None)
+
+
+
+
+    ##  selection test
+    # \brief It tests default settings
+    def test_available_sel_update(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = self.openConf()
+
+        avc = el.availableSelections()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_selection"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        cpx = el.selections(avc)
+
+        self.setSelection(el, xml)
+        self.assertEqual(el.storeSelection(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableSelections()
+#        print avc2
+        cpx2 = el.selections(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+            
+        self.assertTrue(name in avc2)
+        j = avc2.index(name)
+        self.assertEqual(cpx2[j], xml)
+
+
+
+        self.setSelection(el, xml2)
+        self.assertEqual(el.storeSelection(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableSelections()
+#        print avc2
+        cpx2 = el.selections(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+            
+        self.assertTrue(name in avc2)
+        j = avc2.index(name)
+        self.assertEqual(cpx2[j], xml2)
+
+        
+        self.assertEqual(el.deleteSelection(name), None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableSelections()
+        cpx3 = el.selections(avc3)
+        self.assertTrue(isinstance(avc3, list))
+
+
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc3)
+            j = avc3.index(avc[i])
+            self.assertEqual(cpx3[j], cpx[i])
+            
+        self.assertTrue(name not in avc3)
+        
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+3)
+        self.assertEqual(el.close(),None)
+
+
+
+
+
+    ##  selection test
+    # \brief It tests default settings
+    def test_available_sel2_xml(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        el = self.openConf()
+
+        avc = el.availableSelections()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_selection"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        while name in avc:
+            name = name + '_1'
+        name2 = name + '_2'
+        while name2 in avc:
+            name2 = name2 + '_2'
+#        print avc
+        cpx = el.selections(avc)
+
+        self.setSelection(el, xml)
+        self.assertEqual(el.storeSelection(name),None)
+        self.__cmps.append(name)
+        avc2 = el.availableSelections()
+#        print avc2
+        cpx2 = el.selections(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+            
+        self.assertTrue(name in avc2)
+        j = avc2.index(name)
+        self.assertEqual(cpx2[j], xml)
+
+        self.setSelection(el, xml2)
+        self.assertEqual(el.storeSelection(name2),None)
+        self.__cmps.append(name2)
+        avc2 = el.availableSelections()
+#        print avc2
+        cpx2 = el.selections(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+            
+        self.assertTrue(name2 in avc2)
+        j = avc2.index(name2)
+        self.assertEqual(cpx2[j], xml2)
+
+        cpx2b = el.selections([name,name2])
+        self.assertEqual(cpx2b[0], xml)
+        self.assertEqual(cpx2b[1], xml2)
+
+        
+        self.assertEqual(el.deleteSelection(name),None)
+        self.__cmps.pop(-2)
+
+        self.assertEqual(el.deleteSelection(name2),None)
+        self.__cmps.pop()
+        
+        avc3 = el.availableSelections()
+        cpx3 = el.selections(avc3)
+        self.assertTrue(isinstance(avc3, list))
+
+
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc3)
+            j = avc3.index(avc[i])
+            self.assertEqual(cpx3[j], cpx[i])
+            
+        self.assertTrue(name not in avc3)
+        
+        self.assertEqual(long(el.version.split('.')[-1]),self.revision+4)
+        self.assertEqual(el.close(),None)
+
 
 
 
