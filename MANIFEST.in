@@ -1,2 +1,4 @@
 include COPYRIGHT
 include man/NXSConfigServer.1
+include conf/my.cnf
+include conf/mysql_create.sql
