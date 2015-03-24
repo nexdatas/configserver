@@ -27,7 +27,7 @@ and extract the sources.
 
 One can also download the lastest version directly from the git repository by
 
-git clone https://code.google.com/p/nexdatas.configserver/
+git clone https://github.com/jkotan/nexdatas.configserver/
 
 Next, run the installation script
 
