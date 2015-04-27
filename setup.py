@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2012-2014 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2012-2015 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -57,10 +57,10 @@ SETUPDATA = dict(
     description=("Configuration Server for Nexus Data Writer"),
     license="GNU GENERAL PUBLIC LICENSE v3",
     keywords="configuration MySQL writer Tango server nexus data",
-    url="http://code.google.com/p/nexdatas/",
+    url="http://github.com/jkotan/nexdatas/",
     packages=[NXS],
     requires=REQUIRED,
-    scripts=['NXSConfigServer.py', 'NXSConfigServer'],
+    scripts=['NXSConfigServer'],
     long_description=read('README')
 )
 

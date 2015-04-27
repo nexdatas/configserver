@@ -31,6 +31,17 @@ CREATE TABLE IF NOT EXISTS `properties` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- Table structure for table `selections`
+--
+
+CREATE TABLE IF NOT EXISTS `selections` (
+  `name` varchar(100) BINARY NOT NULL,
+  `selection` mediumtext BINARY NOT NULL,
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+--
 -- Init the revision counter if not exists
 --
 INSERT INTO properties  (name, value) SELECT * FROM (SELECT 'revision', '0') AS tmp WHERE NOT EXISTS ( SELECT name FROM properties WHERE name ='revision' ) LIMIT 1;

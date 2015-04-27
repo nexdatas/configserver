@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2012-2014 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2012-2015 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -128,6 +128,32 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
+    ## fetches the required selections
+    # \param names list of selection names
+    # \returns list of given selections
+    def selections(self, names):
+        argout = []
+        if self.__db is not None:
+            try:
+                self.__db.ping(True)
+                if not self.__db.open:
+                    self.connect(self.__args)
+                cursor = self.__db.cursor()
+                for ar in names:
+                    cursor.execute(
+                        "select selection from selections where name = '%s';"
+                        % self.__escape(ar))
+                    data = cursor.fetchone()
+                    if not data or not data[0]:
+                        raise NonregisteredDBRecordError(
+                            "Selection %s not registered in the database" % ar)
+                    argout.append(data[0])
+                cursor.close()
+            except:
+                cursor.close()
+                raise
+        return argout
+
     ## fetches the required datasources
     # \param names list of datasource names
     # \returns list of given datasources
@@ -164,6 +190,24 @@ class MYSQLDataBase(object):
                 self.__db.ping(True)
                 cursor = self.__db.cursor()
                 cursor.execute("select name from components;")
+                data = cursor.fetchall()
+                argout = [d[0] for d in data]
+                cursor.close()
+            except:
+                cursor.close()
+                raise
+
+        return argout
+
+    ## fetches the names of available selections
+    # \returns list of available selections
+    def availableSelections(self):
+        argout = []
+        if self.__db is not None:
+            try:
+                self.__db.ping(True)
+                cursor = self.__db.cursor()
+                cursor.execute("select name from selections;")
                 data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()
@@ -282,6 +326,52 @@ class MYSQLDataBase(object):
                 print "MYSQLDataBase::storeDataSource() - store datasource", \
                     name
 
+    ## stores the given selection
+    # \param name name of the selection to store
+    # \param selection selection tree
+    def storeSelection(self, name, selection):
+        if self.__db is not None:
+            try:
+                self.__db.ping(True)
+                if not self.__db.open:
+                    self.connect(self.__args)
+                cursor = self.__db.cursor()
+                cursor.execute(
+                    "select selection from selections where name = '%s';"
+                    % self.__escape(name))
+                data = cursor.fetchone()
+                if data and len(data) > 0 and data[0]:
+                    if data[0] != selection:
+                        cursor.execute(
+                            "update selections set "
+                            "selection = '%s' where name = '%s';"
+                            % (self.__escape(selection),
+                               self.__escape(name)))
+#                        self.__incRevision(cursor)
+                        self.__db.commit()
+                    else:
+                        self.__db.rollback()
+                else:
+                    cursor.execute(
+                        "insert into selections "
+                        "values('%s', '%s');"
+                        % (self.__escape(name),
+                           self.__escape(selection)))
+
+#                    self.__incRevision(cursor)
+                    self.__db.commit()
+                cursor.close()
+            except:
+                self.__db.rollback()
+                cursor.close()
+                raise
+            if Streams.log_info:
+                print >> Streams.log_info, \
+                    "MYSQLDataBase::storeSelection() - store selection", name
+            else:
+                print "MYSQLDataBase::storeSelection() - store selection", \
+                    name
+
     ## deletes the given component
     # \param name of the component to delete
     def deleteComponent(self, name):
@@ -313,6 +403,39 @@ class MYSQLDataBase(object):
                     "MYSQLDataBase::deleteComponent() - delete component", name
             else:
                 print "MYSQLDataBase::deleteComponent() - delete component", \
+                    name
+
+    ## deletes the given selection
+    # \param name of the selection to delete
+    def deleteSelection(self, name):
+        if self.__db is not None:
+            try:
+                self.__db.ping(True)
+                if not self.__db.open:
+                    self.connect(self.__args)
+                cursor = self.__db.cursor()
+                cursor.execute(
+                    "select exists(select 1 from selections where "
+                    "name = '%s');" % self.__escape(name))
+                data = cursor.fetchone()
+                if data[0]:
+                    cursor.execute(
+                        "delete from selections where name = '%s';"
+                        % self.__escape(name))
+
+                    self.__db.commit()
+#                self.__incRevision(cursor)
+                cursor.close()
+            except:
+                self.__db.rollback()
+                cursor.close()
+                raise
+
+            if Streams.log_info:
+                print >> Streams.log_info, \
+                    "MYSQLDataBase::deleteSelection() - delete selection", name
+            else:
+                print "MYSQLDataBase::deleteSelection() - delete selection", \
                     name
 
     ## sets components as mandatory

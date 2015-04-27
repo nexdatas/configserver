@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2012-2014 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2012-2015 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -41,6 +41,8 @@ class XMLConfigurator(object):
     def __init__(self, server=None):
         ## XML config string
         self.xmlstring = ""
+        ## component selection
+        self.selection = "{}"
         ## JSON string with arguments to connect to database
         self.jsonsettings = "{}"
         ## datasources to be switched into STEP mode
@@ -137,6 +139,15 @@ class XMLConfigurator(object):
         argout = []
         if self.__mydb:
             argout = self.__mydb.components(names)
+        return argout
+
+    ## fetches the required selections
+    # \param names list of selection names
+    # \returns list of given selections
+    def selections(self, names):
+        argout = []
+        if self.__mydb:
+            argout = self.__mydb.selections(names)
         return argout
 
     ## instantiates the required components
@@ -259,6 +270,14 @@ class XMLConfigurator(object):
             argout = self.__mydb.availableComponents()
         return argout
 
+    ## fetches the names of available selections
+    # \returns list of available selections
+    def availableSelections(self):
+        argout = []
+        if self.__mydb:
+            argout = self.__mydb.availableSelections()
+        return argout
+
     ## fetches the names of available datasources
     # \returns list of available datasources
     def availableDataSources(self):
@@ -273,6 +292,12 @@ class XMLConfigurator(object):
         if self.__mydb:
             self.__mydb.storeComponent(name, self.xmlstring)
 
+    ## stores the selection from the xmlstring attribute
+    # \param name name of the selection to store
+    def storeSelection(self, name):
+        if self.__mydb:
+            self.__mydb.storeSelection(name, self.selection)
+
     ## stores the datasource from the xmlstring attribute
     # \param name name of the datasource to store
     def storeDataSource(self, name):
@@ -284,6 +309,12 @@ class XMLConfigurator(object):
     def deleteComponent(self, name):
         if self.__mydb:
             self.__mydb.deleteComponent(name)
+
+    ## deletes the given selection
+    # \param name of the selection to delete
+    def deleteSelection(self, name):
+        if self.__mydb:
+            self.__mydb.deleteSelection(name)
 
     ## deletes the given datasource
     # \param name of the datasource to delete
@@ -488,8 +519,6 @@ if __name__ == "__main__":
             '"read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
-#        conf.createConfiguration(["scan1", "scan2"])
-#        conf.createConfiguration(["scan1", "scan1"])
         conf.createConfiguration(["scan2", "scan2", "scan2"])
         print conf.xmlstring
     finally:
