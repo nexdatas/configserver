@@ -233,7 +233,7 @@ class Merger(object):
                 child = child.nextSibling
 
     ## find first datasources node and name in text nodes of the node
-    # \params node the parent node
+    # \param node the parent node
     # \returns (node, name) of the searched datasource
     def __getTextDataSource(self, node):
         dsname = None

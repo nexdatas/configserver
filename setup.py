@@ -21,7 +21,7 @@
 """ setup.py for NXS configuration server """
 
 import os
-from distutils.core import setup
+from distutils.core import setup, Command
 
 ## package name
 NXS = "nxsconfigserver"
@@ -35,6 +35,25 @@ INXS = __import__(NXS)
 def read(fname):
     """ read the file """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+
+## test command class
+class TestCommand(Command):
+
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import sys
+        import subprocess
+        errno = subprocess.call([sys.executable, 'test/runtest.py'])
+        raise SystemExit(errno)
+
 
 ## required files
 REQUIRED = [
@@ -61,6 +80,7 @@ SETUPDATA = dict(
     packages=[NXS],
     requires=REQUIRED,
     scripts=['NXSConfigServer'],
+    cmdclass={'test': TestCommand},
     long_description=read('README')
 )
 
