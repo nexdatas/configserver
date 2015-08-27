@@ -86,7 +86,7 @@ class ServerSetUp(object):
         
         output = ""
         pipe = subprocess.Popen(
-            "ps -ef | grep 'NXSConfigServer.py MCSTEST'", stdout=subprocess.PIPE , shell= True).stdout
+            "ps -ef | grep 'NXSConfigServer MCSTEST'", stdout=subprocess.PIPE , shell= True).stdout
 
         res = pipe.read().split("\n")
         for r in res:
