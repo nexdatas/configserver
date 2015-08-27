@@ -359,7 +359,6 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
-
 #------------------------------------------------------------------
 #    InstantiatedComponents command:
 #
