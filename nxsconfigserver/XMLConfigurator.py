@@ -515,7 +515,7 @@ if __name__ == "__main__":
     try:
         ## configurer object
         conf = XMLConfigurator()
-        conf.jsonsettings = '{"host":"localhost", "db":"ndts", '\
+        conf.jsonsettings = '{"host":"localhost", "db":"nxsconfig", '\
             '"read_default_file":"/etc/my.cnf"}'
         conf.open()
         print conf.availableComponents()
