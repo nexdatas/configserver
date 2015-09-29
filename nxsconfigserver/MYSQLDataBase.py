@@ -252,10 +252,11 @@ class MYSQLDataBase(object):
                 data = cursor.fetchone()
                 if data and len(data) > 0 and data[0]:
                     if data[0] != xml:
-                        cursor.execute("update components set xml"
-                        " = '%s' where name = '%s';"
-                        % (self.__escape(xml),
-                           self.__escape(name)))
+                        cursor.execute(
+                            "update components set xml"
+                            " = '%s' where name = '%s';"
+                            % (self.__escape(xml),
+                               self.__escape(name)))
                         self.__incRevision(cursor)
                         self.__db.commit()
                     else:

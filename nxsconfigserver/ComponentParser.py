@@ -84,28 +84,26 @@ class ComponentHandler(sax.ContentHandler):
         if tag in self.__withDS:
             text = "".join(self.__content[tag]).strip()
             index = text.find("$%s%s" % (
-                    self.__dsLabel, self.__delimiter))
+                self.__dsLabel, self.__delimiter))
             while index != -1:
                 try:
                     subc = re.finditer(
                         r"[\w]+",
                         text[(index + len(self.__dsLabel) + 2):]
-                        ).next().group(0)
+                    ).next().group(0)
                 except:
                     subc = ""
                 aName = subc.strip() if subc else ""
                 if aName:
                     self.datasources[aName] = "__FROM_DB__"
                 index = text.find("$%s%s" % (
-                        self.__dsLabel, self.__delimiter), index + 1)
+                    self.__dsLabel, self.__delimiter), index + 1)
 
             self.__content[tag] = []
         self.__stack.pop()
 
 
 if __name__ == "__main__":
-
-#
 
     ## second test xml
     www2 = """

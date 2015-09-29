@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
@@ -52,7 +53,7 @@ class Merger(object):
                       "doc"),
             "link": ("doc"),
             "dim": ("datasource", "strategy", "doc"),
-            }
+        }
 
         ## with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
@@ -102,7 +103,7 @@ class Merger(object):
     # \param elem2 second element
     # \returns bool varaible if two elements are mergeable
     def __areMergeable(self, elem1, elem2):
-#        return False
+
         if elem1.nodeName != elem2.nodeName:
             return False
         tagName = unicode(elem1.nodeName)
@@ -122,8 +123,7 @@ class Merger(object):
         tags = self.__checkAttributes(elem1, elem2)
         if tags:
             status = False
-            if (tagName in self.singles
-                or (name1 and name1 == name2)):
+            if (tagName in self.singles or (name1 and name1 == name2)):
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: "
                     % str(tags), [elem1, elem2])

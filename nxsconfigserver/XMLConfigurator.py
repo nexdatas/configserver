@@ -198,20 +198,20 @@ class XMLConfigurator(object):
     def __findElements(self, text, label):
         variables = []
         index = text.find("$%s%s" % (
-                label, self.__delimiter))
+            label, self.__delimiter))
         while index != -1:
             try:
                 subc = re.finditer(
                     r"[\w]+",
                     text[(index + len(label) + 2):]
-                    ).next().group(0)
+                ).next().group(0)
             except:
                 subc = ""
             name = subc.strip() if subc else ""
             if name:
                 variables.append(name)
             index = text.find("$%s%s" % (
-                    label, self.__delimiter), index + 1)
+                label, self.__delimiter), index + 1)
 
         return variables
 
