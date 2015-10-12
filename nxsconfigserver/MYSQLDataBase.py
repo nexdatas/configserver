@@ -40,11 +40,7 @@ class MYSQLDataBase(object):
     ## connects to the database
     # \param args arguments of the MySQLdb connect method
     def connect(self, args):
-        if Streams.log_info:
-            print >> Streams.log_info, \
-                "MYSQLDataBase::connect() - connect:", args
-        else:
-            print "MYSQLDataBase::connect() - connect:", args
+        Streams.info("MYSQLDataBase::connect() - connect: %s" % args)
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
@@ -274,11 +270,8 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::storeComponent() - store component", name
-            else:
-                print "MYSQLDataBase::storeComponent() - store component", name
+            Streams.info("MYSQLDataBase::storeComponent()"
+                         " - store component %s" % name)
 
     ## stores the given datasource
     # \param name name of the datasource to store
@@ -319,12 +312,8 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::storeDataSource() - store datasource", name
-            else:
-                print "MYSQLDataBase::storeDataSource() - store datasource", \
-                    name
+            Streams.info("MYSQLDataBase::storeDataSource() "
+                             "- store datasource %s" % name)
 
     ## stores the given selection
     # \param name name of the selection to store
@@ -365,12 +354,8 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::storeSelection() - store selection", name
-            else:
-                print "MYSQLDataBase::storeSelection() - store selection", \
-                    name
+            Streams.info("MYSQLDataBase::storeSelection() "
+                         "- store selection %s" % name)
 
     ## deletes the given component
     # \param name of the component to delete
@@ -398,12 +383,8 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::deleteComponent() - delete component", name
-            else:
-                print "MYSQLDataBase::deleteComponent() - delete component", \
-                    name
+            Streams.info("MYSQLDataBase::deleteComponent() "
+                         "- delete component %s" % name)
 
     ## deletes the given selection
     # \param name of the selection to delete
@@ -431,12 +412,8 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::deleteSelection() - delete selection", name
-            else:
-                print "MYSQLDataBase::deleteSelection() - delete selection", \
-                    name
+            Streams.info("MYSQLDataBase::deleteSelection() "
+                         "- delete selection %s" % name)
 
     ## sets components as mandatory
     # \param name of the component
@@ -464,11 +441,8 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::setMandatory() - component", name
-            else:
-                print "MYSQLDataBase::setMandatory() - component", name
+            Streams.info(
+                "MYSQLDataBase::setMandatory() - component %s" % name)
 
     ## sets components as not mandatory
     # \param name of the component to delete
@@ -499,11 +473,8 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::unsetMandatory() - component", name
-            else:
-                print "MYSQLDataBase::unsetMandatory() - component", name
+            Streams.info("MYSQLDataBase::unsetMandatory() "
+                         "- component %s" % name)
 
     ## provides mandatory components
     # \returns list of mandatory components
@@ -550,11 +521,8 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            if Streams.log_info:
-                print >> Streams.log_info, \
-                    "MYSQLDataBase::deleteDataSource() - datasource", name
-            else:
-                print "MYSQLDataBase::deleteDataSource() - datasource", name
+            Streams.info("MYSQLDataBase::deleteDataSource() "
+                         "- datasource %s" % name)
 
 
 if __name__ == "__main__":

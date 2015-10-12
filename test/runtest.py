@@ -26,6 +26,7 @@ import unittest
 import ComponentHandlerTest
 import MergerTest
 import ErrorsTest
+import StreamsTest
 
 try:
     import PyTango
@@ -41,7 +42,7 @@ DB_AVAILABLE = []
 try:
     import MySQLdb    
     ## connection arguments to MYSQL DB
-    args = {'host': u'localhost', 'db': u'ndts', 'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
+    args = {'host': u'localhost', 'db': u'nxsconfig', 'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
     ## inscance of MySQLdb
     mydb = MySQLdb.connect(**args)
     mydb.close()
@@ -52,7 +53,7 @@ except:
         from os.path import expanduser
         home = expanduser("~")
         ## connection arguments to MYSQL DB
-        args2 = {'host': u'localhost', 'db': u'ndts', 
+        args2 = {'host': u'localhost', 'db': u'nxsconfig', 
                 'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
         ## inscance of MySQLdb
         mydb = MySQLdb.connect(**args2)
@@ -101,6 +102,9 @@ def main():
 
     suite.addTests(
         unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest) )
+
+    suite.addTests(
+        unittest.defaultTestLoader.loadTestsFromModule(StreamsTest) )
 
 
     

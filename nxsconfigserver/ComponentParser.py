@@ -213,7 +213,7 @@ if __name__ == "__main__":
 """
 
     if len(sys.argv) < 2:
-        print "usage: ComponentParser.py  <XMLinput>"
+        print("usage: ComponentParser.py  <XMLinput>")
     else:
         ## input XML file
         fi = sys.argv[1]

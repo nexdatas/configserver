@@ -102,22 +102,14 @@ class XMLConfigurator(object):
     # \brief It opens connection to the give database by JSON string
     def open(self):
         args = {}
-        if Streams.log_info:
-            print >> Streams.log_info, \
-                "XMLConfigurator::open() - Open connection"
-        else:
-            print "XMLConfigurator::open() - Open connection"
+        Streams.info("XMLConfigurator::open() - Open connection")
         try:
             js = json.loads(self.jsonsettings)
             targs = dict(js.items())
             for k in targs.keys():
                 args[str(k)] = targs[k]
         except:
-            if Streams.log_info:
-                print >> Streams.log_info, "XMLConfigurator::open() - ", \
-                    args
-            else:
-                print args
+            Streams.info("%s" % args)
             args = {}
         self.__mydb.connect(args)
 
@@ -126,11 +118,7 @@ class XMLConfigurator(object):
     def close(self):
         if self.__mydb:
             self.__mydb.close()
-        if Streams.log_info:
-            print >> Streams.log_info, \
-                "XMLConfigurator::close() - Close connection"
-        else:
-            print "XMLConfigurator::close() - Close connection"
+        Streams.info("XMLConfigurator::close() - Close connection")
 
     ## fetches the required components
     # \param names list of component names
@@ -501,13 +489,8 @@ class XMLConfigurator(object):
             self.xmlstring = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlstring = ''
-        if Streams.log_info:
-            print >> Streams.log_info, \
-                "XMLConfigurator::createConfiguration() " \
-                "- Create configuration"
-        else:
-            print "XMLConfigurator::createConfiguration() - " \
-                "Create configuration"
+        Streams.info("XMLConfigurator::createConfiguration() "
+                     "- Create configuration")
 
 
 if __name__ == "__main__":
@@ -518,9 +501,9 @@ if __name__ == "__main__":
         conf.jsonsettings = '{"host":"localhost", "db":"ndts", '\
             '"read_default_file":"/etc/my.cnf"}'
         conf.open()
-        print conf.availableComponents()
+        print(conf.availableComponents())
         conf.createConfiguration(["scan2", "scan2", "scan2"])
-        print conf.xmlstring
+        print(conf.xmlstring)
     finally:
         if conf:
             conf.close()

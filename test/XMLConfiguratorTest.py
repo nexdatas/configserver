@@ -60,7 +60,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self._buint = "uint64" if IS64BIT else "uint32"
         self._bfloat = "float64" if IS64BIT else "float32"
 
-        self.__args = '{"host":"localhost", "db":"ndts", "read_default_file":"/etc/my.cnf", "use_unicode":true}'
+        self.__args = '{"host":"localhost", "db":"nxsconfig", "read_default_file":"/etc/my.cnf", "use_unicode":true}'
         self.__cmps = []
         self.__ds = []
         self.__man = []
@@ -68,7 +68,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         
         from os.path import expanduser
         home = expanduser("~")
-        self.__args2 = '{"host":"localhost", "db":"ndts", "read_default_file":"%s/.my.cnf", "use_unicode":true}' % home
+        self.__args2 = '{"host":"localhost", "db":"nxsconfig", "read_default_file":"%s/.my.cnf", "use_unicode":true}' % home
 
     ## test starter
     # \brief Common set up
