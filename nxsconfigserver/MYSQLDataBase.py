@@ -314,7 +314,7 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
             Streams.info("MYSQLDataBase::storeDataSource() "
-                             "- store datasource %s" % name)
+                         "- store datasource %s" % name)
 
     ## stores the given selection
     # \param name name of the selection to store
