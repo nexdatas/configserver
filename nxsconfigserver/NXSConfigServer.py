@@ -902,159 +902,160 @@ class NXSConfigServerClass(PyTango.DeviceClass):
 
     ##    Class Properties
     class_property_list = {
-        }
+    }
 
     ##    Device Properties
     device_property_list = {
         'VersionLabel':
-            [PyTango.DevString,
-            "version label",
-            ["XCS"]],
-        }
+        [PyTango.DevString,
+         "version label",
+         ["XCS"]],
+    }
 
     ##    Command definitions
     cmd_list = {
         'Open':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'Close':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'Components':
             [[PyTango.DevVarStringArray, "list of component names"],
-            [PyTango.DevVarStringArray, "list of required components"]],
+             [PyTango.DevVarStringArray, "list of required components"]],
         'Selections':
             [[PyTango.DevVarStringArray, "list of selection names"],
-            [PyTango.DevVarStringArray, "list of required selections"]],
+             [PyTango.DevVarStringArray, "list of required selections"]],
         'InstantiatedComponents':
             [[PyTango.DevVarStringArray, "list of component names"],
-            [PyTango.DevVarStringArray, "list of instantiated components"]],
+             [PyTango.DevVarStringArray, "list of instantiated components"]],
         'DataSources':
             [[PyTango.DevVarStringArray, "list of DataSource names"],
-            [PyTango.DevVarStringArray, "list of required DataSources"]],
+             [PyTango.DevVarStringArray, "list of required DataSources"]],
         'AvailableComponents':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVarStringArray, "list of available component names"]],
+             [PyTango.DevVarStringArray, "list of available component names"]],
         'AvailableSelections':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVarStringArray, "list of available selection names"]],
+             [PyTango.DevVarStringArray, "list of available selection names"]],
         'AvailableDataSources':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVarStringArray, "list of available DataSource names"]],
+             [PyTango.DevVarStringArray,
+              "list of available DataSource names"]],
         'StoreSelection':
             [[PyTango.DevString, "selection name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'StoreComponent':
             [[PyTango.DevString, "component name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'StoreDataSource':
             [[PyTango.DevString, "datasource name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'CreateConfiguration':
             [[PyTango.DevVarStringArray, "list of component names"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'DeleteComponent':
             [[PyTango.DevString, "component name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'DeleteSelection':
             [[PyTango.DevString, "selection name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'DeleteDataSource':
             [[PyTango.DevString, "datasource name"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'SetMandatoryComponents':
             [[PyTango.DevVarStringArray, "component names"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'MandatoryComponents':
             [[PyTango.DevVoid, ""],
-            [PyTango.DevVarStringArray, "component names"]],
+             [PyTango.DevVarStringArray, "component names"]],
         'UnsetMandatoryComponents':
             [[PyTango.DevVarStringArray, "list of component names"],
-            [PyTango.DevVoid, ""]],
+             [PyTango.DevVoid, ""]],
         'ComponentDataSources':
             [[PyTango.DevString, "component name"],
-            [PyTango.DevVarStringArray, "list of datasource names"]],
+             [PyTango.DevVarStringArray, "list of datasource names"]],
         'ComponentsDataSources':
             [[PyTango.DevVarStringArray, "component names"],
-            [PyTango.DevVarStringArray, "list of datasource names"]],
+             [PyTango.DevVarStringArray, "list of datasource names"]],
         'ComponentsVariables':
             [[PyTango.DevVarStringArray, "component names"],
-            [PyTango.DevVarStringArray, "list of variable names"]],
+             [PyTango.DevVarStringArray, "list of variable names"]],
         'ComponentVariables':
             [[PyTango.DevString, "component name"],
-            [PyTango.DevVarStringArray, "list of variable names"]],
+             [PyTango.DevVarStringArray, "list of variable names"]],
         'Merge':
             [[PyTango.DevVarStringArray, "list of component names"],
-            [PyTango.DevString, "merged components"]],
+             [PyTango.DevString, "merged components"]],
         'DependentComponents':
             [[PyTango.DevVarStringArray, "component names"],
-            [PyTango.DevVarStringArray, "list of component names"]],
-        }
+             [PyTango.DevVarStringArray, "list of component names"]],
+    }
 
     ##    Attribute definitions
     attr_list = {
         'XMLString':
-            [[PyTango.DevString,
-            PyTango.SCALAR,
-            PyTango.READ_WRITE],
-            {
-                'label':"XML configuration",
-                'description':
-                    "It allows to pass XML strings into database during "
-                "performing StoreComponent and StoreDataSource."
-                "\nMoreover, after performing CreateConfiguration "
-                "it contains the resulting XML configuration.",
-                'Display level':PyTango.DispLevel.EXPERT,
-            }],
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+             'label': "XML configuration",
+             'description':
+             "It allows to pass XML strings into database during "
+             "performing StoreComponent and StoreDataSource."
+             "\nMoreover, after performing CreateConfiguration "
+             "it contains the resulting XML configuration.",
+             'Display level': PyTango.DispLevel.EXPERT,
+        }],
         'Selection':
-            [[PyTango.DevString,
-            PyTango.SCALAR,
-            PyTango.READ_WRITE],
-            {
-                'label':"Selected Component",
-                'description':
-                    "It allows to pass JSON strings into database during "
-                "performing StoreSelection.",
-                'Display level':PyTango.DispLevel.EXPERT,
-            }],
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+            'label': "Selected Component",
+            'description':
+            "It allows to pass JSON strings into database during "
+            "performing StoreSelection.",
+            'Display level': PyTango.DispLevel.EXPERT,
+        }],
         'JSONSettings':
-            [[PyTango.DevString,
-            PyTango.SCALAR,
-            PyTango.READ_WRITE],
-            {
-                'label':"Arguments of MySQLdb.connect(...)",
-                'description':"The JSON string with parameters of "
-                "MySQLdb.connect(...).",
-                'Memorized':"true",
-                'Display level':PyTango.DispLevel.EXPERT,
-            }],
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+             'label': "Arguments of MySQLdb.connect(...)",
+             'description': "The JSON string with parameters of "
+             "MySQLdb.connect(...).",
+             'Memorized': "true",
+             'Display level': PyTango.DispLevel.EXPERT,
+        }],
         'Version':
-            [[PyTango.DevString,
-            PyTango.SCALAR,
-            PyTango.READ],
-            {
-                'label':"configuration version",
-                'description':"Configuration version",
-            }],
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ],
+         {
+             'label': "configuration version",
+             'description': "Configuration version",
+        }],
         'Variables':
-            [[PyTango.DevString,
-            PyTango.SCALAR,
-            PyTango.READ_WRITE],
-            {
-                'label': "XML configuration variables",
-                'description': "The JSON string with "
-                "XML configuration variables",
-            }],
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+             'label': "XML configuration variables",
+             'description': "The JSON string with "
+             "XML configuration variables",
+        }],
         'STEPDataSources':
-            [[PyTango.DevString,
-            PyTango.SPECTRUM,
-            PyTango.READ_WRITE, 4096],
-            {
-                'label': "datasources to be switched into STEP mode",
-                'description': "datasources to be switched "
-                "into STEP mode during creating configuration process",
-            }],
-        }
+        [[PyTango.DevString,
+          PyTango.SPECTRUM,
+          PyTango.READ_WRITE, 4096],
+         {
+             'label': "datasources to be switched into STEP mode",
+             'description': "datasources to be switched "
+             "into STEP mode during creating configuration process",
+        }],
+    }
 
 #------------------------------------------------------------------
 ##    NXSConfigServerClass Constructor

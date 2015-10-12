@@ -7364,8 +7364,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
             '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
             """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
-import ndts
-ds.result = ndts.version</result></datasource>"""
+import nxsconfigserver
+ds.result = nxsconfigserver.__version__</result></datasource>"""
             ]
 
 
@@ -7437,8 +7437,8 @@ ds.result = ndts.version</result></datasource>"""
         mxml = gxml.replace(">    ",">").replace(">   ",">").replace(">  ",">").replace("> ",">")\
             .replace("    <","<").replace("   <","<").replace("  <","<").replace(" <","<")\
             .replace("?>\n<","?><")
-        self.assertTrue((mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0])) |  
-                        (mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field></definition>' % (dsname[0], dsname[2], dsname[0], dsname[1])))
+        self.assertTrue((mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0])) |  
+                        (mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field></definition>' % (dsname[0], dsname[2], dsname[0], dsname[1])))
         
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
@@ -8034,8 +8034,8 @@ ds.result = ndts.version</result></datasource>"""
             '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
             '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
             """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
-import ndts
-ds.result = ndts.version</result></datasource>"""
+import nxsconfigserver
+ds.result = nxsconfigserver.__version__</result></datasource>"""
             ]
 
 
@@ -8807,8 +8807,8 @@ ds.result = ndts.version</result></datasource>"""
             '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
             '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
             """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
-import ndts
-ds.result = ndts.version</result></datasource>"""
+import nxsconfigserver
+ds.result = nxsconfigserver.__version__</result></datasource>"""
             ]
 
 
@@ -8876,7 +8876,7 @@ ds.result = ndts.version</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps),2)
         self.assertEqual(comps[0],'<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource></field></definition>')
-        self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3">\n<datasource name="mcs_test_datasource_111" type="CLIENT">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="mcs_test_datasource_11" type="CLIENT"><record name="r2"/></datasource><result>\nimport ndts\nds.result = ndts.version</result></datasource></field></definition>')
+        self.assertEqual(comps[1],'<definition><group type="NXentry"/><field name="field3">\n<datasource name="mcs_test_datasource_111" type="CLIENT">\n<datasource name="mcs_test_datasource_1" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="mcs_test_datasource_11" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field></definition>')
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()

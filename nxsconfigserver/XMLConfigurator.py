@@ -186,20 +186,20 @@ class XMLConfigurator(object):
     def __findElements(self, text, label):
         variables = []
         index = text.find("$%s%s" % (
-                label, self.__delimiter))
+            label, self.__delimiter))
         while index != -1:
             try:
                 subc = re.finditer(
                     r"[\w]+",
                     text[(index + len(label) + 2):]
-                    ).next().group(0)
+                ).next().group(0)
             except:
                 subc = ""
             name = subc.strip() if subc else ""
             if name:
                 variables.append(name)
             index = text.find("$%s%s" % (
-                    label, self.__delimiter), index + 1)
+                label, self.__delimiter), index + 1)
 
         return variables
 
@@ -498,7 +498,7 @@ if __name__ == "__main__":
     try:
         ## configurer object
         conf = XMLConfigurator()
-        conf.jsonsettings = '{"host":"localhost", "db":"ndts", '\
+        conf.jsonsettings = '{"host":"localhost", "db":"nxsconfig", '\
             '"read_default_file":"/etc/my.cnf"}'
         conf.open()
         print(conf.availableComponents())
