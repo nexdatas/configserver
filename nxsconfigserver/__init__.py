@@ -24,8 +24,6 @@
 ## version number
 __version__ = "1.10.1"
 
-import sys
-
 
 ## runs the TANGO server
 # \param argv command-line arguments
