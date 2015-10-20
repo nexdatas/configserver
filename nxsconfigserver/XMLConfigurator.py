@@ -357,16 +357,21 @@ class XMLConfigurator(object):
                     r"[\w]+",
                     component[(index + len(label) + 2):]).next().group(0)
                 if not tag:
-                    if component[index + len(subc) + len(label) + 2] == '#':
-                        dsubc = re.finditer(
-                            r"([\"'])(?:\\\1|.)*?\1",
-                            component[(index + len(subc) + len(label)
-                                       + 3):]).next().group(0)
-                        if dsubc:
-                            if dsubc[0] == "'":
-                                defsubc = dsubc[1:-1].replace("\\'", "'")
-                            elif dsubc[0] == '"':
-                                defsubc = dsubc[1:-1].replace('\\"', '"')
+                    offset = index + len(subc) + len(label) + 2
+                    if component[offset] == '#':
+                        if component[offset+1:offset+8] == '\&quot;':
+                            soff = component[(offset + 8):].find('\&quot;')
+                            dsubc = component[(offset + 1):(offset + 15 + soff)]
+                            defsubc = dsubc[7:-7].replace('\\"', '"')
+                        else:
+                            dsubc = re.finditer(
+                                r"([\"'])(?:\\\1|.)*?\1",
+                                component[(offset + 1):]).next().group(0)
+                            if dsubc:
+                                if dsubc[0] == "'":
+                                    defsubc = dsubc[1:-1].replace("\\'", "'")
+                                elif dsubc[0] == '"':
+                                    defsubc = dsubc[1:-1].replace('\\"', '"')
             except:
                 pass
             name = subc.strip() if subc else ""
