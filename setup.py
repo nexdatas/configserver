@@ -50,7 +50,7 @@ class TestCommand(Command):
     ## finalizes options
     def finalize_options(self):
         pass
-    
+
     ## runs command
     def run(self):
         import sys

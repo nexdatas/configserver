@@ -1,4 +1,8 @@
 2015-10-20 Jan Kotanski <jankotan@gmail.com>
+	* adding support for variable default value in &quot;
+	* tagged as v1.11.1
+
+2015-10-20 Jan Kotanski <jankotan@gmail.com>
 	* adding support for datasources and strategy in links
 	* adding support for variable default value in \&quot;
 	* tagged as v1.11.0

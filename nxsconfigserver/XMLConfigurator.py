@@ -359,9 +359,15 @@ class XMLConfigurator(object):
                 if not tag:
                     offset = index + len(subc) + len(label) + 2
                     if component[offset] == '#':
-                        if component[offset+1:offset+8] == '\&quot;':
+                        if component[offset + 1:offset + 7] == '&quot;':
+                            soff = component[(offset + 7):].find('&quot;')
+                            dsubc = component[
+                                (offset + 1):(offset + 13 + soff)]
+                            defsubc = dsubc[6:-6].replace('\\"', '"')
+                        elif component[offset + 1:offset + 8] == '\&quot;':
                             soff = component[(offset + 8):].find('\&quot;')
-                            dsubc = component[(offset + 1):(offset + 15 + soff)]
+                            dsubc = component[
+                                (offset + 1):(offset + 15 + soff)]
                             defsubc = dsubc[7:-7].replace('\\"', '"')
                         else:
                             dsubc = re.finditer(
