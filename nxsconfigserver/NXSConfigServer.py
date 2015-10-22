@@ -182,7 +182,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def write_STEPDataSources(self, attr):
         self.debug_stream("In write_STEPDataSources()")
         if self.is_STEPDataSources_write_allowed():
-            self.xmlc.stepdatasources = attr.get_write_value()
+            # workaround for bug PyTango #709
+            self.xmlc.stepdatasources = attr.get_write_value() or []
         else:
             self.warn_stream("To change the settings please close the server.")
             raise Exception(
