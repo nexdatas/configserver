@@ -53,18 +53,18 @@ from .XMLConfigurator import XMLConfigurator as XMLC
 
 class NXSConfigServer(PyTango.Device_4Impl):
 
-#------------------------------------------------------------------
-#    Device constructor
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Device constructor
+    #------------------------------------------------------------------
     def __init__(self, cl, name):
         PyTango.Device_4Impl.__init__(self, cl, name)
         self.debug_stream("In __init__()")
         self.xmlc = None
         NXSConfigServer.init_device(self)
 
-#------------------------------------------------------------------
-#    Device destructor
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Device destructor
+    #------------------------------------------------------------------
     def delete_device(self):
         self.debug_stream("In delete_device()")
         if hasattr(self, "xmlc") and self.xmlc:
@@ -74,9 +74,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
             self.xmlc = None
         self.set_state(PyTango.DevState.OFF)
 
-#------------------------------------------------------------------
-#    Device initialization
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Device initialization
+    #------------------------------------------------------------------
     def init_device(self):
         self.debug_stream("In init_device()")
         self.xmlc = XMLC(self)
@@ -84,75 +84,75 @@ class NXSConfigServer(PyTango.Device_4Impl):
         self.get_device_properties(self.get_device_class())
         self.xmlc.versionLabel = self.VersionLabel
 
-#------------------------------------------------------------------
-#    Always excuted hook method
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Always excuted hook method
+    #------------------------------------------------------------------
     def always_executed_hook(self):
         self.debug_stream("In always_excuted_hook()")
 
-#==================================================================
-#
-#    NXSConfigServer read/write attribute methods
-#
-#==================================================================
-#------------------------------------------------------------------
-#    Read Attribute Hardware
-#------------------------------------------------------------------
+    #==================================================================
+    #
+    #    NXSConfigServer read/write attribute methods
+    #
+    #==================================================================
+    #------------------------------------------------------------------
+    #    Read Attribute Hardware
+    #------------------------------------------------------------------
     def read_attr_hardware(self, _):
         self.debug_stream("In read_attr_hardware()")
 
-#------------------------------------------------------------------
-#    Read XMLString attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Read XMLString attribute
+    #------------------------------------------------------------------
     def read_XMLString(self, attr):
         self.debug_stream("In read_XMLString()")
         attr.set_value(self.xmlc.xmlstring)
 
-#------------------------------------------------------------------
-#    Write XMLString attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Write XMLString attribute
+    #------------------------------------------------------------------
     def write_XMLString(self, attr):
         self.debug_stream("In write_XMLString()")
         self.xmlc.xmlstring = attr.get_write_value()
 
-#---- XMLString attribute State Machine -----------------
+    #---- XMLString attribute State Machine -----------------
     def is_XMLString_allowed(self, _):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Read Selection attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Read Selection attribute
+    #------------------------------------------------------------------
     def read_Selection(self, attr):
         self.debug_stream("In read_Selection()")
         attr.set_value(self.xmlc.selection)
 
-#------------------------------------------------------------------
-#    Write Selection attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Write Selection attribute
+    #------------------------------------------------------------------
     def write_Selection(self, attr):
         self.debug_stream("In write_Selection()")
         self.xmlc.selection = attr.get_write_value()
 
-#---- Selection attribute State Machine -----------------
+    #---- Selection attribute State Machine -----------------
     def is_Selection_allowed(self, _):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Read JSONSettings attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Read JSONSettings attribute
+    #------------------------------------------------------------------
     def read_JSONSettings(self, attr):
         self.debug_stream("In read_JSONSettings()")
         attr.set_value(self.xmlc.jsonsettings)
 
-#------------------------------------------------------------------
-#    Write JSONSettings attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Write JSONSettings attribute
+    #------------------------------------------------------------------
     def write_JSONSettings(self, attr):
         self.debug_stream("In write_JSONSettings()")
         if self.is_JSONSettings_write_allowed():
@@ -162,24 +162,24 @@ class NXSConfigServer(PyTango.Device_4Impl):
             raise Exception(
                 "To change the settings please close the server.")
 
-#---- JSONSettings attribute Write State Machine -----------------
+    #---- JSONSettings attribute Write State Machine -----------------
     def is_JSONSettings_write_allowed(self):
         if self.get_state() in [PyTango.DevState.OPEN,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Read STEPDataSources attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Read STEPDataSources attribute
+    #------------------------------------------------------------------
     def read_STEPDataSources(self, attr):
         self.debug_stream("In read_STEPDataSources()")
         # workaround for bug PyTango #709
         attr.set_value(self.xmlc.stepdatasources or [])
 
-#------------------------------------------------------------------
-#    Write STEPDataSources attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Write STEPDataSources attribute
+    #------------------------------------------------------------------
     def write_STEPDataSources(self, attr):
         self.debug_stream("In write_STEPDataSources()")
         if self.is_STEPDataSources_write_allowed():
@@ -190,15 +190,15 @@ class NXSConfigServer(PyTango.Device_4Impl):
             raise Exception(
                 "To change the settings please close the server.")
 
-#---- STEPDataSources attribute Write State Machine -----------------
+    #---- STEPDataSources attribute Write State Machine -----------------
     def is_STEPDataSources_write_allowed(self):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Read Version attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Read Version attribute
+    #------------------------------------------------------------------
     def read_Version(self, attr):
         self.debug_stream("In read_Version()")
 
@@ -206,44 +206,44 @@ class NXSConfigServer(PyTango.Device_4Impl):
         self.xmlc.versionLabel = self.VersionLabel
         attr.set_value(self.xmlc.version)
 
-#---- Version attribute State Machine -----------------
+    #---- Version attribute State Machine -----------------
     def is_Version_allowed(self, _):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#    Read Variables attribute
-#------------------------------------------------------------------
+    #    Read Variables attribute
+    #------------------------------------------------------------------
     def read_Variables(self, attr):
         self.debug_stream("In read_Variables()")
         attr.set_value(self.xmlc.variables)
 
-#------------------------------------------------------------------
-#    Write Variables attribute
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Write Variables attribute
+    #------------------------------------------------------------------
     def write_Variables(self, attr):
         self.debug_stream("In write_Variables()")
         self.xmlc.variables = attr.get_write_value()
 
-#---- Variables attribute State Machine -----------------
+    #---- Variables attribute State Machine -----------------
     def is_Variables_allowed(self, _):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
 
-#==================================================================
-#
-#    NXSConfigServer command methods
-#
-#==================================================================
+    #==================================================================
+    #
+    #    NXSConfigServer command methods
+    #
+    #==================================================================
 
-#------------------------------------------------------------------
-#    Open command:
-#
-#    Description: Opens connection to the database
-#
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Open command:
+    #
+    #    Description: Opens connection to the database
+    #
+    #------------------------------------------------------------------
     def Open(self):
         self.debug_stream("In Open()")
         try:
@@ -257,18 +257,18 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.ON)
 
-#---- Open command State Machine -----------------
+    #---- Open command State Machine -----------------
     def is_Open_allowed(self):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Close command:
-#
-#    Description: Closes connection into the database
-#
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Close command:
+    #
+    #    Description: Closes connection into the database
+    #
+    #------------------------------------------------------------------
     def Close(self):
         self.debug_stream("In Close()")
 
@@ -280,21 +280,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.ON)
 
-#---- Close command State Machine -----------------
+    #---- Close command State Machine -----------------
     def is_Close_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Components command:
-#
-#    Description: Returns a list of required components
-#
-#    argin:  DevVarStringArray    list of component names
-#    argout: DevVarStringArray    list of required components
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Components command:
+    #
+    #    Description: Returns a list of required components
+    #
+    #    argin:  DevVarStringArray    list of component names
+    #    argout: DevVarStringArray    list of required components
+    #------------------------------------------------------------------
     def Components(self, argin):
         self.debug_stream("In Components()")
         try:
@@ -307,21 +307,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- Components command State Machine -----------------
+    #---- Components command State Machine -----------------
     def is_Components_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    Selections command:
-#
-#    Description: Returns a list of required selections
-#
-#    argin:  DevVarStringArray    list of selection names
-#    argout: DevVarStringArray    list of required selections
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Selections command:
+    #
+    #    Description: Returns a list of required selections
+    #
+    #    argin:  DevVarStringArray    list of selection names
+    #    argout: DevVarStringArray    list of required selections
+    #------------------------------------------------------------------
     def Selections(self, argin):
         self.debug_stream("In Selections()")
         try:
@@ -334,21 +334,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- Selections command State Machine -----------------
+    #---- Selections command State Machine -----------------
     def is_Selections_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    InstantiatedComponents command:
-#
-#    Description: Returns a list of required components
-#
-#    argin:  DevVarStringArray    list of component names
-#    argout: DevVarStringArray    list of instantiated components
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    InstantiatedComponents command:
+    #
+    #    Description: Returns a list of required components
+    #
+    #    argin:  DevVarStringArray    list of component names
+    #    argout: DevVarStringArray    list of instantiated components
+    #------------------------------------------------------------------
     def InstantiatedComponents(self, argin):
         self.debug_stream("In InstantiateComponents()")
         try:
@@ -361,21 +361,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- Components command State Machine -----------------
+    #---- Components command State Machine -----------------
     def is_InstantiatedComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    DataSources command:
-#
-#    Description: Return a list of required DataSources
-#
-#    argin:  DevVarStringArray    list of DataSource names
-#    argout: DevVarStringArray    list of required DataSources
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    DataSources command:
+    #
+    #    Description: Return a list of required DataSources
+    #
+    #    argin:  DevVarStringArray    list of DataSource names
+    #    argout: DevVarStringArray    list of required DataSources
+    #------------------------------------------------------------------
     def DataSources(self, argin):
         self.debug_stream("In DataSources()")
         try:
@@ -388,20 +388,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- DataSources command State Machine -----------------
+    #---- DataSources command State Machine -----------------
     def is_DataSources_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    AvailableComponents command:
-#
-#    Description: Returns a list of available component names
-#
-#    argout: DevVarStringArray    list of available component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    AvailableComponents command:
+    #
+    #    Description: Returns a list of available component names
+    #
+    #    argout: DevVarStringArray    list of available component names
+    #------------------------------------------------------------------
     def AvailableComponents(self):
         self.debug_stream("In AvailableComponents()")
         try:
@@ -414,20 +414,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- AvailableComponents command State Machine -----------------
+    #---- AvailableComponents command State Machine -----------------
     def is_AvailableComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    AvailableSelections command:
-#
-#    Description: Returns a list of available selection names
-#
-#    argout: DevVarStringArray    list of available selection names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    AvailableSelections command:
+    #
+    #    Description: Returns a list of available selection names
+    #
+    #    argout: DevVarStringArray    list of available selection names
+    #------------------------------------------------------------------
     def AvailableSelections(self):
         self.debug_stream("In AvailableSelections()")
         try:
@@ -440,20 +440,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- AvailableSelections command State Machine -----------------
+    #---- AvailableSelections command State Machine -----------------
     def is_AvailableSelections_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    AvailableDataSources command:
-#
-#    Description: Returns a list of available DataSource names
-#
-#    argout: DevVarStringArray    list of available DataSource names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    AvailableDataSources command:
+    #
+    #    Description: Returns a list of available DataSource names
+    #
+    #    argout: DevVarStringArray    list of available DataSource names
+    #------------------------------------------------------------------
     def AvailableDataSources(self):
         self.debug_stream("In AvailableDataSources()")
         try:
@@ -466,20 +466,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- AvailableDataSources command State Machine -----------------
+    #---- AvailableDataSources command State Machine -----------------
     def is_AvailableDataSources_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    StoreComponent command:
-#
-#    Description: Stores the component from XMLString
-#
-#    argin:  DevString    component name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    StoreComponent command:
+    #
+    #    Description: Stores the component from XMLString
+    #
+    #    argin:  DevString    component name
+    #------------------------------------------------------------------
     def StoreComponent(self, argin):
         self.debug_stream("In StoreComponent()")
         #    Add your own code here
@@ -491,20 +491,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- StoreComponent command State Machine -----------------
+    #---- StoreComponent command State Machine -----------------
     def is_StoreComponent_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    StoreSelection command:
-#
-#    Description: Stores the selection from XMLString
-#
-#    argin:  DevString    selection name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    StoreSelection command:
+    #
+    #    Description: Stores the selection from XMLString
+    #
+    #    argin:  DevString    selection name
+    #------------------------------------------------------------------
     def StoreSelection(self, argin):
         self.debug_stream("In StoreSelection()")
         #    Add your own code here
@@ -516,20 +516,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- StoreSelection command State Machine -----------------
+    #---- StoreSelection command State Machine -----------------
     def is_StoreSelection_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    StoreDataSource command:
-#
-#    Description: Stores the DataSource from XMLString
-#
-#    argin:  DevString    datasource name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    StoreDataSource command:
+    #
+    #    Description: Stores the DataSource from XMLString
+    #
+    #    argin:  DevString    datasource name
+    #------------------------------------------------------------------
     def StoreDataSource(self, argin):
         self.debug_stream("In StoreDataSource()")
         #    Add your own code here
@@ -541,21 +541,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- StoreDataSource command State Machine -----------------
+    #---- StoreDataSource command State Machine -----------------
     def is_StoreDataSource_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    CreateConfiguration command:
-#
-#    Description: Creates the NDTS configuration script from the
-#                 given components. The result is strored in XMLString
-#
-#    argin:  DevVarStringArray    list of component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    CreateConfiguration command:
+    #
+    #    Description: Creates the NDTS configuration script from the
+    #                 given components. The result is strored in XMLString
+    #
+    #    argin:  DevVarStringArray    list of component names
+    #------------------------------------------------------------------
     def CreateConfiguration(self, argin):
         self.debug_stream("In CreateConfiguration()")
         #    Add your own code here
@@ -567,20 +567,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- CreateConfiguration command State Machine -----------------
+    #---- CreateConfiguration command State Machine -----------------
     def is_CreateConfiguration_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    DeleteComponent command:
-#
-#    Description: Deletes the given component
-#
-#    argin:  DevString    component name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    DeleteComponent command:
+    #
+    #    Description: Deletes the given component
+    #
+    #    argin:  DevString    component name
+    #------------------------------------------------------------------
     def DeleteComponent(self, argin):
         self.debug_stream("In DeleteComponent()")
         #    Add your own code here
@@ -592,20 +592,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- DeleteComponent command State Machine -----------------
+    #---- DeleteComponent command State Machine -----------------
     def is_DeleteComponent_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    DeleteSelection command:
-#
-#    Description: Deletes the given selection
-#
-#    argin:  DevString    selection name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    DeleteSelection command:
+    #
+    #    Description: Deletes the given selection
+    #
+    #    argin:  DevString    selection name
+    #------------------------------------------------------------------
     def DeleteSelection(self, argin):
         self.debug_stream("In DeleteSelection()")
         #    Add your own code here
@@ -617,20 +617,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- DeleteSelection command State Machine -----------------
+    #---- DeleteSelection command State Machine -----------------
     def is_DeleteSelection_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    DeleteDataSource command:
-#
-#    Description: Deletes the given datasource
-#
-#    argin:  DevString    datasource name
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    DeleteDataSource command:
+    #
+    #    Description: Deletes the given datasource
+    #
+    #    argin:  DevString    datasource name
+    #------------------------------------------------------------------
     def DeleteDataSource(self, argin):
         self.debug_stream("In DeleteDataSource()")
         #    Add your own code here
@@ -642,20 +642,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- DeleteDataSource command State Machine -----------------
+    #---- DeleteDataSource command State Machine -----------------
     def is_DeleteDataSource_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    SetMandatoryComponents command:
-#
-#    Description: Sets the mandatory components
-#
-#    argin:  DevVarStringArray    component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    SetMandatoryComponents command:
+    #
+    #    Description: Sets the mandatory components
+    #
+    #    argin:  DevVarStringArray    component names
+    #------------------------------------------------------------------
     def SetMandatoryComponents(self, argin):
         self.debug_stream("In SetMandatoryComponents()")
         #    Add your own code here
@@ -667,19 +667,19 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- SetMandatoryComponents command State Machine -----------------
+    #---- SetMandatoryComponents command State Machine -----------------
     def is_SetMandatoryComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    MandatoryComponents command:
-#
-#    Description: Sets the mandatory components
-#
-#    argout: DevVarStringArray    component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    MandatoryComponents command:
+    #
+    #    Description: Sets the mandatory components
+    #
+    #    argout: DevVarStringArray    component names
+    #------------------------------------------------------------------
     def MandatoryComponents(self):
         self.debug_stream("In MandatoryComponents()")
 
@@ -692,19 +692,20 @@ class NXSConfigServer(PyTango.Device_4Impl):
                 self.set_state(PyTango.DevState.OPEN)
         return argout
 
-#---- MandatoryComponents command State Machine -----------------
+    #---- MandatoryComponents command State Machine -----------------
     def is_MandatoryComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    UnsetMandatoryComponents command:
-#
-#    Description: It removes the given components from the mandatory components
-#
-#    argin:  DevVarStringArray    list of component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    UnsetMandatoryComponents command:
+    #
+    #    Description: It removes the given components
+    #                 from the mandatory components
+    #
+    #    argin:  DevVarStringArray    list of component names
+    #------------------------------------------------------------------
     def UnsetMandatoryComponents(self, argin):
         self.debug_stream("In UnsetMandatoryComponents()")
         try:
@@ -715,21 +716,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
             if self.get_state() == PyTango.DevState.RUNNING:
                 self.set_state(PyTango.DevState.OPEN)
 
-#---- UnsetMandatoryComponents command State Machine -----------------
+    #---- UnsetMandatoryComponents command State Machine -----------------
     def is_UnsetMandatoryComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    ComponentDataSources command:
-#
-#    Description: returns a list of datasource names for a given component
-#
-#    argin:  DevString    component name
-#    argout: DevVarStringArray    list of datasource names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    ComponentDataSources command:
+    #
+    #    Description: returns a list of datasource names for a given component
+    #
+    #    argin:  DevString    component name
+    #    argout: DevVarStringArray    list of datasource names
+    #------------------------------------------------------------------
     def ComponentDataSources(self, argin):
         self.debug_stream("In ComponentDataSources()")
         try:
@@ -742,21 +743,21 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- ComponentDataSources command State Machine -----------------
+    #---- ComponentDataSources command State Machine -----------------
     def is_ComponentDataSources_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
             return False
         return True
 
-#------------------------------------------------------------------
-#    ComponentsDataSources command:
-#
-#    Description: returns a list of datasource names for a given components
-#
-#    argin:  DevVarStringArray    component names
-#    argout: DevVarStringArray    list of datasource names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    ComponentsDataSources command:
+    #
+    #    Description: returns a list of datasource names for a given components
+    #
+    #    argin:  DevVarStringArray    component names
+    #    argout: DevVarStringArray    list of datasource names
+    #------------------------------------------------------------------
     def ComponentsDataSources(self, argin):
         self.debug_stream("In ComponentsDataSources()")
         try:
@@ -769,7 +770,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- ComponentsDataSources command State Machine -----------------
+    #---- ComponentsDataSources command State Machine -----------------
     def is_ComponentsDataSources_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -778,14 +779,14 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
-#------------------------------------------------------------------
-#    ComponentsVariables command:
-#
-#    Description: returns a list of variable names for a given components
-#
-#    argin:  DevVarStringArray    component names
-#    argout: DevVarStringArray    list of variable names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    ComponentsVariables command:
+    #
+    #    Description: returns a list of variable names for a given components
+    #
+    #    argin:  DevVarStringArray    component names
+    #    argout: DevVarStringArray    list of variable names
+    #------------------------------------------------------------------
     def ComponentsVariables(self, argin):
         self.debug_stream("In ComponentsVariables()")
         try:
@@ -798,7 +799,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- ComponentsVariables command State Machine -----------------
+    #---- ComponentsVariables command State Machine -----------------
     def is_ComponentsVariables_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -807,14 +808,14 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
-#------------------------------------------------------------------
-#    ComponentVariables command:
-#
-#    Description: returns a list of variable names for a given component
-#
-#    argin:  DevString    component name
-#    argout: DevVarStringArray    list of variable names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    ComponentVariables command:
+    #
+    #    Description: returns a list of variable names for a given component
+    #
+    #    argin:  DevString    component name
+    #    argout: DevVarStringArray    list of variable names
+    #------------------------------------------------------------------
     def ComponentVariables(self, argin):
         self.debug_stream("In ComponentVariables()")
         try:
@@ -827,7 +828,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- ComponentVariables command State Machine -----------------
+    #---- ComponentVariables command State Machine -----------------
     def is_ComponentVariables_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -836,14 +837,14 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
-#------------------------------------------------------------------
-#    Merge command:
-#
-#    Description: Merges give components
-#
-#    argin:  DevVarStringArray    list of component names
-#    argout: DevString    merged components
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    Merge command:
+    #
+    #    Description: Merges give components
+    #
+    #    argin:  DevVarStringArray    list of component names
+    #    argout: DevString    merged components
+    #------------------------------------------------------------------
     def Merge(self, argin):
         self.debug_stream("In Merge()")
         try:
@@ -855,7 +856,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
                 self.set_state(PyTango.DevState.OPEN)
         return argout
 
-#---- Merge command State Machine -----------------
+    #---- Merge command State Machine -----------------
     def is_Merge_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -864,15 +865,15 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
-#------------------------------------------------------------------
-#    DependentComponents command:
-#
-#    Description: returns a list of dependent component names
-#        for a given components
-#
-#    argin:  DevVarStringArray    component names
-#    argout: DevVarStringArray    list of component names
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    #    DependentComponents command:
+    #
+    #    Description: returns a list of dependent component names
+    #        for a given components
+    #
+    #    argin:  DevVarStringArray    component names
+    #    argout: DevVarStringArray    list of component names
+    #------------------------------------------------------------------
     def DependentComponents(self, argin):
         self.debug_stream("In DependentComponents()")
         try:
@@ -885,7 +886,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
         return argout
 
-#---- DependentComponents command State Machine -----------------
+    #---- DependentComponents command State Machine -----------------
     def is_DependentComponents_allowed(self):
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -1059,10 +1060,10 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         }],
     }
 
-#------------------------------------------------------------------
-##    NXSConfigServerClass Constructor
-#
-#------------------------------------------------------------------
+    #------------------------------------------------------------------
+    ##    NXSConfigServerClass Constructor
+    #
+    #------------------------------------------------------------------
     def __init__(self, name):
         PyTango.DeviceClass.__init__(self, name)
         self.set_type(name)
