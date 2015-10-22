@@ -81,7 +81,7 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.singles, ['strategy', 'dimensions', 'definition', 'record', 'device', 'query', 'database'])
-        self.assertEqual(el.children, {'definition': ('group', 'field', 'attribute', 'link', 'component', 'doc', 'symbols'), 'group': ('group', 'field', 'attribute', 'link', 'component', 'doc'), 'dim': ('datasource', 'strategy', 'doc'), 'dimensions': ('dim', 'doc'), 'attribute': ('datasource', 'strategy', 'enumeration', 'doc', 'dimensions'), 'field': ('attribute', 'datasource', 'doc', 'dimensions', 'enumeration', 'strategy'), 'link': 'doc'})
+        self.assertEqual(el.children, {'definition': ('group', 'field', 'attribute', 'link', 'component', 'doc', 'symbols'), 'group': ('group', 'field', 'attribute', 'link', 'component', 'doc'), 'dim': ('datasource', 'strategy', 'doc'), 'dimensions': ('dim', 'doc'), 'attribute': ('datasource', 'strategy', 'enumeration', 'doc', 'dimensions'), 'field': ('attribute', 'datasource', 'doc', 'dimensions', 'enumeration', 'strategy'), 'link': ('datasource', 'strategy','doc')})
         self.assertEqual(el.uniqueText, ['field','attribute','query','strategy', 'result'])
         self.assertEqual(el.toString(), None)
 

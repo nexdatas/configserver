@@ -1,4 +1,13 @@
-2015-XX-XX Jan Kotanski <jankotan@gmail.com>
+2015-10-20 Jan Kotanski <jankotan@gmail.com>
+	* adding support for variable default value in &quot;
+	* tagged as v1.11.1
+
+2015-10-20 Jan Kotanski <jankotan@gmail.com>
+	* adding support for datasources and strategy in links
+	* adding support for variable default value in \&quot;
+	* tagged as v1.11.0
+
+2015-10-16 Jan Kotanski <jankotan@gmail.com>
 	* adding Streaming functions
 	* fix for killing Test Servers
 	* tagged as v1.10.1

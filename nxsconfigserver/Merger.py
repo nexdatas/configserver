@@ -51,7 +51,7 @@ class Merger(object):
                       "enumeration", "strategy"),
             "group": ("group", "field", "attribute", "link", "component",
                       "doc"),
-            "link": ("doc"),
+            "link": ("datasource", "strategy", "doc"),
             "dim": ("datasource", "strategy", "doc"),
         }
 
