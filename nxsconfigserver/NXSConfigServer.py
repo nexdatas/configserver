@@ -174,7 +174,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
 #------------------------------------------------------------------
     def read_STEPDataSources(self, attr):
         self.debug_stream("In read_STEPDataSources()")
-        attr.set_value(self.xmlc.stepdatasources)
+        # workaround for bug PyTango #709
+        attr.set_value(self.xmlc.stepdatasources or [])
 
 #------------------------------------------------------------------
 #    Write STEPDataSources attribute
