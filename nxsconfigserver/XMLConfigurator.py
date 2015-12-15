@@ -46,7 +46,7 @@ class XMLConfigurator(object):
         ## JSON string with arguments to connect to database
         self.jsonsettings = "{}"
         ## datasources to be switched into STEP mode
-        self.stepdatasources = []
+        self.__stepdatasources = "[]"
 
         ## string with XML variables
         self.variables = "{}"
@@ -86,6 +86,46 @@ class XMLConfigurator(object):
                 Streams.log_info = server.log_info
             if hasattr(self.__server, "log_debug"):
                 Streams.log_debug = server.log_debug
+
+    ## converts string to json list
+    # \param string with list of item or json list
+    # \returns json list
+    @classmethod
+    def __stringToListJson(cls, string):
+        if not string or string == "Not initialised":
+            return "[]"
+        try:
+            acps = json.loads(string)
+            if not isinstance(acps, (list, tuple)):
+                raise AssertionError()
+            jstring = string
+        except (ValueError, AssertionError):
+            lst = re.sub("[:,;]", "  ", string).split()
+            jstring = json.dumps(lst)
+        return jstring
+
+    ## get method for dataSourceGroup attribute
+    # \returns names of STEP dataSources
+    def __getStepDatSources(self):
+        try:
+            lad = json.loads(self.__stepdatasources)
+            assert isinstance(lad, list)
+            return self.__stepdatasources
+        except Exception:
+            return '[]'
+
+    ## set method for dataSourceGroup attribute
+    # \param names of STEP dataSources
+    def __setStepDatSources(self, names):
+        jnames = self.__stringToListJson(names)
+        ## administator data
+        self.__stepdatasources = jnames
+
+    ## the json data string
+    stepdatasources = property(
+        __getStepDatSources,
+        __setStepDatSources,
+        doc='step datasource list')
 
     ## get method for version attribute
     # \returns server and configuration version
@@ -481,7 +521,7 @@ class XMLConfigurator(object):
     # \return merged components
     def __merge(self, xmls):
         mgr = Merger()
-        mgr.stepdatasources = list(self.stepdatasources)
+        mgr.stepdatasources = json.loads(self.stepdatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()

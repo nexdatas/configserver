@@ -20,7 +20,7 @@
 # the unittest runner
 #
 
-import os 
+import os
 import unittest
 
 import ComponentHandlerTest
@@ -35,31 +35,33 @@ try:
 except ImportError, e:
     PYTANGO_AVAILABLE = False
     print "PyTango is not available: %s" % e
-    
+
 ## list of available databases
 DB_AVAILABLE = []
-    
+
 try:
-    import MySQLdb    
+    import MySQLdb
     ## connection arguments to MYSQL DB
-    args = {'host': u'localhost', 'db': u'nxsconfig', 'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
+    args = {'host': u'localhost', 'db': u'nxsconfig',
+            'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
     ## inscance of MySQLdb
     mydb = MySQLdb.connect(**args)
     mydb.close()
     DB_AVAILABLE.append("MYSQL")
 except:
     try:
-        import MySQLdb    
+        import MySQLdb
         from os.path import expanduser
         home = expanduser("~")
         ## connection arguments to MYSQL DB
-        args2 = {'host': u'localhost', 'db': u'nxsconfig', 
-                'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
+        args2 = {'host': u'localhost', 'db': u'nxsconfig',
+                 'read_default_file': u'%s/.my.cnf' % home,
+                 'use_unicode': True}
         ## inscance of MySQLdb
         mydb = MySQLdb.connect(**args2)
         mydb.close()
         DB_AVAILABLE.append("MYSQL")
-        
+
     except ImportError, e:
         print "MYSQL not available: %s" % e
     except Exception, e:
@@ -68,13 +70,12 @@ except:
         print "MYSQL not available"
 
 
-
 if "MYSQL" in DB_AVAILABLE:
     import MYSQLDataBaseTest
     import XMLConfiguratorTest
 
 
-if PYTANGO_AVAILABLE :
+if PYTANGO_AVAILABLE:
     if "MYSQL" in DB_AVAILABLE:
         import NXSConfigServerTest
 
@@ -84,53 +85,43 @@ if PYTANGO_AVAILABLE :
 ## main function
 def main():
 
+    ## test server
+    ts = None
 
-
-
-    ## test server    
-    ts = None    
-    
     ## test suit
     suite = unittest.TestSuite()
 
+    suite.addTests(
+        unittest.defaultTestLoader.loadTestsFromModule(ComponentHandlerTest))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(ComponentHandlerTest) )
+        unittest.defaultTestLoader.loadTestsFromModule(MergerTest))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(MergerTest) )
+        unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest) )
-
-    suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(StreamsTest) )
-
-
-    
+        unittest.defaultTestLoader.loadTestsFromModule(StreamsTest))
 
     if "MYSQL" in DB_AVAILABLE:
         suite.addTests(
-            unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBaseTest) )
+            unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBaseTest))
         suite.addTests(
-            unittest.defaultTestLoader.loadTestsFromModule(XMLConfiguratorTest) )
-
+            unittest.defaultTestLoader.loadTestsFromModule(
+                XMLConfiguratorTest))
 
     if PYTANGO_AVAILABLE:
 
         if "MYSQL" in DB_AVAILABLE:
             suite.addTests(
-                unittest.defaultTestLoader.loadTestsFromModule(NXSConfigServerTest) )
+                unittest.defaultTestLoader.loadTestsFromModule(
+                    NXSConfigServerTest))
 
-
-    
     ## test runner
     runner = unittest.TextTestRunner()
     ## test result
     result = runner.run(suite)
 
- #   if ts:
- #       ts.tearDown()
 
 if __name__ == "__main__":
     main()
