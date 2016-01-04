@@ -1,4 +1,4 @@
-2015-XX-XX Jan Kotanski <jankotan@gmail.com>
+2016-01-04 Jan Kotanski <jankotan@gmail.com>
 	* changing STEPDataSources from SPECTRUM into Json SCALAR
 	  (workaround for PyTango memory leak #758)
 	* tagged as v2.0.0
