@@ -648,6 +648,31 @@ class NXSConfigServer(PyTango.Device_4Impl):
         return True
 
     #------------------------------------------------------------------
+    #    SetComponentDataSources command:
+    #
+    #    Description: set component datasources according to given dictionary
+    #
+    #    argin:  DevString   JSON dict { comp1: {ds: tds, ...}, ...}
+    #------------------------------------------------------------------
+    def SetComponentDataSources(self, argin):
+        self.debug_stream("In SetComponentDataSources()")
+        #    Add your own code here
+        try:
+            self.set_state(PyTango.DevState.RUNNING)
+            self.xmlc.setComponentDataSources(argin)
+            self.set_state(PyTango.DevState.OPEN)
+        finally:
+            if self.get_state() == PyTango.DevState.RUNNING:
+                self.set_state(PyTango.DevState.OPEN)
+
+    #---- SetComponentDataSources command State Machine -----------------
+    def is_SetComponentDataSources_allowed(self):
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+    #------------------------------------------------------------------
     #    SetMandatoryComponents command:
     #
     #    Description: Sets the mandatory components
@@ -963,6 +988,9 @@ class NXSConfigServerClass(PyTango.DeviceClass):
              [PyTango.DevVoid, ""]],
         'DeleteDataSource':
             [[PyTango.DevString, "datasource name"],
+             [PyTango.DevVoid, ""]],
+        'SetComponentDataSources':
+            [[PyTango.DevString, "JSON dict {comp1: {tds1: ds1, ...}, ...}"],
              [PyTango.DevVoid, ""]],
         'SetMandatoryComponents':
             [[PyTango.DevVarStringArray, "component names"],

@@ -52,7 +52,7 @@ class XMLConfigurator(object):
         self.variables = "{}"
 
         ## XML variables
-        self.__variables = {}
+        self.__parameters = {}
 
         ## instance of MYSQLDataBase
         self.__mydb = MyDB()
@@ -65,6 +65,9 @@ class XMLConfigurator(object):
 
         ## component label
         self.__cpLabel = "components"
+
+        ## template label
+        self.__templabel = '__template__'
 
         ## delimiter
         self.__delimiter = '.'
@@ -350,6 +353,41 @@ class XMLConfigurator(object):
         if self.__mydb:
             self.__mydb.deleteDataSource(name)
 
+    ## sets component datasources according to given dict
+    # \param jdict JSON dict of component datasources
+    def setComponentDataSources(self, jdict):
+        cps = json.loads(jdict)
+        avcp = set(self.availableComponents())
+        for cpname, dsdict in cps:
+            if cpname.startswith(self.__templabel):
+                tcpname = cpname
+                cpname = cpname[len(self.__templabel):]
+            else:
+                tcpname = self.__templabel + cpname
+            if tcpname not in avcp:
+                if cpname not in avcp:
+                    raise NonregisteredDBRecordError(
+                        "The %s %s not registered" % (
+                            "component", cpname))
+                else:
+                    tcomp = self.components([cpname])
+                    self.__mydb.storeComponent(tcpname, tcomp)
+            else:
+                tcomp = self.components([tcpname])
+            tcpdss = self.componentDataSources(tcpname)
+            self.__parameters = {}
+            for tds, ds in dsdict:
+                if tds not in tcpdss:
+                    raise NonregisteredDBRecordError(
+                        "The datasource %s absent in the component %s"
+                        % (tds, tcpname))
+                else:
+                    self.__parameters[str(tds)] = "$datasources.%s" % ds
+            comp = self.__attachElements(
+                tcomp, self.__dsLabel,
+                self.__parameters.keys(), self.__getParameter)
+            self.__mydb.storeComponent(cpname, comp)
+
     ## sets the mandtaory components
     # \param names list of component names
     def setMandatoryComponents(self, names):
@@ -370,9 +408,9 @@ class XMLConfigurator(object):
             argout = self.__mydb.mandatory()
         return argout
 
-    def __getVariable(self, name, default=None):
-        if len(name) > 0 and name[0] and name[0] in self.__variables:
-            return [self.__variables[name[0]]]
+    def __getParameter(self, name, default=None):
+        if len(name) > 0 and name[0] and name[0] in self.__parameters:
+            return [self.__parameters[name[0]]]
         elif default is not None:
             return [str(default)]
         else:
@@ -451,8 +489,8 @@ class XMLConfigurator(object):
                     ds = xmlds[0]
                 component = component[0:index] + ("%s" % ds) \
                     + component[
-                    (index + len(subc) + len(label) + 2 +
-                     ((len(dsubc) + 1) if defsubc is not None else 0)):]
+                        (index + len(subc) + len(label) + 2 +
+                         ((len(dsubc) + 1) if defsubc is not None else 0)):]
                 index = component.find("$%s%s" % (label, self.__delimiter))
             else:
                 raise NonregisteredDBRecordError(
@@ -466,14 +504,14 @@ class XMLConfigurator(object):
     def __attachVariables(self, component):
         if not component:
             return
-        self.__variables = {}
+        self.__parameters = {}
         js = json.loads(self.variables)
         targs = dict(js.items())
         for k in targs.keys():
-            self.__variables[str(k)] = str(targs[k])
+            self.__parameters[str(k)] = str(targs[k])
         return self.__attachElements(
             component, self.__varLabel,
-            self.__variables.keys(), self.__getVariable)
+            self.__parameters.keys(), self.__getParameter)
 
     ## attaches variables to component
     # \param component given component
