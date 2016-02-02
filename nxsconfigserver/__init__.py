@@ -22,7 +22,7 @@
 """ Implementation of NexDaTaS Configuration Server """
 
 ## version number
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 
 ## runs the TANGO server
