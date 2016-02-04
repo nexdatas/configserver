@@ -188,13 +188,18 @@ class XMLConfigurator(object):
         comps = []
         if self.__mydb:
             comps = self.__mydb.components(names)
-            comps = [
-                self.__attachVariables(
-                    self.__attachDataSources(
-                        self.__attachVariables(
-                            self.__attachComponents(
-                                cp)))) for cp in comps]
+            comps = [self.__instantiate(cp) for cp in comps]
         return comps
+
+    ## instantiates the xml component
+    # \param xmlcp xml component
+    # \returns instantiated components
+    def __instantiate(self, xmlcp):
+        return self.__attachVariables(
+            self.__attachDataSources(
+                self.__attachVariables(
+                    self.__attachComponents(
+                        xmlcp))))
 
     ## provides a list of datasources from the given component
     # \param name given component
@@ -202,7 +207,7 @@ class XMLConfigurator(object):
     def componentDataSources(self, name):
         cpl = []
         if self.__mydb:
-            cpl = self.__mydb.components([name])
+            cpl = self.instantiatedComponents([name])
             if len(cpl) > 0:
                 handler = ComponentHandler(self.__dsLabel)
                 sax.parseString(str(cpl[0]).strip(), handler)
@@ -214,8 +219,9 @@ class XMLConfigurator(object):
     # \param names given components
     # \returns list of datasource names from the given components
     def componentsDataSources(self, names):
-        cnf = str(self.merge(names)).strip()
-        if cnf:
+        mcnf = str(self.merge(names)).strip()
+        if mcnf:
+            cnf = self.__instantiate(mcnf)
             handler = ComponentHandler(self.__dsLabel)
             sax.parseString(cnf, handler)
             return list(handler.datasources.keys())
@@ -358,25 +364,26 @@ class XMLConfigurator(object):
     def setComponentDataSources(self, jdict):
         cps = json.loads(jdict)
         avcp = set(self.availableComponents())
-        for cpname, dsdict in cps:
+        for cpname, dsdict in cps.items():
             if cpname.startswith(self.__templabel):
                 tcpname = cpname
                 cpname = cpname[len(self.__templabel):]
             else:
                 tcpname = self.__templabel + cpname
+            print avcp
             if tcpname not in avcp:
                 if cpname not in avcp:
                     raise NonregisteredDBRecordError(
                         "The %s %s not registered" % (
                             "component", cpname))
                 else:
-                    tcomp = self.components([cpname])
+                    tcomp = self.components([cpname])[0]
                     self.__mydb.storeComponent(tcpname, tcomp)
             else:
-                tcomp = self.components([tcpname])
+                tcomp = self.components([tcpname])[0]
             tcpdss = self.componentDataSources(tcpname)
             self.__parameters = {}
-            for tds, ds in dsdict:
+            for tds, ds in dsdict.items():
                 if tds not in tcpdss:
                     raise NonregisteredDBRecordError(
                         "The datasource %s absent in the component %s"
@@ -385,7 +392,8 @@ class XMLConfigurator(object):
                     self.__parameters[str(tds)] = "$datasources.%s" % ds
             comp = self.__attachElements(
                 tcomp, self.__dsLabel,
-                self.__parameters.keys(), self.__getParameter)
+                self.__parameters.keys(),
+                self.__getParameter, onlyexisting=True)
             self.__mydb.storeComponent(cpname, comp)
 
     ## sets the mandtaory components
@@ -408,7 +416,7 @@ class XMLConfigurator(object):
             argout = self.__mydb.mandatory()
         return argout
 
-    def __getParameter(self, name, default=None):
+    def __getVariable(self, name, default=None):
         if len(name) > 0 and name[0] and name[0] in self.__parameters:
             return [self.__parameters[name[0]]]
         elif default is not None:
@@ -416,15 +424,22 @@ class XMLConfigurator(object):
         else:
             return [""]
 
+    def __getParameter(self, name, default=None):
+        if len(name) > 0 and name[0] and name[0] in self.__parameters:
+            return [self.__parameters[name[0]]]
+        else:
+            return []
+
     ## attaches elements to component
     # \param component given component
     # \param label element label
     # \param keys element names
     # \param funValue function of element value
     # \param tag xml tag
+    # \param onlyexisting attachElement only if exists
     # \returns component with attached variables
     def __attachElements(self, component, label, keys, funValue,
-                         tag=None):
+                         tag=None, onlyexisting=False):
         index = component.find("$%s%s" % (label, self.__delimiter))
         while index != -1:
             defsubc = None
@@ -468,7 +483,7 @@ class XMLConfigurator(object):
                     xmlds = funValue([name], defsubc)
                 except:
                     xmlds = []
-                if not xmlds:
+                if not onlyexisting and not xmlds:
                     raise NonregisteredDBRecordError(
                         "The %s %s not registered" % (
                             tag if tag else "variable", name))
@@ -486,12 +501,19 @@ class XMLConfigurator(object):
                                 tag if tag else "variable", name))
                     ds = "\n" + ds
                 else:
-                    ds = xmlds[0]
-                component = component[0:index] + ("%s" % ds) \
-                    + component[
-                        (index + len(subc) + len(label) + 2 +
-                         ((len(dsubc) + 1) if defsubc is not None else 0)):]
-                index = component.find("$%s%s" % (label, self.__delimiter))
+                    ds = xmlds[0] if (xmlds or not onlyexisting) else None
+                if xmlds:
+                    component = component[0:index] + ("%s" % ds) \
+                        + component[
+                            (index + len(subc) + len(label) + 2 +
+                             ((len(dsubc) + 1)
+                              if defsubc is not None else 0)):]
+                if not onlyexisting:
+                    index = component.find("$%s%s" % (label, self.__delimiter))
+                else:
+                    index = component.find(
+                        "$%s%s" % (label, self.__delimiter),
+                        index + 1)
             else:
                 raise NonregisteredDBRecordError(
                     "The %s %s not registered" % (
@@ -511,7 +533,7 @@ class XMLConfigurator(object):
             self.__parameters[str(k)] = str(targs[k])
         return self.__attachElements(
             component, self.__varLabel,
-            self.__parameters.keys(), self.__getParameter)
+            self.__parameters.keys(), self.__getVariable)
 
     ## attaches variables to component
     # \param component given component
@@ -568,9 +590,7 @@ class XMLConfigurator(object):
     # \param names list of component names
     def createConfiguration(self, names):
         cnf = self.__mergeVars(names, withVariables=True)
-        cnf = self.__attachComponents(cnf)
-        cnf = self.__attachDataSources(cnf)
-        cnf = self.__attachVariables(cnf)
+        cnf = self.__instantiate(cnf)
         cnfMerged = self.__merge([cnf])
 
         if cnfMerged and hasattr(cnfMerged, "strip") and cnfMerged.strip():

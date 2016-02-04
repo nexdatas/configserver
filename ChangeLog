@@ -1,5 +1,6 @@
-2016-01-XX Jan Kotanski <jankotan@gmail.com>
+2016-02-04 Jan Kotanski <jankotan@gmail.com>
 	* add setComponentDataSources command
+	* instantiate component in Component(s)DataSources commands
 	* tagged as v2.1.0
 
 2016-01-04 Jan Kotanski <jankotan@gmail.com>
