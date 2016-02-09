@@ -1,3 +1,7 @@
+2016-02-09 Jan Kotanski <jankotan@gmail.com>
+	* add switching to POSTRUN in setComponentDataSources
+	* tagged as v2.2.0
+
 2016-02-04 Jan Kotanski <jankotan@gmail.com>
 	* add setComponentDataSources command
 	* instantiate component in Component(s)DataSources commands

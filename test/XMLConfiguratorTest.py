@@ -5745,6 +5745,143 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
+
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_setComponentDataSources_postrun(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        xds  = [
+            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            ]
+
+        odsname = "mcs_test_datasource"
+        avds = el.availableDataSources()
+        self.assertTrue(isinstance(avds, list))
+        dsnp = len(xds)
+        dsname = []
+        for i in range(dsnp):
+
+            dsname.append(odsname +'_%s' % i)
+            while dsname[i] in avds:
+                dsname[i] = dsname[i] + '_%s' %i
+
+        for i in range(dsnp):
+            self.setXML(el, xds[i] % dsname[i])
+            self.assertEqual(el.storeDataSource(dsname[i]), None)
+            self.__ds.append(dsname[i])
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+               % ("$datasources.%s" % dsname[0]),
+               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               % ("$datasources.%s" % dsname[1]),
+               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               % ("$datasources.%s" % dsname[2] ,"$datasources.%s" % dsname[3])
+               ]
+
+        xml2 = [
+            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>',
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>',
+            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
+        ]
+
+        np = len(xml)
+        name = []
+        for i in range(np):
+
+            name.append(oname +'_%s' % i)
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' %i
+#        print avc
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]), None)
+            self.__cmps.append(name[i])
+
+        css = [name[0], name[2]]
+        cmps = []
+        for cs in css:
+            mdss = el.componentDataSources(cs)
+            cmps.extend(mdss)
+        self.assertEqual(cmps,[dsname[0], dsname[2], dsname[3]])
+
+        el.setComponentDataSources(
+            json.dumps({name[0]: {dsname[0]: ""}})
+        )
+        avcp2 = el.availableComponents()
+        tname = ["__template__" + nm for nm in name]
+        self.assertTrue(tname[0] in avcp2)
+        self.__cmps.append(tname[0])
+
+        mdss = el.componentDataSources(tname[0])
+        self.assertEqual(set(mdss), set([dsname[0]]))
+        mdss = el.componentDataSources(name[0])
+        self.assertEqual(set(mdss), set())
+        self.assertEqual(
+            el.components([name[0]])[0],
+            xml2[0] % (""))
+        self.assertEqual(el.components([tname[0]])[0], xml[0])
+        
+        for cs in css:
+            mdss = el.componentDataSources(cs)
+            cmps.extend(mdss)
+        self.assertEqual(
+            set(cmps),
+            set([dsname[0], dsname[2], dsname[3]]))
+
+
+        el.setComponentDataSources(
+            json.dumps({name[0]: {dsname[0]: ""},
+                        name[1]: {dsname[1]: dsname[0]}})
+        )
+        avcp2 = el.availableComponents()
+        tname = ["__template__" + nm for nm in name]
+        self.assertTrue(tname[0] in avcp2)
+        self.assertTrue(tname[1] in avcp2)
+        self.__cmps.append(tname[1])
+
+        mdss = el.componentDataSources(tname[0])
+        self.assertEqual(set(mdss), set([dsname[0]]))
+        mdss = el.componentDataSources(name[0])
+        self.assertEqual(set(mdss), set())
+        self.assertEqual(
+            el.components([name[0]])[0],
+            xml2[0] % (""))
+        self.assertEqual(el.components([tname[0]])[0], xml[0])
+
+        mdss = el.componentDataSources(tname[1])
+        self.assertEqual(set(mdss), set([dsname[1]]))
+        mdss = el.componentDataSources(name[1])
+        self.assertEqual(set(mdss), set([dsname[0]]))
+        self.assertEqual(
+            el.components([name[1]])[0],
+            xml2[1] % ("$datasources.%s" % dsname[0]))
+        self.assertEqual(el.components([tname[1]])[0], xml[1])
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision+11)
+        el.setMandatoryComponents(man)
+        el.close()
+
     ## creatConf test
     # \brief It tests XMLConfigurator
     def test_setComponentDataSources_2(self):

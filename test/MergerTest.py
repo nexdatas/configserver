@@ -537,9 +537,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        self.assertEqual(el.stepdatasources,[])
+        self.assertEqual(el.switchdatasources,[])
         self.assertEqual(el.switchable, ["field", 'attribute'])
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='INIT'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
@@ -553,7 +553,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -565,7 +565,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds2']
+        el.switchdatasources=['ds2']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -577,7 +577,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds1"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -590,9 +590,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         self.assertEqual(el.switchable, ["field", 'attribute'])
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -606,9 +606,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field2", 'attribute1']
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -621,9 +621,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute1']
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -637,9 +637,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=[]
+        el.modesToSwitch= {}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -653,9 +653,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=['INIT']
+        el.modesToSwitch= {'INIT': 'STEP'}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -670,9 +670,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=["FINAL"]
+        el.modesToSwitch= {'FINAL': 'STEP'}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -706,9 +706,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        self.assertEqual(el.stepdatasources,[])
+        self.assertEqual(el.switchdatasources,[])
         self.assertEqual(el.switchable, ["field", 'attribute'])
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'>$datasources.ds1<strategy mode='INIT'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
@@ -722,7 +722,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -734,7 +734,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds2']
+        el.switchdatasources=['ds2']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -746,7 +746,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'>$datasources.ds1<strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2">$datasources.ds1<strategy mode="STEP"/></attribute></group></definition>')
@@ -759,9 +759,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         self.assertEqual(el.switchable, ["field", 'attribute'])
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -775,9 +775,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field2", 'attribute1']
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -790,12 +790,27 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute1']
-        self.assertEqual(el.modesToSwitch, ["INIT", "FINAL"])
+        self.assertEqual(el.modesToSwitch, {'INIT': 'STEP', 'FINAL': 'STEP'})
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_switch_stepdatasources_step_postrun_tags_2_var(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.switchdatasources=['ds1','ds2']
+        el.switchable = ["field", 'attribute']
+        el.modesToSwitch = {'INIT': 'STEP', 'FINAL': 'POSTRUN'}
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="POSTRUN"/></attribute></group></definition>')
 
 
 
@@ -806,9 +821,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=[]
+        el.modesToSwitch = {}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
@@ -822,12 +837,27 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=['INIT']
+        el.modesToSwitch= {'INIT': 'STEP'}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_switch_stepdatasources_postrun_modes_var(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.switchdatasources=['ds1','ds2']
+        el.switchable = ["field", 'attribute']
+        el.modesToSwitch= {'STEP': 'POSTRUN'}
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='STEP' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="POSTRUN"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="FINAL"/></attribute></group></definition>')
 
 
 
@@ -839,9 +869,9 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1','ds2']
+        el.switchdatasources=['ds1','ds2']
         el.switchable = ["field", 'attribute']
-        el.modesToSwitch=["FINAL"]
+        el.modesToSwitch = {'FINAL': 'STEP'}
         self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'>$datasources.ds1<strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'/><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">$datasources.ds1<strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds2"/><strategy mode="STEP"/></attribute></group></definition>')
@@ -854,7 +884,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'><datasource name='ds1'/></datasource><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2"><datasource name="ds1"/></datasource><strategy mode="STEP"/></attribute></group></definition>' )
@@ -866,7 +896,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds2']
+        el.switchdatasources=['ds2']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'><datasource name='ds1'/></datasource><strategy mode='INIT'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2"><datasource name="ds1"/></datasource><strategy mode="STEP"/></attribute></group></definition>' )
@@ -879,7 +909,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds3']
+        el.switchdatasources=['ds3']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'><datasource name='ds1'/></datasource><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2"><datasource name="ds1"/></datasource><strategy mode="FINAL"/></attribute></group></definition>' )
@@ -893,7 +923,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds1']
+        el.switchdatasources=['ds1']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'>$datasources.ds1</datasource><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2">$datasources.ds1</datasource><strategy mode="STEP"/></attribute></group></definition>' )
@@ -905,7 +935,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds2']
+        el.switchdatasources=['ds2']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'>$datasources.ds1</datasource><strategy mode='INIT'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2">$datasources.ds1</datasource><strategy mode="STEP"/></attribute></group></definition>' )
@@ -918,7 +948,7 @@ class MergerTest(unittest.TestCase):
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
 
         el = Merger()
-        el.stepdatasources=['ds3']
+        el.switchdatasources=['ds3']
         self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds2'>$datasources.ds1</datasource><strategy mode='FINAL'/></attribute></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2">$datasources.ds1</datasource><strategy mode="FINAL"/></attribute></group></definition>' )

@@ -370,7 +370,6 @@ class XMLConfigurator(object):
                 cpname = cpname[len(self.__templabel):]
             else:
                 tcpname = self.__templabel + cpname
-            print avcp
             if tcpname not in avcp:
                 if cpname not in avcp:
                     raise NonregisteredDBRecordError(
@@ -383,18 +382,38 @@ class XMLConfigurator(object):
                 tcomp = self.components([tcpname])[0]
             tcpdss = self.componentDataSources(tcpname)
             self.__parameters = {}
+            disds = set()
             for tds, ds in dsdict.items():
                 if tds not in tcpdss:
                     raise NonregisteredDBRecordError(
                         "The datasource %s absent in the component %s"
                         % (tds, tcpname))
-                else:
+                elif ds:
                     self.__parameters[str(tds)] = "$datasources.%s" % ds
+                else:
+                    self.__parameters[str(tds)] = ""
+                    disds.add(str(tds))
+            if disds:
+                tcomp = self.__commentDataSources(tcomp, disds)
             comp = self.__attachElements(
                 tcomp, self.__dsLabel,
                 self.__parameters.keys(),
                 self.__getParameter, onlyexisting=True)
             self.__mydb.storeComponent(cpname, comp)
+
+    ## switch diable datasources into POSTRUN mode
+    # \param comp xml component
+    # \param disds list of disable datasources
+    def __commentDataSources(self, comp, disds):
+        mgr = Merger()
+        mgr.switchdatasources = list(disds) or []
+        mgr.modesToSwitch = {
+            "INIT": "POSTRUN",
+            "FINAL": "POSTRUN",
+            "STEP": "POSTRUN"}
+        mgr.collect([comp])
+        mgr.merge()
+        return mgr.toString()
 
     ## sets the mandtaory components
     # \param names list of component names
@@ -493,12 +512,11 @@ class XMLConfigurator(object):
                     if not domds:
                         raise NonregisteredDBRecordError(
                             "The %s %s not registered in the DataBase" % (
-                                tag if tag else "variable", name))
+                                tag, name))
                     ds = domds[0].toxml()
                     if not ds:
                         raise NonregisteredDBRecordError(
-                            "The %s %s not registered" % (
-                                tag if tag else "variable", name))
+                            "The %s %s not registered" % (tag, name))
                     ds = "\n" + ds
                 else:
                     ds = xmlds[0] if (xmlds or not onlyexisting) else None
@@ -581,7 +599,7 @@ class XMLConfigurator(object):
     # \return merged components
     def __merge(self, xmls):
         mgr = Merger()
-        mgr.stepdatasources = json.loads(self.stepdatasources)
+        mgr.switchdatasources = json.loads(self.stepdatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()

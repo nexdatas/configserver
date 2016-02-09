@@ -62,10 +62,13 @@ class Merger(object):
         self.switchable = ["field", 'attribute']
 
         ## strategy modes to switch
-        self.modesToSwitch = ["INIT", "FINAL"]
+        self.modesToSwitch = {
+            "INIT": "STEP",
+            "FINAL": "STEP"
+        }
 
         ## aliased to switch to STEP mode
-        self.stepdatasources = []
+        self.switchdatasources = []
 
         self.__dsvars = "$datasources."
 
@@ -123,7 +126,7 @@ class Merger(object):
         tags = self.__checkAttributes(elem1, elem2)
         if tags:
             status = False
-            if (tagName in self.singles or (name1 and name1 == name2)):
+            if tagName in self.singles or (name1 and name1 == name2):
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: "
                     % str(tags), [elem1, elem2])
@@ -248,7 +251,7 @@ class Merger(object):
             except:
                 subc = ''
             name = subc.strip() if subc else ""
-            if name in self.stepdatasources:
+            if name in self.switchdatasources:
                 dsnode = node
                 dsname = name
                 break
@@ -268,13 +271,12 @@ class Merger(object):
             dsname, dsnode = self.__getTextDataSource(node)
 
             children = node.childNodes
-#            cpname = node.getAttribute("name")
             for child in children:
                 cName = unicode(child.nodeName) \
                     if isinstance(child, Element) else ""
                 if cName == 'datasource':
                     dsname = child.getAttribute("name")
-                    if dsname in self.stepdatasources:
+                    if dsname in self.switchdatasources:
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(child)
@@ -285,20 +287,18 @@ class Merger(object):
                                 if isinstance(gchild, Element) else ""
                             if gcName == 'datasource':
                                 gdsname = gchild.getAttribute("name")
-                                if gdsname in self.stepdatasources:
+                                if gdsname in self.switchdatasources:
                                     dsnode = child
-#                        if not dsnode:
-#                            break
                 elif cName == 'strategy':
                     mode = child.getAttribute("mode")
-                    if mode in self.modesToSwitch:
+                    if mode in self.modesToSwitch.keys():
                         stnode = child
                     else:
                         break
                 if stnode and dsnode:
                     break
             if stnode and dsnode:
-                stnode.setAttribute("mode", "STEP")
+                stnode.setAttribute("mode", self.modesToSwitch[mode])
 
     ## collects the given components in one DOM tree
     # \param components given components
