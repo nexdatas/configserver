@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
@@ -16,9 +15,7 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxsconfigserver nexdatas
-## \file Merger.py
-# Class for merging DOM component trees
+#
 
 """ Classes for merging DOM component trees """
 
@@ -28,19 +25,21 @@ from xml.dom.minidom import parseString, Element
 from .Errors import IncompatibleNodeError, UndefinedTagError
 
 
-## merges the components
 class Merger(object):
+    """ merges the components
+    """
 
-    ## constructor
     def __init__(self):
+        """ consturctor
+        """
 
-        ## DOM root node
+        #: DOM root node
         self.__root = None
-        ## tags which cannot have the same siblings
+        #: tags which cannot have the same siblings
         self.singles = ['strategy', 'dimensions', 'definition',
                         'record', 'device', 'query', 'database']
 
-        ## allowed children
+        #: allowed children
         self.children = {
             "attribute": ("datasource", "strategy", "enumeration",
                           "doc", "dimensions"),
@@ -55,27 +54,30 @@ class Merger(object):
             "dim": ("datasource", "strategy", "doc"),
         }
 
-        ## with unique text
+        #: with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
-        ## node which can have switched strategy
+        #: node which can have switched strategy
         self.switchable = ["field", 'attribute']
 
-        ## strategy modes to switch
+        #: strategy modes to switch
         self.modesToSwitch = {
             "INIT": "STEP",
             "FINAL": "STEP"
         }
 
-        ## aliased to switch to STEP mode
+        #: aliased to switch to STEP mode
         self.switchdatasources = []
 
         self.__dsvars = "$datasources."
 
-    ## collects text from text child nodes
-    # \param node parent node
     @classmethod
     def __getText(cls, node):
+        """ collects text from text child nodes
+
+        :param node: parent node
+
+        """
         text = ""
         if node:
             child = node.firstChild
@@ -85,10 +87,12 @@ class Merger(object):
                 child = child.nextSibling
         return text
 
-    ## gets ancestors form the xml tree
-    # \param node dom node
-    # \returns xml path
     def __getAncestors(self, node):
+        """ gets ancestors form the xml tree
+
+       :param node: dom node
+       :returns: xml path
+        """
         res = ""
 
         name = node.getAttribute("name") if isinstance(node, Element) else ""
@@ -101,11 +105,13 @@ class Merger(object):
             res += ":" + name
         return res
 
-    ## checks if two elements are mergeable
-    # \param elem1 first element
-    # \param elem2 second element
-    # \returns bool varaible if two elements are mergeable
     def __areMergeable(self, elem1, elem2):
+        """ checks if two elements are mergeable
+
+       :param elem1: first element
+       :param elem2: second element
+       :returns: bool varaible if two elements are mergeable
+        """
 
         if elem1.nodeName != elem2.nodeName:
             return False
@@ -142,11 +148,13 @@ class Merger(object):
 
         return status
 
-    ## checks if two elements are mergeable
-    # \param elem1 first element
-    # \param elem2 second element
-    # \returns tags with not mergeable attributes
     def __checkAttributes(self, elem1, elem2):
+        """ checks if two elements are mergeable
+
+       :param elem1: first element
+       :param elem2: second element
+       :returns: tags with not mergeable attributes
+        """
         tags = []
         attr1 = elem1.attributes
         attr2 = elem2.attributes
@@ -160,11 +168,13 @@ class Merger(object):
                                  str(at1.nodeValue), str(at2.nodeValue)))
         return tags
 
-    ## merges two dom elements
-    # \param elem1 first element
-    # \param elem2 second element
     @classmethod
     def __mergeNodes(cls, elem1, elem2):
+        """ merges two dom elements
+
+       :param elem1: first element
+       :param elem2: second element
+        """
         attr2 = elem2.attributes
         texts = []
 
@@ -196,9 +206,11 @@ class Merger(object):
         parent = elem2.parentNode
         parent.removeChild(elem2)
 
-    ## merge the given node
-    # \param node the given node
     def __mergeChildren(self, node):
+        """ merge the given node
+
+       :param node: the given node
+        """
         if node:
 
             children = node.childNodes
@@ -235,10 +247,12 @@ class Merger(object):
                     self.__switch(child)
                 child = child.nextSibling
 
-    ## find first datasources node and name in text nodes of the node
-    # \param node the parent node
-    # \returns (node, name) of the searched datasource
     def __getTextDataSource(self, node):
+        """ find first datasources node and name in text nodes of the node
+
+       :param node: the parent node
+       :returns: (node, name) of the searched datasource
+        """
         dsname = None
         dsnode = None
         text = unicode(self.__getText(node)).strip()
@@ -259,9 +273,11 @@ class Merger(object):
             index = text.find(self.__dsvars)
         return dsname, dsnode
 
-    ## switch the given node to step mode
-    # \param node the given node
     def __switch(self, node):
+        """ switch the given node to step mode
+
+       :param node: the given node
+        """
         if node:
             stnode = None
             mode = None
@@ -300,9 +316,11 @@ class Merger(object):
             if stnode and dsnode:
                 stnode.setAttribute("mode", self.modesToSwitch[mode])
 
-    ## collects the given components in one DOM tree
-    # \param components given components
     def collect(self, components):
+        """ collects the given components in one DOM tree
+
+       :param components: given components
+        """
         self.__root = None
         rootDef = None
         for cp in components:
@@ -330,15 +348,17 @@ class Merger(object):
                         icd = self.__root.importNode(cd, True)
                         rootDef.appendChild(icd)
 
-    ## Converts DOM trer to string
-    #  \returns DOM tree in XML string
     def toString(self):
+        """ Converts DOM trer to string
+
+        :returns: DOM tree in XML string
+        """
         if self.__root:
             return str(self.__root.toxml())
 
-    ## performs the merging operation
-    # \brief It calls mergeChildern() method
     def merge(self):
+        """ performs the merging operation
+        """
         self.__mergeChildren(self.__root)
 
 

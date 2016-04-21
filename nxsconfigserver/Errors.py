@@ -15,37 +15,42 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxsconfigserver nexdatas
-## \file Errors.py
-# Error classes
+#
 
 """ Error classes  """
 
 
-## Incompatible class Exception
 class IncompatibleNodeError(Exception):
+    """ Incompatible class Exception
+    """
 
-    ## constructor
-    # \param value string with error message
-    # \param nodes list of nodes with errors
     def __init__(self, value, nodes=None):
+        """ constructor
+
+        :param value: string with error message
+        :param nodes: list of nodes with errors
+        """
         Exception.__init__(self, value)
-        ## exception value
+        #: exception value
         self.value = value
-        ## nodes with errors
+        #: nodes with errors
         self.nodes = nodes if nodes else []
 
-    ## tostring method
-    # \brief It shows the error message
     def __str__(self):
+        """ tostring method
+
+        :brief: It shows the error message
+        """
         return repr(self.value)
 
 
-## Exception for undefined tags
 class UndefinedTagError(Exception):
+    """ Exception for undefined tags
+    """
     pass
 
 
-##  Error for non-existing database records
 class NonregisteredDBRecordError(Exception):
+    """ Error for non-existing database records
+    """
     pass

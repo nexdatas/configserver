@@ -15,9 +15,7 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package nxsconfigserver nexdatas
-## \file ComponentParser.py
-# Class for searching database names in components
+#
 
 """ Parser for searching database names in components """
 
@@ -28,42 +26,51 @@ import os
 import re
 
 
-## SAX2 parser
 class ComponentHandler(sax.ContentHandler):
+    """ SAX2 parser
+    """
 
-    ## constructor
-    # \brief It constructs parser and sets variables to default values
     def __init__(self, dsLabel="datasources", delimiter='.'):
+        """ constructor
+
+        :param dsLabel: variable element label, e.g. 'datasources'
+        :param delimiter: variable element delimiter, e.g. '.'
+        :brief: It constructs parser and sets variables to default values
+        """
         sax.ContentHandler.__init__(self)
-        ##  dictionary with datasources
+        #:  dictionary with datasources
         self.datasources = {}
-        ## tag name
+        #: tag name
         self.__tag = "datasource"
-        ## delimiter
+        #: delimiter
         self.__delimiter = delimiter
-        ## unnamed datasource counter
+        #: unnamed datasource counter
         self.__counter = 0
-        ## datasource label
+        #: datasource label
         self.__dsLabel = dsLabel
-        ## containing datasources
+        #: containing datasources
         self.__withDS = ["field", "attribute"]
-        ## content flag
+        #: content flag
         self.__stack = []
-        ## content
+        #: content
         self.__content = {}
         for tag in self.__withDS:
             self.__content[tag] = []
 
-    ## adds the tag content
-    # \param content partial content of the tag
     def characters(self, content):
+        """ adds the tag content
+
+        param content: partial content of the tag
+        """
         if self.__stack[-1] in self.__withDS:
             self.__content[self.__stack[-1]].append(content)
 
-    ##  parses the opening tag
-    # \param name tag name
-    # \param attrs attribute dictionary
     def startElement(self, name, attrs):
+        """ parses the opening tag
+
+        :param name: tag name
+        :param attrs: attribute dictionary
+        """
         self.__stack.append(name)
         if self.__tag and name == self.__tag:
             if "name" in attrs.keys():
@@ -77,9 +84,11 @@ class ComponentHandler(sax.ContentHandler):
                 aType = ""
             self.datasources[aName] = aType
 
-    ## parses the closing tag
-    # \param name tag name
     def endElement(self, name):
+        """ parses the closing tag
+
+        :param name: tag name
+        """
         tag = self.__stack[-1]
         if tag in self.__withDS:
             text = "".join(self.__content[tag]).strip()
@@ -105,7 +114,7 @@ class ComponentHandler(sax.ContentHandler):
 
 if __name__ == "__main__":
 
-    ## second test xml
+    #: second test xml
     www2 = """
 <?xml version='1.0'?>
 <definition type="" name="">
@@ -157,7 +166,7 @@ if __name__ == "__main__":
 <doc>definition</doc>
 </definition>
 """
-    ## first test XML
+    #: first test XML
     www = """
 <?xml version='1.0'?>
 <definition type="" name="">
@@ -213,20 +222,20 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("usage: ComponentParser.py  <XMLinput>")
     else:
-        ## input XML file
+        #: input XML file
         fi = sys.argv[1]
         if os.path.exists(fi):
 
-            ## a parser object
+            #: a parser object
             parser = sax.make_parser()
 
-            ## a SAX2 handler object
+            #: a SAX2 handler object
             handler = ComponentHandler()
             parser.setContentHandler(handler)
             parser.parse(open(fi))
             print(handler.datasources)
 
-            ## a SAX2 handler object
+            #: a SAX2 handler object
             handler = ComponentHandler()
             sax.parseString(str(www2).strip(), handler)
             print(handler.datasources)

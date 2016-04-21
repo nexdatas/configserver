@@ -1,3 +1,8 @@
+2016-02-XX Jan Kotanski <jankotan@gmail.com>
+	* switch to sphinx documentation
+	* move version into Release module
+	* tagged as v2.3.0
+
 2016-02-09 Jan Kotanski <jankotan@gmail.com>
 	* add switching to POSTRUN in setComponentDataSources
 	* tagged as v2.2.0

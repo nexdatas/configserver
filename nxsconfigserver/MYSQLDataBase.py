@@ -15,9 +15,6 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package mcs nexdatas.configserver
-## \file MYSQLDataBase.py
-# Allows the access to MYSQL database with NDTS configuration files
 #
 
 """ Providesthe access to MYSQL database with NDTS configuration files """
@@ -28,25 +25,33 @@ from .Errors import NonregisteredDBRecordError
 from . import Streams
 
 
-## XML Configurer
 class MYSQLDataBase(object):
-    ## constructor
-    # \brief It creates the MYSQLDataBase instance
+    """ XML Configurer
+    """
+
     def __init__(self):
-        ## db instance
+        """ constructor
+
+        :brief: It creates the MYSQLDataBase instance
+        """
+        #: db instance
         self.__db = None
         self.__args = None
 
-    ## connects to the database
-    # \param args arguments of the MySQLdb connect method
     def connect(self, args):
+        """ connects to the database
+
+        :param args: arguments of the MySQLdb connect method
+        """
         Streams.info("MYSQLDataBase::connect() - connect: %s" % args)
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
-    ## closes database connection
-    # \brief It closes connection to the open database
     def close(self):
+        """ closes database connection
+
+        :brief: It closes connection to the open database
+        """
         if self.__db:
             try:
                 self.__db.ping(True)
@@ -55,9 +60,12 @@ class MYSQLDataBase(object):
             except:
                 pass
 
-    ## provides DB configuration version
-    # \returns DB configuration version
     def version(self):
+        """ provides DB configuration version
+
+        :returns: DB configuration version
+
+        """
         argout = None
         if self.__db is not None:
             try:
@@ -79,17 +87,21 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
-    ## adds escape characters to string
-    # \param string
-    # \retruns string with excape characters
     @classmethod
     def __escape(cls, string):
+        """ adds escape characters to string
+
+        :param string: input string
+        :retruns: string with excape characters
+        """
         return string.replace("\\", "\\\\").replace("'", "\\\'")
 
-    ## increases revision number
-    # \param cursor transaction cursor
     @classmethod
     def __incRevision(cls, cursor):
+        """ increases revision number
+
+        :param cursor: transaction cursor
+        """
         cursor.execute(
             "select value from properties where name = 'revision';")
         data = cursor.fetchone()
@@ -98,10 +110,12 @@ class MYSQLDataBase(object):
             "update properties set value = '%s' where name = 'revision';"
             % (cls.__escape(new)))
 
-    ## fetches the required components
-    # \param names list of component names
-    # \returns list of given components
     def components(self, names):
+        """ fetches the required components
+
+        :param names: list of component names
+        :returns: list of given components
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -124,10 +138,12 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
-    ## fetches the required selections
-    # \param names list of selection names
-    # \returns list of given selections
     def selections(self, names):
+        """ fetches the required selections
+
+        :param names: list of selection names
+        :returns: list of given selections
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -150,10 +166,12 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
-    ## fetches the required datasources
-    # \param names list of datasource names
-    # \returns list of given datasources
     def dataSources(self, names):
+        """ fetches the required datasources
+
+        :param names: list of datasource names
+        :returns: list of given datasources
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -177,9 +195,11 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
-    ## fetches the names of available components
-    # \returns list of available components
     def availableComponents(self):
+        """ fetches the names of available components
+
+        :returns: list of available components
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -195,9 +215,11 @@ class MYSQLDataBase(object):
 
         return argout
 
-    ## fetches the names of available selections
-    # \returns list of available selections
     def availableSelections(self):
+        """ fetches the names of available selections
+
+        :returns: list of available selections
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -213,9 +235,11 @@ class MYSQLDataBase(object):
 
         return argout
 
-    ## fetches the names of available datasources
-    # \returns list of available datasources
     def availableDataSources(self):
+        """ fetches the names of available datasources
+
+        :returns: list of available datasources
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -232,10 +256,12 @@ class MYSQLDataBase(object):
                 raise
         return argout
 
-    ## stores the given component
-    # \param name name of the component to store
-    # \param xml component tree
     def storeComponent(self, name, xml):
+        """ stores the given component
+
+        :param name: name of the component to store
+        :param xml: component tree
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -274,10 +300,12 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::storeComponent()"
                          " - store component %s" % name)
 
-    ## stores the given datasource
-    # \param name name of the datasource to store
-    # \param xml datasource tree
     def storeDataSource(self, name, xml):
+        """ stores the given datasource
+
+        :param name: name of the datasource to store
+        :param xml: datasource tree
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -316,10 +344,13 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::storeDataSource() "
                          "- store datasource %s" % name)
 
-    ## stores the given selection
-    # \param name name of the selection to store
-    # \param selection selection tree
     def storeSelection(self, name, selection):
+        """ stores the given selection
+
+        :param name: name of the selection to store
+        :param selection: selection tree
+
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -358,9 +389,11 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::storeSelection() "
                          "- store selection %s" % name)
 
-    ## deletes the given component
-    # \param name of the component to delete
     def deleteComponent(self, name):
+        """ deletes the given component
+
+        :param name: name of the component to delete
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -387,9 +420,11 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::deleteComponent() "
                          "- delete component %s" % name)
 
-    ## deletes the given selection
-    # \param name of the selection to delete
     def deleteSelection(self, name):
+        """ deletes the given selection
+
+        :param name: name of the selection to delete
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -416,9 +451,11 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::deleteSelection() "
                          "- delete selection %s" % name)
 
-    ## sets components as mandatory
-    # \param name of the component
     def setMandatory(self, name):
+        """ sets components as mandatory
+
+        :param name: name of the component
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -445,9 +482,11 @@ class MYSQLDataBase(object):
             Streams.info(
                 "MYSQLDataBase::setMandatory() - component %s" % name)
 
-    ## sets components as not mandatory
-    # \param name of the component to delete
     def unsetMandatory(self, name):
+        """sets components as not mandatory
+
+        :param name: name of the component to delete
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)
@@ -477,9 +516,11 @@ class MYSQLDataBase(object):
             Streams.info("MYSQLDataBase::unsetMandatory() "
                          "- component %s" % name)
 
-    ## provides mandatory components
-    # \returns list of mandatory components
     def mandatory(self):
+        """ provides mandatory components
+
+        :returns: list of mandatory components
+        """
         argout = []
         if self.__db is not None:
             try:
@@ -497,9 +538,11 @@ class MYSQLDataBase(object):
 
         return argout
 
-    ## deletes the given datasource
-    # \param name of the datasource to delete
     def deleteDataSource(self, name):
+        """ deletes the given datasource
+
+        :param name: name of the datasource to delete
+        """
         if self.__db is not None:
             try:
                 self.__db.ping(True)

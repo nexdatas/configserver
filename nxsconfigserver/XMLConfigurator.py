@@ -15,67 +15,69 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package mcs nexdatas.configserver
-## \file XMLConfigurator.py
-# Allows the access to a database with NDTS configuration files
 #
 
 """ Provides the access to a database with NDTS configuration files """
 
 import json
 import re
-import nxsconfigserver
 from xml import sax
 from xml.dom.minidom import parseString
+
 from .MYSQLDataBase import MYSQLDataBase as MyDB
 from .ComponentParser import ComponentHandler
 from .Merger import Merger
 from .Errors import NonregisteredDBRecordError
+from .Release import __version__
 from . import Streams
 
-
-## XML Configurator
 class XMLConfigurator(object):
-    ## constructor
-    # \brief It allows to construct XML configurer object
+    """ XML Configurator
+    """
     def __init__(self, server=None):
-        ## XML config string
+        """ constructor
+
+        :param server: NXSConfigServer instance
+        :brief: It allows to construct XML configurer object
+
+        """
+        #: XML config string
         self.xmlstring = ""
-        ## component selection
+        #: component selection
         self.selection = "{}"
-        ## JSON string with arguments to connect to database
+        #: JSON string with arguments to connect to database
         self.jsonsettings = "{}"
-        ## datasources to be switched into STEP mode
+        #: datasources to be switched into STEP mode
         self.__stepdatasources = "[]"
 
-        ## string with XML variables
+        #: string with XML variables
         self.variables = "{}"
 
-        ## XML variables
+        #: XML variables
         self.__parameters = {}
 
-        ## instance of MYSQLDataBase
+        #: instance of MYSQLDataBase
         self.__mydb = MyDB()
 
-        ## datasource label
+        #: datasource label
         self.__dsLabel = "datasources"
 
-        ## variable label
+        #: variable label
         self.__varLabel = "var"
 
-        ## component label
+        #: component label
         self.__cpLabel = "components"
 
-        ## template label
+        #: template label
         self.__templabel = '__template__'
 
-        ## delimiter
+        #: delimiter
         self.__delimiter = '.'
 
-        ## version label
+        #: version label
         self.versionLabel = "XCS"
 
-        ## Tango server
+        #: Tango server
         self.__server = server
 
         if server:
@@ -90,11 +92,13 @@ class XMLConfigurator(object):
             if hasattr(self.__server, "log_debug"):
                 Streams.log_debug = server.log_debug
 
-    ## converts string to json list
-    # \param string with list of item or json list
-    # \returns json list
     @classmethod
     def __stringToListJson(cls, string):
+        """ converts string to json list
+
+        :param string: with list of item or json list
+        :returns: json list
+        """
         if not string or string == "Not initialised":
             return "[]"
         try:
@@ -107,9 +111,11 @@ class XMLConfigurator(object):
             jstring = json.dumps(lst)
         return jstring
 
-    ## get method for dataSourceGroup attribute
-    # \returns names of STEP dataSources
     def __getStepDatSources(self):
+        """ get method for dataSourceGroup attribute
+
+        :returns: names of STEP dataSources
+        """
         try:
             lad = json.loads(self.__stepdatasources)
             assert isinstance(lad, list)
@@ -117,33 +123,39 @@ class XMLConfigurator(object):
         except Exception:
             return '[]'
 
-    ## set method for dataSourceGroup attribute
-    # \param names of STEP dataSources
     def __setStepDatSources(self, names):
+        """ set method for dataSourceGroup attribute
+
+        :param names: of STEP dataSources
+        """
         jnames = self.__stringToListJson(names)
-        ## administator data
+        #: administator data
         self.__stepdatasources = jnames
 
-    ## the json data string
+    #: the json data string
     stepdatasources = property(
         __getStepDatSources,
         __setStepDatSources,
         doc='step datasource list')
 
-    ## get method for version attribute
-    # \returns server and configuration version
     def __getVersion(self):
-        version = nxsconfigserver.__version__ + \
+        """ get method for version attribute
+
+        :returns: server and configuration version
+        """
+        version = __version__ + \
             "." + self.versionLabel + "." + self.__mydb.version()
         return version
 
-    ## configuration version
+    #: configuration version
     version = property(__getVersion,
                        doc='configuration version')
 
-    ## opens database connection
-    # \brief It opens connection to the give database by JSON string
     def open(self):
+        """ opens database connection
+
+        :brief: It opens connection to the give database by JSON string
+        """
         args = {}
         Streams.info("XMLConfigurator::open() - Open connection")
         try:
@@ -156,55 +168,69 @@ class XMLConfigurator(object):
             args = {}
         self.__mydb.connect(args)
 
-    ## closes database connection
-    # \brief It closes connection to the open database
     def close(self):
+        """ closes database connection
+
+        :brief: It closes connection to the open database
+        """
+
         if self.__mydb:
             self.__mydb.close()
         Streams.info("XMLConfigurator::close() - Close connection")
 
-    ## fetches the required components
-    # \param names list of component names
-    # \returns list of given components
     def components(self, names):
+        """ fetches the required components
+
+        :param names: list of component names
+        :returns: list of given components
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.components(names)
         return argout
 
-    ## fetches the required selections
-    # \param names list of selection names
-    # \returns list of given selections
     def selections(self, names):
+        """ fetches the required selections
+
+        :param names: list of selection names
+        :returns: list of given selections
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.selections(names)
         return argout
 
-    ## instantiates the required components
-    # \param names list of component names
-    # \returns list of instantiated components
     def instantiatedComponents(self, names):
+        """ instantiates the required components
+
+        :param names: list of component names
+        :returns: list of instantiated components
+        """
         comps = []
         if self.__mydb:
             comps = self.__mydb.components(names)
             comps = [self.__instantiate(cp) for cp in comps]
         return comps
 
-    ## instantiates the xml component
-    # \param xmlcp xml component
-    # \returns instantiated components
     def __instantiate(self, xmlcp):
+        """ instantiates the xml component
+
+        :param xmlcp: xml component
+        :returns: instantiated components
+
+        """
         return self.__attachVariables(
             self.__attachDataSources(
                 self.__attachVariables(
                     self.__attachComponents(
                         xmlcp))))
 
-    ## provides a list of datasources from the given component
-    # \param name given component
-    # \returns list of datasource names from the given component
     def componentDataSources(self, name):
+        """ provides a list of datasources from the given component
+
+        :param name: given component
+        :returns: list of datasource names from the given component
+        """
         cpl = []
         if self.__mydb:
             cpl = self.instantiatedComponents([name])
@@ -215,10 +241,12 @@ class XMLConfigurator(object):
             else:
                 return []
 
-    ## provides a list of datasources from the given components
-    # \param names given components
-    # \returns list of datasource names from the given components
     def componentsDataSources(self, names):
+        """ provides a list of datasources from the given components
+
+        :param names: given components
+        :returns: list of datasource names from the given components
+        """
         mcnf = str(self.merge(names)).strip()
         if mcnf:
             cnf = self.__instantiate(mcnf)
@@ -228,11 +256,13 @@ class XMLConfigurator(object):
         else:
             return []
 
-    ## provides a list of elements from the given text
-    # \param text give text
-    # \param label element label
-    # \returns list of element names from the given text
     def __findElements(self, text, label):
+        """ provides a list of elements from the given text
+
+        :param text: give text
+        :param label: element label
+        :returns: list of element names from the given text
+        """
         variables = []
         index = text.find("$%s%s" % (
             label, self.__delimiter))
@@ -252,10 +282,12 @@ class XMLConfigurator(object):
 
         return variables
 
-    ## provides a list of variables from the given components
-    # \param name given component
-    # \returns list of variable names from the given components
     def componentVariables(self, name):
+        """ provides a list of variables from the given components
+
+        :param name: given component
+        :returns: list of variable names from the given components
+        """
         cpl = []
         if self.__mydb:
             cpl = self.__mydb.components([name])
@@ -265,21 +297,25 @@ class XMLConfigurator(object):
             else:
                 return []
 
-    ## provides a tuple of variables from the given components
-    # \param names given components
-    # \returns tuple of variable names from the given components
     def componentsVariables(self, names):
+        """ provides a tuple of variables from the given components
+
+        :param names: given components
+        :returns: tuple of variable names from the given components
+        """
         cnf = str(self.merge(names)).strip()
         if cnf:
             return list(self.__findElements(cnf, self.__varLabel))
         else:
             return []
 
-    ## provides dependent components
-    # \param names component names to check
-    # \param deps dictionery with dependent components
-    # \returns list of depending components
     def dependentComponents(self, names, deps=None):
+        """ provides dependent components
+
+        :param names: component names to check
+        :param deps: dictionery with dependent components
+        :returns: list of depending components
+        """
         dps = deps if deps else {}
         for nm in names:
             if nm not in dps:
@@ -290,78 +326,101 @@ class XMLConfigurator(object):
                     self.dependentComponents(dps[nm], dps)
         return dps.keys()
 
-    ## fetches the required datasources
-    # \param names list of datasource names
-    # \returns list of given datasources
     def dataSources(self, names, _=None):
+        """ fetches the required datasources
+
+        :param names: list of datasource names
+        :returns: list of given datasources
+
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.dataSources(names)
         return argout
 
-    ## fetches the names of available components
-    # \returns list of available components
     def availableComponents(self):
+        """ fetches the names of available components
+
+        :returns: list of available components
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.availableComponents()
         return argout
 
-    ## fetches the names of available selections
-    # \returns list of available selections
     def availableSelections(self):
+        """ fetches the names of available selections
+
+        :returns: list of available selections
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.availableSelections()
         return argout
 
-    ## fetches the names of available datasources
-    # \returns list of available datasources
     def availableDataSources(self):
+        """ fetches the names of available datasources
+
+        :returns: list of available datasources
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.availableDataSources()
         return argout
 
-    ## stores the component from the xmlstring attribute
-    # \param name name of the component to store
     def storeComponent(self, name):
+        """ stores the component from the xmlstring attribute
+
+        :param name: name of the component to store
+        """
         if self.__mydb:
             self.__mydb.storeComponent(name, self.xmlstring)
 
-    ## stores the selection from the xmlstring attribute
-    # \param name name of the selection to store
     def storeSelection(self, name):
+        """ stores the selection from the xmlstring attribute
+
+        :param name: name of the selection to store
+        """
         if self.__mydb:
             self.__mydb.storeSelection(name, self.selection)
 
-    ## stores the datasource from the xmlstring attribute
-    # \param name name of the datasource to store
     def storeDataSource(self, name):
+        """ stores the datasource from the xmlstring attribute
+
+        :param name: name of the datasource to store
+        """
         if self.__mydb:
             self.__mydb.storeDataSource(name, self.xmlstring)
 
-    ## deletes the given component
-    # \param name of the component to delete
     def deleteComponent(self, name):
+        """ deletes the given component
+
+        :param name: name of the component to delete
+        """
         if self.__mydb:
             self.__mydb.deleteComponent(name)
 
-    ## deletes the given selection
-    # \param name of the selection to delete
     def deleteSelection(self, name):
+        """ deletes the given selection
+
+        :param name: name of the selection to delete
+        """
         if self.__mydb:
             self.__mydb.deleteSelection(name)
 
-    ## deletes the given datasource
-    # \param name of the datasource to delete
     def deleteDataSource(self, name):
+        """ deletes the given datasource
+
+        :param name: name of the datasource to delete
+        """
         if self.__mydb:
             self.__mydb.deleteDataSource(name)
 
-    ## sets component datasources according to given dict
-    # \param jdict JSON dict of component datasources
     def setComponentDataSources(self, jdict):
+        """ sets component datasources according to given dict
+
+        :param jdict: JSON dict of component datasources
+        """
         cps = json.loads(jdict)
         avcp = set(self.availableComponents())
         for cpname, dsdict in cps.items():
@@ -401,10 +460,12 @@ class XMLConfigurator(object):
                 self.__getParameter, onlyexisting=True)
             self.__mydb.storeComponent(cpname, comp)
 
-    ## switch diable datasources into POSTRUN mode
-    # \param comp xml component
-    # \param disds list of disable datasources
     def __commentDataSources(self, comp, disds):
+        """ switch diable datasources into POSTRUN mode
+
+        :param comp: xml component
+        :param disds: list of disable datasources
+        """
         mgr = Merger()
         mgr.switchdatasources = list(disds) or []
         mgr.modesToSwitch = {
@@ -415,27 +476,38 @@ class XMLConfigurator(object):
         mgr.merge()
         return mgr.toString()
 
-    ## sets the mandtaory components
-    # \param names list of component names
     def setMandatoryComponents(self, names):
+        """ sets the mandtaory components
+
+        :param names: list of component names
+        """
         for name in names:
             self.__mydb.setMandatory(name)
 
-    ## sets the mandatory components
-    # \param names list of component names
     def unsetMandatoryComponents(self, names):
+        """ sets the mandatory components
+
+        :param names: list of component names
+        """
         for name in names:
             self.__mydb.unsetMandatory(name)
 
-    ## Provides names of the mandatory components
-    # \returns mandatory components
     def mandatoryComponents(self):
+        """ provides names of the mandatory components
+
+        :returns: mandatory components
+        """
         argout = []
         if self.__mydb:
             argout = self.__mydb.mandatory()
         return argout
 
     def __getVariable(self, name, default=None):
+        """ provides variable value
+
+        :param name: variable name
+        :parma default: default value
+        """
         if len(name) > 0 and name[0] and name[0] in self.__parameters:
             return [self.__parameters[name[0]]]
         elif default is not None:
@@ -444,21 +516,28 @@ class XMLConfigurator(object):
             return [""]
 
     def __getParameter(self, name, default=None):
+        """ provides parameter value
+
+        :param name: parameter name
+        :parma default: default value
+        """
         if len(name) > 0 and name[0] and name[0] in self.__parameters:
             return [self.__parameters[name[0]]]
         else:
             return []
 
-    ## attaches elements to component
-    # \param component given component
-    # \param label element label
-    # \param keys element names
-    # \param funValue function of element value
-    # \param tag xml tag
-    # \param onlyexisting attachElement only if exists
-    # \returns component with attached variables
     def __attachElements(self, component, label, keys, funValue,
                          tag=None, onlyexisting=False):
+        """ attaches elements to component
+
+        :param component: given component
+        :param label: element label
+        :param keys: element names
+        :param funValue: function of element value
+        :param tag: xml tag
+        :param onlyexisting: attachElement only if exists
+        :returns: component with attached variables
+        """
         index = component.find("$%s%s" % (label, self.__delimiter))
         while index != -1:
             defsubc = None
@@ -538,10 +617,12 @@ class XMLConfigurator(object):
                         tag if tag else "variable", name))
         return component
 
-    ## attaches variables to component
-    # \param component given component
-    # \returns component with attached variables
     def __attachVariables(self, component):
+        """ attaches variables to component
+
+        :param component: given component
+        :returns: component with attached variables
+        """
         if not component:
             return
         self.__parameters = {}
@@ -553,19 +634,23 @@ class XMLConfigurator(object):
             component, self.__varLabel,
             self.__parameters.keys(), self.__getVariable)
 
-    ## attaches variables to component
-    # \param component given component
-    # \returns component with attached variables
     def __attachComponents(self, component):
+        """ attaches variables to component
+
+        :param component: given component
+        :returns: component with attached variables
+        """
         if not component:
             return
         return self.__attachElements(
             component, self.__cpLabel, [], lambda x, y: [""])
 
-    ## attaches datasources to component
-    # \param component given component
-    # \returns component with attached datasources
     def __attachDataSources(self, component):
+        """ attaches datasources to component
+
+        :param component: given component
+        :returns: component with attached datasources
+        """
         if not component:
             return
         return self.__attachElements(
@@ -573,17 +658,21 @@ class XMLConfigurator(object):
             self.availableDataSources(), self.dataSources,
             "datasource")
 
-    ## merges the give components
-    # \param names list of component names
-    # \return merged components
     def merge(self, names):
+        """ merges the give components
+
+        :param names: list of component names
+        :return: merged components
+        """
         return self.__mergeVars(names, False)
 
-    ## merges the give components
-    # \param names list of component names
-    # \param withVariables if true variables will be substituted
-    # \return merged components
     def __mergeVars(self, names, withVariables=False):
+        """ merges the give components
+
+        :param names: list of component names
+        :param withVariables: if true variables will be substituted
+        :returns: merged components
+        """
         xml = ""
         if self.__mydb:
             allnames = self.dependentComponents(
@@ -594,19 +683,23 @@ class XMLConfigurator(object):
             xml = self.__merge(comps)
         return xml if xml is not None else ""
 
-    ## merges the give component xmls
-    # \param xmls list of component xmls
-    # \return merged components
     def __merge(self, xmls):
+        """ merges the give component xmls
+
+        :param xmls: list of component xmls
+        :returns: merged components
+        """
         mgr = Merger()
         mgr.switchdatasources = json.loads(self.stepdatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()
 
-    ## creates the final configuration string in the xmlstring attribute
-    # \param names list of component names
     def createConfiguration(self, names):
+        """ creates the final configuration string in the xmlstring attribute
+
+        :param names: list of component names
+        """
         cnf = self.__mergeVars(names, withVariables=True)
         cnf = self.__instantiate(cnf)
         cnfMerged = self.__merge([cnf])
@@ -623,7 +716,7 @@ class XMLConfigurator(object):
 if __name__ == "__main__":
 
     try:
-        ## configurer object
+        #: configurer object
         conf = XMLConfigurator()
         conf.jsonsettings = '{"host":"localhost", "db":"nxsconfig", '\
             '"read_default_file":"/etc/my.cnf"}'

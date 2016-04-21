@@ -17,29 +17,8 @@
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-""" Implementation of NexDaTaS Configuration Server """
+""" release version module """
 
-## package version
-from .Release import __version__
+#: version number
+__version__ = "2.3.0"
 
-
-def run(argv):
-    """ runs the Configuration TANGO server
-
-    :param argv: command-line arguments
-    """
-    import PyTango
-    from .NXSConfigServer import NXSConfigServer as NXSCnfSrv
-    from .NXSConfigServer import NXSConfigServerClass as NXSCnfSrvClass
-    try:
-        pyutil = PyTango.Util(argv)
-        pyutil.add_class(NXSCnfSrvClass, NXSCnfSrv)
-
-        util = PyTango.Util.instance()
-        util.server_init()
-        util.server_run()
-
-    except PyTango.DevFailed as ex:
-        print('-------> Received a DevFailed exception: %s' % ex)
-    except Exception as ex:
-        print('-------> An unforeseen exception occured.... %s' % ex)
