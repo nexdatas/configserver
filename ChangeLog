@@ -1,3 +1,7 @@
+2016-04-XX Jan Kotanski <jankotan@gmail.com>
+	* add definitions of configuration variable values in component xmls
+	* tagged as v2.4.0
+
 2016-04-21 Jan Kotanski <jankotan@gmail.com>
 	* switch to sphinx documentation
 	* move version into Release module

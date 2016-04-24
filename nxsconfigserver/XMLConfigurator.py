@@ -256,29 +256,31 @@ class XMLConfigurator(object):
         else:
             return []
 
-    def __findElements(self, text, label):
+    def __findElements(self, text, label, delimiter=None, rechars=None):
         """ provides a list of elements from the given text
 
         :param text: give text
         :param label: element label
+        :param delimiter: element end delimiter
+        :param rechars: possible characters of element value
+                      as a regular expression string
         :returns: list of element names from the given text
         """
         variables = []
-        index = text.find("$%s%s" % (
-            label, self.__delimiter))
+        delimiter = delimiter or self.__delimiter
+        rechars = rechars or r"[\w]+"
+        index = text.find("$%s%s" % (label, delimiter))
         while index != -1:
             try:
                 subc = re.finditer(
-                    r"[\w]+",
-                    text[(index + len(label) + 2):]
+                    rechars, text[(index + len(label) + 2):]
                 ).next().group(0)
             except:
                 subc = ""
             name = subc.strip() if subc else ""
             if name:
                 variables.append(name)
-            index = text.find("$%s%s" % (
-                label, self.__delimiter), index + 1)
+            index = text.find("$%s%s" % (label, delimiter), index + 1)
 
         return variables
 
@@ -460,7 +462,8 @@ class XMLConfigurator(object):
                 self.__getParameter, onlyexisting=True)
             self.__mydb.storeComponent(cpname, comp)
 
-    def __commentDataSources(self, comp, disds):
+    @classmethod
+    def __commentDataSources(cls, comp, disds):
         """ switch diable datasources into POSTRUN mode
 
         :param comp: xml component
@@ -515,7 +518,7 @@ class XMLConfigurator(object):
         else:
             return [""]
 
-    def __getParameter(self, name, default=None):
+    def __getParameter(self, name, _=None):
         """ provides parameter value
 
         :param name: parameter name
@@ -555,8 +558,8 @@ class XMLConfigurator(object):
                             dsubc = component[
                                 (offset + 1):(offset + 13 + soff)]
                             defsubc = dsubc[6:-6].replace('\\"', '"')
-                        elif component[offset + 1:offset + 8] == '\&quot;':
-                            soff = component[(offset + 8):].find('\&quot;')
+                        elif component[offset + 1:offset + 8] == '\\&quot;':
+                            soff = component[(offset + 8):].find('\\&quot;')
                             dsubc = component[
                                 (offset + 1):(offset + 15 + soff)]
                             defsubc = dsubc[7:-7].replace('\\"', '"')
@@ -617,17 +620,19 @@ class XMLConfigurator(object):
                         tag if tag else "variable", name))
         return component
 
-    def __attachVariables(self, component):
+    def __attachVariables(self, component, cpvars=None):
         """ attaches variables to component
 
         :param component: given component
+        :param cpvars: dictionary with component variable values
         :returns: component with attached variables
         """
         if not component:
             return
         self.__parameters = {}
         js = json.loads(self.variables)
-        targs = dict(js.items())
+        targs = cpvars or {}
+        targs.update(dict(js.items()))
         for k in targs.keys():
             self.__parameters[str(k)] = str(targs[k])
         return self.__attachElements(
@@ -666,6 +671,21 @@ class XMLConfigurator(object):
         """
         return self.__mergeVars(names, False)
 
+    def __variableComponentValues(self, comps):
+        """ finds variable values defined in components
+
+        :param comps: list of component xml strings
+        :returns: dictionary with variable values
+        """
+        cpvars = {}
+        for cp in comps:
+            varls = self.__findElements(cp, self.__varLabel, "(", r"[=\w]+")
+            for var in varls:
+                if "=" in var:
+                    key, value = var.split("=")
+                cpvars[str(key)] = str(value)
+        return cpvars
+
     def __mergeVars(self, names, withVariables=False):
         """ merges the give components
 
@@ -679,7 +699,8 @@ class XMLConfigurator(object):
                 list(set(self.__mydb.mandatory() + names)))
             comps = self.__mydb.components(list(set(allnames)))
             if withVariables:
-                comps = [self.__attachVariables(cp) for cp in comps]
+                cpvars = self.__variableComponentValues(comps)
+                comps = [self.__attachVariables(cp, cpvars) for cp in comps]
             xml = self.__merge(comps)
         return xml if xml is not None else ""
 
