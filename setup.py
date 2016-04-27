@@ -67,7 +67,6 @@ class TestCommand(Command):
 REQUIRED = [
     'numpy (>=1.5.0)',
     'PyTango (>=7.2.2)',
-    'pninx (>=4.0.2)'
 #    'libpninx (>=0.1.2)'
 #   'pninx-python (>=0.1.2)'
 #   'libpninx-python (>=0.1.2)'
