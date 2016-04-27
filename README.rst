@@ -11,6 +11,8 @@ on a MySQL database. It allows to store XML configuration datasources
 and components. It also gives possibility to select mandatory components 
 and perform the process of component merging.
 
+| Source code: https://github.com//nexdatas/configserver
+| Web page: http://www.desy.de/~jkotan/nxsconfigserver
 
 =========================
 Installation from sources
