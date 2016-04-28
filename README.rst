@@ -315,7 +315,7 @@ and *pilatus* created for the particular detector
 	  </group>
        </group>
      </group>
-     <doc>$var()</doc>
+     <doc>$var(detector=pilatus)</doc>
    </definition>
 
 
