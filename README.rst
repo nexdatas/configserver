@@ -32,9 +32,9 @@ Download the latest version of NeXuS Configuration Server from
 Extract the sources and run
 
 .. code:: bash
-	  
+
 	  $ python setup.py install
-    
+
 Debian packages
 ^^^^^^^^^^^^^^^
 
@@ -61,10 +61,10 @@ Finally,
 	  $ apt-get update
 	  $ apt-get install python-nxsconfigserver nxsconfigserver-db
 
-To instal other NexDaTaS packages	  
+To instal other NexDaTaS packages
 
 .. code:: bash
-	  
+
 	  $ apt-get install python-nxswriter nxsconfigtool nxstools
 
 and for Sardana related packages
