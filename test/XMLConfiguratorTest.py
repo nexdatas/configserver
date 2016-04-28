@@ -1276,7 +1276,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
-        
+
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
@@ -1338,7 +1338,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
-        
+
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_cp(self):
         fun = sys._getframe().f_code.co_name
@@ -1493,6 +1493,102 @@ class XMLConfiguratorTest(unittest.TestCase):
             xml.replace("?>\n<", "?><"),
             '<?xml version="1.0" ?><definition>'
             ' <group name="entry1" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name2), None)
+        self.__cmps.pop()
+        self.assertEqual(el.deleteComponent(name), None)
+        self.__cmps.pop()
+
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
+        el.setMandatoryComponents(man)
+        el.close()
+
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var2_cp_default2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        name2 = "mcs_var_component"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='NXentry' name='entry'>" \
+              "<group type='NXinstrument' name='instrument'> " \
+              "<group type='NXdetector' name='$var.detector#\"mydetector\"'>" \
+             "<group type='NXtransformations' name='transformations'/>" \
+             "</group></group></group></definition>"
+        xml2 = "<?xml version='1.0'?><definition>" \
+               "<group type='NXentry' name='entry'>" \
+               "<group type='NXinstrument' name='instrument'>" \
+               "<group type='NXdetector' name='pilatus'>" \
+               "<field type='NX_FLOAT64' name='data'/>" \
+               "</group></group></group>" \
+               "<doc>$var(detector=pilatus)</doc>" \
+               "</definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        while name2 in avc:
+            name2 = name2 + '_1'
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name), None)
+        self.__cmps.append(name)
+        self.setXML(el, xml2)
+        self.assertEqual(el.storeComponent(name2), None)
+        self.__cmps.append(name2)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+
+        self.assertTrue(name in avc2)
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+
+        self.assertEqual(el.createConfiguration([name]), None)
+
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry" type="NXentry">'
+            '  <group name="instrument" type="NXinstrument">'
+            '       <group name="mydetector" type="NXdetector">'
+            '    <group name="transformations" type="NXtransformations"/>'
+            '   </group>  </group> </group></definition>')
+
+
+        el.variables = '{}'
+        self.assertEqual(el.createConfiguration([name, name2]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry" type="NXentry">'
+            '  <group name="instrument" type="NXinstrument">'
+            '       <group name="pilatus" type="NXdetector">'
+            '    <group name="transformations" type="NXtransformations"/>'
+            '    <field name="data" type="NX_FLOAT64"/>'
+            '   </group>  </group> </group> '
+            '<doc>$var(detector=pilatus)</doc></definition>'
+        )
 
         self.assertEqual(el.deleteComponent(name2), None)
         self.__cmps.pop()
@@ -6048,7 +6144,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             el.components([name[0]])[0],
             xml2[0] % ("$datasources.%s" % dsname[1]))
         self.assertEqual(el.components([tname[0]])[0], xml[0])
-        
+
         for cs in css:
             mdss = el.componentDataSources(cs)
             cmps.extend(mdss)
@@ -6185,7 +6281,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             el.components([name[0]])[0],
             xml2[0] % (""))
         self.assertEqual(el.components([tname[0]])[0], xml[0])
-        
+
         for cs in css:
             mdss = el.componentDataSources(cs)
             cmps.extend(mdss)
@@ -6339,7 +6435,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setComponentDataSources(
             json.dumps({name[2]: {}})
         )
-        
+
         avcp2 = el.availableComponents()
         tname = ["__template__" + nm for nm in name]
         self.assertTrue(tname[0] not in avcp2)
@@ -6368,7 +6464,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
-        
+
     ## creatConf test
     # \brief It tests XMLConfigurator
     def test_componentDataSources_external_2(self):
