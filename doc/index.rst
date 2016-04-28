@@ -5,7 +5,7 @@
 
 .. include:: ../README.rst
 
-
+=========
 Contents:
 =========
 
@@ -14,7 +14,7 @@ Contents:
 
    nxsconfigserver
 
-
+==================
 Indices and tables
 ==================
 

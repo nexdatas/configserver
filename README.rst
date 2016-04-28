@@ -14,27 +14,66 @@ and perform the process of component merging.
 | Source code: https://github.com//nexdatas/configserver
 | Web page: http://www.desy.de/~jkotan/nxsconfigserver
 
-=========================
-Installation from sources
-=========================
+------------
+Installation
+------------
 
 Install the dependencies:
 
-    MySQLdb, PyTango
+    MySQLdb, PyTango, sphinx
+
+From sources
+^^^^^^^^^^^^
 
 Download the latest version of NeXuS Configuration Server from
 
-    NeXuS Configuration Server
+    https://github.com/jkotan/nexdatas.configserver/
 
-and extract the sources.
+Extract the sources and run
 
-One can also download the lastest version directly from the git repository by
+.. code:: bash
+	  
+	  $ python setup.py install
+    
+Debian packages
+^^^^^^^^^^^^^^^
 
-git clone https://github.com/jkotan/nexdatas.configserver/
+Debian Jessie (and Wheezy) packages can be found in the HDRI repository.
 
-Next, run the installation script
+To install the debian packages, add the PGP repository key
 
-$ python setup.py install
+.. code:: bash
+
+	  $ sudo su
+	  $ wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg | apt-key add -
+
+and then download the corresponding source list
+
+.. code:: bash
+
+	  $ cd /etc/apt/sources.list.d
+	  $ wget http://repos.pni-hdri.de/jessie-pni-hdri.list
+
+Finally,
+
+.. code:: bash
+
+	  $ apt-get update
+	  $ apt-get install python-nxsconfigserver nxsconfigserver-db
+
+To instal other NexDaTaS packages	  
+
+.. code:: bash
+	  
+	  $ apt-get install python-nxswriter nxsconfigtool nxstools
+
+and for Sardana related packages
+
+.. code:: bash
+
+	  $ apt-get install python-nxsrecselector nxselector
+
+for component selector.
 
 ============================
 Description
