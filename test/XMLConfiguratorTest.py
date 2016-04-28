@@ -61,15 +61,19 @@ class XMLConfiguratorTest(unittest.TestCase):
         self._buint = "uint64" if IS64BIT else "uint32"
         self._bfloat = "float64" if IS64BIT else "float32"
 
-        self.__args = '{"host":"localhost", "db":"nxsconfig", "read_default_file":"/etc/my.cnf", "use_unicode":true}'
+        self.__args = '{"host":"localhost", "db":"nxsconfig", ' \
+                      '"read_default_file":"/etc/my.cnf", "use_unicode":true}'
         self.__cmps = []
         self.__ds = []
         self.__man = []
-        self.children = ("record", "doc", "device", "database", "query", "datasource", "result")
+        self.children = ("record", "doc", "device", "database", "query",
+                         "datasource", "result")
 
         from os.path import expanduser
         home = expanduser("~")
-        self.__args2 = '{"host":"localhost", "db":"nxsconfig", "read_default_file":"%s/.my.cnf", "use_unicode":true}' % home
+        self.__args2 = '{"host":"localhost", "db":"nxsconfig", ' \
+                       '"read_default_file":"%s/.my.cnf", ' \
+                       '"use_unicode":true}' % home
 
     ## test starter
     # \brief Common set up
@@ -195,7 +199,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              "</definition>"
         while name in avc:
             name = name + '_1'
 #        print avc
@@ -1190,6 +1195,88 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var_cp(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        name2 = "mcs_var_component"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition><doc>$var(myentry=entry2)</doc></definition>"
+        while name in avc:
+            name = name + '_1'
+        while name2 in avc:
+            name2 = name2 + '_1'
+#        print avc
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name), None)
+        self.__cmps.append(name)
+        self.setXML(el, xml2)
+        self.assertEqual(el.storeComponent(name2), None)
+        self.__cmps.append(name2)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+
+        self.assertTrue(name in avc2)
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        cpx2 = el.components([name2])
+        self.assertEqual(cpx2[0], xml2)
+
+        self.assertEqual(el.createConfiguration([name]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group name="" type="NXentry"/></definition>')
+
+        el.variables = '{}'
+        self.assertEqual(el.createConfiguration([name, name2]), None)
+
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group name="entry2" type="NXentry"/> <doc>$var(myentry=entry2)</doc></definition>')
+
+        el.variables = '{"myentry":"entry1"}'
+        self.assertEqual(el.createConfiguration([name, name2]), None)
+
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group name="entry1" type="NXentry"/> <doc>$var(myentry=entry2)</doc></definition>')
+
+        self.assertEqual(el.deleteComponent(name2), None)
+        self.__cmps.pop()
+        self.assertEqual(el.deleteComponent(name), None)
+        self.__cmps.pop()
+
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
+        el.setMandatoryComponents(man)
+        el.close()
+
+        
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
@@ -1251,6 +1338,177 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
+        
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var2_cp(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        name2 = "mcs_var_component"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='$var.entryType' name='$var.myentry'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition>" \
+               "<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>" \
+               "</definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        while name2 in avc:
+            name2 = name2 + '_1'
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name), None)
+        self.__cmps.append(name)
+        self.setXML(el, xml2)
+        self.assertEqual(el.storeComponent(name2), None)
+        self.__cmps.append(name2)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+
+        self.assertTrue(name in avc2)
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+
+        self.assertEqual(el.createConfiguration([name]), None)
+
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group name="" type=""/>'
+            '</definition>')
+
+
+        el.variables = '{}'
+        self.assertEqual(el.createConfiguration([name, name2]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry2" type="NXentry"/>'
+            ' <doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
+            '</definition>')
+        el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
+        self.assertEqual(el.createConfiguration([name]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry1" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name2), None)
+        self.__cmps.pop()
+        self.assertEqual(el.deleteComponent(name), None)
+        self.__cmps.pop()
+
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
+        el.setMandatoryComponents(man)
+        el.close()
+
+    # \brief It tests XMLConfigurator
+    def test_createConf_default_2_var2_cp_default(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        name2 = "mcs_var_component"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='$var.entryType' name='$var.myentry#\"12def34\"'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition>" \
+               "<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>" \
+               "</definition>"
+        while name in avc:
+            name = name + '_1'
+#        print avc
+        while name2 in avc:
+            name2 = name2 + '_1'
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name), None)
+        self.__cmps.append(name)
+        self.setXML(el, xml2)
+        self.assertEqual(el.storeComponent(name2), None)
+        self.__cmps.append(name2)
+        avc2 = el.availableComponents()
+#        print avc2
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+
+        self.assertTrue(name in avc2)
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+
+        self.assertEqual(el.createConfiguration([name]), None)
+
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group name="12def34" type=""/>'
+            '</definition>')
+
+
+        el.variables = '{}'
+        self.assertEqual(el.createConfiguration([name, name2]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry2" type="NXentry"/>'
+            ' <doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
+            '</definition>')
+        el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
+        self.assertEqual(el.createConfiguration([name]), None)
+        xml = self.getXML(el)
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry1" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name2), None)
+        self.__cmps.pop()
+        self.assertEqual(el.deleteComponent(name), None)
+        self.__cmps.pop()
+
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
+        el.setMandatoryComponents(man)
+        el.close()
+
     ## creatConf test
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var_default(self):
@@ -1268,7 +1526,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry#\"12def34\"'/></definition>"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='NXentry' name='$var.myentry#\"12def34\"'/>" \
+              "</definition>"
         while name in avc:
             name = name + '_1'
 #        print avc
@@ -1290,7 +1550,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = self.getXML(el)
         self.assertEqual(
             xml.replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition> <group name="12def34" type="NXentry"/></definition>')
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="12def34" type="NXentry"/></definition>')
 
         el.variables = '{"myentry":"entry1"}'
         self.assertEqual(el.createConfiguration([name]), None)
@@ -1298,7 +1559,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = self.getXML(el)
         self.assertEqual(
             xml.replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition> <group name="entry1" type="NXentry"/></definition>')
+            '<?xml version="1.0" ?><definition>'
+            ' <group name="entry1" type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -3465,7 +3727,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='NXentry' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
 #        print avc
@@ -3486,14 +3749,16 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = el.merge([name])
         self.assertEqual(
             xml.replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group name="$var.myentry" type="NXentry"/></definition>')
+            '<?xml version="1.0" ?><definition>'
+            '<group name="$var.myentry" type="NXentry"/></definition>')
 
         el.variables = '{"myentry":"entry1"}'
         xml = el.merge([name])
 
         self.assertEqual(
             xml.replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group name="$var.myentry" type="NXentry"/></definition>')
+            '<?xml version="1.0" ?><definition>'
+            '<group name="$var.myentry" type="NXentry"/></definition>')
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -3505,6 +3770,85 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 2)
+        el.setMandatoryComponents(man)
+        el.close()
+
+    ## creatConf test
+    # \brief It tests XMLConfigurator
+    def test_merge_default_2_var_cp(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        name2 = "mcs_var_component"
+        xml = "<?xml version='1.0'?><definition>" \
+              "<group type='NXentry' name='$var.myentry'/></definition>"
+        xml2 = "<?xml version='1.0'?><definition><doc>$var(myentry=entry2)</doc></definition>"
+        while name in avc:
+            name = name + '_1'
+        while name2 in avc:
+            name2 = name2 + '_1'
+        self.setXML(el, xml)
+        self.assertEqual(el.storeComponent(name), None)
+        self.__cmps.append(name)
+        self.setXML(el, xml2)
+        self.assertEqual(el.storeComponent(name2), None)
+        self.__cmps.append(name2)
+        avc2 = el.availableComponents()
+        self.assertTrue(isinstance(avc2, list))
+        for cp in avc:
+            self.assertTrue(cp in avc2)
+
+        self.assertTrue(name in avc2)
+
+        cpx = el.components([name])
+        self.assertEqual(cpx[0], xml)
+        cpx2 = el.components([name2])
+        self.assertEqual(cpx2[0], xml2)
+
+        xml = el.merge([name])
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            '<group name="$var.myentry" type="NXentry"/></definition>')
+
+        xml = el.merge([name, name2])
+
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            '<group name="$var.myentry" type="NXentry"/>'
+            '<doc>$var(myentry=entry2)</doc></definition>')
+        el.variables = '{"myentry":"entry1"}'
+        xml = el.merge([name])
+
+        self.assertEqual(
+            xml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition>'
+            '<group name="$var.myentry" type="NXentry"/></definition>')
+
+        self.assertEqual(el.deleteComponent(name2), None)
+        self.__cmps.pop()
+        self.assertEqual(el.deleteComponent(name), None)
+        self.__cmps.pop()
+
+        avc3 = el.availableComponents()
+        self.assertTrue(isinstance(avc3, list))
+        for cp in avc:
+            self.assertTrue(cp in avc3)
+        self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
         el.close()
 

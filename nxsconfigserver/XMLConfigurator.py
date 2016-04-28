@@ -31,6 +31,7 @@ from .Errors import NonregisteredDBRecordError
 from .Release import __version__
 from . import Streams
 
+
 class XMLConfigurator(object):
     """ XML Configurator
     """

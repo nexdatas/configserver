@@ -19,7 +19,7 @@
 
 """ Implementation of NexDaTaS Configuration Server """
 
-## package version
+# package version
 from .Release import __version__
 
 
