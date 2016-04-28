@@ -1,4 +1,8 @@
 2016-04-28 Jan Kotanski <jankotan@gmail.com>
+	* fix in README.rst
+	* tagged as v2.4.1
+
+2016-04-28 Jan Kotanski <jankotan@gmail.com>
 	* add definitions of configuration variable values in component xmls
 	* tagged as v2.4.0
 
