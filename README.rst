@@ -11,7 +11,7 @@ on a MySQL database. It allows to store XML configuration datasources
 and components. It also gives possibility to select mandatory components
 and perform the process of component merging.
 
-| Source code: https://github.com//nexdatas/configserver
+| Source code: https://github.com/nexdatas/configserver
 | Web page: http://www.desy.de/~jkotan/nxsconfigserver
 
 ------------
@@ -67,17 +67,17 @@ To instal other NexDaTaS packages
 
 	  $ apt-get install python-nxswriter nxsconfigtool nxstools
 
-and for Sardana related packages
+and
 
 .. code:: bash
 
-	  $ apt-get install python-nxsrecselector nxselector
+	  $ apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
 
-for component selector.
+for Component Selector and Sardana related packages.
 
-============================
+===========
 Description
-============================
+===========
 
 Configuration Server is dedicated to store NXDL-like configuration needed for
 Tango Data Writer runs. The server uses as a storage system a MYSQL database.
