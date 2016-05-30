@@ -75,7 +75,7 @@ and
 for Component Selector and Sardana related packages.
 
 Setting NeXus Configuration Server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To set up  NeXus Configuration Server with the default configuration run
 
@@ -124,9 +124,9 @@ attribute.
 
 
 
-============================
+===========
 Client code
-============================
+===========
 
 .. code-block:: python
 
