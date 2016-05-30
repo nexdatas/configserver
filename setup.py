@@ -23,9 +23,9 @@
 import os
 from distutils.core import setup, Command
 
-## package name
+#: package name
 NXS = "nxsconfigserver"
-## nxs imported package
+#: nxs imported package
 INXS = __import__(NXS)
 
 from sphinx.setup_command import BuildDoc

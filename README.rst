@@ -4,7 +4,6 @@ Welcome to NeXuS Configuration Server's documentation!
 
 
 Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic
-Introduction
 
 NeXuS Configuration Server is a Tango Server with its implementation based
 on a MySQL database. It allows to store XML configuration datasources
