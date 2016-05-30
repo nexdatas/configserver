@@ -27,7 +27,7 @@ From sources
 
 Download the latest version of NeXuS Configuration Server from
 
-    https://github.com/jkotan/nexdatas.configserver/
+    https://github.com/jkotan/nexdatas/configserver/
 
 Extract the sources and run
 
@@ -74,6 +74,17 @@ and
 	  $ apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
 
 for Component Selector and Sardana related packages.
+
+Setting NeXus Configuration Server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To set up  NeXus Servers with the default configuration run
+
+.. code:: bash
+
+          $ nxsetup -x NXSConfigServer
+
+The *nxsetup* command comes from **python-nxstools** package.
 
 ===========
 Description
