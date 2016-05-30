@@ -84,7 +84,7 @@ To set up  NeXus Servers with the default configuration run
 
           $ nxsetup -x NXSConfigServer
 
-The *nxsetup* command comes from **python-nxstools** package.
+The *nxsetup* command comes from the **python-nxstools** package.
 
 ===========
 Description
