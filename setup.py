@@ -62,6 +62,10 @@ class TestCommand(Command):
         errno = subprocess.call([sys.executable, 'test/runtest.py'])
         raise SystemExit(errno)
 
+release = INXS.__version__
+version = ".".join(release.split(".")[:2])
+name = "NXSConfigServer"
+
 
 #: required files
 REQUIRED = [
@@ -72,10 +76,6 @@ REQUIRED = [
 #   'libpninx-python (>=0.1.2)'
 #   'libpninx-python (>=0.1.2)'
     ]
-
-release = INXS.__version__
-version = ".".join(release.split(".")[:2])
-name = "NXSConfigServer"
 
 
 #: metadata for distutils

@@ -27,6 +27,7 @@ From sources
 Download the latest version of NeXuS Configuration Server from
 
     https://github.com/jkotan/nexdatas/configserver/
+    https://github.com/jkotan/nexdatas/configserver-db/
 
 Extract the sources and run
 
@@ -34,6 +35,14 @@ Extract the sources and run
 
 	  $ python setup.py install
 
+To set database execute
+	  
+.. code:: bash
+
+	  $ mysql < conf/mysql_create.sql
+
+with proper privileges.
+	  
 Debian packages
 ^^^^^^^^^^^^^^^
 
