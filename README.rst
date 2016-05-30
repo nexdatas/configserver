@@ -78,7 +78,7 @@ for Component Selector and Sardana related packages.
 Setting NeXus Configuration Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To set up  NeXus Servers with the default configuration run
+To set up  NeXus Configuration Server with the default configuration run
 
 .. code:: bash
 
