@@ -26,8 +26,8 @@ From sources
 
 Download the latest version of NeXuS Configuration Server from
 
-|    https://github.com/jkotan/nexdatas/configserver/
-|    https://github.com/jkotan/nexdatas/configserver-db/
+|    https://github.com/nexdatas/configserver/
+|    https://github.com/nexdatas/configserver-db/
 
 Extract the sources and run
 

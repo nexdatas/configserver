@@ -34,25 +34,27 @@ class ComponentHandler(sax.ContentHandler):
         """ constructor
 
         :param dsLabel: variable element label, e.g. 'datasources'
+        :type dsLabel: :obj:`str`
         :param delimiter: variable element delimiter, e.g. '.'
+        :type delimiter: :obj:`str`
         :brief: It constructs parser and sets variables to default values
         """
         sax.ContentHandler.__init__(self)
-        #:  dictionary with datasources
+        #: (:obj:`dict` <:obj:`str` , :obj:`str`> ) dictionary with datasources
         self.datasources = {}
-        #: tag name
+        #: (:obj:`str`) tag name
         self.__tag = "datasource"
-        #: delimiter
+        #: (:obj:`str`) delimiter
         self.__delimiter = delimiter
-        #: unnamed datasource counter
+        #: (:obj:`int`) unnamed datasource counter
         self.__counter = 0
-        #: datasource label
+        #: (:obj:`str`) datasource label
         self.__dsLabel = dsLabel
-        #: containing datasources
+        #: (:obj:`list` <:obj:`str`>) containing datasources
         self.__withDS = ["field", "attribute"]
-        #: content flag
+        #: (:obj:`list` <:obj:`str`>) content flag
         self.__stack = []
-        #: content
+        #: (:obj:`dict` <:obj:`str` , `list` <:obj:`str`>> ) content
         self.__content = {}
         for tag in self.__withDS:
             self.__content[tag] = []
@@ -61,6 +63,7 @@ class ComponentHandler(sax.ContentHandler):
         """ adds the tag content
 
         param content: partial content of the tag
+        :type content: :obj:`str`
         """
         if self.__stack[-1] in self.__withDS:
             self.__content[self.__stack[-1]].append(content)
@@ -69,7 +72,9 @@ class ComponentHandler(sax.ContentHandler):
         """ parses the opening tag
 
         :param name: tag name
+        :type name: :obj:`str`
         :param attrs: attribute dictionary
+        :type attrs: :obj:`dict` <:obj:`str`, :obj:`str`>
         """
         self.__stack.append(name)
         if self.__tag and name == self.__tag:
@@ -88,6 +93,7 @@ class ComponentHandler(sax.ContentHandler):
         """ parses the closing tag
 
         :param name: tag name
+        :type name: :obj:`str`
         """
         tag = self.__stack[-1]
         if tag in self.__withDS:
@@ -222,20 +228,20 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("usage: ComponentParser.py  <XMLinput>")
     else:
-        #: input XML file
+        #: (:obj:`str`) input XML file
         fi = sys.argv[1]
         if os.path.exists(fi):
 
-            #: a parser object
+            #: (:class:`xml.sax.xmlreader.XMLReader`) parser object
             parser = sax.make_parser()
 
-            #: a SAX2 handler object
+            #: (:class:`FetchNameHandler`) SAX2 handler object
             handler = ComponentHandler()
             parser.setContentHandler(handler)
             parser.parse(open(fi))
             print(handler.datasources)
 
-            #: a SAX2 handler object
+            #: (:class:`FetchNameHandler`)  SAX2 handler object
             handler = ComponentHandler()
             sax.parseString(str(www2).strip(), handler)
             print(handler.datasources)

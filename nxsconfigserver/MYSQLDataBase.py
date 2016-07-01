@@ -34,14 +34,16 @@ class MYSQLDataBase(object):
 
         :brief: It creates the MYSQLDataBase instance
         """
-        #: db instance
+        #: (:class:`MySQLdb.connections.Connection`) db instance
         self.__db = None
+        #: (:obj:`dict` <:obj:`str`, any>) connect arguments
         self.__args = None
 
     def connect(self, args):
         """ connects to the database
 
         :param args: arguments of the MySQLdb connect method
+        :type args: :obj:`dict` <:obj:`str`, any>
         """
         Streams.info("MYSQLDataBase::connect() - connect: %s" % args)
         self.__db = MySQLdb.connect(**args)
@@ -64,7 +66,7 @@ class MYSQLDataBase(object):
         """ provides DB configuration version
 
         :returns: DB configuration version
-
+        :rtype: :obj:`str`
         """
         argout = None
         if self.__db is not None:
@@ -92,7 +94,9 @@ class MYSQLDataBase(object):
         """ adds escape characters to string
 
         :param string: input string
+        :type string: :obj:`str`
         :retruns: string with excape characters
+        :rtype: :obj:`str`
         """
         return string.replace("\\", "\\\\").replace("'", "\\\'")
 
@@ -101,6 +105,7 @@ class MYSQLDataBase(object):
         """ increases revision number
 
         :param cursor: transaction cursor
+        :type cursor: :class:`MySQLdb.cursors.Cursor`
         """
         cursor.execute(
             "select value from properties where name = 'revision';")
@@ -114,7 +119,9 @@ class MYSQLDataBase(object):
         """ fetches the required components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -142,7 +149,9 @@ class MYSQLDataBase(object):
         """ fetches the required selections
 
         :param names: list of selection names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given selections
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -170,7 +179,9 @@ class MYSQLDataBase(object):
         """ fetches the required datasources
 
         :param names: list of datasource names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given datasources
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -199,6 +210,7 @@ class MYSQLDataBase(object):
         """ fetches the names of available components
 
         :returns: list of available components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -219,6 +231,7 @@ class MYSQLDataBase(object):
         """ fetches the names of available selections
 
         :returns: list of available selections
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -239,6 +252,7 @@ class MYSQLDataBase(object):
         """ fetches the names of available datasources
 
         :returns: list of available datasources
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -260,7 +274,9 @@ class MYSQLDataBase(object):
         """ stores the given component
 
         :param name: name of the component to store
+        :type name: :obj:`str`
         :param xml: component tree
+        :rtype: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -304,7 +320,9 @@ class MYSQLDataBase(object):
         """ stores the given datasource
 
         :param name: name of the datasource to store
+        :type name: :obj:`str`
         :param xml: datasource tree
+        :rtype: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -348,8 +366,9 @@ class MYSQLDataBase(object):
         """ stores the given selection
 
         :param name: name of the selection to store
+        :type name: :obj:`str`
         :param selection: selection tree
-
+        :rtype: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -393,6 +412,7 @@ class MYSQLDataBase(object):
         """ deletes the given component
 
         :param name: name of the component to delete
+        :type name: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -424,6 +444,7 @@ class MYSQLDataBase(object):
         """ deletes the given selection
 
         :param name: name of the selection to delete
+        :type name: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -455,6 +476,7 @@ class MYSQLDataBase(object):
         """ sets components as mandatory
 
         :param name: name of the component
+        :type name: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -486,6 +508,7 @@ class MYSQLDataBase(object):
         """sets components as not mandatory
 
         :param name: name of the component to delete
+        :type name: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -520,6 +543,7 @@ class MYSQLDataBase(object):
         """ provides mandatory components
 
         :returns: list of mandatory components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__db is not None:
@@ -542,6 +566,7 @@ class MYSQLDataBase(object):
         """ deletes the given datasource
 
         :param name: name of the datasource to delete
+        :type name: :obj:`str`
         """
         if self.__db is not None:
             try:

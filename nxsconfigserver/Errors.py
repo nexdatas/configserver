@@ -28,7 +28,9 @@ class IncompatibleNodeError(Exception):
         """ constructor
 
         :param value: string with error message
+        :type value: :obj:`str`
         :param nodes: list of nodes with errors
+        :type nodes: :obj:`list` <:class:`xml.dom.minidom.Node`>
         """
         Exception.__init__(self, value)
         #: exception value
@@ -40,6 +42,8 @@ class IncompatibleNodeError(Exception):
         """ tostring method
 
         :brief: It shows the error message
+        :rtype: :obj:`str`
+        :returns: error message
         """
         return repr(self.value)
 
