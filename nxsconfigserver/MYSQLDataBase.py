@@ -276,7 +276,7 @@ class MYSQLDataBase(object):
         :param name: name of the component to store
         :type name: :obj:`str`
         :param xml: component tree
-        :rtype: :obj:`str`
+        :type xml: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -322,7 +322,7 @@ class MYSQLDataBase(object):
         :param name: name of the datasource to store
         :type name: :obj:`str`
         :param xml: datasource tree
-        :rtype: :obj:`str`
+        :type xml: :obj:`str`
         """
         if self.__db is not None:
             try:
@@ -368,7 +368,7 @@ class MYSQLDataBase(object):
         :param name: name of the selection to store
         :type name: :obj:`str`
         :param selection: selection tree
-        :rtype: :obj:`str`
+        :type xml: :obj:`str`
         """
         if self.__db is not None:
             try:
