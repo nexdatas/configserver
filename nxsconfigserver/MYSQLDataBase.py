@@ -368,7 +368,7 @@ class MYSQLDataBase(object):
         :param name: name of the selection to store
         :type name: :obj:`str`
         :param selection: selection tree
-        :type xml: :obj:`str`
+        :type selection: :obj:`str`
         """
         if self.__db is not None:
             try:
