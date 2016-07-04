@@ -33,13 +33,14 @@ class Merger(object):
         """ consturctor
         """
 
-        #: DOM root node
+        #: (:obj:`xml.dom.minidom.Node`) DOM root node
         self.__root = None
-        #: tags which cannot have the same siblings
+        #: (:obj:`list` <:obj:`str`> ) tags which cannot have the same siblings
         self.singles = ['strategy', 'dimensions', 'definition',
                         'record', 'device', 'query', 'database']
 
-        #: allowed children
+        #: (:obj:`dict` <:obj:`str` , :obj:`tuple` <:obj:`str`>> ) \
+        #:    allowed children
         self.children = {
             "attribute": ("datasource", "strategy", "enumeration",
                           "doc", "dimensions"),
@@ -54,21 +55,23 @@ class Merger(object):
             "dim": ("datasource", "strategy", "doc"),
         }
 
-        #: with unique text
+        #: (:obj:`list` <:obj:`str`> ) with unique text
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
-        #: node which can have switched strategy
+        #: (:obj:`list` <:obj:`str`> ) node which can have switched strategy
         self.switchable = ["field", 'attribute']
 
-        #: strategy modes to switch
+        #: (:obj:`dict` <:obj:`str` , :obj:`str`> ) \
+        #:     strategy modes to switch
         self.modesToSwitch = {
             "INIT": "STEP",
             "FINAL": "STEP"
         }
 
-        #: aliased to switch to STEP mode
+        #: (:obj:`list` <:obj:`str`> ) aliased to switch to STEP mode
         self.switchdatasources = []
 
+        #: (:obj:`str`) datasource label
         self.__dsvars = "$datasources."
 
     @classmethod
@@ -76,7 +79,7 @@ class Merger(object):
         """ collects text from text child nodes
 
         :param node: parent node
-
+        :type node: :obj:`xml.dom.minidom.Node`
         """
         text = ""
         if node:
@@ -90,8 +93,10 @@ class Merger(object):
     def __getAncestors(self, node):
         """ gets ancestors form the xml tree
 
-       :param node: dom node
-       :returns: xml path
+        :param node: dom node
+        :type node: :obj:`xml.dom.minidom.Node`
+        :returns: xml path
+        :rtype: :obj:`str`
         """
         res = ""
 
@@ -108,9 +113,12 @@ class Merger(object):
     def __areMergeable(self, elem1, elem2):
         """ checks if two elements are mergeable
 
-       :param elem1: first element
-       :param elem2: second element
-       :returns: bool varaible if two elements are mergeable
+        :param elem1: first element
+        :type elem1: :obj:`xml.dom.minidom.Element`
+        :param elem2: second element
+        :type elem2: :obj:`xml.dom.minidom.Element`
+        :returns: bool varaible if two elements are mergeable
+        :rtype: :obj:`bool`
         """
 
         if elem1.nodeName != elem2.nodeName:
@@ -151,9 +159,12 @@ class Merger(object):
     def __checkAttributes(self, elem1, elem2):
         """ checks if two elements are mergeable
 
-       :param elem1: first element
-       :param elem2: second element
-       :returns: tags with not mergeable attributes
+        :param elem1: first element
+        :type elem1: :obj:`xml.dom.minidom.Element`
+        :param elem2: second element
+        :type elem2: :obj:`xml.dom.minidom.Element`
+        :returns: tags with not mergeable attributes
+        :rtype: :obj:`list` <:obj:`tuple` <:obj:`str`>>
         """
         tags = []
         attr1 = elem1.attributes
@@ -172,8 +183,10 @@ class Merger(object):
     def __mergeNodes(cls, elem1, elem2):
         """ merges two dom elements
 
-       :param elem1: first element
-       :param elem2: second element
+        :param elem1: first element
+        :type elem1: :obj:`xml.dom.minidom.Element`
+        :param elem2: second element
+        :type elem2: :obj:`xml.dom.minidom.Element`
         """
         attr2 = elem2.attributes
         texts = []
@@ -209,7 +222,8 @@ class Merger(object):
     def __mergeChildren(self, node):
         """ merge the given node
 
-       :param node: the given node
+        :param node: the given node
+        :type node: :obj:`xml.dom.minidom.Node`
         """
         if node:
 
@@ -250,8 +264,10 @@ class Merger(object):
     def __getTextDataSource(self, node):
         """ find first datasources node and name in text nodes of the node
 
-       :param node: the parent node
-       :returns: (node, name) of the searched datasource
+        :param node: the parent node
+        :type node: :obj:`xml.dom.minidom.Node`
+        :returns: (node, name) of the searched datasource
+        :rtype: (:obj:`str` , :obj:`str`)
         """
         dsname = None
         dsnode = None
@@ -276,7 +292,8 @@ class Merger(object):
     def __switch(self, node):
         """ switch the given node to step mode
 
-       :param node: the given node
+        :param node: the given node
+        :type node: :obj:`xml.dom.minidom.Node`
         """
         if node:
             stnode = None
@@ -319,7 +336,8 @@ class Merger(object):
     def collect(self, components):
         """ collects the given components in one DOM tree
 
-       :param components: given components
+        :param components: given components
+        :type components: :obj:`list` <:obj:`str`>
         """
         self.__root = None
         rootDef = None
@@ -349,9 +367,10 @@ class Merger(object):
                         rootDef.appendChild(icd)
 
     def toString(self):
-        """ Converts DOM trer to string
+        """ Converts DOM tree to string
 
         :returns: DOM tree in XML string
+        :rtype: :obj:`str`
         """
         if self.__root:
             return str(self.__root.toxml())

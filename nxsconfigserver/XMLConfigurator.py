@@ -39,46 +39,48 @@ class XMLConfigurator(object):
         """ constructor
 
         :param server: NXSConfigServer instance
+        :type server: :class:`PyTango.Device_4Impl`
         :brief: It allows to construct XML configurer object
 
         """
-        #: XML config string
+        #: (:obj:`str`) XML config string
         self.xmlstring = ""
-        #: component selection
+        #: (:obj:`str`) component selection
         self.selection = "{}"
-        #: JSON string with arguments to connect to database
+        #: (:obj:`str`) JSON string with arguments to connect to database
         self.jsonsettings = "{}"
-        #: datasources to be switched into STEP mode
+        #: (:obj:`str`) datasources to be switched into STEP mode
         self.__stepdatasources = "[]"
 
-        #: string with XML variables
+        #: (:obj:`str`) string with XML variables
         self.variables = "{}"
 
-        #: XML variables
+        #: (:obj:`str`) XML variables
         self.__parameters = {}
 
-        #: instance of MYSQLDataBase
+        #: (:class:`nxsconfigserver.MYSQLDataBase.MYSQLDataBase`) \
+        #:        instance of MYSQLDataBase
         self.__mydb = MyDB()
 
-        #: datasource label
+        #: (:obj:`str`) datasource label
         self.__dsLabel = "datasources"
 
-        #: variable label
+        #: (:obj:`str`) variable label
         self.__varLabel = "var"
 
-        #: component label
+        #: (:obj:`str`) component label
         self.__cpLabel = "components"
 
-        #: template label
+        #: (:obj:`str`) template label
         self.__templabel = '__template__'
 
-        #: delimiter
+        #: (:obj:`str`) delimiter
         self.__delimiter = '.'
 
-        #: version label
+        #: (:obj:`str`) version label
         self.versionLabel = "XCS"
 
-        #: Tango server
+        #: (:class:`PyTango.Device_4Impl`) Tango server
         self.__server = server
 
         if server:
@@ -98,7 +100,9 @@ class XMLConfigurator(object):
         """ converts string to json list
 
         :param string: with list of item or json list
+        :type string: :obj:`str`
         :returns: json list
+        :rtype: :obj:`str`
         """
         if not string or string == "Not initialised":
             return "[]"
@@ -116,6 +120,7 @@ class XMLConfigurator(object):
         """ get method for dataSourceGroup attribute
 
         :returns: names of STEP dataSources
+        :rtype: :obj:`str`
         """
         try:
             lad = json.loads(self.__stepdatasources)
@@ -128,12 +133,13 @@ class XMLConfigurator(object):
         """ set method for dataSourceGroup attribute
 
         :param names: of STEP dataSources
+        :type names: :obj:`str`
         """
         jnames = self.__stringToListJson(names)
         #: administator data
         self.__stepdatasources = jnames
 
-    #: the json data string
+    #: (:obj:`str`) the json data string
     stepdatasources = property(
         __getStepDatSources,
         __setStepDatSources,
@@ -143,12 +149,13 @@ class XMLConfigurator(object):
         """ get method for version attribute
 
         :returns: server and configuration version
+        :rtype: :obj:`str`
         """
         version = __version__ + \
             "." + self.versionLabel + "." + self.__mydb.version()
         return version
 
-    #: configuration version
+    #: (:obj:`str`)configuration version
     version = property(__getVersion,
                        doc='configuration version')
 
@@ -183,7 +190,9 @@ class XMLConfigurator(object):
         """ fetches the required components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -194,7 +203,9 @@ class XMLConfigurator(object):
         """ fetches the required selections
 
         :param names: list of selection names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given selections
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -205,7 +216,9 @@ class XMLConfigurator(object):
         """ instantiates the required components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of instantiated components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         comps = []
         if self.__mydb:
@@ -217,7 +230,9 @@ class XMLConfigurator(object):
         """ instantiates the xml component
 
         :param xmlcp: xml component
+        :type xmlcp: :obj:`str`
         :returns: instantiated components
+        :rtype: :obj:`str`
 
         """
         return self.__attachVariables(
@@ -230,7 +245,9 @@ class XMLConfigurator(object):
         """ provides a list of datasources from the given component
 
         :param name: given component
+        :type name: :obj:`str`
         :returns: list of datasource names from the given component
+        :rtype: :obj:`list` <:obj:`str`>
         """
         cpl = []
         if self.__mydb:
@@ -246,7 +263,9 @@ class XMLConfigurator(object):
         """ provides a list of datasources from the given components
 
         :param names: given components
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of datasource names from the given components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         mcnf = str(self.merge(names)).strip()
         if mcnf:
@@ -261,11 +280,15 @@ class XMLConfigurator(object):
         """ provides a list of elements from the given text
 
         :param text: give text
+        :type text: :obj:`str`
         :param label: element label
+        :type label: :obj:`str`
         :param delimiter: element end delimiter
         :param rechars: possible characters of element value
                       as a regular expression string
+        :type rechars: :obj:`str`
         :returns: list of element names from the given text
+        :rtype: :obj:`list` <:obj:`str`>
         """
         variables = []
         delimiter = delimiter or self.__delimiter
@@ -289,7 +312,9 @@ class XMLConfigurator(object):
         """ provides a list of variables from the given components
 
         :param name: given component
+        :type name: :obj:`str`
         :returns: list of variable names from the given components
+        :rtype: :obj:`str`
         """
         cpl = []
         if self.__mydb:
@@ -304,7 +329,10 @@ class XMLConfigurator(object):
         """ provides a tuple of variables from the given components
 
         :param names: given components
+        :type names: :obj:`list` <:obj:`str`>
+
         :returns: tuple of variable names from the given components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         cnf = str(self.merge(names)).strip()
         if cnf:
@@ -316,8 +344,11 @@ class XMLConfigurator(object):
         """ provides dependent components
 
         :param names: component names to check
+        :type names: :obj:`list` <:obj:`str`>
         :param deps: dictionery with dependent components
+        :type deps: :obj:`dict` <:obj:`str`, :obj:`str`>
         :returns: list of depending components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         dps = deps if deps else {}
         for nm in names:
@@ -333,8 +364,9 @@ class XMLConfigurator(object):
         """ fetches the required datasources
 
         :param names: list of datasource names
+        :type names: :obj:`list` <:obj:`str`>
         :returns: list of given datasources
-
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -345,6 +377,7 @@ class XMLConfigurator(object):
         """ fetches the names of available components
 
         :returns: list of available components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -355,6 +388,7 @@ class XMLConfigurator(object):
         """ fetches the names of available selections
 
         :returns: list of available selections
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -365,6 +399,7 @@ class XMLConfigurator(object):
         """ fetches the names of available datasources
 
         :returns: list of available datasources
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -375,6 +410,7 @@ class XMLConfigurator(object):
         """ stores the component from the xmlstring attribute
 
         :param name: name of the component to store
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.storeComponent(name, self.xmlstring)
@@ -383,6 +419,7 @@ class XMLConfigurator(object):
         """ stores the selection from the xmlstring attribute
 
         :param name: name of the selection to store
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.storeSelection(name, self.selection)
@@ -391,6 +428,7 @@ class XMLConfigurator(object):
         """ stores the datasource from the xmlstring attribute
 
         :param name: name of the datasource to store
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.storeDataSource(name, self.xmlstring)
@@ -399,6 +437,7 @@ class XMLConfigurator(object):
         """ deletes the given component
 
         :param name: name of the component to delete
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.deleteComponent(name)
@@ -407,6 +446,7 @@ class XMLConfigurator(object):
         """ deletes the given selection
 
         :param name: name of the selection to delete
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.deleteSelection(name)
@@ -415,6 +455,7 @@ class XMLConfigurator(object):
         """ deletes the given datasource
 
         :param name: name of the datasource to delete
+        :type name: :obj:`str`
         """
         if self.__mydb:
             self.__mydb.deleteDataSource(name)
@@ -423,6 +464,7 @@ class XMLConfigurator(object):
         """ sets component datasources according to given dict
 
         :param jdict: JSON dict of component datasources
+        :type jdict: :obj:`str`
         """
         cps = json.loads(jdict)
         avcp = set(self.availableComponents())
@@ -468,7 +510,9 @@ class XMLConfigurator(object):
         """ switch diable datasources into POSTRUN mode
 
         :param comp: xml component
+        :type comp: :obj:`str`
         :param disds: list of disable datasources
+        :type disds: :obj:`list` <:obj:`str`>
         """
         mgr = Merger()
         mgr.switchdatasources = list(disds) or []
@@ -484,6 +528,7 @@ class XMLConfigurator(object):
         """ sets the mandtaory components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         """
         for name in names:
             self.__mydb.setMandatory(name)
@@ -492,6 +537,7 @@ class XMLConfigurator(object):
         """ sets the mandatory components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         """
         for name in names:
             self.__mydb.unsetMandatory(name)
@@ -500,6 +546,7 @@ class XMLConfigurator(object):
         """ provides names of the mandatory components
 
         :returns: mandatory components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         argout = []
         if self.__mydb:
@@ -510,7 +557,7 @@ class XMLConfigurator(object):
         """ provides variable value
 
         :param name: variable name
-        :parma default: default value
+        :type name: :obj:`str`
         """
         if len(name) > 0 and name[0] and name[0] in self.__parameters:
             return [self.__parameters[name[0]]]
@@ -523,7 +570,7 @@ class XMLConfigurator(object):
         """ provides parameter value
 
         :param name: parameter name
-        :parma default: default value
+        :type name: :obj:`str`
         """
         if len(name) > 0 and name[0] and name[0] in self.__parameters:
             return [self.__parameters[name[0]]]
@@ -535,12 +582,20 @@ class XMLConfigurator(object):
         """ attaches elements to component
 
         :param component: given component
+        :type component: :obj:`str`
         :param label: element label
+        :type label: :obj:`str`
         :param keys: element names
+        :type label: :obj:`list` <:obj:`str`>
         :param funValue: function of element value
+        :type funValue: :obj:`instancemethod`
         :param tag: xml tag
+        :type tag: :obj:`str`
+
         :param onlyexisting: attachElement only if exists
+        :type onlyexisting: :obj:`bool`
         :returns: component with attached variables
+        :rtype: :obj:`str`
         """
         index = component.find("$%s%s" % (label, self.__delimiter))
         while index != -1:
@@ -625,8 +680,11 @@ class XMLConfigurator(object):
         """ attaches variables to component
 
         :param component: given component
+        :type component: :obj:`str`
         :param cpvars: dictionary with component variable values
+        :type cpvars: :obj:`dict` <:obj:`str` , :obj:`str`>
         :returns: component with attached variables
+        :rtype: :obj:`str`
         """
         if not component:
             return
@@ -644,7 +702,9 @@ class XMLConfigurator(object):
         """ attaches variables to component
 
         :param component: given component
+        :type component: :obj:`str`
         :returns: component with attached variables
+        :rtype: :obj:`str`
         """
         if not component:
             return
@@ -655,7 +715,9 @@ class XMLConfigurator(object):
         """ attaches datasources to component
 
         :param component: given component
+        :type component: :obj:`str`
         :returns: component with attached datasources
+        :rtype: :obj:`str`
         """
         if not component:
             return
@@ -668,7 +730,9 @@ class XMLConfigurator(object):
         """ merges the give components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         :return: merged components
+        :rtype: :obj:`str`
         """
         return self.__mergeVars(names, False)
 
@@ -676,7 +740,9 @@ class XMLConfigurator(object):
         """ finds variable values defined in components
 
         :param comps: list of component xml strings
+        :type comps: :obj:`list` <:obj:`str`>
         :returns: dictionary with variable values
+        :rtype: :obj:`dict` <:obj:`str` , :obj:`str`>
         """
         cpvars = {}
         for cp in comps:
@@ -691,8 +757,11 @@ class XMLConfigurator(object):
         """ merges the give components
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         :param withVariables: if true variables will be substituted
+        :param withVariables: :obj:`bool`
         :returns: merged components
+        :rtype: :obj:`str`
         """
         xml = ""
         if self.__mydb:
@@ -709,7 +778,9 @@ class XMLConfigurator(object):
         """ merges the give component xmls
 
         :param xmls: list of component xmls
+        :type xmls: :obj:`list` <:obj:`str`>
         :returns: merged components
+        :rtype: :obj:`str`
         """
         mgr = Merger()
         mgr.switchdatasources = json.loads(self.stepdatasources)
@@ -721,6 +792,7 @@ class XMLConfigurator(object):
         """ creates the final configuration string in the xmlstring attribute
 
         :param names: list of component names
+        :type names: :obj:`list` <:obj:`str`>
         """
         cnf = self.__mergeVars(names, withVariables=True)
         cnf = self.__instantiate(cnf)
@@ -738,7 +810,8 @@ class XMLConfigurator(object):
 if __name__ == "__main__":
 
     try:
-        #: configurer object
+        #: (:class:`nxsconfigserver.XMLConfigurator.XMLConfigurator`)  \
+        #:     configurer object
         conf = XMLConfigurator()
         conf.jsonsettings = '{"host":"localhost", "db":"nxsconfig", '\
             '"read_default_file":"/etc/my.cnf"}'

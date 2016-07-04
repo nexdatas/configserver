@@ -55,10 +55,13 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Device constructor
 
         :param cl: class name
+        :type cl: :obj:`str`
         :param name: device name
+        :type name: :obj:`str`
         """
         PyTango.Device_4Impl.__init__(self, cl, name)
         self.debug_stream("In __init__()")
+        #: (:class:`nxsconfigserver.XMLConfigutator.XMLConfigutator`)
         self.xmlc = None
         NXSConfigServer.init_device(self)
 
@@ -101,6 +104,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read XMLString attribute
 
         :param attr: xml string attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_XMLString()")
         attr.set_value(self.xmlc.xmlstring)
@@ -109,12 +113,16 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Write XMLString attribute
 
         :param attr: xml string attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In write_XMLString()")
         self.xmlc.xmlstring = attr.get_write_value()
 
     def is_XMLString_allowed(self, _):
         """ XMLString attribute State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -125,6 +133,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read Selection attribute
 
         :param attr: selection attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_Selection()")
         attr.set_value(self.xmlc.selection)
@@ -133,12 +142,16 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Write Selection attribute
 
         :param attr: selection attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In write_Selection()")
         self.xmlc.selection = attr.get_write_value()
 
     def is_Selection_allowed(self, _):
         """ Selection attribute State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -149,6 +162,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read JSONSettings attribute
 
         :param attr: jsonsettings attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_JSONSettings()")
         attr.set_value(self.xmlc.jsonsettings)
@@ -157,6 +171,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read JSONSettings attribute
 
         :param attr: jsonsettings attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In write_JSONSettings()")
         if self.is_JSONSettings_write_allowed():
@@ -168,6 +183,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_JSONSettings_write_allowed(self):
         """ JSONSettings attribute Write State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.OPEN,
                                 PyTango.DevState.RUNNING]:
@@ -178,6 +196,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read STEPDataSources attribute
 
         :param attr: step datasources attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_STEPDataSources()")
         attr.set_value(self.xmlc.stepdatasources or "")
@@ -186,6 +205,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Write STEPDataSources attribute
 
         :param attr: step datasources attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In write_STEPDataSources()")
         if self.is_STEPDataSources_write_allowed():
@@ -197,6 +217,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_STEPDataSources_write_allowed(self):
         """ STEPDataSources attribute Write State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
@@ -206,6 +229,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read Version attribute
 
         :param attr: version attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_Version()")
 
@@ -215,6 +239,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Version_allowed(self, _):
         """ Version attribute State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -225,6 +252,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Read Variables attribute
 
         :param attr: variables attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In read_Variables()")
         attr.set_value(self.xmlc.variables)
@@ -233,12 +261,16 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """ Write Variables attribute
 
         :param attr: variables attribute
+        :type attr: :class:`PyTango.Attribute`
         """
         self.debug_stream("In write_Variables()")
         self.xmlc.variables = attr.get_write_value()
 
     def is_Variables_allowed(self, _):
         """ Variables attribute State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
@@ -269,6 +301,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Open_allowed(self):
         """ Open command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
@@ -291,6 +326,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Close_allowed(self):
         """ Close command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -303,7 +341,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of required components
 
         :param argin:  DevVarStringArray    list of component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of required components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In Components()")
         try:
@@ -318,6 +358,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Components_allowed(self):
         """ Components command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -330,7 +373,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of required selections
 
         :param argin:  DevVarStringArray    list of selection names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of required selections
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In Selections()")
         try:
@@ -345,6 +390,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Selections_allowed(self):
         """ Selections command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -357,7 +405,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of required components
 
         :param argin:  DevVarStringArray    list of component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of instantiated components
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In InstantiateComponents()")
         try:
@@ -372,6 +422,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_InstantiatedComponents_allowed(self):
         """ Components command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -384,8 +437,10 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Return a list of required DataSources
 
         :param argin:  DevVarStringArray    list of DataSource names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of required DataSources
-       """
+        :rtype: :obj:`list` <:obj:`str`>
+        """
         self.debug_stream("In DataSources()")
         try:
             self.set_state(PyTango.DevState.RUNNING)
@@ -399,6 +454,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_DataSources_allowed(self):
         """ DataSources command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -411,6 +469,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of available component names
 
         :returns: DevVarStringArray    list of available component names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In AvailableComponents()")
         try:
@@ -425,6 +484,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_AvailableComponents_allowed(self):
         """ AvailableComponents command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -437,6 +499,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of available selection names
 
         :returns: DevVarStringArray    list of available selection names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In AvailableSelections()")
         try:
@@ -451,6 +514,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_AvailableSelections_allowed(self):
         """ AvailableSelections command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -463,6 +529,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Returns a list of available DataSource names
 
         :returns: DevVarStringArray    list of available DataSource names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In AvailableDataSources()")
         try:
@@ -477,6 +544,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_AvailableDataSources_allowed(self):
         """ AvailableDataSources command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -489,6 +559,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Stores the component from XMLString
 
         :param argin:  DevString    component name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In StoreComponent()")
         try:
@@ -501,6 +572,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_StoreComponent_allowed(self):
         """ StoreComponent command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -513,6 +587,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Stores the selection from XMLString
 
         :param argin:  DevString    selection name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In StoreSelection()")
         try:
@@ -525,6 +600,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_StoreSelection_allowed(self):
         """ StoreSelection command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -537,6 +615,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Stores the DataSource from XMLString
 
         :param argin:  DevString    datasource name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In StoreDataSource()")
         try:
@@ -549,6 +628,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_StoreDataSource_allowed(self):
         """ StoreDataSource command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -562,6 +644,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
                 given components. The result is strored in XMLString
 
         :param argin:  DevVarStringArray    list of component names
+        :type argin: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In CreateConfiguration()")
         try:
@@ -574,6 +657,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_CreateConfiguration_allowed(self):
         """ CreateConfiguration command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -586,6 +672,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Deletes the given component
 
         :param argin:  DevString    component name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In DeleteComponent()")
         try:
@@ -598,6 +685,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_DeleteComponent_allowed(self):
         """ DeleteComponent command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -610,6 +700,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Deletes the given selection
 
         :param argin:  DevString    selection name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In DeleteSelection()")
         try:
@@ -622,6 +713,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_DeleteSelection_allowed(self):
         """ DeleteSelection command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -634,6 +728,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Deletes the given datasource
 
         :param argin:  DevString    datasource name
+        :type argin: :obj:`str`
         """
         self.debug_stream("In DeleteDataSource()")
         #    Add your own code here
@@ -647,6 +742,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_DeleteDataSource_allowed(self):
         """ DeleteDataSource command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -659,6 +757,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: set component datasources according to given dictionary
 
         :param argin:  DevString   JSON dict { comp1: {ds: tds, ...}, ...}
+        :type argin: :obj:`str`
         """
         self.debug_stream("In SetComponentDataSources()")
         try:
@@ -671,6 +770,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_SetComponentDataSources_allowed(self):
         """ SetComponentDataSources command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -683,6 +785,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Sets the mandatory components
 
         :param argin:  DevVarStringArray    component names
+        :type argin: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In SetMandatoryComponents()")
         try:
@@ -695,6 +798,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_SetMandatoryComponents_allowed(self):
         """ SetMandatoryComponents command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
@@ -706,6 +812,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Sets the mandatory components
 
         :returns: DevVarStringArray    component names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In MandatoryComponents()")
 
@@ -720,6 +827,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_MandatoryComponents_allowed(self):
         """ MandatoryComponents command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
@@ -732,6 +842,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
                 from the mandatory components
 
         :param argin:  DevVarStringArray    list of component names
+        :type argin: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In UnsetMandatoryComponents()")
         try:
@@ -744,6 +855,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_UnsetMandatoryComponents_allowed(self):
         """ UnsetMandatoryComponents command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -756,7 +870,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: returns a list of datasource names for a given component
 
         :param argin:  DevString    component name
+        :type argin: :obj:`str`
         :returns: DevVarStringArray    list of datasource names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In ComponentDataSources()")
         try:
@@ -771,6 +887,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_ComponentDataSources_allowed(self):
         """ ComponentDataSources command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -783,7 +902,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: returns a list of datasource names for a given components
 
         :param argin:  DevVarStringArray    component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of datasource names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In ComponentsDataSources()")
         try:
@@ -798,6 +919,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_ComponentsDataSources_allowed(self):
         """ComponentsDataSources command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -810,7 +934,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: returns a list of variable names for a given components
 
         :param argin:  DevVarStringArray    component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of variable names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In ComponentsVariables()")
         try:
@@ -825,6 +951,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_ComponentsVariables_allowed(self):
         """ ComponentsVariables command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -837,7 +966,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: returns a list of variable names for a given component
 
         :param argin:  DevString    component name
+        :type argin: :obj:`str`
         :returns: DevVarStringArray    list of variable names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In ComponentVariables()")
         try:
@@ -852,6 +983,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_ComponentVariables_allowed(self):
         """ ComponentVariables command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -864,7 +998,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :brief: Merges give components
 
         :param argin:  DevVarStringArray    list of component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevString    merged components
+        :rtype: :obj:`str`
         """
         self.debug_stream("In Merge()")
         try:
@@ -878,6 +1014,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_Merge_allowed(self):
         """ Merge command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -891,7 +1030,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
             for a given components
 
         :param argin:  DevVarStringArray    component names
+        :type argin: :obj:`list` <:obj:`str`>
         :returns: DevVarStringArray    list of component names
+        :rtype: :obj:`list` <:obj:`str`>
         """
         self.debug_stream("In DependentComponents()")
         try:
@@ -906,6 +1047,9 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
     def is_DependentComponents_allowed(self):
         """ DependentComponents command State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
         """
         if self.get_state() in [PyTango.DevState.ON,
                                 PyTango.DevState.RUNNING]:
@@ -917,11 +1061,15 @@ class NXSConfigServerClass(PyTango.DeviceClass):
     """ NXSConfigServerClass class definition
     """
 
-    #:    Class Properties
+    #: (:obj:`dict` <:obj:`str`, \
+    #:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \
+    #:       [ :obj:`list` <:obj:`int`> ] ] > ) Class Properties
     class_property_list = {
     }
 
-    #:    Device Properties
+    #: (:obj:`dict` <:obj:`str`, \
+    #:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \
+    #:       [ :obj:`list` <:obj:`int`> ] ] > ) Device Properties
     device_property_list = {
         'VersionLabel':
         [PyTango.DevString,
@@ -929,7 +1077,9 @@ class NXSConfigServerClass(PyTango.DeviceClass):
          ["XCS"]],
     }
 
-    #:    Command definitions
+    #: (:obj:`dict` <:obj:`str`, \
+    #:       [[ :class:`PyTango.CmdArgType`, :obj:`str`]] >)
+    #:       Command definitions
     cmd_list = {
         'Open':
             [[PyTango.DevVoid, ""],
@@ -1012,7 +1162,11 @@ class NXSConfigServerClass(PyTango.DeviceClass):
              [PyTango.DevVarStringArray, "list of component names"]],
     }
 
-    #:    Attribute definitions
+    #: (:obj:`dict` <:obj:`str`, \
+    #:       [[ :class:`PyTango.CmdArgType`, \
+    #:          :class:`PyTango.AttrDataFormat`, \
+    #:          :class:`PyTango.AttrWriteType` ], \
+    #:          :obj:`dict` <:obj:`str` , any> ] > ) Attribute definitions
     attr_list = {
         'XMLString':
         [[PyTango.DevString,
@@ -1084,10 +1238,7 @@ class NXSConfigServerClass(PyTango.DeviceClass):
         self.set_type(name)
         print("In NXSConfigServerClass  constructor")
 
-# ==================================================================
-#
+
 #    NXSConfigServer class main method
-#
-# ==================================================================
 if __name__ == '__main__':
     pass

@@ -27,6 +27,7 @@ def run(argv):
     """ runs the Configuration TANGO server
 
     :param argv: command-line arguments
+    :type argv: :obj:`list` <:obj:`str`>
     """
     import PyTango
     from .NXSConfigServer import NXSConfigServer as NXSCnfSrv
