@@ -12,6 +12,7 @@ and perform the process of component merging.
 
 | Source code: https://github.com/nexdatas/configserver/
 | Web page: https://nexdatas.github.io/configserver/
+| NexDaTaS Web page: https://nexdatas.github.io
 
 ------------
 Installation
@@ -111,15 +112,15 @@ TANGO devices or other databases as well to client data.
 **Components** specify Nexus tree with positions of datasets for particular
 pieces of hardware and writing strategy for corresponding to them data.
 
- + They can include datasources directly as well as links to datasources
-   defined in the server. To this end template syntax of
-   $datasources.<ds_name> type is used.
- + Moreover, they can holds links to other components which describe their
-   dependences. In this case $components.<comp_name> syntax is used.
- + Finally, the components can contains variables. The variables are defined
-   in XML code by $var.<var_name> syntax and can be provided to
-   the Configuration Server by passing a JSON string.
-   The default value for variables is an empty string.
++ They can include datasources directly as well as links to datasources
+  defined in the server. To this end template syntax of
+  $datasources.<ds_name> type is used.
++ Moreover, they can holds links to other components which describe their
+  dependences. In this case $components.<comp_name> syntax is used.
++ Finally, the components can contains variables. The variables are defined
+  in XML code by $var.<var_name> syntax and can be provided to
+  the Configuration Server by passing a JSON string.
+  The default value for variables is an empty string.
 
 All elements of configuration can be created by GUI tool - ComponentDesigner.
 The tool can connect to Configuration Server and fetch or store
