@@ -20,7 +20,7 @@ Installation
 
 Install the dependencies:
 
-    MySQLdb, PyTango, sphinx
+|    MySQLdb, PyTango, sphinx
 
 From sources
 ^^^^^^^^^^^^
