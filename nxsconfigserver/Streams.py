@@ -40,7 +40,7 @@ def fatal(message, std=True):
     :type message: :obj:`str`
     :param std: it writes to sys stream
                 when log stream does not exist
-    :type std: :obj:`str`
+    :type std: :obj:`bool`
     """
     if log_fatal:
         try:
@@ -59,7 +59,7 @@ def error(message, std=True):
     :type message: :obj:`str`
     :param std: it writes to sys stream
                 when log stream does not exist
-    :type std: :obj:`str`
+    :type std: :obj:`bool`
     """
     if log_error:
         try:
@@ -78,7 +78,7 @@ def warn(message, std=True):
     :type message: :obj:`str`
     :param std: it writes to sys stream
                 when log stream does not exist
-    :type std: :obj:`str`
+    :type std: :obj:`bool`
     """
     if log_warn:
         try:
@@ -97,7 +97,7 @@ def info(message, std=True):
     :type message: :obj:`str`
     :param std: it writes to sys stream
                 when log stream does not exist
-    :type std: :obj:`str`
+    :type std: :obj:`bool`
     """
     if log_info:
         try:
@@ -116,7 +116,7 @@ def debug(message, std=True):
     :type message: :obj:`str`
     :param std: it writes to sys stream
                 when log stream does not exist
-    :type std: :obj:`str`
+    :type std: :obj:`bool`
     """
     if log_debug:
         try:
