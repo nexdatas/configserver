@@ -61,7 +61,8 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """
         PyTango.Device_4Impl.__init__(self, cl, name)
         self.debug_stream("In __init__()")
-        #: (:class:`nxsconfigserver.XMLConfigutator.XMLConfigutator`)
+        #: (:class:`nxsconfigserver.XMLConfigutator.XMLConfigutator`) \
+        #:    xml configurator instance
         self.xmlc = None
         NXSConfigServer.init_device(self)
 
@@ -236,17 +237,6 @@ class NXSConfigServer(PyTango.Device_4Impl):
         self.get_device_properties(self.get_device_class())
         self.xmlc.versionLabel = self.VersionLabel
         attr.set_value(self.xmlc.version)
-
-    def is_Version_allowed(self, _):
-        """ Version attribute State Machine
-
-        :returns: True if the operation allowed
-        :rtype: :obj:`bool`
-        """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.RUNNING]:
-            return False
-        return True
 
     def read_Variables(self, attr):
         """ Read Variables attribute

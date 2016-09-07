@@ -69,9 +69,13 @@ class MYSQLDataBase(object):
         :rtype: :obj:`str`
         """
         argout = None
+        cursor = None
         if self.__db is not None:
             try:
-                self.__db.ping(True)
+                try:
+                    self.__db.ping(True)
+                except:
+                    return argout
                 if not self.__db.open:
                     self.connect(self.__args)
                 cursor = self.__db.cursor()
@@ -85,7 +89,8 @@ class MYSQLDataBase(object):
                 argout = data[0]
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
         return argout
 

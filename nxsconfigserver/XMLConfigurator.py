@@ -152,7 +152,9 @@ class XMLConfigurator(object):
         :rtype: :obj:`str`
         """
         version = __version__ + \
-            "." + self.versionLabel + "." + self.__mydb.version()
+            "." + self.versionLabel + "." + (
+                self.__mydb.version() or "<DB_NOT_CONNECTED>"
+            )
         return version
 
     #: (:obj:`str`)configuration version
