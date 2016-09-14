@@ -424,7 +424,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def DataSources(self, argin):
         """ DataSources command
 
-        :brief: Return a list of required DataSources
+        :brief: Returns a list of required DataSources
 
         :param argin:  DevVarStringArray    list of DataSource names
         :type argin: :obj:`list` <:obj:`str`>
@@ -744,7 +744,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def SetComponentDataSources(self, argin):
         """ SetComponentDataSources command
 
-        :brief: set component datasources according to given dictionary
+        :brief: Sets component datasources according to given dictionary
 
         :param argin:  DevString   JSON dict { comp1: {ds: tds, ...}, ...}
         :type argin: :obj:`str`
@@ -792,14 +792,15 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.RUNNING]:
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
             return False
         return True
 
     def MandatoryComponents(self):
         """ MandatoryComponents command
 
-        :brief: Sets the mandatory components
+        :brief: Returns the mandatory components
 
         :returns: DevVarStringArray    component names
         :rtype: :obj:`list` <:obj:`str`>
@@ -821,14 +822,15 @@ class NXSConfigServer(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.RUNNING]:
+        if self.get_state() in [PyTango.DevState.ON,
+                                PyTango.DevState.RUNNING]:
             return False
         return True
 
     def UnsetMandatoryComponents(self, argin):
         """ UnsetMandatoryComponents command
 
-        :brief: It removes the given components
+        :brief: Removes the given components
                 from the mandatory components
 
         :param argin:  DevVarStringArray    list of component names
@@ -857,7 +859,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def ComponentDataSources(self, argin):
         """ ComponentDataSources command
 
-        :brief: returns a list of datasource names for a given component
+        :brief: Returns a list of datasource names for a given component
 
         :param argin:  DevString    component name
         :type argin: :obj:`str`
@@ -889,7 +891,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def ComponentsDataSources(self, argin):
         """ ComponentsDataSources command
 
-        :brief: returns a list of datasource names for a given components
+        :brief: Returns a list of datasource names for a given components
 
         :param argin:  DevVarStringArray    component names
         :type argin: :obj:`list` <:obj:`str`>
@@ -921,7 +923,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def ComponentsVariables(self, argin):
         """ ComponentsVariables command
 
-        :brief: returns a list of variable names for a given components
+        :brief: Returns a list of variable names for a given components
 
         :param argin:  DevVarStringArray    component names
         :type argin: :obj:`list` <:obj:`str`>
@@ -953,7 +955,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
     def ComponentVariables(self, argin):
         """ ComponentVariables command
 
-        :brief: returns a list of variable names for a given component
+        :brief: Returns a list of variable names for a given component
 
         :param argin:  DevString    component name
         :type argin: :obj:`str`

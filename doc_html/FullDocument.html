@@ -1,0 +1,2886 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title> NXSConfigServer Tango Class User&lsquo;s Guide </title>
+</head>
+<body text="Black" bgcolor="White" link="Blue" vlink="Purple" alink="Red">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" >
+        <td align="center">
+            <a href="http://www.esrf.fr/" target=new>
+                <img src="http://www.esrf.fr/gifs/logo/80.gif" border=0 height="35"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.elettra.trieste.it/" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/elettra_logo.gif" border=0 height="35"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.synchrotron-soleil.fr/" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/soleil_logo.gif" border=0 height="35"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.cells.es/" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/alba.jpg" border=0 height="27"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.tango-controls.org/" target="_top">
+               <img src="http://www.esrf.fr/computing/cs/tango/tango_logo.jpg" alt=""  height="40" /></a>
+        </td>
+        <td align="center">
+            <a href="http://www.desy.de/html/home/index_eng.html" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/desy.gif" border=0 height="26"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.maxlab.lu.se/maxlab/max4/index.html" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/maxlab.gif" border=0 height="21"></a>
+        </td>
+        <td align="center">
+            <a href="http://www.frm2.tum.de/en/index.html" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/frm-2.jpg" border=0 height="24"></a>
+        </td>
+         <td align="center">
+            <a href="http://www.synchrotron.uj.edu.pl/" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/solaris_logo.gif" border=0 height="21"></a>
+        </td>
+         <td align="center">
+            <a href="http://www.anka.kit.edu/english/28.php" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/anka_blau_rot.png" border=0 height="25"></a>
+        </td>
+         <td align="center">
+            <a href="http://www.eli-hu.hu/" target=new>
+                <img src="http://www.esrf.fr/computing/cs/tango/eli-alps.jpg" border=0 height="32"></a>
+        </td>
+   </table>
+<hr>
+<br>
+<center><h2><u><b> NXSConfigServer Tango Python Class </b></u></h2></center>	<br><br>
+	<ul>
+		<font size="+1"><u><b> Contents : </b></u></font>
+		<ul>
+			<li> <a href="FullDocument.html#description">  Description  </a>
+			<li> <a href="FullDocument.html#properties">   Properties   </a>
+			<li> <a href="FullDocument.html#commands">     Commands     </a>
+			<ul>
+				<li> <a href="FullDocument.html#cmdState"> State </a>
+				<li> <a href="FullDocument.html#cmdStatus"> Status </a>
+				<li> <a href="FullDocument.html#cmdOpen"> Open </a>
+				<li> <a href="FullDocument.html#cmdClose"> Close </a>
+				<li> <a href="FullDocument.html#cmdComponents"> Components </a>
+				<li> <a href="FullDocument.html#cmdSelections"> Selections </a>
+				<li> <a href="FullDocument.html#cmdInstantiatedComponents"> InstantiatedComponents </a>
+				<li> <a href="FullDocument.html#cmdDataSources"> DataSources </a>
+				<li> <a href="FullDocument.html#cmdAvailableComponents"> AvailableComponents </a>
+				<li> <a href="FullDocument.html#cmdAvailableSelections"> AvailableSelections </a>
+				<li> <a href="FullDocument.html#cmdAvailableDataSources"> AvailableDataSources </a>
+				<li> <a href="FullDocument.html#cmdStoreSelection"> StoreSelection </a>
+				<li> <a href="FullDocument.html#cmdStoreComponent"> StoreComponent </a>
+				<li> <a href="FullDocument.html#cmdStoreDataSource"> StoreDataSource </a>
+				<li> <a href="FullDocument.html#cmdCreateConfiguration"> CreateConfiguration </a>
+				<li> <a href="FullDocument.html#cmdDeleteComponent"> DeleteComponent </a>
+				<li> <a href="FullDocument.html#cmdDeleteSelection"> DeleteSelection </a>
+				<li> <a href="FullDocument.html#cmdDeleteDataSource"> DeleteDataSource </a>
+				<li> <a href="FullDocument.html#cmdSetComponentDataSources"> SetComponentDataSources </a>
+				<li> <a href="FullDocument.html#cmdSetMandatoryComponents"> SetMandatoryComponents </a>
+				<li> <a href="FullDocument.html#cmdMandatoryComponents"> MandatoryComponents </a>
+				<li> <a href="FullDocument.html#cmdUnsetMandatoryComponents"> UnsetMandatoryComponents </a>
+				<li> <a href="FullDocument.html#cmdComponentDataSources"> ComponentDataSources </a>
+				<li> <a href="FullDocument.html#cmdComponentsDataSources"> ComponentsDataSources </a>
+				<li> <a href="FullDocument.html#cmdComponentsVariables"> ComponentsVariables </a>
+				<li> <a href="FullDocument.html#cmdComponentVariables"> ComponentVariables </a>
+				<li> <a href="FullDocument.html#cmdMerge"> Merge </a>
+				<li> <a href="FullDocument.html#cmdDependentComponents"> DependentComponents </a>
+			</ul>
+			<li> <a href="FullDocument.html#attributes">   Attributes   </a>
+			<ul>
+				<li> <a href="FullDocument.html#attrXMLString"> XMLString </a>
+				<li> <a href="FullDocument.html#attrSelection"> Selection </a>
+				<li> <a href="FullDocument.html#attrJSONSettings"> JSONSettings </a>
+				<li> <a href="FullDocument.html#attrVersion"> Version </a>
+				<li> <a href="FullDocument.html#attrVariables"> Variables </a>
+				<li> <a href="FullDocument.html#attrSTEPDataSources"> STEPDataSources </a>
+			</ul>
+			<li> <a href="FullDocument.html#states">       States       </a>
+		</ul>
+	</ul>
+	<hr>
+<br><br>
+<a name="description"> </a>
+<ul>
+	<br><br><br>
+	<table border="0" width="100%">
+		<Tr>
+			<td> <font size="+1"><u><b> NXSConfigServer Class Identification : </b></u></font> </td>
+			<td> <font size="+1"><u><b> NXSConfigServer Class Inheritance : </b></u></font> </td>
+		</tr>
+		<td><ul>
+			<table border="0">
+				<Tr>
+					<td> Contact </td><td> : at desy.de - jan.kotanski</td>
+				</tr>
+				<tr>
+					<td> Class Family </td><td> : Acquisition
+				</tr>
+				<tr>
+					<td> Platform </td><td> : All Platforms </td>
+				</tr>
+				<tr>
+					<td> Bus </td><td> : Not Applicable </td>
+				</tr>
+				<tr>
+					<td> Manufacturer </td><td> : DESY </td>
+				</tr>
+				<tr>
+					<td> Manufacturer ref.</td><td> :  </td>
+				</tr>
+			</Table>
+		</ul></td>
+		<td>
+			<ul><li> <a href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/" target="new"> Tango::DeviceImpl</a></li>
+			<ul> <li> NXSConfigServer</li>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</td>
+	</Table>
+	<br><br><br>
+	<font size="+1"><u><b> NXSConfigServer Class Description : </b></u></font>
+	<br><br>
+	<ul>
+		NeXuS Configuration Server is a Tango Server with its implementation based<Br>
+		on a MySQL database. It allows to store XML configuration datasources<Br>
+		and components. It also gives possibility to select mandatory components<Br>
+		and perform the process of component merging.<Br>
+		<Br>
+		Source code: https://github.com/nexdatas/configserver/<Br>
+		Web page: https://nexdatas.github.io/configserver/<Br>
+		NexDaTaS Web page: https://nexdatas.github.io<Br>
+		
+		<!---  /*PROTECTED REGION ID(FullDocument.html) ENABLED START*/  --->
+			<!--- Add your own documentation, pictures, links,.... --->
+			
+		<!---  /*PROTECTED REGION END*/  --->
+		
+	</ul>
+</ul>
+<br><br>
+<hr>
+<a name="properties"> </a>
+<br><br><br>
+<font size="+1"><u><b> NXSConfigServer  Properties : </b></u></font>
+<br><br><br>
+<font size="+1"><u><b> There is no class properties </b></u></font>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=4> <font size=+1> <center><b> Device Properties </b></font></center></td>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+		<td> <center><b> Name </b></center> </td>
+		<td> <center><b> Description </b></center> </td>
+		<td> <center><b> Type </b></center> </td>
+		<td> <center><b> Default Value </b></center> </td>
+	</tr>
+	<tr>
+		<td> VersionLabel </td>
+		<td> version label </td>
+		<td> String </td>
+		<td> &quot;XCS&quot; <br> </td>
+	</tr>
+</table>
+<br><br>
+<hr>
+<a name="commands"> </a>
+<br><br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=5> <font size=+1> <center><b> NXSConfigServer Class Commands </b></font></center></td>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+		<td> <center><b> Name </b></center> </td>
+		<td> <center><b> Input type </b></center> </td>
+		<td> <center><b> Output type </b></center> </td>
+		<td> <center><b> Level </b></center> </td>
+		<td> <center><b> Description </b></center> </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdState.html"> State </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_STATE </td>
+		<td> OPERATOR </td>
+		<td> This command gets the device state (stored in its device_state data member) and returns it to the caller. </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStatus.html"> Status </a> </td>
+		<td> DEV_VOID </td>
+		<td> CONST_DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> This command gets the device status (stored in its device_status data member) and returns it to the caller. </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdOpen.html"> Open </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Opens connection to the database </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdClose.html"> Close </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Closes connection into the database </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponents.html"> Components </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSelections.html"> Selections </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required selections </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdInstantiatedComponents.html"> InstantiatedComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDataSources.html"> DataSources </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required DataSources </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableComponents.html"> AvailableComponents </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available component names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableSelections.html"> AvailableSelections </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available selection names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableDataSources.html"> AvailableDataSources </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available DataSource names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreSelection.html"> StoreSelection </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the selection from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreComponent.html"> StoreComponent </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the component from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreDataSource.html"> StoreDataSource </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the DataSource from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdCreateConfiguration.html"> CreateConfiguration </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Creates the NDTS configuration script from the given components. The result is strored in XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteComponent.html"> DeleteComponent </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteSelection.html"> DeleteSelection </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given selection </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteDataSource.html"> DeleteDataSource </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given datasource </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSetComponentDataSources.html"> SetComponentDataSources </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Sets component datasources according to given dictionary </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSetMandatoryComponents.html"> SetMandatoryComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Sets the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdMandatoryComponents.html"> MandatoryComponents </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdUnsetMandatoryComponents.html"> UnsetMandatoryComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Removes the given components from the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentDataSources.html"> ComponentDataSources </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of datasource names for a given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentsDataSources.html"> ComponentsDataSources </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of datasource names for a given components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentsVariables.html"> ComponentsVariables </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of variable names for a given components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentVariables.html"> ComponentVariables </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of variable names for a given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdMerge.html"> Merge </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> Merges give components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDependentComponents.html"> DependentComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of dependent component names for a given components </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdState"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command State : </b></u></font>
+<ul>
+	This command gets the device state (stored in its device_state data member) and returns it to the caller.
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> State Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td> none </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_STATE </td>
+		<td> Device state </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> true </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command allowed for </td>
+		<td> All states </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdStatus"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Status : </b></u></font>
+<ul>
+	This command gets the device status (stored in its device_status data member) and returns it to the caller.
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Status Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td> none </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::CONST_DEV_STRING </td>
+		<td> Device status </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> true </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command allowed for </td>
+		<td> All states </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdOpen"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Open : </b></u></font>
+<ul>
+	Opens connection to the database
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Open Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdClose"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Close : </b></u></font>
+<ul>
+	Closes connection into the database
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Close Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Components : </b></u></font>
+<ul>
+	Returns a list of required components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Components Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of required components </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdSelections"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Selections : </b></u></font>
+<ul>
+	Returns a list of required selections
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Selections Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of selection names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of required selections </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdInstantiatedComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command InstantiatedComponents : </b></u></font>
+<ul>
+	Returns a list of required components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> InstantiatedComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of instantiated components </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command DataSources : </b></u></font>
+<ul>
+	Returns a list of required DataSources
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> DataSources Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of DataSource names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of required DataSources </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdAvailableComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command AvailableComponents : </b></u></font>
+<ul>
+	Returns a list of available component names
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> AvailableComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of available component names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdAvailableSelections"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command AvailableSelections : </b></u></font>
+<ul>
+	Returns a list of available selection names
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> AvailableSelections Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of available selection names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdAvailableDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command AvailableDataSources : </b></u></font>
+<ul>
+	Returns a list of available DataSource names
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> AvailableDataSources Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of available DataSource names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdStoreSelection"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command StoreSelection : </b></u></font>
+<ul>
+	Stores the selection from XMLString
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> StoreSelection Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> selection name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdStoreComponent"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command StoreComponent : </b></u></font>
+<ul>
+	Stores the component from XMLString
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> StoreComponent Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> component name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdStoreDataSource"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command StoreDataSource : </b></u></font>
+<ul>
+	Stores the DataSource from XMLString
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> StoreDataSource Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> datasource name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdCreateConfiguration"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command CreateConfiguration : </b></u></font>
+<ul>
+	Creates the NDTS configuration script from the given components. The result is strored in XMLString
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> CreateConfiguration Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdDeleteComponent"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command DeleteComponent : </b></u></font>
+<ul>
+	Deletes the given component
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> DeleteComponent Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> component name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdDeleteSelection"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command DeleteSelection : </b></u></font>
+<ul>
+	Deletes the given selection
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> DeleteSelection Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> selection name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdDeleteDataSource"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command DeleteDataSource : </b></u></font>
+<ul>
+	Deletes the given datasource
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> DeleteDataSource Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> datasource name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdSetComponentDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command SetComponentDataSources : </b></u></font>
+<ul>
+	Sets component datasources according to given dictionary
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> SetComponentDataSources Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> JSON dict {comp1: {tds1: ds1, ...}, ...} </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdSetMandatoryComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command SetMandatoryComponents : </b></u></font>
+<ul>
+	Sets the mandatory components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> SetMandatoryComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdMandatoryComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command MandatoryComponents : </b></u></font>
+<ul>
+	Returns the mandatory components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> MandatoryComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> component names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdUnsetMandatoryComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command UnsetMandatoryComponents : </b></u></font>
+<ul>
+	Removes the given components from the mandatory components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> UnsetMandatoryComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_VOID </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdComponentDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command ComponentDataSources : </b></u></font>
+<ul>
+	Returns a list of datasource names for a given component
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> ComponentDataSources Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> component name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of datasource names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdComponentsDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command ComponentsDataSources : </b></u></font>
+<ul>
+	Returns a list of datasource names for a given components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> ComponentsDataSources Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of datasource names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdComponentsVariables"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command ComponentsVariables : </b></u></font>
+<ul>
+	Returns a list of variable names for a given components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> ComponentsVariables Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of variable names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdComponentVariables"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command ComponentVariables : </b></u></font>
+<ul>
+	Returns a list of variable names for a given component
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> ComponentVariables Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> component name </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of variable names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdMerge"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command Merge : </b></u></font>
+<ul>
+	Merges give components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> Merge Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEV_STRING </td>
+		<td> merged components </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br><hr>
+<a name="cmdDependentComponents"> </a>
+<br><br><br>
+<font size="+1"><u><b> Command DependentComponents : </b></u></font>
+<ul>
+	Returns a list of dependent component names for a given components
+</ul>
+<br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=0> <font size=+1> <center><b> DependentComponents Definition </b></font></center></td>
+	</tr>
+	<tr>
+		<td> Input Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> component names </td>
+	</tr>
+	<tr>
+		<td> Output Argument </td>
+		<td> Tango::DEVVAR_STRINGARRAY </td>
+		<td> list of component names </td>
+	</tr>
+	<tr>
+		<td> DisplayLevel </td>
+		<td> OPERATOR </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Inherited </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Abstract </td>
+		<td> false </td>
+		<td> .. </td>
+	</tr>
+	<tr>
+		<td> Polling Period </td>
+		<td> Not polled </td>
+		<td> .. </td>
+	</tr>
+<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td><Td><Hr></Td></Tr>
+	<tr>
+		<td> Command NOT allowed for </td>
+		<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+		<td> .. </td>
+	</tr>
+</table>
+<br><br>
+<hr>
+<a name="attributes"> </a>
+<br><br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=8> <font size=+1> <center><b> NXSConfigServer Class Attributes </b></font></center></td>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+		<td> <center><b> Name </b></center> </td>
+		<td> <center><b> Inherited </b></center> </td>
+		<td> <center><b> Abstract </b></center> </td>
+		<td> <center><b> Attr. type </b></center> </td>
+		<td> <center><b> R/W type </b></center> </td>
+		<td> <center><b> Data type </b></center> </td>
+		<td> <center><b> Level </b></center> </td>
+		<td> <center><b> Description </b></center> </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrXMLString.html"> XMLString </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ_WRITE </td>
+		<td> Tango::DEV_STRING </td>
+		<td> EXPERT </td>
+		<td> It allows to pass XML strings into database during performing StoreComponent and StoreDataSource<Br>
+			Moreover, after performing CreateConfiguration it contains the resulting XML configuration. </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrSelection.html"> Selection </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ_WRITE </td>
+		<td> Tango::DEV_STRING </td>
+		<td> EXPERT </td>
+		<td> &quot;It allows to pass JSON strings into database during performing StoreSelection. </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrJSONSettings.html"> JSONSettings </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ_WRITE </td>
+		<td> Tango::DEV_STRING </td>
+		<td> EXPERT </td>
+		<td> &quot;The JSON string with parameters of MySQLdb.connect(...). </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrVersion.html"> Version </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ </td>
+		<td> Tango::DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> Configuration version </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrVariables.html"> Variables </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ_WRITE </td>
+		<td> Tango::DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> The JSON string with XML configuration variables </td>
+	</tr>
+	<tr>
+		<td> <a href="AttrSTEPDataSources.html"> STEPDataSources </a> </td>
+		<td> false </td>
+		<td> false </td>
+		<td> Scalar </td>
+		<td> READ_WRITE </td>
+		<td> Tango::DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> JSON list of datasources to be switched into STEP mode during creating configuration process </td>
+	</tr>
+</table>
+<br><br>
+<hr>
+<br><br>
+<font size="+1"><u><b> There is no dynamic attribute defined. </b></u></font>
+<br><br>
+<hr>
+<a name="attrXMLString"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute XMLString : </b></u></font>
+<ul>
+	It allows to pass XML strings into database during performing StoreComponent and StoreDataSource<Br>
+	Moreover, after performing CreateConfiguration it contains the resulting XML configuration.
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ_WRITE </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> EXPERT </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read NOT allowed for </td>
+					<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+				</tr>
+				<tr>
+					<td> Write NOT allowed for </td>
+					<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> XML Configuration </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<a name="attrSelection"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute Selection : </b></u></font>
+<ul>
+	&quot;It allows to pass JSON strings into database during performing StoreSelection.
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ_WRITE </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> EXPERT </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read NOT allowed for </td>
+					<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+				</tr>
+				<tr>
+					<td> Write NOT allowed for </td>
+					<td> <font size="-1">  <li> ON </li>  <li> RUNNING </li> </font> </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> Selected Component </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<a name="attrJSONSettings"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute JSONSettings : </b></u></font>
+<ul>
+	&quot;The JSON string with parameters of MySQLdb.connect(...).
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ_WRITE </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> EXPERT </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> true </td>
+				</tr>
+				<tr>
+					<td> Write hardware at init. </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read allowed for </td>
+					<td> All states </td>
+				</tr>
+				<tr>
+					<td> Write allowed for </td>
+					<td> All states </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> Arguments of MySQLdb.connect(...) </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<a name="attrVersion"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute Version : </b></u></font>
+<ul>
+	Configuration version
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> OPERATOR </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read allowed for </td>
+					<td> All states </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> Configuration Version </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<a name="attrVariables"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute Variables : </b></u></font>
+<ul>
+	The JSON string with XML configuration variables
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ_WRITE </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> OPERATOR </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read NOT allowed for </td>
+					<td> <font size="-1">  <li> RUNNING </li> </font> </td>
+				</tr>
+				<tr>
+					<td> Write NOT allowed for </td>
+					<td> <font size="-1">  <li> RUNNING </li> </font> </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> XML Configuration Variables </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<a name="attrSTEPDataSources"> </a>
+<br><br><br>
+<font size="+1"><u><b> Attribute STEPDataSources : </b></u></font>
+<ul>
+	JSON list of datasources to be switched into STEP mode during creating configuration process
+</ul>
+<br><br><br>
+<Table Border=0 Cellpadding=0 CELLSPACING=20>
+	<TR>
+		<TD ALIGN="left" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Definition </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Attribute Type </td>
+					<td> Scalar </td>
+				</tr>
+				<tr>
+					<td> R/W Type </td>
+					<td> READ_WRITE </td>
+				</tr>
+				<tr>
+					<td> Data Type </td>
+					<td> Tango::DEV_STRING </td>
+				</tr>
+				<tr>
+					<td> Display Level </td>
+					<td> OPERATOR </td>
+				</tr>
+				<tr>
+					<td> Inherited </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Abstract </td>
+					<td> false </td>
+				</tr>
+				<tr>
+					<td> Polling Period </td>
+					<td> Not polled </td>
+				</tr>
+				<tr>
+					<td> Memorized </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Read allowed for </td>
+					<td> All states </td>
+				</tr>
+				<tr>
+					<td> Write allowed for </td>
+					<td> All states </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Center" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Properties </b></font></center></td>
+				</tr>
+				<tr>
+					<td> label </td>
+					<td> Datasources to be switched into STEP Mode </td>
+				</tr>
+				<tr>
+					<td> unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> standard unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> display unit </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> format </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_value </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_alarm </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> max_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> min_warning </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_time </td>
+					<td>  </td>
+				</tr>
+				<tr>
+					<td> delta_val </td>
+					<td>  </td>
+				</tr>
+			</table>
+		</td>
+		<TD ALIGN="Right" VALIGN=top>
+			<Table Border=2 Cellpadding=3 CELLSPACING=0>
+				<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+				<td colspan=0> <font size=+1> <center><b> Attribute Event Criteria </b></font></center></td>
+				</tr>
+				<tr>
+					<td> Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Archive Periodic </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Relative Change </td>
+					<td> Not set </td>
+				</tr>
+				<tr>
+					<td> Archive Absolute Change </td>
+					<td> Not set </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td><Hr></Td><Td><Hr></Td></Tr>
+				<tr>
+					<td> Push Change event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push Archive event by user code </td>
+					<td> false </td>
+				</tr>
+			<Tr BGCOLOR="#CCCCFF"><Td> </Td><Td> </Td></Tr>
+				<tr>
+					<td> Push DataReady event by user code </td>
+					<td> false </td>
+				</tr>
+			</table>
+		</td>
+	</TR>
+</table>
+<br><br>
+<hr>
+<br><br>
+<hr>
+<a name="states"> </a>
+<br><br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=2> <font size=+1> <center><b> NXSConfigServer Class States </b></font></center></td>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+		<td> <center><b> Name </b></center> </td>
+		<td> <center><b> Description </b></center> </td>
+	</tr>
+	<tr>
+		<td> ON </td>
+		<td> Server is ON </td>
+	</tr>
+	<tr>
+		<td> OPEN </td>
+		<td> Open connection to the database </td>
+	</tr>
+	<tr>
+		<td> RUNNING </td>
+		<td> Performing a query </td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title> NXSConfigServer Tango Class Commands </title>
+</head>
+<body text="Black" bgcolor="White" link="Blue" vlink="Purple" alink="Red">
+<br><br><br><br>
+<Table Border=2 Cellpadding=3 CELLSPACING=0>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+	<td colspan=5> <font size=+1> <center><b> NXSConfigServer Class Commands </b></font></center></td>
+	<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+		<td> <center><b> Name </b></center> </td>
+		<td> <center><b> Input type </b></center> </td>
+		<td> <center><b> Output type </b></center> </td>
+		<td> <center><b> Level </b></center> </td>
+		<td> <center><b> Description </b></center> </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdState.html"> State </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_STATE </td>
+		<td> OPERATOR </td>
+		<td> This command gets the device state (stored in its device_state data member) and returns it to the caller. </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStatus.html"> Status </a> </td>
+		<td> DEV_VOID </td>
+		<td> CONST_DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> This command gets the device status (stored in its device_status data member) and returns it to the caller. </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdOpen.html"> Open </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Opens connection to the database </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdClose.html"> Close </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Closes connection into the database </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponents.html"> Components </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSelections.html"> Selections </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required selections </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdInstantiatedComponents.html"> InstantiatedComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDataSources.html"> DataSources </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of required DataSources </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableComponents.html"> AvailableComponents </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available component names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableSelections.html"> AvailableSelections </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available selection names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdAvailableDataSources.html"> AvailableDataSources </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of available DataSource names </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreSelection.html"> StoreSelection </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the selection from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreComponent.html"> StoreComponent </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the component from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdStoreDataSource.html"> StoreDataSource </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Stores the DataSource from XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdCreateConfiguration.html"> CreateConfiguration </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Creates the NDTS configuration script from the given components. The result is strored in XMLString </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteComponent.html"> DeleteComponent </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteSelection.html"> DeleteSelection </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given selection </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDeleteDataSource.html"> DeleteDataSource </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Deletes the given datasource </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSetComponentDataSources.html"> SetComponentDataSources </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Sets component datasources according to given dictionary </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdSetMandatoryComponents.html"> SetMandatoryComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Sets the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdMandatoryComponents.html"> MandatoryComponents </a> </td>
+		<td> DEV_VOID </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdUnsetMandatoryComponents.html"> UnsetMandatoryComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_VOID </td>
+		<td> OPERATOR </td>
+		<td> Removes the given components from the mandatory components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentDataSources.html"> ComponentDataSources </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of datasource names for a given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentsDataSources.html"> ComponentsDataSources </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of datasource names for a given components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentsVariables.html"> ComponentsVariables </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of variable names for a given components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdComponentVariables.html"> ComponentVariables </a> </td>
+		<td> DEV_STRING </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of variable names for a given component </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdMerge.html"> Merge </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEV_STRING </td>
+		<td> OPERATOR </td>
+		<td> Merges give components </td>
+	</tr>
+	<tr>
+		<td> <a href="CmdDependentComponents.html"> DependentComponents </a> </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> DEVVAR_STRINGARRAY </td>
+		<td> OPERATOR </td>
+		<td> Returns a list of dependent component names for a given components </td>
+	</tr>
+</table>
+</body>
+</html>

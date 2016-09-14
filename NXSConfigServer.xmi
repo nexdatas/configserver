@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pogoDsl:PogoSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pogoDsl="http://www.esrf.fr/tango/pogo/PogoDsl">
+  <classes name="NXSConfigServer" pogoRevision="8.1">
+    <description description="NeXuS Configuration Server is a Tango Server with its implementation based&#xA;on a MySQL database. It allows to store XML configuration datasources&#xA;and components. It also gives possibility to select mandatory components&#xA;and perform the process of component merging.&#xA;&#xA;Source code: https://github.com/nexdatas/configserver/&#xA;Web page: https://nexdatas.github.io/configserver/&#xA;NexDaTaS Web page: https://nexdatas.github.io&#xA;" title="Configuration Server for Nexus Data Writer" sourcePath="/home/jkotan/ndts/nexdatas.configserver" language="Python" filestogenerate="XMI   file,Code files,html Pages" license="GPL" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false" descriptionHtmlExists="false">
+      <inheritances classname="Device_Impl" sourcePath=""/>
+      <identification contact="at desy.de - jan.kotanski" author="jan.kotanski" emailDomain="desy.de" classFamily="Acquisition" siteSpecific="" platform="All Platforms" bus="Not Applicable" manufacturer="DESY" reference=""/>
+    </description>
+    <deviceProperties name="VersionLabel" description="version label">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>&quot;XCS&quot;</DefaultPropValue>
+    </deviceProperties>
+    <commands name="State" description="This command gets the device state (stored in its device_state data member) and returns it to the caller." execMethod="dev_state" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device state">
+        <type xsi:type="pogoDsl:StateType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Status" description="This command gets the device status (stored in its device_status data member) and returns it to the caller." execMethod="dev_status" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device status">
+        <type xsi:type="pogoDsl:ConstStringType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Open" description="Opens connection to the database" execMethod="open" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="Close" description="Closes connection into the database" execMethod="close" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="Components" description="Returns a list of required components" execMethod="components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of required components">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="Selections" description="Returns a list of required selections" execMethod="selections" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of selection names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of required selections">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="InstantiatedComponents" description="Returns a list of required components" execMethod="instantiated_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of instantiated components">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="DataSources" description="Returns a list of required DataSources" execMethod="data_sources" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of DataSource names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of required DataSources">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="AvailableComponents" description="Returns a list of available component names" execMethod="available_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="list of available component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="AvailableSelections" description="Returns a list of available selection names" execMethod="available_selections" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="list of available selection names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="AvailableDataSources" description="Returns a list of available DataSource names" execMethod="available_data_sources" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="list of available DataSource names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="StoreSelection" description="Stores the selection from XMLString" execMethod="store_selection" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="selection name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="StoreComponent" description="Stores the component from XMLString" execMethod="store_component" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="StoreDataSource" description="Stores the DataSource from XMLString" execMethod="store_data_source" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="datasource name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="CreateConfiguration" description="Creates the NDTS configuration script from the given components. The result is strored in XMLString" execMethod="create_configuration" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="DeleteComponent" description="Deletes the given component" execMethod="delete_component" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="DeleteSelection" description="Deletes the given selection" execMethod="delete_selection" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="selection name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="DeleteDataSource" description="Deletes the given datasource" execMethod="delete_data_source" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="datasource name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="SetComponentDataSources" description="Sets component datasources according to given dictionary" execMethod="set_component_data_sources" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="JSON dict {comp1: {tds1: ds1, ...}, ...}">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="SetMandatoryComponents" description="Sets the mandatory components" execMethod="set_mandatory_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="MandatoryComponents" description="Returns the mandatory components" execMethod="mandatory_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="UnsetMandatoryComponents" description="Removes the given components from the mandatory components" execMethod="unset_mandatory_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="ComponentDataSources" description="Returns a list of datasource names for a given component" execMethod="component_data_sources" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="list of datasource names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="ComponentsDataSources" description="Returns a list of datasource names for a given components" execMethod="components_data_sources" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of datasource names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="ComponentsVariables" description="Returns a list of variable names for a given components" execMethod="components_variables" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of variable names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="ComponentVariables" description="Returns a list of variable names for a given component" execMethod="component_variables" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="list of variable names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="Merge" description="Merges give components" execMethod="merge" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="merged components">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <commands name="DependentComponents" description="Returns a list of dependent component names for a given components" execMethod="dependent_components" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argin>
+      <argout description="list of component names">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <excludedStates>ON</excludedStates>
+      <excludedStates>RUNNING</excludedStates>
+    </commands>
+    <attributes name="XMLString" attType="Scalar" rwType="READ_WRITE" displayLevel="EXPERT" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="It allows to pass XML strings into database during performing StoreComponent and StoreDataSource&#xA;Moreover, after performing CreateConfiguration it contains the resulting XML configuration." label="XML Configuration" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <readExcludedStates>ON</readExcludedStates>
+      <readExcludedStates>RUNNING</readExcludedStates>
+      <writeExcludedStates>ON</writeExcludedStates>
+      <writeExcludedStates>RUNNING</writeExcludedStates>
+    </attributes>
+    <attributes name="Selection" attType="Scalar" rwType="READ_WRITE" displayLevel="EXPERT" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="&quot;It allows to pass JSON strings into database during performing StoreSelection." label="Selected Component" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <readExcludedStates>ON</readExcludedStates>
+      <readExcludedStates>RUNNING</readExcludedStates>
+      <writeExcludedStates>ON</writeExcludedStates>
+      <writeExcludedStates>RUNNING</writeExcludedStates>
+    </attributes>
+    <attributes name="JSONSettings" attType="Scalar" rwType="READ_WRITE" displayLevel="EXPERT" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="&quot;The JSON string with parameters of MySQLdb.connect(...)." label="Arguments of MySQLdb.connect(...)" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="Version" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="Configuration version" label="Configuration Version" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="Variables" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="The JSON string with XML configuration variables" label="XML Configuration Variables" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <readExcludedStates>RUNNING</readExcludedStates>
+      <writeExcludedStates>RUNNING</writeExcludedStates>
+    </attributes>
+    <attributes name="STEPDataSources" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="JSON list of datasources to be switched into STEP mode during creating configuration process" label="Datasources to be switched into STEP Mode" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <states name="ON" description="Server is ON">
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </states>
+    <states name="OPEN" description="Open connection to the database">
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </states>
+    <states name="RUNNING" description="Performing a query">
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </states>
+    <preferences docHome="./doc_html" makefileHome="/usr/share/pogo/preferences"/>
+  </classes>
+</pogoDsl:PogoSystem>
