@@ -636,27 +636,28 @@ class XMLConfigurator(object):
             if name:
                 if tag and name not in keys:
                     raise NonregisteredDBRecordError(
-                        "The %s %s not registered in the DataBase" % (
-                            tag if tag else "variable", name))
+                        "The %s %s of %s not registered in the DataBase" % (
+                            tag if tag else "variable", name, component))
                 try:
                     xmlds = funValue([name], defsubc)
                 except:
                     xmlds = []
                 if not onlyexisting and not xmlds:
                     raise NonregisteredDBRecordError(
-                        "The %s %s not registered" % (
-                            tag if tag else "variable", name))
+                        "The %s %s of %s not registered" % (
+                            tag if tag else "variable", name, component))
                 if tag:
                     dom = parseString(xmlds[0])
                     domds = dom.getElementsByTagName(tag)
                     if not domds:
                         raise NonregisteredDBRecordError(
-                            "The %s %s not registered in the DataBase" % (
-                                tag, name))
+                            "The %s %s of %s not registered in the DataBase" % (
+                                tag if tag else "variable", name, component))
                     ds = domds[0].toxml()
                     if not ds:
                         raise NonregisteredDBRecordError(
-                            "The %s %s not registered" % (tag, name))
+                            "The %s %s of %s not registered" % (
+                                tag if tag else "variable", name, component))
                     ds = "\n" + ds
                 else:
                     ds = xmlds[0] if (xmlds or not onlyexisting) else None
@@ -674,8 +675,8 @@ class XMLConfigurator(object):
                         index + 1)
             else:
                 raise NonregisteredDBRecordError(
-                    "The %s %s not registered" % (
-                        tag if tag else "variable", name))
+                    "The %s %s of %s not registered" % (
+                        tag if tag else "variable", name, component))
         return component
 
     def __attachVariables(self, component, cpvars=None):
