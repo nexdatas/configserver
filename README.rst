@@ -32,13 +32,13 @@ Download the latest version of NeXuS Configuration Server from
 
 Extract the sources and run
 
-.. code:: bash
+.. code-block:: console
 
 	  $ python setup.py install
 
 To set database execute
 	  
-.. code:: bash
+.. code-block:: console
 
 	  $ mysql < conf/mysql_create.sql
 
@@ -51,34 +51,34 @@ Debian Jessie (and Wheezy) packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
-.. code:: bash
+.. code-block:: console
 
 	  $ sudo su
 	  $ wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg | apt-key add -
 
 and then download the corresponding source list
 
-.. code:: bash
+.. code-block:: console
 
 	  $ cd /etc/apt/sources.list.d
 	  $ wget http://repos.pni-hdri.de/jessie-pni-hdri.list
 
 Finally,
 
-.. code:: bash
+.. code-block:: console
 
 	  $ apt-get update
 	  $ apt-get install python-nxsconfigserver nxsconfigserver-db
 
 To instal other NexDaTaS packages
 
-.. code:: bash
+.. code-block:: console
 
 	  $ apt-get install python-nxswriter nxsconfigtool nxstools
 
 and
 
-.. code:: bash
+.. code-block:: console
 
 	  $ apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
 
@@ -89,7 +89,7 @@ Setting NeXus Configuration Server
 
 To set up  NeXus Configuration Server with the default configuration run
 
-.. code:: bash
+.. code-block:: console
 
           $ nxsetup -x NXSConfigServer
 
