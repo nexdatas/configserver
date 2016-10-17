@@ -761,27 +761,28 @@
             <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">tag</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NonregisteredDBRecordError</span><span class="p">(</span>
-                        <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not registered in the DataBase&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                            <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                        <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s"> not registered in the DataBase&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                            <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">))</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">xmlds</span> <span class="o">=</span> <span class="n">funValue</span><span class="p">([</span><span class="n">name</span><span class="p">],</span> <span class="n">defsubc</span><span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">xmlds</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">onlyexisting</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">xmlds</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NonregisteredDBRecordError</span><span class="p">(</span>
-                        <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                            <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                        <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                            <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
                     <span class="n">dom</span> <span class="o">=</span> <span class="n">parseString</span><span class="p">(</span><span class="n">xmlds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                     <span class="n">domds</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">domds</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">NonregisteredDBRecordError</span><span class="p">(</span>
-                            <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not registered in the DataBase&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                                <span class="n">tag</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                            <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s"> not registered in the DataBase&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                                <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">))</span>
                     <span class="n">ds</span> <span class="o">=</span> <span class="n">domds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">toxml</span><span class="p">()</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">ds</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">NonregisteredDBRecordError</span><span class="p">(</span>
-                            <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                            <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                                <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">))</span>
                     <span class="n">ds</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">ds</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">ds</span> <span class="o">=</span> <span class="n">xmlds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">xmlds</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">onlyexisting</span><span class="p">)</span> <span class="k">else</span> <span class="bp">None</span>
@@ -799,8 +800,8 @@
                         <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">NonregisteredDBRecordError</span><span class="p">(</span>
-                    <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                        <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                    <span class="s">&quot;The </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> of </span><span class="si">%s</span><span class="s"> not registered&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                        <span class="n">tag</span> <span class="k">if</span> <span class="n">tag</span> <span class="k">else</span> <span class="s">&quot;variable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">component</span>
 
     <span class="k">def</span> <span class="nf">__attachVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component</span><span class="p">,</span> <span class="n">cpvars</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>

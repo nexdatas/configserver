@@ -549,7 +549,7 @@
 <div class="viewcode-block" id="NXSConfigServer.DataSources"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DataSources">[docs]</a>    <span class="k">def</span> <span class="nf">DataSources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; DataSources command</span>
 
-<span class="sd">        :brief: Return a list of required DataSources</span>
+<span class="sd">        :brief: Returns a list of required DataSources</span>
 
 <span class="sd">        :param argin:  DevVarStringArray    list of DataSource names</span>
 <span class="sd">        :type argin: :obj:`list` &lt;:obj:`str`&gt;</span>
@@ -869,7 +869,7 @@
 <div class="viewcode-block" id="NXSConfigServer.SetComponentDataSources"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.SetComponentDataSources">[docs]</a>    <span class="k">def</span> <span class="nf">SetComponentDataSources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; SetComponentDataSources command</span>
 
-<span class="sd">        :brief: set component datasources according to given dictionary</span>
+<span class="sd">        :brief: Sets component datasources according to given dictionary</span>
 
 <span class="sd">        :param argin:  DevString   JSON dict { comp1: {ds: tds, ...}, ...}</span>
 <span class="sd">        :type argin: :obj:`str`</span>
@@ -917,14 +917,15 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 </div>
 <div class="viewcode-block" id="NXSConfigServer.MandatoryComponents"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.MandatoryComponents">[docs]</a>    <span class="k">def</span> <span class="nf">MandatoryComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; MandatoryComponents command</span>
 
-<span class="sd">        :brief: Sets the mandatory components</span>
+<span class="sd">        :brief: Returns the mandatory components</span>
 
 <span class="sd">        :returns: DevVarStringArray    component names</span>
 <span class="sd">        :rtype: :obj:`list` &lt;:obj:`str`&gt;</span>
@@ -946,14 +947,15 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">return</span> <span class="bp">True</span>
 </div>
 <div class="viewcode-block" id="NXSConfigServer.UnsetMandatoryComponents"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.UnsetMandatoryComponents">[docs]</a>    <span class="k">def</span> <span class="nf">UnsetMandatoryComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; UnsetMandatoryComponents command</span>
 
-<span class="sd">        :brief: It removes the given components</span>
+<span class="sd">        :brief: Removes the given components</span>
 <span class="sd">                from the mandatory components</span>
 
 <span class="sd">        :param argin:  DevVarStringArray    list of component names</span>
@@ -982,7 +984,7 @@
 <div class="viewcode-block" id="NXSConfigServer.ComponentDataSources"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentDataSources">[docs]</a>    <span class="k">def</span> <span class="nf">ComponentDataSources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; ComponentDataSources command</span>
 
-<span class="sd">        :brief: returns a list of datasource names for a given component</span>
+<span class="sd">        :brief: Returns a list of datasource names for a given component</span>
 
 <span class="sd">        :param argin:  DevString    component name</span>
 <span class="sd">        :type argin: :obj:`str`</span>
@@ -1014,7 +1016,7 @@
 <div class="viewcode-block" id="NXSConfigServer.ComponentsDataSources"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentsDataSources">[docs]</a>    <span class="k">def</span> <span class="nf">ComponentsDataSources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; ComponentsDataSources command</span>
 
-<span class="sd">        :brief: returns a list of datasource names for a given components</span>
+<span class="sd">        :brief: Returns a list of datasource names for a given components</span>
 
 <span class="sd">        :param argin:  DevVarStringArray    component names</span>
 <span class="sd">        :type argin: :obj:`list` &lt;:obj:`str`&gt;</span>
@@ -1046,7 +1048,7 @@
 <div class="viewcode-block" id="NXSConfigServer.ComponentsVariables"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentsVariables">[docs]</a>    <span class="k">def</span> <span class="nf">ComponentsVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; ComponentsVariables command</span>
 
-<span class="sd">        :brief: returns a list of variable names for a given components</span>
+<span class="sd">        :brief: Returns a list of variable names for a given components</span>
 
 <span class="sd">        :param argin:  DevVarStringArray    component names</span>
 <span class="sd">        :type argin: :obj:`list` &lt;:obj:`str`&gt;</span>
@@ -1078,7 +1080,7 @@
 <div class="viewcode-block" id="NXSConfigServer.ComponentVariables"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentVariables">[docs]</a>    <span class="k">def</span> <span class="nf">ComponentVariables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argin</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; ComponentVariables command</span>
 
-<span class="sd">        :brief: returns a list of variable names for a given component</span>
+<span class="sd">        :brief: Returns a list of variable names for a given component</span>
 
 <span class="sd">        :param argin:  DevString    component name</span>
 <span class="sd">        :type argin: :obj:`str`</span>

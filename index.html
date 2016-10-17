@@ -149,6 +149,7 @@
 on a MySQL database. It allows to store XML configuration datasources
 and components. It also gives possibility to select mandatory components
 and perform the process of component merging.</p>
+<p>Tango Server API: <a class="reference external" href="https://nexdatas.github.io/configserver/doc_html">https://nexdatas.github.io/configserver/doc_html</a></p>
 <div class="line-block">
 <div class="line">Source code: <a class="reference external" href="https://github.com/nexdatas/configserver/">https://github.com/nexdatas/configserver/</a></div>
 <div class="line">Web page: <a class="reference external" href="https://nexdatas.github.io/configserver/">https://nexdatas.github.io/configserver/</a></div>
@@ -168,11 +169,11 @@ and perform the process of component merging.</p>
 <div class="line"><a class="reference external" href="https://github.com/nexdatas/configserver-db/">https://github.com/nexdatas/configserver-db/</a></div>
 </div>
 <p>Extract the sources and run</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ python setup.py install
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python setup.py install
 </pre></div>
 </div>
 <p>To set database execute</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ mysql &lt; conf/mysql_create.sql
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mysql &lt; conf/mysql_create.sql
 </pre></div>
 </div>
 <p>with proper privileges.</p>
@@ -181,26 +182,26 @@ and perform the process of component merging.</p>
 <h3>Debian packages<a class="headerlink" href="#debian-packages" title="Permalink to this headline">¶</a></h3>
 <p>Debian Jessie (and Wheezy) packages can be found in the HDRI repository.</p>
 <p>To install the debian packages, add the PGP repository key</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ sudo su
-$ wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg | apt-key add -
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo su
+<span class="gp">$</span> wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg <span class="p">|</span> apt-key add -
 </pre></div>
 </div>
 <p>and then download the corresponding source list</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ cd /etc/apt/sources.list.d
-$ wget http://repos.pni-hdri.de/jessie-pni-hdri.list
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /etc/apt/sources.list.d
+<span class="gp">$</span> wget http://repos.pni-hdri.de/jessie-pni-hdri.list
 </pre></div>
 </div>
 <p>Finally,</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ apt-get update
-$ apt-get install python-nxsconfigserver nxsconfigserver-db
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get update
+<span class="gp">$</span> apt-get install python-nxsconfigserver nxsconfigserver-db
 </pre></div>
 </div>
 <p>To instal other NexDaTaS packages</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ apt-get install python-nxswriter nxsconfigtool nxstools
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-nxswriter nxsconfigtool nxstools
 </pre></div>
 </div>
 <p>and</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
 </pre></div>
 </div>
 <p>for Component Selector and Sardana related packages.</p>
@@ -208,7 +209,7 @@ $ apt-get install python-nxsconfigserver nxsconfigserver-db
 <div class="section" id="setting-nexus-configuration-server">
 <h3>Setting NeXus Configuration Server<a class="headerlink" href="#setting-nexus-configuration-server" title="Permalink to this headline">¶</a></h3>
 <p>To set up  NeXus Configuration Server with the default configuration run</p>
-<div class="code bash highlight-python"><div class="highlight"><pre>$ nxsetup -x NXSConfigServer
+<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> nxsetup -x NXSConfigServer
 </pre></div>
 </div>
 <p>The <em>nxsetup</em> command comes from the <strong>python-nxstools</strong> package.</p>
