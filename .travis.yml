@@ -28,7 +28,8 @@ before_install:
   - sleep 10
 
 install:
-  - python setup.py -q install
+  - sudo apt-get install -y  python-nxsconfigserver
+#  - python setup.py -q install
 
 script:
-  - python setup.py test
+  - python test/runtest.py

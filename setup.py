@@ -28,7 +28,6 @@ NXS = "nxsconfigserver"
 #: nxs imported package
 INXS = __import__(NXS)
 
-import sphinx
 from sphinx.setup_command import BuildDoc
 
 #__requires__ = 'nextdata ==%s' % INXS.__version__
