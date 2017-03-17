@@ -1,7 +1,7 @@
 language: python
 
 sudo: required
-dist: trusty
+#dist: trusty
 
 python:
   - "2.7"
@@ -28,8 +28,8 @@ before_install:
   - sleep 10
 
 install:
-  - sudo apt-get install -y  python-nxsconfigserver
-#  - python setup.py -q install
+#  - sudo apt-get install -y  python-nxsconfigserver
+  - python setup.py -q install
 
 script:
-  - python test/runtest.py
+  - python setup.py test
