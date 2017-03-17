@@ -26,7 +26,8 @@ before_install:
   - sudo apt-get install -y    python-sphinx
   - sudo apt-get install -y   --force-yes python-pytango python-nxstools
   - sleep 10
-
+  - export PYTHONPATH=$PYTHONPATH:$(pwd):/usr/lib/python2.7/dist-packages
+  
 install:
 #  - sudo apt-get install -y  python-nxsconfigserver
   - echo "$PYTHONPATH"
