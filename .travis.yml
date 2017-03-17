@@ -29,6 +29,7 @@ before_install:
 
 install:
 #  - sudo apt-get install -y  python-nxsconfigserver
+  - echo "$PYTHONPATH"
   - python setup.py -q install
 
 script:
