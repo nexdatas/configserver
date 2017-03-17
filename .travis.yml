@@ -5,7 +5,8 @@ dist: trusty
 
 python:
   - "2.7"
-
+  - nightly
+  
 services:
   - mysql
 
@@ -29,8 +30,6 @@ before_install:
   - export PYTHONPATH=$PYTHONPATH:$(pwd):/usr/lib/python2.7/dist-packages
   
 install:
-#  - sudo apt-get install -y  python-nxsconfigserver
-  - echo "$PYTHONPATH"
   - python setup.py -q install
 
 script:
