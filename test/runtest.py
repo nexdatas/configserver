@@ -21,6 +21,7 @@
 #
 
 import os
+import sys
 import unittest
 
 import ComponentHandlerTest
@@ -119,9 +120,11 @@ def main():
 
     ## test runner
     runner = unittest.TextTestRunner()
+
     ## test result
-    result = runner.run(suite)
+    result = runner.run(suite).wasSuccessful()
+    sys.exit(result)
 
-
+         
 if __name__ == "__main__":
     main()
