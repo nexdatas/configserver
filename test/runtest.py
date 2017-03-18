@@ -123,7 +123,7 @@ def main():
 
     ## test result
     result = runner.run(suite).wasSuccessful()
-    sys.exit(result)
+    sys.exit(not result)
 
          
 if __name__ == "__main__":
