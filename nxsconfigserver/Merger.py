@@ -59,7 +59,10 @@ class Merger(object):
         self.uniqueText = ['field', 'attribute', 'query', 'strategy', 'result']
 
         #: (:obj:`list` <:obj:`str`> ) node which can have switched strategy
-        self.switchable = ["field", 'attribute']
+        self.switchable = ["field", "attribute"]
+
+        #: (:obj:`list` <:obj:`str`> ) node which can have links
+        self.linkable = ["field"]
 
         #: (:obj:`dict` <:obj:`str` , :obj:`str`> ) \
         #:     strategy modes to switch
@@ -70,6 +73,9 @@ class Merger(object):
 
         #: (:obj:`list` <:obj:`str`> ) aliased to switch to STEP mode
         self.switchdatasources = []
+
+        #: (:obj:`list` <:obj:`str`> ) aliased to add links
+        self.linkdatasources = []
 
         #: (:obj:`str`) datasource label
         self.__dsvars = "$datasources."
@@ -257,20 +263,25 @@ class Merger(object):
                             [child])
 
                 self.__mergeChildren(child)
-                if cName in self.switchable:
+                if cName in self.switchable and self.switchdatasources:
                     self.__switch(child)
+                if cName in self.linkable and self.linkdatasources:
+                    self.__addlink(child)
                 child = child.nextSibling
 
-    def __getTextDataSource(self, node):
+    def __getTextDataSource(self, node, dslist=None):
         """ find first datasources node and name in text nodes of the node
 
         :param node: the parent node
         :type node: :obj:`xml.dom.minidom.Node`
+        :param dslist: list of datasources
+        :type dslist: :obj:`list` <:obj:`str`>
         :returns: (node, name) of the searched datasource
         :rtype: (:obj:`str` , :obj:`str`)
         """
         dsname = None
         dsnode = None
+        dslist = dslist or self.switchdatasources
         text = unicode(self.__getText(node)).strip()
         index = text.find(self.__dsvars)
         while index >= 0:
@@ -281,7 +292,7 @@ class Merger(object):
             except:
                 subc = ''
             name = subc.strip() if subc else ""
-            if name in self.switchdatasources:
+            if name in dslist:
                 dsnode = node
                 dsname = name
                 break
@@ -332,6 +343,89 @@ class Merger(object):
                     break
             if stnode and dsnode:
                 stnode.setAttribute("mode", self.modesToSwitch[mode])
+
+    def __addlink(self, node):
+        """ add link in NXdata group
+
+        :param node: the given node
+        :type node: :obj:`xml.dom.minidom.Node`
+        """
+        if node:
+            stnode = None
+            mode = None
+            dsname = None
+            dsnode = None
+
+            dsname, dsnode = self.__getTextDataSource(node, self.linkdatasources)
+
+            children = node.childNodes
+            for child in children:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
+                if cName == 'datasource':
+                    dsname = child.getAttribute("name")
+                    if dsname in self.linkdatasources:
+                        dsnode = child
+                    else:
+                        dsname, dsnode = self.__getTextDataSource(
+                            child, self.linkdatasources)
+                if stnode and dsnode:
+                    break
+            if dsnode:
+                grpnode = node.parentNode
+                path = [(node.getAttribute("name"), dsname)]
+                entrynode = None
+                while hasattr(grpnode, "getAttribute"):
+                    if  grpnode.nodeName == 'group':
+                        entrynode = grpnode
+                        path.append(
+                            (grpnode.getAttribute("name"),
+                             grpnode.getAttribute("type")))
+                    grpnode = grpnode.parentNode
+                linkfound = False
+                if entrynode:
+                    gchildren = entrynode.childNodes
+                    for gchild in gchildren:
+                        if hasattr(gchild, "getAttribute"):
+                            if gchild.getAttribute("name") == 'data' \
+                               and gchild.getAttribute("type") == 'NXdata':
+                                datanode = gchild
+                                dchildren = datanode.childNodes
+                                for dchild in dchildren:
+                                    if hasattr(dchild, "getAttribute"):
+                                        if dchild.getAttribute("name") == dsname:
+                                            linkfound = True
+                                            break
+                    if not linkfound:
+                        self.__createLink(grpnode, entrynode, datanode, path)
+
+    def __createLink(self, root, entry, data, path):
+        """ create link on given node
+
+        :param root: root node
+        :type root: :class:`xml.dom.minidom.Node`
+        :param node: the given node
+        :type node: :obj:`xml.dom.minidom.Node`
+        :param path: list with NeXus path (name, type)
+        :type node: :obj:`list` < (:obj:`str`,:obj:`str`) >
+        """
+
+        if not data:
+            data = root.createElement("group")
+            entry.appendChild(data)
+            data.setAttribute("type", "NXdata")
+            data.setAttribute("name", "data")
+        if path and data:
+            target, dsname = path[0]
+
+            for gname, gtype in path[1:]:
+                target = "%s:%s/" % (gname, gtype) + target
+            target = "/" + target    
+            if dsname:
+                link = root.createElement("link")
+                data.appendChild(link)
+                link.setAttribute("target", "%s" % target)
+                link.setAttribute("name", dsname)
 
     def collect(self, components):
         """ collects the given components in one DOM tree

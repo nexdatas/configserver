@@ -51,6 +51,8 @@ class XMLConfigurator(object):
         self.jsonsettings = "{}"
         #: (:obj:`str`) datasources to be switched into STEP mode
         self.__stepdatasources = "[]"
+        #: (:obj:`str`) datasources to which links will be added
+        self.__linkdatasources = "[]"
 
         #: (:obj:`str`) string with XML variables
         self.variables = "{}"
@@ -144,6 +146,35 @@ class XMLConfigurator(object):
         __getStepDatSources,
         __setStepDatSources,
         doc='step datasource list')
+    
+    def __getLinkDatSources(self):
+        """ get method for dataSourceGroup attribute
+
+        :returns: names of LINK dataSources
+        :rtype: :obj:`str`
+        """
+        try:
+            lad = json.loads(self.__linkdatasources)
+            assert isinstance(lad, list)
+            return self.__linkdatasources
+        except Exception:
+            return '[]'
+
+    def __setLinkDatSources(self, names):
+        """ set method for dataSourceGroup attribute
+
+        :param names: of LINK dataSources
+        :type names: :obj:`str`
+        """
+        jnames = self.__stringToListJson(names)
+        #: administator data
+        self.__linkdatasources = jnames
+
+    #: (:obj:`str`) the json data string
+    linkdatasources = property(
+        __getLinkDatSources,
+        __setLinkDatSources,
+        doc='link datasource list')
 
     def __getVersion(self):
         """ get method for version attribute
@@ -787,6 +818,7 @@ class XMLConfigurator(object):
         """
         mgr = Merger()
         mgr.switchdatasources = json.loads(self.stepdatasources)
+        mgr.linkdatasources = json.loads(self.linkdatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()

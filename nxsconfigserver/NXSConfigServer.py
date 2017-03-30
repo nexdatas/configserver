@@ -226,6 +226,40 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
+    def read_LinkDataSources(self, attr):
+        """ Read LinkDataSources attribute
+
+        :param attr: link datasources attribute
+        :type attr: :class:`PyTango.Attribute`
+        """
+        self.debug_stream("In read_LinkDataSources()")
+        attr.set_value(self.xmlc.linkdatasources or "")
+
+    def write_LinkDataSources(self, attr):
+        """ Write LinkDataSources attribute
+
+        :param attr: link datasources attribute
+        :type attr: :class:`PyTango.Attribute`
+        """
+        self.debug_stream("In write_LinkDataSources()")
+        if self.is_LinkDataSources_write_allowed():
+            self.xmlc.linkdatasources = attr.get_write_value() or ""
+        else:
+            self.warn_stream("To change the settings please close the server.")
+            raise Exception(
+                "To change the settings please close the server.")
+
+    def is_LinkDataSources_write_allowed(self):
+        """ LinkDataSources attribute Write State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
+        """
+        if self.get_state() in [PyTango.DevState.RUNNING]:
+            return False
+        return True
+
+
     def read_Version(self, attr):
         """ Read Version attribute
 
@@ -1220,6 +1254,15 @@ class NXSConfigServerClass(PyTango.DeviceClass):
              'label': "Datasources to be switched into STEP Mode",
              'description': "JSON list of datasources to be switched "
              "into STEP mode during creating configuration process",
+        }],
+        'LinkDataSources':
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+             'label': "Datasources to which links will be added",
+             'description': "JSON list of datasources"
+             "to which links will be added",
         }],
     }
 
