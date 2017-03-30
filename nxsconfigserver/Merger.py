@@ -369,32 +369,40 @@ class Merger(object):
                     else:
                         dsname, dsnode = self.__getTextDataSource(
                             child, self.linkdatasources)
-                if stnode and dsnode:
+                if dsnode:
                     break
+            print "LINK", self.linkdatasources, dsname   
             if dsnode:
                 grpnode = node.parentNode
                 path = [(node.getAttribute("name"), dsname)]
                 entrynode = None
+                print "GRN", grpnode, path
                 while hasattr(grpnode, "getAttribute"):
                     if  grpnode.nodeName == 'group':
                         entrynode = grpnode
                         path.append(
                             (grpnode.getAttribute("name"),
                              grpnode.getAttribute("type")))
+                        print path
                     grpnode = grpnode.parentNode
                 linkfound = False
+                datanode = None
+                print "L1"
                 if entrynode:
                     gchildren = entrynode.childNodes
                     for gchild in gchildren:
+                        print "L2"
                         if hasattr(gchild, "getAttribute"):
                             if gchild.getAttribute("name") == 'data' \
                                and gchild.getAttribute("type") == 'NXdata':
                                 datanode = gchild
                                 dchildren = datanode.childNodes
                                 for dchild in dchildren:
+                                    print "L3"
                                     if hasattr(dchild, "getAttribute"):
                                         if dchild.getAttribute("name") == dsname:
                                             linkfound = True
+                                            print "L4"
                                             break
                     if not linkfound:
                         self.__createLink(grpnode, entrynode, datanode, path)
@@ -410,22 +418,23 @@ class Merger(object):
         :type node: :obj:`list` < (:obj:`str`,:obj:`str`) >
         """
 
-        if not data:
-            data = root.createElement("group")
-            entry.appendChild(data)
-            data.setAttribute("type", "NXdata")
-            data.setAttribute("name", "data")
-        if path and data:
+        print "CRLINK", path
+        if path:
             target, dsname = path[0]
-
-            for gname, gtype in path[1:]:
-                target = "%s:%s/" % (gname, gtype) + target
-            target = "/" + target    
-            if dsname:
-                link = root.createElement("link")
-                data.appendChild(link)
-                link.setAttribute("target", "%s" % target)
-                link.setAttribute("name", dsname)
+            if target:
+                if not data:
+                    data = root.createElement("group")
+                    entry.appendChild(data)
+                    data.setAttribute("type", "NXdata")
+                    data.setAttribute("name", "data")
+                for gname, gtype in path[1:]:
+                    target = "%s:%s/" % (gname, gtype) + target
+                target = "/" + target    
+                if dsname:
+                    link = root.createElement("link")
+                    data.appendChild(link)
+                    link.setAttribute("target", "%s" % target)
+                    link.setAttribute("name", dsname)
 
     def collect(self, components):
         """ collects the given components in one DOM tree

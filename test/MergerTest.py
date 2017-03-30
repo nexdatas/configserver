@@ -954,7 +954,121 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.toString().replace("?>\n<","?><"),'<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><attribute type="field2"><datasource name="ds2">$datasources.ds1</datasource><strategy mode="FINAL"/></attribute></group></definition>' )
 
 
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_none(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        self.assertEqual(el.linkdatasources,[])
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='INIT'/></attribute></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds1"/><strategy mode="INIT"/></attribute></group></definition>')
 
 
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_nofieldname(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='INIT'/></attribute></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds1"/><strategy mode="INIT"/></attribute></group></definition>')
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field name='myfield' type='field'><datasource name='ds1'/><strategy mode='INIT' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='INIT'/></attribute></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="myfield" type="field"><datasource name="ds1"/><strategy mode="INIT"/></field><attribute type="field2"><datasource name="ds1"/><strategy mode="INIT"/></attribute><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry/myfield"/></group></group></definition>')
+
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_withdata(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><field name='myfield' type='field'><datasource name='ds1'/><strategy mode='STEP' /></field></group></definition>","<definition><group name='entry' type='NXentry'><attribute type='field2'><datasource name='ds1'/><strategy mode='INIT'/></attribute><group name='data' type='NXdata' /></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="myfield" type="field"><datasource name="ds1"/><strategy mode="STEP"/></field><attribute type="field2"><datasource name="ds1"/><strategy mode="INIT"/></attribute><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry/myfield"/></group></group></definition>')
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_twofields(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><group  name='instrument' type='NXinstrument'><field name='myfield' type='field'><datasource name='ds2'/><strategy mode='STEP' /></field></group></group></definition>","<definition><group name='entry' type='NXentry'><field name='mf' type='field2'><datasource name='ds1'/><strategy mode='INIT'/></field><group name='data' type='NXdata' /></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><group name="instrument" type="NXinstrument"><field name="myfield" type="field"><datasource name="ds2"/><strategy mode="STEP"/></field></group><field name="mf" type="field2"><datasource name="ds1"/><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry/mf"/></group></group></definition>')
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_twolinks(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1", "ds2"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><group  name='instrument' type='NXinstrument'><field name='myfield' type='field'><datasource name='ds2'/><strategy mode='STEP' /></field></group></group></definition>","<definition><group name='entry' type='NXentry'><field name='mf' type='field2'><datasource name='ds1'/><strategy mode='INIT'/></field><group name='data' type='NXdata' /></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><group name="instrument" type="NXinstrument"><field name="myfield" type="field"><datasource name="ds2"/><strategy mode="STEP"/></field></group><field name="mf" type="field2"><datasource name="ds1"/><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="ds2" target="/entry:NXentry/instrument:NXinstrument/myfield"/><link name="ds1" target="/entry:NXentry/mf"/></group></group></definition>')
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_twoduplinks(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group  name='entry' type='NXentry'><group  name='instrument' type='NXinstrument'><field name='myfield' type='field'><datasource name='ds1'/><strategy mode='STEP' /></field></group></group></definition>","<definition><group name='entry' type='NXentry'><field name='mf' type='field2'><datasource name='ds1'/><strategy mode='INIT'/></field><group name='data' type='NXdata' /></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        try:
+            self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><group name="instrument" type="NXinstrument"><field name="myfield" type="field"><datasource name="ds1"/><strategy mode="STEP"/></field></group><field name="mf" type="field2"><datasource name="ds1"/><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry/mf"/></group></group></definition>')
+        except:
+            self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><group name="instrument" type="NXinstrument"><field name="myfield" type="field"><datasource name="ds1"/><strategy mode="STEP"/></field></group><field name="mf" type="field2"><datasource name="ds1"/><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry/instrument:NXinstrument/myfield"/></group></group></definition>')
+
+    ## test collect
+    # \brief It tests default settings
+    def test_linkdatasources_ds1_twolinks_oneexists(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.linkdatasources = ["ds1", "ds2"]
+        self.assertEqual(el.linkable, ["field"])
+        
+        self.assertEqual(el.collect(["<definition><group name='entry' type='NXentry'><group  name='instrument' type='NXinstrument'><field name='myfield' type='field'><datasource name='ds2'/><strategy mode='STEP' /></field></group></group></definition>","<definition><group name='entry' type='NXentry'><field name='mf' type='field2'><datasource name='ds1'/><strategy mode='INIT'/></field><group name='data' type='NXdata' ><link name='ds1' target='/entry:NXentry'/></group></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<","?><"), '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><group name="instrument" type="NXinstrument"><field name="myfield" type="field"><datasource name="ds2"/><strategy mode="STEP"/></field></group><field name="mf" type="field2"><datasource name="ds1"/><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="ds1" target="/entry:NXentry"/><link name="ds2" target="/entry:NXentry/instrument:NXinstrument/myfield"/></group></group></definition>')
 if __name__ == '__main__':
     unittest.main()
