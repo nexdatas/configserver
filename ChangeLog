@@ -1,3 +1,7 @@
+2017-03-XX Jan Kotanski <jankotan@gmail.com>
+	* add LinkDataSources attribute
+	* tagged as v2.6.0
+
 2016-09-07 Jan Kotanski <jankotan@gmail.com>
 	* allow version reading at any time
 	* tagged as v2.5.0
