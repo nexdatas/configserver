@@ -1052,7 +1052,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -1062,7 +1062,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(long(el.version()), self.version + 4)
         self.assertEqual(el.close(), None)
@@ -1132,7 +1132,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -1144,7 +1144,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(long(el.version()), self.version + 8)
         self.assertEqual(el.close(), None)

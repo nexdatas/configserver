@@ -36,7 +36,7 @@ from nxsconfigserver.XMLConfigurator import XMLConfigurator
 from nxsconfigserver.Merger import Merger
 from nxsconfigserver.Errors import (
     NonregisteredDBRecordError, UndefinedTagError,
-                                     IncompatibleNodeError)
+    IncompatibleNodeError)
 import nxsconfigserver
 
 
@@ -2788,7 +2788,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(
             gxml.replace("> ", ">").replace(">  ", ">").replace(">   ", ">").replace(" <", "<").replace(
                 "  <", "<").replace("   <", "<").replace("?>\n<", "?><").replace(" <", "<"),
-                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">myvalue</field></group></definition>')
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field type="field">myvalue</field></group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -7272,10 +7272,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -7349,10 +7349,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -7504,10 +7504,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -7583,12 +7583,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -7663,12 +7663,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -7754,12 +7754,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
-               % ("$datasources.%s" % dsname[2])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            % ("$datasources.%s" % dsname[2])
         ]
 
         np = len(xml)
@@ -7837,10 +7837,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -7917,10 +7917,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -7994,10 +7994,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8072,10 +8072,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8150,12 +8150,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -8229,12 +8229,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -8315,12 +8315,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
-               % ("$datasources.%s" % dsname[2])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            % ("$datasources.%s" % dsname[2])
         ]
 
         np = len(xml)
@@ -8396,10 +8396,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8476,10 +8476,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8555,10 +8555,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8717,10 +8717,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -8799,12 +8799,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -8881,12 +8881,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
-               % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
         np = len(xml)
@@ -8971,12 +8971,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
-               % ("$datasources.%s" % dsname[2])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            % ("$datasources.%s" % dsname[2])
         ]
 
         np = len(xml)
@@ -9050,10 +9050,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9131,10 +9131,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9209,10 +9209,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9288,10 +9288,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9367,10 +9367,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9446,10 +9446,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9476,7 +9476,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9527,10 +9527,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry" /><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9557,7 +9557,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9608,10 +9608,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9638,7 +9638,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                        '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9690,10 +9690,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9721,12 +9721,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                        '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         except:
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                             '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9777,10 +9777,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9855,10 +9855,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -9934,10 +9934,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10012,10 +10012,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10104,10 +10104,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10133,7 +10133,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -10184,10 +10184,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry" /><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10213,7 +10213,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                         '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -10264,10 +10264,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10293,7 +10293,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                        '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -10345,10 +10345,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         xml = [
             '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-               '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
-                   "$datasources.%s" % dsname[1]),
-               '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
-               % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
+            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+                "$datasources.%s" % dsname[1]),
+            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
         np = len(xml)
@@ -10375,12 +10375,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                        '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         except:
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                             '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()

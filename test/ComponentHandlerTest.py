@@ -413,7 +413,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler()
         sax.parseString(
             '<group><field name="myfield" >$datasources.myTANGO</field>' +
-                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+            '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
 
         self.assertEqual(
             el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'})
@@ -428,7 +428,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler()
         sax.parseString(
             '<group>$datasources.myTANGO<field name="myfield" >$datasources.myTANGO</field>' +
-                '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
+            '<field name="myfield2" >$datasources.myTANGO2</field></group>', el)
 
         self.assertEqual(
             el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'})
@@ -443,7 +443,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler()
         sax.parseString(
             '<group><field name="myfield" >$datasources.myTANGO<strategy/></field>' +
-                '<field name="myfield2" >$datasources.myTANGO2<doc/></field></group>', el)
+            '<field name="myfield2" >$datasources.myTANGO2<doc/></field></group>', el)
 
         self.assertEqual(
             el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'})
@@ -458,7 +458,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler()
         sax.parseString(
             '<group><field name="myfield" >$datasources.myTANGO' +
-                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+            '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
 
         self.assertEqual(
             el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'})
@@ -473,7 +473,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler("ds")
         sax.parseString(
             '<group><field name="myfield" >$datasources.myTANGO' +
-                '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
+            '<attribute name="myattr" >$datasources.myTANGO2</attribute></field></group>', el)
 
         self.assertEqual(el.datasources, {})
 
@@ -487,7 +487,7 @@ class ComponentHandlerTest(unittest.TestCase):
         el = ComponentHandler("ds")
         sax.parseString(
             '<group><field name="myfield" >$ds.myTANGO' +
-                '<attribute name="myattr" >$ds.myTANGO2</attribute></field></group>', el)
+            '<attribute name="myattr" >$ds.myTANGO2</attribute></field></group>', el)
 
         self.assertEqual(
             el.datasources, {u'myTANGO2': '__FROM_DB__', u'myTANGO': '__FROM_DB__'})
