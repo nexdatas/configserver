@@ -27,6 +27,7 @@ import re
 
 
 class ComponentHandler(sax.ContentHandler):
+
     """ SAX2 parser
     """
 

@@ -21,6 +21,7 @@
 
 
 class IncompatibleNodeError(Exception):
+
     """ Incompatible class Exception
     """
 
@@ -49,12 +50,14 @@ class IncompatibleNodeError(Exception):
 
 
 class UndefinedTagError(Exception):
+
     """ Exception for undefined tags
     """
     pass
 
 
 class NonregisteredDBRecordError(Exception):
+
     """ Error for non-existing database records
     """
     pass

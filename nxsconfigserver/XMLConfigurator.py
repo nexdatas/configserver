@@ -33,8 +33,10 @@ from . import Streams
 
 
 class XMLConfigurator(object):
+
     """ XML Configurator
     """
+
     def __init__(self, server=None):
         """ constructor
 
@@ -146,7 +148,7 @@ class XMLConfigurator(object):
         __getStepDatSources,
         __setStepDatSources,
         doc='step datasource list')
-    
+
     def __getLinkDatSources(self):
         """ get method for dataSourceGroup attribute
 
@@ -682,8 +684,8 @@ class XMLConfigurator(object):
                     domds = dom.getElementsByTagName(tag)
                     if not domds:
                         raise NonregisteredDBRecordError(
-                            "The %s %s of %s not registered in the DataBase" % (
-                                tag if tag else "variable", name, component))
+                            "The %s %s of %s not registered in the DataBase"
+                            % (tag if tag else "variable", name, component))
                     ds = domds[0].toxml()
                     if not ds:
                         raise NonregisteredDBRecordError(

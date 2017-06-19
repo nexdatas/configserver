@@ -42,6 +42,7 @@ from .XMLConfigurator import XMLConfigurator as XMLC
 
 
 class NXSConfigServer(PyTango.Device_4Impl):
+
     """   NXSConfigServer Class Description:
 
     :brief: Configuration Server based on MySQL database.
@@ -258,7 +259,6 @@ class NXSConfigServer(PyTango.Device_4Impl):
         if self.get_state() in [PyTango.DevState.RUNNING]:
             return False
         return True
-
 
     def read_Version(self, attr):
         """ Read Version attribute
@@ -1084,6 +1084,7 @@ class NXSConfigServer(PyTango.Device_4Impl):
 
 
 class NXSConfigServerClass(PyTango.DeviceClass):
+
     """ NXSConfigServerClass class definition
     """
 

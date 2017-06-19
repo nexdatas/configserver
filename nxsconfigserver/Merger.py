@@ -26,6 +26,7 @@ from .Errors import IncompatibleNodeError, UndefinedTagError
 
 
 class Merger(object):
+
     """ merges the components
     """
 
@@ -351,12 +352,11 @@ class Merger(object):
         :type node: :obj:`xml.dom.minidom.Node`
         """
         if node:
-            stnode = None
-            mode = None
             dsname = None
             dsnode = None
 
-            dsname, dsnode = self.__getTextDataSource(node, self.linkdatasources)
+            dsname, dsnode = self.__getTextDataSource(
+                node, self.linkdatasources)
 
             children = node.childNodes
             for child in children:
@@ -371,14 +371,14 @@ class Merger(object):
                             child, self.linkdatasources)
                 if dsnode:
                     break
-            print "LINK", self.linkdatasources, dsname   
+            print "LINK", self.linkdatasources, dsname
             if dsnode:
                 grpnode = node.parentNode
                 path = [(node.getAttribute("name"), dsname)]
                 entrynode = None
                 print "GRN", grpnode, path
                 while hasattr(grpnode, "getAttribute"):
-                    if  grpnode.nodeName == 'group':
+                    if grpnode.nodeName == 'group':
                         entrynode = grpnode
                         path.append(
                             (grpnode.getAttribute("name"),
@@ -397,7 +397,8 @@ class Merger(object):
                                 dchildren = datanode.childNodes
                                 for dchild in dchildren:
                                     if hasattr(dchild, "getAttribute"):
-                                        if dchild.getAttribute("name") == dsname:
+                                        if dchild.getAttribute("name") \
+                                           == dsname:
                                             linkfound = True
                                             break
                     if not linkfound:
@@ -425,7 +426,7 @@ class Merger(object):
                     data.setAttribute("name", "data")
                 for gname, gtype in path[1:]:
                     target = "%s:%s/" % (gname, gtype) + target
-                target = "/" + target    
+                target = "/" + target
                 if dsname:
                     link = root.createElement("link")
                     data.appendChild(link)

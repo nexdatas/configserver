@@ -26,6 +26,7 @@ from . import Streams
 
 
 class MYSQLDataBase(object):
+
     """ XML Configurer
     """
 

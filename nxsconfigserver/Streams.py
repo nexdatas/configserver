@@ -84,7 +84,7 @@ def warn(message, std=True):
         try:
             log_warn.write(message + '\n')
         except:
-            #: workaround for PyTango bug: #740
+            # : workaround for PyTango bug: #740
             sys.stderr.write(message + '\n')
     elif std:
         sys.stderr.write(message + '\n')
