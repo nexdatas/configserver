@@ -965,7 +965,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -975,7 +975,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision + 4)
         self.assertEqual(el.close(), None)
@@ -1044,7 +1044,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(el.deleteComponent(name), None)
         self.__cmps.pop()
@@ -1056,7 +1056,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for cp in man:
             self.assertTrue(cp in man2)
 
-        self.assertTrue(not name in man2)
+        self.assertTrue(name not in man2)
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision + 8)
         self.assertEqual(el.close(), None)
@@ -9644,7 +9644,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.setMandatoryComponents(man)
         el.close()
 
-            # creatConf test
+    # creatConf test
     # \brief It tests XMLConfigurator
     def test_createConfiguration_addlink_withdata(self):
         fun = sys._getframe().f_code.co_name
@@ -10299,7 +10299,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.setMandatoryComponents(man)
         el.close()
 
-            # creatConf test
+    # creatConf test
     # \brief It tests XMLConfigurator
     def test_merge_addlink_withdata(self):
         fun = sys._getframe().f_code.co_name

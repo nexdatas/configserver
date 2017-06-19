@@ -82,7 +82,9 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
             cnt += 1
 
         if not found:
-            raise Exception, "Cannot connect to %s" % self._sv.new_device_info_writer.name
+            raise Exception(
+                "Cannot connect to %s"
+                % self._sv.new_device_info_writer.name)
 
         if xmlc.state() == PyTango.DevState.ON:
             xmlc.JSONSettings = args

@@ -171,7 +171,7 @@ class MergerTest(unittest.TestCase):
         self.myAssertRaise(UndefinedTagError, el.collect, [
                            "<group/>", "<definition><group type='NXentry'/></definition>"])
 
-   # test collect
+    # test collect
     # \brief It tests default settings
     def test_collect_group_field_3(self):
         fun = sys._getframe().f_code.co_name
@@ -183,7 +183,7 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.toString().replace("?>\n<", "?><"),
                          '<?xml version="1.0" ?><definition><group type="NXentry"><field type="field"/></group><group type="NXentry"><field type="field"/></group><group type="NXentry"><field type="field"/></group></definition>')
 
-   # test collect
+    # test collect
     # \brief It tests default settings
     def test_collect_group_group_field(self):
         fun = sys._getframe().f_code.co_name
