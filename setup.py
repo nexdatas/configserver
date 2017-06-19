@@ -30,10 +30,11 @@ INXS = __import__(NXS)
 
 from sphinx.setup_command import BuildDoc
 
-#__requires__ = 'nextdata ==%s' % INXS.__version__
+# __requires__ = 'nextdata ==%s' % INXS.__version__
+
 
 def read(fname):
-    """ read the file 
+    """ read the file
 
     :param fname: readme file name
     """
@@ -41,6 +42,7 @@ def read(fname):
 
 
 class TestCommand(Command):
+
     """ test command class
     """
 
@@ -71,11 +73,11 @@ name = "NXSConfigServer"
 REQUIRED = [
     'numpy (>=1.5.0)',
     'PyTango (>=7.2.2)',
-#    'libpninx (>=0.1.2)'
-#   'pninx-python (>=0.1.2)'
-#   'libpninx-python (>=0.1.2)'
-#   'libpninx-python (>=0.1.2)'
-    ]
+    #    'libpninx (>=0.1.2)'
+    #   'pninx-python (>=0.1.2)'
+    #   'libpninx-python (>=0.1.2)'
+    #   'libpninx-python (>=0.1.2)'
+]
 
 
 #: metadata for distutils

@@ -15,8 +15,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package test nexdatas
-## \file NXSConfigServerTest.py
+# \package test nexdatas
+# \file NXSConfigServerTest.py
 # unittests for field Tags running Tango Server
 #
 import unittest
@@ -29,61 +29,62 @@ import PyTango
 
 import ServerSetUp
 import XMLConfiguratorTest
-#import XMLConTest as XMLConfiguratorTest
+# import XMLConTest as XMLConfiguratorTest
 from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
-## test fixture
+# test fixture
+
+
 class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
 
-    ## constructor
+    # constructor
     # \param methodName name of the test method
+
     def __init__(self, methodName):
         XMLConfiguratorTest.XMLConfiguratorTest.__init__(self, methodName)
 
         self._sv = ServerSetUp.ServerSetUp()
 
-
-
-    ## test starter
+    # test starter
     # \brief Common set up of Tango Server
     def setUp(self):
         self._sv.setUp()
-        print "SEED =", self.seed 
+        print "SEED =", self.seed
 
-    ## test closer
+    # test closer
     # \brief Common tear down oif Tango Server
-    def tearDown(self): 
+    def tearDown(self):
         XMLConfiguratorTest.XMLConfiguratorTest.tearDown(self)
         self._sv.tearDown()
-        
-    ## opens config server
+
+    # opens config server
     # \param args connection arguments
-    # \returns NXSConfigServer instance   
+    # \returns NXSConfigServer instance
     def openConfig(self, args):
-        
+
         found = False
         cnt = 0
         while not found and cnt < 1000:
             try:
                 print "\b.",
-                xmlc = PyTango.DeviceProxy(self._sv.new_device_info_writer.name)
+                xmlc = PyTango.DeviceProxy(
+                    self._sv.new_device_info_writer.name)
                 time.sleep(0.01)
                 if xmlc.state() == PyTango.DevState.ON:
                     found = True
                 found = True
-            except Exception,e:    
-                print self._sv.new_device_info_writer.name,e
+            except Exception, e:
+                print self._sv.new_device_info_writer.name, e
                 found = False
             except:
                 found = False
-                
-            cnt +=1
+
+            cnt += 1
 
         if not found:
             raise Exception, "Cannot connect to %s" % self._sv.new_device_info_writer.name
 
-
-        if xmlc.state()== PyTango.DevState.ON:
+        if xmlc.state() == PyTango.DevState.ON:
             xmlc.JSONSettings = args
             xmlc.Open()
         version = xmlc.version
@@ -92,39 +93,33 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
         self.version = ".".join(vv[0:3])
         self.label = ".".join(vv[3:-1])
 
-        self.assertEqual(self.version, nxsconfigserver.__version__ )
+        self.assertEqual(self.version, nxsconfigserver.__version__)
         self.assertEqual(self.label, '.'.join(xmlc.Version.split('.')[3:-1]))
 
-        
         self.assertEqual(xmlc.state(), PyTango.DevState.OPEN)
-        
+
         return xmlc
 
-
-    ## closes opens config server
-    # \param xmlc XMLConfigurator instance   
+    # closes opens config server
+    # \param xmlc XMLConfigurator instance
     def closeConfig(self, xmlc):
         self.assertEqual(xmlc.state(), PyTango.DevState.OPEN)
 
         xmlc.Close()
         self.assertEqual(xmlc.state(), PyTango.DevState.ON)
-                
-    ## sets xmlconfiguration
+
+    # sets xmlconfiguration
     # \param xmlc configuration instance
     # \param xml xml configuration string
     def setXML(self, xmlc, xml):
         xmlc.XMLString = xml
 
-
-    ## gets xmlconfiguration
+    # gets xmlconfiguration
     # \param xmlc configuration instance
     # \returns xml configuration string
     def getXML(self, xmlc):
-        return xmlc.XMLString 
-        
-
+        return xmlc.XMLString
 
 
 if __name__ == '__main__':
     unittest.main()
-

@@ -15,8 +15,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package test nexdatas
-## \file ErrorsTest.py
+# \package test nexdatas
+# \file ErrorsTest.py
 # unittests for Error classes
 #
 import unittest
@@ -28,59 +28,56 @@ import struct
 import numpy
 
 
+from nxsconfigserver.Errors import (
+    IncompatibleNodeError, UndefinedTagError, NonregisteredDBRecordError)
 
-from nxsconfigserver.Errors import (IncompatibleNodeError, UndefinedTagError, NonregisteredDBRecordError)
-                         
 
-## test fixture
+# test fixture
 class ErrorsTest(unittest.TestCase):
 
-    ## constructor
+    # constructor
     # \param methodName name of the test method
+
     def __init__(self, methodName):
         unittest.TestCase.__init__(self, methodName)
 
-
-
-
-    ## test starter
+    # test starter
     # \brief Common set up
     def setUp(self):
-        ## file handle
-        print "\nsetting up..."        
+        # file handle
+        print "\nsetting up..."
 
-    ## test closer
+    # test closer
     # \brief Common tear down
     def tearDown(self):
         print "tearing down ..."
 
-    ## Exception tester
+    # Exception tester
     # \param exception expected exception
-    # \param method called method      
+    # \param method called method
     # \param args list with method arguments
     # \param kwargs dictionary with method arguments
     def myAssertRaise(self, exception, method, *args, **kwargs):
         try:
-            error =  False
+            error = False
             method(*args, **kwargs)
         except exception, e:
             error = True
         self.assertEqual(error, True)
 
-
-    ##  IncompatibleNodeError test
+    # IncompatibleNodeError test
     # \brief It tests default settings
     def test_IncompatibleNodeError(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         value = 'ble ble'
         err = IncompatibleNodeError(value)
-        self.assertTrue(isinstance(err,Exception))
+        self.assertTrue(isinstance(err, Exception))
         self.assertEqual(err.value, value)
         self.assertEqual(err.nodes, [])
-        self.assertEqual(err.__str__(),value.__repr__())
+        self.assertEqual(err.__str__(), value.__repr__())
 
-    ##  IncompatibleNodeError test
+    # IncompatibleNodeError test
     # \brief It tests default settings
     def test_IncompatibleNodeError_nodes(self):
         fun = sys._getframe().f_code.co_name
@@ -88,33 +85,26 @@ class ErrorsTest(unittest.TestCase):
         value = 1234
         nodes = ['asdads1234']
         err = IncompatibleNodeError(value, nodes)
-        self.assertTrue(isinstance(err,Exception))
+        self.assertTrue(isinstance(err, Exception))
         self.assertEqual(err.value, value)
         self.assertEqual(err.nodes, nodes)
-        self.assertEqual(err.__str__(),value.__repr__())
+        self.assertEqual(err.__str__(), value.__repr__())
 
-
-    ##  UndefinedTagError test
+    # UndefinedTagError test
     # \brief It tests default settings
     def test_UndefinedTagError(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         err = UndefinedTagError()
-        self.assertTrue(isinstance(err,Exception))
+        self.assertTrue(isinstance(err, Exception))
 
-    ##  NonregisteredDBRecordError test
+    # NonregisteredDBRecordError test
     # \brief It tests default settings
     def test_NonregisteredDBRecordError(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
         err = NonregisteredDBRecordError()
-        self.assertTrue(isinstance(err,Exception))
-
-
-
-
-
-
+        self.assertTrue(isinstance(err, Exception))
 
 
 if __name__ == '__main__':
