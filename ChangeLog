@@ -1,3 +1,7 @@
+2017-06-20 Jan Kotanski <jankotan@gmail.com>
+	* move the content of Streams module into StreamSet
+	* tagged as v2.7.0
+
 2017-03-30 Jan Kotanski <jankotan@gmail.com>
 	* add LinkDataSources attribute
 	* tagged as v2.6.0

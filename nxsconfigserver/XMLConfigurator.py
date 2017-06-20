@@ -29,7 +29,7 @@ from .ComponentParser import ComponentHandler
 from .Merger import Merger
 from .Errors import NonregisteredDBRecordError
 from .Release import __version__
-from . import Streams
+from .StreamSet import StreamSet
 
 
 class XMLConfigurator(object):
@@ -45,6 +45,8 @@ class XMLConfigurator(object):
         :brief: It allows to construct XML configurer object
 
         """
+        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        self._streams = StreamSet(server)
         #: (:obj:`str`) XML config string
         self.xmlstring = ""
         #: (:obj:`str`) component selection
@@ -64,7 +66,7 @@ class XMLConfigurator(object):
 
         #: (:class:`nxsconfigserver.MYSQLDataBase.MYSQLDataBase`) \
         #:        instance of MYSQLDataBase
-        self.__mydb = MyDB()
+        self.__mydb = MyDB(streams=self._streams)
 
         #: (:obj:`str`) datasource label
         self.__dsLabel = "datasources"
@@ -86,18 +88,6 @@ class XMLConfigurator(object):
 
         #: (:class:`PyTango.Device_4Impl`) Tango server
         self.__server = server
-
-        if server:
-            if hasattr(self.__server, "log_fatal"):
-                Streams.log_fatal = server.log_fatal
-            if hasattr(self.__server, "log_error"):
-                Streams.log_error = server.log_error
-            if hasattr(self.__server, "log_warn"):
-                Streams.log_warn = server.log_warn
-            if hasattr(self.__server, "log_info"):
-                Streams.log_info = server.log_info
-            if hasattr(self.__server, "log_debug"):
-                Streams.log_debug = server.log_debug
 
     @classmethod
     def __stringToListJson(cls, string):
@@ -200,14 +190,14 @@ class XMLConfigurator(object):
         :brief: It opens connection to the give database by JSON string
         """
         args = {}
-        Streams.info("XMLConfigurator::open() - Open connection")
+        self._streams.info("XMLConfigurator::open() - Open connection")
         try:
             js = json.loads(self.jsonsettings)
             targs = dict(js.items())
             for k in targs.keys():
                 args[str(k)] = targs[k]
         except:
-            Streams.info("%s" % args)
+            self._streams.info("%s" % args)
             args = {}
         self.__mydb.connect(args)
 
@@ -219,7 +209,7 @@ class XMLConfigurator(object):
 
         if self.__mydb:
             self.__mydb.close()
-        Streams.info("XMLConfigurator::close() - Close connection")
+        self._streams.info("XMLConfigurator::close() - Close connection")
 
     def components(self, names):
         """ fetches the required components
@@ -840,8 +830,8 @@ class XMLConfigurator(object):
             self.xmlstring = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlstring = ''
-        Streams.info("XMLConfigurator::createConfiguration() "
-                     "- Create configuration")
+        self._streams.info("XMLConfigurator::createConfiguration() "
+                           "- Create configuration")
 
 
 if __name__ == "__main__":

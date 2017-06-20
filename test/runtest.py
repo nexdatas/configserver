@@ -27,7 +27,7 @@ import unittest
 import ComponentHandlerTest
 import MergerTest
 import ErrorsTest
-import StreamsTest
+import StreamSetTest
 
 try:
     import PyTango
@@ -102,7 +102,7 @@ def main():
         unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(StreamsTest))
+        unittest.defaultTestLoader.loadTestsFromModule(StreamSetTest))
 
     if "MYSQL" in DB_AVAILABLE:
         suite.addTests(

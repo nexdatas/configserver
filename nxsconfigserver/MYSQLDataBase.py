@@ -22,7 +22,6 @@
 import MySQLdb
 
 from .Errors import NonregisteredDBRecordError
-from . import Streams
 
 
 class MYSQLDataBase(object):
@@ -30,15 +29,19 @@ class MYSQLDataBase(object):
     """ XML Configurer
     """
 
-    def __init__(self):
+    def __init__(self, streams=None):
         """ constructor
 
         :brief: It creates the MYSQLDataBase instance
+        :param streams: tango-like steamset class
+        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
         """
         #: (:class:`MySQLdb.connections.Connection`) db instance
         self.__db = None
         #: (:obj:`dict` <:obj:`str`, any>) connect arguments
         self.__args = None
+        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        self._streams = streams
 
     def connect(self, args):
         """ connects to the database
@@ -46,7 +49,8 @@ class MYSQLDataBase(object):
         :param args: arguments of the MySQLdb connect method
         :type args: :obj:`dict` <:obj:`str`, any>
         """
-        Streams.info("MYSQLDataBase::connect() - connect: %s" % args)
+        if self._streams:
+            self._streams.info("MYSQLDataBase::connect() - connect: %s" % args)
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
@@ -319,8 +323,9 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            Streams.info("MYSQLDataBase::storeComponent()"
-                         " - store component %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::storeComponent()"
+                                   " - store component %s" % name)
 
     def storeDataSource(self, name, xml):
         """ stores the given datasource
@@ -365,8 +370,9 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            Streams.info("MYSQLDataBase::storeDataSource() "
-                         "- store datasource %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::storeDataSource() "
+                                   "- store datasource %s" % name)
 
     def storeSelection(self, name, selection):
         """ stores the given selection
@@ -411,8 +417,9 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            Streams.info("MYSQLDataBase::storeSelection() "
-                         "- store selection %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::storeSelection() "
+                                   "- store selection %s" % name)
 
     def deleteComponent(self, name):
         """ deletes the given component
@@ -443,8 +450,9 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            Streams.info("MYSQLDataBase::deleteComponent() "
-                         "- delete component %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::deleteComponent() "
+                                   "- delete component %s" % name)
 
     def deleteSelection(self, name):
         """ deletes the given selection
@@ -475,8 +483,9 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            Streams.info("MYSQLDataBase::deleteSelection() "
-                         "- delete selection %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::deleteSelection() "
+                                   "- delete selection %s" % name)
 
     def setMandatory(self, name):
         """ sets components as mandatory
@@ -507,8 +516,9 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            Streams.info(
-                "MYSQLDataBase::setMandatory() - component %s" % name)
+            if self._streams:
+                self._streams.info(
+                    "MYSQLDataBase::setMandatory() - component %s" % name)
 
     def unsetMandatory(self, name):
         """sets components as not mandatory
@@ -542,8 +552,9 @@ class MYSQLDataBase(object):
                 cursor.close()
                 raise
 
-            Streams.info("MYSQLDataBase::unsetMandatory() "
-                         "- component %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::unsetMandatory() "
+                                   "- component %s" % name)
 
     def mandatory(self):
         """ provides mandatory components
@@ -596,8 +607,9 @@ class MYSQLDataBase(object):
                 self.__db.rollback()
                 cursor.close()
                 raise
-            Streams.info("MYSQLDataBase::deleteDataSource() "
-                         "- datasource %s" % name)
+            if self._streams:
+                self._streams.info("MYSQLDataBase::deleteDataSource() "
+                                   "- datasource %s" % name)
 
 
 if __name__ == "__main__":
