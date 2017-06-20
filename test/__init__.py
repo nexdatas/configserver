@@ -15,8 +15,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package mcs nexdatas
-## \file __init__.py
+# \package mcs nexdatas
+# \file __init__.py
 # package constructor
 
 """ Tests for Implementation of NexDaTaS Configuration Server"""

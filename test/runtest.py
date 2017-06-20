@@ -15,8 +15,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
-## \package test nexdatas.configserver
-## \file runtest.py
+# \package test nexdatas.configserver
+# \file runtest.py
 # the unittest runner
 #
 
@@ -27,25 +27,25 @@ import unittest
 import ComponentHandlerTest
 import MergerTest
 import ErrorsTest
-import StreamsTest
+import StreamSetTest
 
 try:
     import PyTango
-    ## if module PyTango avalable
+    # if module PyTango avalable
     PYTANGO_AVAILABLE = True
 except ImportError, e:
     PYTANGO_AVAILABLE = False
     print "PyTango is not available: %s" % e
 
-## list of available databases
+# list of available databases
 DB_AVAILABLE = []
 
 try:
     import MySQLdb
-    ## connection arguments to MYSQL DB
+    # connection arguments to MYSQL DB
     args = {'host': u'localhost', 'db': u'nxsconfig',
             'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
-    ## inscance of MySQLdb
+    # inscance of MySQLdb
     mydb = MySQLdb.connect(**args)
     mydb.close()
     DB_AVAILABLE.append("MYSQL")
@@ -54,11 +54,11 @@ except:
         import MySQLdb
         from os.path import expanduser
         home = expanduser("~")
-        ## connection arguments to MYSQL DB
+        # connection arguments to MYSQL DB
         args2 = {'host': u'localhost', 'db': u'nxsconfig',
                  'read_default_file': u'%s/.my.cnf' % home,
                  'use_unicode': True}
-        ## inscance of MySQLdb
+        # inscance of MySQLdb
         mydb = MySQLdb.connect(**args2)
         mydb.close()
         DB_AVAILABLE.append("MYSQL")
@@ -81,15 +81,15 @@ if PYTANGO_AVAILABLE:
         import NXSConfigServerTest
 
 
-#import TestServerSetUp
+# import TestServerSetUp
 
-## main function
+# main function
 def main():
 
-    ## test server
+    # test server
     ts = None
 
-    ## test suit
+    # test suit
     suite = unittest.TestSuite()
 
     suite.addTests(
@@ -102,7 +102,7 @@ def main():
         unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(StreamsTest))
+        unittest.defaultTestLoader.loadTestsFromModule(StreamSetTest))
 
     if "MYSQL" in DB_AVAILABLE:
         suite.addTests(
@@ -118,13 +118,13 @@ def main():
                 unittest.defaultTestLoader.loadTestsFromModule(
                     NXSConfigServerTest))
 
-    ## test runner
+    # test runner
     runner = unittest.TextTestRunner()
 
-    ## test result
+    # test result
     result = runner.run(suite).wasSuccessful()
     sys.exit(not result)
 
-         
+
 if __name__ == "__main__":
     main()

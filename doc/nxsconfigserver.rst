@@ -44,10 +44,10 @@ nxsconfigserver.NXSConfigServer module
     :undoc-members:
     :show-inheritance:
 
-nxsconfigserver.Streams module
-------------------------------
+nxsconfigserver.StreamSet module
+--------------------------------
 
-.. automodule:: nxsconfigserver.Streams
+.. automodule:: nxsconfigserver.StreamSet
     :members:
     :undoc-members:
     :show-inheritance:
