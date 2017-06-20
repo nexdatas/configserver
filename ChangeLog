@@ -1,4 +1,8 @@
 2017-06-20 Jan Kotanski <jankotan@gmail.com>
+	* test fix
+	* tagged as v2.7.1
+
+2017-06-20 Jan Kotanski <jankotan@gmail.com>
 	* move the content of Streams module into StreamSet
 	* tagged as v2.7.0
 
