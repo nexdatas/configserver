@@ -82,6 +82,8 @@ class MergerTest(unittest.TestCase):
             'dim', 'doc'), 'attribute': ('datasource', 'strategy', 'enumeration', 'doc', 'dimensions'), 'field': ('attribute', 'datasource', 'doc', 'dimensions', 'enumeration', 'strategy'), 'link': ('datasource', 'strategy', 'doc')})
         self.assertEqual(
             el.uniqueText, ['field', 'attribute', 'query', 'strategy', 'result'])
+        self.assertEqual(
+            el.tocut, ['NXtransformations', 'NXcollection'])
         self.assertEqual(el.toString(), None)
 
     # test collect
@@ -244,6 +246,170 @@ class MergerTest(unittest.TestCase):
 
     # test collect
     # \brief It tests default settings
+    def test_merge_group_tocut(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        self.assertTrue("NXcollection" in el.tocut)
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXcollection'/></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition/>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut2(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry'/></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition/>')
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut3(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = []
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry'/></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group type="NXentry"/></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut4(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry'><group/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group type="NXentry"><group/></group></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut5(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry'></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition/>')
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut6(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry2'></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group name="entry2" type="NXentry"/></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut7(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry' attr='ble ble'></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group attr="ble ble" name="entry" type="NXentry"/></definition>')
+
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut8(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry", "NXtransformations"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry2'>"
+                        "<group type='NXtransformations'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group name="entry2" type="NXentry"/></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut9(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry2'>"
+                        "<group type='NXtransformations'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group name="entry2" type="NXentry">'
+                         '<group type="NXtransformations"/></group></definition>')
+
+
+        
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut10(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry", "NXtransformations"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry2'>"
+                        "<group type='NXtransformations' name='transformations'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group name="entry2" type="NXentry"/></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def test_merge_group_tocut11(self):
+        fun = sys._getframe().f_code.co_name
+        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+
+        el = Merger()
+        el.tocut = ["NXentry", "NXtransformations"]
+        self.assertEqual(
+            el.collect(["<definition/>", "<definition><group type='NXentry' name='entry2'>"
+                        "<group type='NXtransformations' name='transformations2'/></group></definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        self.assertEqual(el.toString().replace("?>\n<", "?><"),
+                         '<?xml version="1.0" ?><definition><group name="entry2" type="NXentry">'
+                         '<group name="transformations2" type="NXtransformations"/></group></definition>')
+
+
+        
+    # test collect
+    # \brief It tests default settings
     def test_merge_group_5(self):
         fun = sys._getframe().f_code.co_name
         print "Run: %s.%s() " % (self.__class__.__name__, fun)
@@ -255,6 +421,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.toString().replace("?>\n<", "?><"),
                          '<?xml version="1.0" ?><definition><group type="NXentry"/></definition>')
 
+
+        
     # test collect
     # \brief It tests default settings
     def test_merge_group_group(self):

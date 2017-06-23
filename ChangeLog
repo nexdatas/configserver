@@ -1,5 +1,5 @@
-2017-06-XX Jan Kotanski <jankotan@gmail.com>
-	* skip empty group
+2017-06-23 Jan Kotanski <jankotan@gmail.com>
+	* skip empty NXtransformations and NXcollection groups when empty
 	* tagged as v2.8.0
 
 2017-06-20 Jan Kotanski <jankotan@gmail.com>

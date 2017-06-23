@@ -40,6 +40,9 @@ class Merger(object):
         self.singles = ['strategy', 'dimensions', 'definition',
                         'record', 'device', 'query', 'database']
 
+        #: (:obj:`list` <:obj:`str`> ) tags which cannot have the same siblings
+        self.tocut = ['NXtransformations', 'NXcollection']
+
         #: (:obj:`dict` <:obj:`str` , :obj:`tuple` <:obj:`str`>> ) \
         #:    allowed children
         self.children = {
@@ -281,12 +284,13 @@ class Merger(object):
                                  for i in range(cchildren.length)
                                  if isinstance(cchildren.item(i), Element)]
                         if not elems and \
-                           "NX" + child.getAttribute("name") \
-                           == child.getAttribute("type"):
+                           child.getAttribute("type") in self.tocut and \
+                           (len(child.attributes.keys()) == 1 or
+                            (len(child.attributes.keys()) == 2 and
+                             "NX" + child.getAttribute("name")
+                             == child.getAttribute("type"))):
                             node.removeChild(child)
                 c1 += 1
-
-                    
 
     def __getTextDataSource(self, node, dslist=None):
         """ find first datasources node and name in text nodes of the node

@@ -50,7 +50,8 @@ class MYSQLDataBase(object):
         :type args: :obj:`dict` <:obj:`str`, any>
         """
         if self._streams:
-            self._streams.debug("MYSQLDataBase::connect() - connect: %s" % args)
+            self._streams.debug(
+                "MYSQLDataBase::connect() - connect: %s" % args)
         self.__db = MySQLdb.connect(**args)
         self.__args = args
 
