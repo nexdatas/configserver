@@ -40,6 +40,9 @@ class Merger(object):
         self.singles = ['strategy', 'dimensions', 'definition',
                         'record', 'device', 'query', 'database']
 
+        #: (:obj:`list` <:obj:`str`> ) tags which cannot have the same siblings
+        self.tocut = ['NXtransformations', 'NXcollection']
+
         #: (:obj:`dict` <:obj:`str` , :obj:`tuple` <:obj:`str`>> ) \
         #:    allowed children
         self.children = {
@@ -270,6 +273,25 @@ class Merger(object):
                     self.__addlink(child)
                 child = child.nextSibling
 
+            children = node.childNodes
+            c1 = 0
+            while c1 < children.length:
+                child = children.item(c1)
+                if isinstance(child, Element):
+                    if child.nodeName == "group":
+                        cchildren = child.childNodes
+                        elems = [cchildren.item(i)
+                                 for i in range(cchildren.length)
+                                 if isinstance(cchildren.item(i), Element)]
+                        if not elems and \
+                           child.getAttribute("type") in self.tocut and \
+                           (len(child.attributes.keys()) == 1 or
+                            (len(child.attributes.keys()) == 2 and
+                             "NX" + child.getAttribute("name")
+                             == child.getAttribute("type"))):
+                            node.removeChild(child)
+                c1 += 1
+
     def __getTextDataSource(self, node, dslist=None):
         """ find first datasources node and name in text nodes of the node
 
@@ -371,19 +393,16 @@ class Merger(object):
                             child, self.linkdatasources)
                 if dsnode:
                     break
-            print "LINK", self.linkdatasources, dsname
             if dsnode:
                 grpnode = node.parentNode
                 path = [(node.getAttribute("name"), dsname)]
                 entrynode = None
-                print "GRN", grpnode, path
                 while hasattr(grpnode, "getAttribute"):
                     if grpnode.nodeName == 'group':
                         entrynode = grpnode
                         path.append(
                             (grpnode.getAttribute("name"),
                              grpnode.getAttribute("type")))
-                        print path
                     grpnode = grpnode.parentNode
                 linkfound = False
                 datanode = None
@@ -415,7 +434,6 @@ class Merger(object):
         :type node: :obj:`list` < (:obj:`str`,:obj:`str`) >
         """
 
-        print "CRLINK", path
         if path:
             target, dsname = path[0]
             if target:
