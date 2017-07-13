@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>nxsconfigserver.Merger &mdash; NXSConfigServer 2.5.0 documentation</title>
+    <title>nxsconfigserver.Merger &mdash; NXSConfigServer 2.8.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.5.0',
+        VERSION:     '2.8.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="NXSConfigServer 2.5.0 documentation" href="../../index.html" />
+    <link rel="top" title="NXSConfigServer 2.8.0 documentation" href="../../index.html" />
     <link rel="up" title="nxsconfigserver" href="../nxsconfigserver.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.8</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -73,7 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.Merger">nxsconfigserver.Merger module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.Streams">nxsconfigserver.Streams module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.StreamSet">nxsconfigserver.StreamSet module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxsconfigserver.html#module-nxsconfigserver">Module contents</a></li>
 </ul>
@@ -126,7 +126,7 @@
 <span class="c">#!/usr/bin/env python</span>
 <span class="c">#   This file is part of nexdatas - Tango Server for NeXus data writer</span>
 <span class="c">#</span>
-<span class="c">#    Copyright (C) 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;</span>
+<span class="c">#    Copyright (C) 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;</span>
 <span class="c">#</span>
 <span class="c">#    nexdatas is free software: you can redistribute it and/or modify</span>
 <span class="c">#    it under the terms of the GNU General Public License as published by</span>
@@ -151,6 +151,7 @@
 
 
 <div class="viewcode-block" id="Merger"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.Merger.Merger">[docs]</a><span class="k">class</span> <span class="nc">Merger</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
     <span class="sd">&quot;&quot;&quot; merges the components</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -163,6 +164,9 @@
         <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) tags which cannot have the same siblings</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">singles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;strategy&#39;</span><span class="p">,</span> <span class="s">&#39;dimensions&#39;</span><span class="p">,</span> <span class="s">&#39;definition&#39;</span><span class="p">,</span>
                         <span class="s">&#39;record&#39;</span><span class="p">,</span> <span class="s">&#39;device&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;database&#39;</span><span class="p">]</span>
+
+        <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) tags which cannot have the same siblings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tocut</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;NXtransformations&#39;</span><span class="p">,</span> <span class="s">&#39;NXcollection&#39;</span><span class="p">]</span>
 
         <span class="c">#: (:obj:`dict` &lt;:obj:`str` , :obj:`tuple` &lt;:obj:`str`&gt;&gt; ) \</span>
         <span class="c">#:    allowed children</span>
@@ -184,7 +188,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">uniqueText</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;field&#39;</span><span class="p">,</span> <span class="s">&#39;attribute&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;strategy&#39;</span><span class="p">,</span> <span class="s">&#39;result&#39;</span><span class="p">]</span>
 
         <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) node which can have switched strategy</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">switchable</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;field&quot;</span><span class="p">,</span> <span class="s">&#39;attribute&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">switchable</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;field&quot;</span><span class="p">,</span> <span class="s">&quot;attribute&quot;</span><span class="p">]</span>
+
+        <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) node which can have links</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linkable</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;field&quot;</span><span class="p">]</span>
 
         <span class="c">#: (:obj:`dict` &lt;:obj:`str` , :obj:`str`&gt; ) \</span>
         <span class="c">#:     strategy modes to switch</span>
@@ -195,6 +202,9 @@
 
         <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) aliased to switch to STEP mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">switchdatasources</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c">#: (:obj:`list` &lt;:obj:`str`&gt; ) aliased to add links</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linkdatasources</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c">#: (:obj:`str`) datasource label</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dsvars</span> <span class="o">=</span> <span class="s">&quot;$datasources.&quot;</span>
@@ -382,20 +392,44 @@
                             <span class="p">[</span><span class="n">child</span><span class="p">])</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">__mergeChildren</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">cName</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switchable</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cName</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switchable</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">switchdatasources</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">__switch</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cName</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkable</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkdatasources</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__addlink</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
                 <span class="n">child</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">nextSibling</span>
 
-    <span class="k">def</span> <span class="nf">__getTextDataSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">c1</span> <span class="o">&lt;</span> <span class="n">children</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+                <span class="n">child</span> <span class="o">=</span> <span class="n">children</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Element</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s">&quot;group&quot;</span><span class="p">:</span>
+                        <span class="n">cchildren</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">childNodes</span>
+                        <span class="n">elems</span> <span class="o">=</span> <span class="p">[</span><span class="n">cchildren</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cchildren</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+                                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cchildren</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">Element</span><span class="p">)]</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">elems</span> <span class="ow">and</span> \
+                           <span class="n">child</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tocut</span> <span class="ow">and</span> \
+                           <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
+                            <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span>
+                             <span class="s">&quot;NX&quot;</span> <span class="o">+</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+                             <span class="o">==</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">))):</span>
+                            <span class="n">node</span><span class="o">.</span><span class="n">removeChild</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="n">c1</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__getTextDataSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">dslist</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; find first datasources node and name in text nodes of the node</span>
 
 <span class="sd">        :param node: the parent node</span>
 <span class="sd">        :type node: :obj:`xml.dom.minidom.Node`</span>
+<span class="sd">        :param dslist: list of datasources</span>
+<span class="sd">        :type dslist: :obj:`list` &lt;:obj:`str`&gt;</span>
 <span class="sd">        :returns: (node, name) of the searched datasource</span>
 <span class="sd">        :rtype: (:obj:`str` , :obj:`str`)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dsname</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="n">dsnode</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">dslist</span> <span class="o">=</span> <span class="n">dslist</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">switchdatasources</span>
         <span class="n">text</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__getText</span><span class="p">(</span><span class="n">node</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="n">index</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dsvars</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -406,7 +440,7 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">subc</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">subc</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">subc</span> <span class="k">else</span> <span class="s">&quot;&quot;</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switchdatasources</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dslist</span><span class="p">:</span>
                 <span class="n">dsnode</span> <span class="o">=</span> <span class="n">node</span>
                 <span class="n">dsname</span> <span class="o">=</span> <span class="n">name</span>
                 <span class="k">break</span>
@@ -457,6 +491,90 @@
                     <span class="k">break</span>
             <span class="k">if</span> <span class="n">stnode</span> <span class="ow">and</span> <span class="n">dsnode</span><span class="p">:</span>
                 <span class="n">stnode</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&quot;mode&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modesToSwitch</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__addlink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; add link in NXdata group</span>
+
+<span class="sd">        :param node: the given node</span>
+<span class="sd">        :type node: :obj:`xml.dom.minidom.Node`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+            <span class="n">dsname</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">dsnode</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="n">dsname</span><span class="p">,</span> <span class="n">dsnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getTextDataSource</span><span class="p">(</span>
+                <span class="n">node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkdatasources</span><span class="p">)</span>
+
+            <span class="n">children</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">childNodes</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="n">cName</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">nodeName</span><span class="p">)</span> \
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Element</span><span class="p">)</span> <span class="k">else</span> <span class="s">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">cName</span> <span class="o">==</span> <span class="s">&#39;datasource&#39;</span><span class="p">:</span>
+                    <span class="n">dsname</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">dsname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkdatasources</span><span class="p">:</span>
+                        <span class="n">dsnode</span> <span class="o">=</span> <span class="n">child</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dsname</span><span class="p">,</span> <span class="n">dsnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getTextDataSource</span><span class="p">(</span>
+                            <span class="n">child</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linkdatasources</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">dsnode</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">dsnode</span><span class="p">:</span>
+                <span class="n">grpnode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parentNode</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="p">[(</span><span class="n">node</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">),</span> <span class="n">dsname</span><span class="p">)]</span>
+                <span class="n">entrynode</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">while</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">grpnode</span><span class="p">,</span> <span class="s">&quot;getAttribute&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">grpnode</span><span class="o">.</span><span class="n">nodeName</span> <span class="o">==</span> <span class="s">&#39;group&#39;</span><span class="p">:</span>
+                        <span class="n">entrynode</span> <span class="o">=</span> <span class="n">grpnode</span>
+                        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="p">(</span><span class="n">grpnode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">),</span>
+                             <span class="n">grpnode</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)))</span>
+                    <span class="n">grpnode</span> <span class="o">=</span> <span class="n">grpnode</span><span class="o">.</span><span class="n">parentNode</span>
+                <span class="n">linkfound</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">datanode</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">if</span> <span class="n">entrynode</span><span class="p">:</span>
+                    <span class="n">gchildren</span> <span class="o">=</span> <span class="n">entrynode</span><span class="o">.</span><span class="n">childNodes</span>
+                    <span class="k">for</span> <span class="n">gchild</span> <span class="ow">in</span> <span class="n">gchildren</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">gchild</span><span class="p">,</span> <span class="s">&quot;getAttribute&quot;</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">gchild</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;data&#39;</span> \
+                               <span class="ow">and</span> <span class="n">gchild</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;NXdata&#39;</span><span class="p">:</span>
+                                <span class="n">datanode</span> <span class="o">=</span> <span class="n">gchild</span>
+                                <span class="n">dchildren</span> <span class="o">=</span> <span class="n">datanode</span><span class="o">.</span><span class="n">childNodes</span>
+                                <span class="k">for</span> <span class="n">dchild</span> <span class="ow">in</span> <span class="n">dchildren</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dchild</span><span class="p">,</span> <span class="s">&quot;getAttribute&quot;</span><span class="p">):</span>
+                                        <span class="k">if</span> <span class="n">dchild</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span> \
+                                           <span class="o">==</span> <span class="n">dsname</span><span class="p">:</span>
+                                            <span class="n">linkfound</span> <span class="o">=</span> <span class="bp">True</span>
+                                            <span class="k">break</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">linkfound</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__createLink</span><span class="p">(</span><span class="n">grpnode</span><span class="p">,</span> <span class="n">entrynode</span><span class="p">,</span> <span class="n">datanode</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__createLink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">entry</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; create link on given node</span>
+
+<span class="sd">        :param root: root node</span>
+<span class="sd">        :type root: :class:`xml.dom.minidom.Node`</span>
+<span class="sd">        :param node: the given node</span>
+<span class="sd">        :type node: :obj:`xml.dom.minidom.Node`</span>
+<span class="sd">        :param path: list with NeXus path (name, type)</span>
+<span class="sd">        :type node: :obj:`list` &lt; (:obj:`str`,:obj:`str`) &gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">target</span><span class="p">,</span> <span class="n">dsname</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">target</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s">&quot;group&quot;</span><span class="p">)</span>
+                    <span class="n">entry</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;NXdata&quot;</span><span class="p">)</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="s">&quot;data&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">gname</span><span class="p">,</span> <span class="n">gtype</span> <span class="ow">in</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gname</span><span class="p">,</span> <span class="n">gtype</span><span class="p">)</span> <span class="o">+</span> <span class="n">target</span>
+                <span class="n">target</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">target</span>
+                <span class="k">if</span> <span class="n">dsname</span><span class="p">:</span>
+                    <span class="n">link</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s">&quot;link&quot;</span><span class="p">)</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+                    <span class="n">link</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&quot;target&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">target</span><span class="p">)</span>
+                    <span class="n">link</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">dsname</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Merger.collect"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.Merger.Merger.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">components</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; collects the given components in one DOM tree</span>
@@ -521,7 +639,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+        &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>

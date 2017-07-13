@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>nxsconfigserver package &mdash; NXSConfigServer 2.5.0 documentation</title>
+    <title>nxsconfigserver package &mdash; NXSConfigServer 2.8.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.5.0',
+        VERSION:     '2.8.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="NXSConfigServer 2.5.0 documentation" href="index.html" />
+    <link rel="top" title="NXSConfigServer 2.8.0 documentation" href="index.html" />
     <link rel="prev" title="Welcome to NeXuS Configuration Server’s documentation!" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.8</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -73,7 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.Merger">nxsconfigserver.Merger module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.Streams">nxsconfigserver.Streams module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.StreamSet">nxsconfigserver.StreamSet module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxsconfigserver">Module contents</a></li>
 </ul>
@@ -98,7 +98,7 @@
 <li><a class="reference internal" href="#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase module</a></li>
 <li><a class="reference internal" href="#module-nxsconfigserver.Merger">nxsconfigserver.Merger module</a></li>
 <li><a class="reference internal" href="#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer module</a></li>
-<li><a class="reference internal" href="#module-nxsconfigserver.Streams">nxsconfigserver.Streams module</a></li>
+<li><a class="reference internal" href="#module-nxsconfigserver.StreamSet">nxsconfigserver.StreamSet module</a></li>
 <li><a class="reference internal" href="#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator module</a></li>
 <li><a class="reference internal" href="#module-nxsconfigserver">Module contents</a></li>
 </ul>
@@ -233,7 +233,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>value</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; string with error message</li>
-<li><strong>nodes</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<tt class="xref py py-class docutils literal"><span class="pre">xml.dom.minidom.Node</span></tt>&gt;) &#8211; list of nodes with errors</li>
+<li><strong>nodes</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<tt class="xref py py-class docutils literal"><span class="pre">xml.dom.minidom.Node</span></tt>&gt;) &#8211; list of nodes with errors</li>
 </ul>
 </td>
 </tr>
@@ -273,7 +273,7 @@
 <p>Providesthe access to MYSQL database with NDTS configuration files</p>
 <dl class="class">
 <dt id="nxsconfigserver.MYSQLDataBase.MYSQLDataBase">
-<em class="property">class </em><tt class="descname">MYSQLDataBase</tt><a class="reference internal" href="_modules/nxsconfigserver/MYSQLDataBase.html#MYSQLDataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.MYSQLDataBase.MYSQLDataBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">MYSQLDataBase</tt><big>(</big><em>streams=None</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/MYSQLDataBase.html#MYSQLDataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.MYSQLDataBase.MYSQLDataBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>XML Configurer</p>
 <p>constructor</p>
@@ -282,6 +282,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">It creates the MYSQLDataBase instance</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>streams</strong> (<tt class="xref py py-class docutils literal"><span class="pre">StreamSet</span></tt> or <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/server_api/device.html#PyTango.Device_4Impl" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.Device_4Impl</span></tt></a>) &#8211; tango-like steamset class</td>
 </tr>
 </tbody>
 </table>
@@ -295,7 +297,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -311,7 +313,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available datasources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -327,7 +329,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -355,11 +357,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -387,11 +389,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of datasource names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of datasource names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given datasources</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -449,7 +451,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -463,11 +465,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of selection names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of selection names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given selections</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -600,10 +602,22 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>components</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>components</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nxsconfigserver.Merger.Merger.linkable">
+<tt class="descname">linkable</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.linkable" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) node which can have links</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nxsconfigserver.Merger.Merger.linkdatasources">
+<tt class="descname">linkdatasources</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.linkdatasources" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) aliased to add links</p>
 </dd></dl>
 
 <dl class="method">
@@ -624,19 +638,19 @@
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.singles">
 <tt class="descname">singles</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.singles" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) tags which cannot have the same siblings</p>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) tags which cannot have the same siblings</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.switchable">
 <tt class="descname">switchable</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.switchable" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) node which can have switched strategy</p>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) node which can have switched strategy</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.switchdatasources">
 <tt class="descname">switchdatasources</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.switchdatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) aliased to switch to STEP mode</p>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) aliased to switch to STEP mode</p>
 </dd></dl>
 
 <dl class="method">
@@ -656,9 +670,15 @@
 </dd></dl>
 
 <dl class="attribute">
+<dt id="nxsconfigserver.Merger.Merger.tocut">
+<tt class="descname">tocut</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.tocut" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) tags which cannot have the same siblings</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.uniqueText">
 <tt class="descname">uniqueText</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.uniqueText" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) with unique text</p>
+<dd><p>(<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt; ) with unique text</p>
 </dd></dl>
 
 </dd></dl>
@@ -670,7 +690,7 @@
 <dl class="class">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer">
 <em class="property">class </em><tt class="descname">NXSConfigServer</tt><big>(</big><em>cl</em>, <em>name</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyTango._PyTango.Device_4Impl</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tango._tango.Device_4Impl</span></tt></p>
 <p>NXSConfigServer Class Description:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -709,7 +729,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available component names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -727,7 +747,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available DataSource names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -745,7 +765,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available selection names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -779,7 +799,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of datasource names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -799,7 +819,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of variable names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -815,11 +835,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -835,11 +855,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of datasource names for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of datasource names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -855,11 +875,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of variable names for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of variable names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -876,7 +896,7 @@ DevState.RUNNING -  Performing a query,</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Creates the NDTS configuration script from the
 given components. The result is strored in XMLString</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -892,11 +912,11 @@ given components. The result is strored in XMLString</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required DataSources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of DataSource names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of DataSource names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required DataSources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -961,11 +981,11 @@ given components. The result is strored in XMLString</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">returns a list of dependent component names
 for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of component names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -981,11 +1001,11 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of instantiated components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1003,7 +1023,7 @@ for a given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    component names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1019,7 +1039,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Merges give components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevString    merged components</td>
 </tr>
@@ -1053,11 +1073,11 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of selection names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of selection names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1089,7 +1109,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Sets the mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    component names</td>
 </tr>
 </tbody>
 </table>
@@ -1154,7 +1174,7 @@ for a given components</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Removes the given components
 from the mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; DevVarStringArray    list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -1451,6 +1471,22 @@ from the mandatory components</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.is_LinkDataSources_write_allowed">
+<tt class="descname">is_LinkDataSources_write_allowed</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.is_LinkDataSources_write_allowed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_LinkDataSources_write_allowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>LinkDataSources attribute Write State Machine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.is_MandatoryComponents_allowed">
 <tt class="descname">is_MandatoryComponents_allowed</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.is_MandatoryComponents_allowed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_MandatoryComponents_allowed" title="Permalink to this definition">¶</a></dt>
 <dd><p>MandatoryComponents command State Machine</p>
@@ -1689,6 +1725,20 @@ from the mandatory components</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.read_LinkDataSources">
+<tt class="descname">read_LinkDataSources</tt><big>(</big><em>attr</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.read_LinkDataSources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_LinkDataSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read LinkDataSources attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr</strong> (<a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/server_api/attribute.html#PyTango.Attribute" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.Attribute</span></tt></a>) &#8211; link datasources attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.read_STEPDataSources">
 <tt class="descname">read_STEPDataSources</tt><big>(</big><em>attr</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.read_STEPDataSources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_STEPDataSources" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read STEPDataSources attribute</p>
@@ -1779,6 +1829,20 @@ from the mandatory components</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.write_LinkDataSources">
+<tt class="descname">write_LinkDataSources</tt><big>(</big><em>attr</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.write_LinkDataSources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_LinkDataSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write LinkDataSources attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr</strong> (<a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/server_api/attribute.html#PyTango.Attribute" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.Attribute</span></tt></a>) &#8211; link datasources attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServer.write_STEPDataSources">
 <tt class="descname">write_STEPDataSources</tt><big>(</big><em>attr</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServer.write_STEPDataSources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_STEPDataSources" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write STEPDataSources attribute</p>
@@ -1848,12 +1912,12 @@ from the mandatory components</td>
 <dl class="class">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass">
 <em class="property">class </em><tt class="descname">NXSConfigServerClass</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/NXSConfigServer.html#NXSConfigServerClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyTango._PyTango.DeviceClass</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tango._tango.DeviceClass</span></tt></p>
 <p>NXSConfigServerClass class definition</p>
 <p>NXSConfigServerClass Constructor</p>
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.attr_list">
-<tt class="descname">attr_list</tt><em class="property"> = {'JSONSettings': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ_WRITE], {'Memorized': 'true', 'description': 'The JSON string with parameters of MySQLdb.connect(...).', 'Display level': PyTango._PyTango.DispLevel.EXPERT, 'label': 'Arguments of MySQLdb.connect(...)'}], 'Selection': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ_WRITE], {'description': 'It allows to pass JSON strings into database during performing StoreSelection.', 'Display level': PyTango._PyTango.DispLevel.EXPERT, 'label': 'Selected Component'}], 'XMLString': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ_WRITE], {'description': 'It allows to pass XML strings into database during performing StoreComponent and StoreDataSource.\nMoreover, after performing CreateConfiguration it contains the resulting XML configuration.', 'Display level': PyTango._PyTango.DispLevel.EXPERT, 'label': 'XML Configuration'}], 'Variables': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ_WRITE], {'description': 'The JSON string with XML configuration variables', 'label': 'XML Configuration Variables'}], 'Version': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ], {'description': 'Configuration version', 'label': 'Configuration Version'}], 'STEPDataSources': [[PyTango._PyTango.CmdArgType.DevString, PyTango._PyTango.AttrDataFormat.SCALAR, PyTango._PyTango.AttrWriteType.READ_WRITE], {'description': 'JSON list of datasources to be switched into STEP mode during creating configuration process', 'label': 'Datasources to be switched into STEP Mode'}]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.attr_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">attr_list</tt><em class="property"> = {'JSONSettings': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'Memorized': 'true', 'description': 'The JSON string with parameters of MySQLdb.connect(...).', 'Display level': tango._tango.DispLevel.EXPERT, 'label': 'Arguments of MySQLdb.connect(...)'}], 'Selection': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'description': 'It allows to pass JSON strings into database during performing StoreSelection.', 'Display level': tango._tango.DispLevel.EXPERT, 'label': 'Selected Component'}], 'XMLString': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'description': 'It allows to pass XML strings into database during performing StoreComponent and StoreDataSource.\nMoreover, after performing CreateConfiguration it contains the resulting XML configuration.', 'Display level': tango._tango.DispLevel.EXPERT, 'label': 'XML Configuration'}], 'Variables': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'description': 'The JSON string with XML configuration variables', 'label': 'XML Configuration Variables'}], 'LinkDataSources': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'description': 'JSON list of datasourcesto which links will be added', 'label': 'Datasources to which links will be added'}], 'Version': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ], {'description': 'Configuration version', 'label': 'Configuration Version'}], 'STEPDataSources': [[tango._tango.CmdArgType.DevString, tango._tango.AttrDataFormat.SCALAR, tango._tango.AttrWriteType.READ_WRITE], {'description': 'JSON list of datasources to be switched into STEP mode during creating configuration process', 'label': 'Datasources to be switched into STEP Mode'}]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.attr_list" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>(<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, </dt>
 <dd><dl class="first last docutils">
@@ -1869,13 +1933,13 @@ from the mandatory components</td>
 <tt class="descname">class_property_list</tt><em class="property"> = {}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.class_property_list" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>(<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, </dt>
-<dd>[ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/other.html#PyTango.CmdArgType" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.CmdArgType</span></tt></a>, [ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">int</span></tt></a>&gt; ] ] &gt; ) Class Properties</dd>
+<dd>[ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/other.html#PyTango.CmdArgType" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.CmdArgType</span></tt></a>, [ <tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">int</span></tt></a>&gt; ] ] &gt; ) Class Properties</dd>
 </dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list">
-<tt class="descname">cmd_list</tt><em class="property"> = {'SetComponentDataSources': [[PyTango._PyTango.CmdArgType.DevString, 'JSON dict {comp1: {tds1: ds1, ...}, ...}'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'UnsetMandatoryComponents': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'AvailableSelections': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of available selection names']], 'DependentComponents': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'component names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names']], 'CreateConfiguration': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'StoreDataSource': [[PyTango._PyTango.CmdArgType.DevString, 'datasource name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'ComponentsVariables': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'component names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of variable names']], 'StoreSelection': [[PyTango._PyTango.CmdArgType.DevString, 'selection name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'InstantiatedComponents': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of instantiated components']], 'ComponentsDataSources': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'component names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'ComponentVariables': [[PyTango._PyTango.CmdArgType.DevString, 'component name'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of variable names']], 'DeleteComponent': [[PyTango._PyTango.CmdArgType.DevString, 'component name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'DataSources': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of DataSource names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of required DataSources']], 'AvailableComponents': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of available component names']], 'Selections': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of selection names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of required selections']], 'AvailableDataSources': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of available DataSource names']], 'DeleteDataSource': [[PyTango._PyTango.CmdArgType.DevString, 'datasource name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'Components': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of required components']], 'SetMandatoryComponents': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'component names'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'StoreComponent': [[PyTango._PyTango.CmdArgType.DevString, 'component name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'ComponentDataSources': [[PyTango._PyTango.CmdArgType.DevString, 'component name'], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'Merge': [[PyTango._PyTango.CmdArgType.DevVarStringArray, 'list of component names'], [PyTango._PyTango.CmdArgType.DevString, 'merged components']], 'MandatoryComponents': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVarStringArray, 'component names']], 'Close': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'DeleteSelection': [[PyTango._PyTango.CmdArgType.DevString, 'selection name'], [PyTango._PyTango.CmdArgType.DevVoid, '']], 'Open': [[PyTango._PyTango.CmdArgType.DevVoid, ''], [PyTango._PyTango.CmdArgType.DevVoid, '']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">cmd_list</tt><em class="property"> = {'SetComponentDataSources': [[tango._tango.CmdArgType.DevString, 'JSON dict {comp1: {tds1: ds1, ...}, ...}'], [tango._tango.CmdArgType.DevVoid, '']], 'UnsetMandatoryComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVoid, '']], 'AvailableSelections': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available selection names']], 'DependentComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of component names']], 'CreateConfiguration': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVoid, '']], 'StoreDataSource': [[tango._tango.CmdArgType.DevString, 'datasource name'], [tango._tango.CmdArgType.DevVoid, '']], 'ComponentsVariables': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of variable names']], 'StoreSelection': [[tango._tango.CmdArgType.DevString, 'selection name'], [tango._tango.CmdArgType.DevVoid, '']], 'InstantiatedComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of instantiated components']], 'ComponentsDataSources': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'ComponentVariables': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVarStringArray, 'list of variable names']], 'DeleteComponent': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVoid, '']], 'DataSources': [[tango._tango.CmdArgType.DevVarStringArray, 'list of DataSource names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required DataSources']], 'AvailableComponents': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available component names']], 'Selections': [[tango._tango.CmdArgType.DevVarStringArray, 'list of selection names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required selections']], 'AvailableDataSources': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available DataSource names']], 'DeleteDataSource': [[tango._tango.CmdArgType.DevString, 'datasource name'], [tango._tango.CmdArgType.DevVoid, '']], 'Components': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required components']], 'SetMandatoryComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVoid, '']], 'StoreComponent': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVoid, '']], 'ComponentDataSources': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'Merge': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevString, 'merged components']], 'MandatoryComponents': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'component names']], 'Close': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVoid, '']], 'DeleteSelection': [[tango._tango.CmdArgType.DevString, 'selection name'], [tango._tango.CmdArgType.DevVoid, '']], 'Open': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVoid, '']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>(<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, </dt>
 <dd>[[ <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/other.html#PyTango.CmdArgType" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.CmdArgType</span></tt></a>, <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>]] &gt;)
@@ -1885,22 +1949,35 @@ Command definitions</dd>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list">
-<tt class="descname">device_property_list</tt><em class="property"> = {'VersionLabel': [PyTango._PyTango.CmdArgType.DevString, 'version label', ['XCS']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">device_property_list</tt><em class="property"> = {'VersionLabel': [tango._tango.CmdArgType.DevString, 'version label', ['XCS']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>(<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, </dt>
-<dd>[ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/other.html#PyTango.CmdArgType" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.CmdArgType</span></tt></a>, [ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">int</span></tt></a>&gt; ] ] &gt; ) Device Properties</dd>
+<dd>[ <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/client_api/other.html#PyTango.CmdArgType" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.CmdArgType</span></tt></a>, [ <tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">int</span></tt></a>&gt; ] ] &gt; ) Device Properties</dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="module-nxsconfigserver.Streams">
-<span id="nxsconfigserver-streams-module"></span><h2>nxsconfigserver.Streams module<a class="headerlink" href="#module-nxsconfigserver.Streams" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nxsconfigserver.StreamSet">
+<span id="nxsconfigserver-streamset-module"></span><h2>nxsconfigserver.StreamSet module<a class="headerlink" href="#module-nxsconfigserver.StreamSet" title="Permalink to this headline">¶</a></h2>
 <p>labels to Tango Streams</p>
-<dl class="function">
-<dt id="nxsconfigserver.Streams.debug">
-<tt class="descname">debug</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/Streams.html#debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Streams.debug" title="Permalink to this definition">¶</a></dt>
+<dl class="class">
+<dt id="nxsconfigserver.StreamSet.StreamSet">
+<em class="property">class </em><tt class="descname">StreamSet</tt><big>(</big><em>streams</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
+<p>streamset constractor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>streams</strong> (<a class="reference internal" href="#nxsconfigserver.StreamSet.StreamSet" title="nxsconfigserver.StreamSet.StreamSet"><tt class="xref py py-class docutils literal"><span class="pre">StreamSet</span></tt></a> or <a class="reference external" href="http://www.esrf.fr/computing/cs/tango/tango_doc/kernel_doc/pytango/latest/server_api/device.html#PyTango.Device_4Impl" title="(in PyTango v8.1)"><tt class="xref py py-class docutils literal"><span class="pre">PyTango.Device_4Impl</span></tt></a>) &#8211; tango-like steamset class</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nxsconfigserver.StreamSet.StreamSet.debug">
+<tt class="descname">debug</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet.debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>writes debug message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1908,7 +1985,7 @@ Command definitions</dd>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>message</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; debug message</li>
-<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; it writes to sys stream
+<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -1917,9 +1994,9 @@ when log stream does not exist</li>
 </table>
 </dd></dl>
 
-<dl class="function">
-<dt id="nxsconfigserver.Streams.error">
-<tt class="descname">error</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/Streams.html#error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Streams.error" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="nxsconfigserver.StreamSet.StreamSet.error">
+<tt class="descname">error</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.error" title="Permalink to this definition">¶</a></dt>
 <dd><p>writes error message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1927,7 +2004,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>message</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; error message</li>
-<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; it writes to sys stream
+<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -1936,9 +2013,9 @@ when log stream does not exist</li>
 </table>
 </dd></dl>
 
-<dl class="function">
-<dt id="nxsconfigserver.Streams.fatal">
-<tt class="descname">fatal</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/Streams.html#fatal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Streams.fatal" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="nxsconfigserver.StreamSet.StreamSet.fatal">
+<tt class="descname">fatal</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet.fatal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.fatal" title="Permalink to this definition">¶</a></dt>
 <dd><p>writes fatal error message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1946,7 +2023,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>message</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; error message</li>
-<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; it writes to sys stream
+<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -1955,9 +2032,9 @@ when log stream does not exist</li>
 </table>
 </dd></dl>
 
-<dl class="function">
-<dt id="nxsconfigserver.Streams.info">
-<tt class="descname">info</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/Streams.html#info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Streams.info" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="nxsconfigserver.StreamSet.StreamSet.info">
+<tt class="descname">info</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.info" title="Permalink to this definition">¶</a></dt>
 <dd><p>writes info message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1965,7 +2042,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>message</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; info message</li>
-<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; it writes to sys stream
+<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -1974,39 +2051,39 @@ when log stream does not exist</li>
 </table>
 </dd></dl>
 
-<dl class="data">
-<dt id="nxsconfigserver.Streams.log_debug">
-<tt class="descname">log_debug</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Streams.log_debug" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="nxsconfigserver.StreamSet.StreamSet.log_debug">
+<tt class="descname">log_debug</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.log_debug" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>) Tango debug log stream</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="nxsconfigserver.Streams.log_error">
-<tt class="descname">log_error</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Streams.log_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>)  Tango error log stream</p>
+<dl class="attribute">
+<dt id="nxsconfigserver.StreamSet.StreamSet.log_error">
+<tt class="descname">log_error</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.log_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>) Tango error log stream</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="nxsconfigserver.Streams.log_fatal">
-<tt class="descname">log_fatal</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Streams.log_fatal" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="nxsconfigserver.StreamSet.StreamSet.log_fatal">
+<tt class="descname">log_fatal</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.log_fatal" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>) Tango fatal log stream</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="nxsconfigserver.Streams.log_info">
-<tt class="descname">log_info</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Streams.log_info" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="nxsconfigserver.StreamSet.StreamSet.log_info">
+<tt class="descname">log_info</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.log_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>) Tango info log stream</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="nxsconfigserver.Streams.log_warn">
-<tt class="descname">log_warn</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Streams.log_warn" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="nxsconfigserver.StreamSet.StreamSet.log_warn">
+<tt class="descname">log_warn</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.log_warn" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<tt class="xref py py-class docutils literal"><span class="pre">PyTango.log4tango.TangoStream</span></tt>) Tango warn log stream</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="nxsconfigserver.Streams.warn">
-<tt class="descname">warn</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/Streams.html#warn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Streams.warn" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="nxsconfigserver.StreamSet.StreamSet.warn">
+<tt class="descname">warn</tt><big>(</big><em>message</em>, <em>std=True</em><big>)</big><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet.warn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet.warn" title="Permalink to this definition">¶</a></dt>
 <dd><p>writes warning message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2014,13 +2091,15 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>message</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) &#8211; warning message</li>
-<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; it writes to sys stream
+<li><strong>std</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a>) &#8211; True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -2053,7 +2132,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2069,7 +2148,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available datasources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2085,7 +2164,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2117,7 +2196,7 @@ when log stream does not exist</li>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of datasource names from the given component</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2149,11 +2228,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2167,11 +2246,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of datasource names from the given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2185,11 +2264,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple of variable names from the given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2203,7 +2282,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2217,11 +2296,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of datasource names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of datasource names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given datasources</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2278,7 +2357,7 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; component names to check</li>
+<li><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; component names to check</li>
 <li><strong>deps</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>, <a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; dictionery with dependent components</li>
 </ul>
 </td>
@@ -2286,7 +2365,7 @@ when log stream does not exist</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of depending components</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</p>
 </td>
 </tr>
 </tbody>
@@ -2301,11 +2380,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of instantiated components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2315,6 +2394,12 @@ when log stream does not exist</li>
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.jsonsettings">
 <tt class="descname">jsonsettings</tt><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.jsonsettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) JSON string with arguments to connect to database</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.linkdatasources">
+<tt class="descname">linkdatasources</tt><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.linkdatasources" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>) the json data string</p>
 </dd></dl>
 
 <dl class="method">
@@ -2327,7 +2412,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2341,7 +2426,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">merged components</td>
 </tr>
@@ -2379,11 +2464,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of selection names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of selection names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given selections</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2411,7 +2496,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2473,7 +2558,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2517,7 +2602,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; command-line arguments</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> (<tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt> &lt;<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>&gt;) &#8211; command-line arguments</td>
 </tr>
 </tbody>
 </table>
@@ -2538,7 +2623,7 @@ when log stream does not exist</li>
       
     </p>
     <p>
-        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+        &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>

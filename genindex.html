@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; NXSConfigServer 2.5.0 documentation</title>
+    <title>Index &mdash; NXSConfigServer 2.8.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,7 +17,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.5.0',
+        VERSION:     '2.8.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -30,7 +30,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="NXSConfigServer 2.5.0 documentation" href="index.html" />
+    <link rel="top" title="NXSConfigServer 2.8.0 documentation" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.5</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.8</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -73,7 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.Merger">nxsconfigserver.Merger module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.Streams">nxsconfigserver.Streams module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.StreamSet">nxsconfigserver.StreamSet module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver">Module contents</a></li>
 </ul>
@@ -318,7 +318,7 @@
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.debug">debug() (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.debug">debug() (StreamSet method)</a>
   </dt>
 
       
@@ -388,7 +388,7 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.error">error() (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.error">error() (StreamSet method)</a>
   </dt>
 
   </dl></td>
@@ -398,7 +398,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.fatal">fatal() (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.fatal">fatal() (StreamSet method)</a>
   </dt>
 
   </dl></td>
@@ -412,7 +412,7 @@
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.info">info() (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.info">info() (StreamSet method)</a>
   </dt>
 
       
@@ -479,12 +479,12 @@
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DeleteDataSource_allowed">is_DeleteDataSource_allowed() (NXSConfigServer method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DeleteSelection_allowed">is_DeleteSelection_allowed() (NXSConfigServer method)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DependentComponents_allowed">is_DependentComponents_allowed() (NXSConfigServer method)</a>
   </dt>
@@ -495,6 +495,10 @@
 
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_JSONSettings_write_allowed">is_JSONSettings_write_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_LinkDataSources_write_allowed">is_LinkDataSources_write_allowed() (NXSConfigServer method)</a>
   </dt>
 
       
@@ -570,25 +574,39 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_debug">log_debug (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.linkable">linkable (Merger attribute)</a>
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_error">log_error (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.linkdatasources">linkdatasources (Merger attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.linkdatasources">(XMLConfigurator attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.log_debug">log_debug (StreamSet attribute)</a>
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_fatal">log_fatal (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.log_error">log_error (StreamSet attribute)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_info">log_info (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.log_fatal">log_fatal (StreamSet attribute)</a>
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_warn">log_warn (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.log_info">log_info (StreamSet attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.log_warn">log_warn (StreamSet attribute)</a>
   </dt>
 
   </dl></td>
@@ -680,7 +698,7 @@
   </dt>
 
       
-  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.Streams">nxsconfigserver.Streams (module)</a>
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.StreamSet">nxsconfigserver.StreamSet (module)</a>
   </dt>
 
       
@@ -719,6 +737,10 @@
 
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_JSONSettings">read_JSONSettings() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_LinkDataSources">read_LinkDataSources() (NXSConfigServer method)</a>
   </dt>
 
       
@@ -840,6 +862,10 @@
   </dt>
 
       
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet">StreamSet (class in nxsconfigserver.StreamSet)</a>
+  </dt>
+
+      
   <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.switchable">switchable (Merger attribute)</a>
   </dt>
 
@@ -852,6 +878,12 @@
 
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.tocut">tocut (Merger attribute)</a>
+  </dt>
+
+  </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.toString">toString() (Merger method)</a>
@@ -920,11 +952,15 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.warn">warn() (in module nxsconfigserver.Streams)</a>
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.StreamSet.StreamSet.warn">warn() (StreamSet method)</a>
   </dt>
 
       
   <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_JSONSettings">write_JSONSettings() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_LinkDataSources">write_LinkDataSources() (NXSConfigServer method)</a>
   </dt>
 
       
@@ -981,7 +1017,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+        &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
