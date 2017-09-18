@@ -153,7 +153,8 @@ class Merger(object):
             if tagName in self.singles or (name1 and name1 == name2):
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: "
-                    % str(tags), [elem1, elem2])
+                    % str((str(self.__getAncestors(elem1)), str(tags))),
+                    [elem1, elem2])
 
         if tagName in self.uniqueText:
             text1 = unicode(self.__getText(elem1)).strip()

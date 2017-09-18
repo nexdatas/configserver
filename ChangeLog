@@ -1,3 +1,8 @@
+2017-09-18 Jan Kotanski <jankotan@gmail.com>
+	* improve error printout
+	* fix for XMLConfiguration tests
+	* tagged as v2.8.1
+
 2017-06-23 Jan Kotanski <jankotan@gmail.com>
 	* skip empty NXtransformations and NXcollection groups when empty
 	* tagged as v2.8.0
