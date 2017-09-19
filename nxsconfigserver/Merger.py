@@ -142,8 +142,8 @@ class Merger(object):
         if name1 != name2 and name1 and name2:
             if tagName in self.singles:
                 raise IncompatibleNodeError(
-                    "Incompatible element attributes  %s: "
-                    % str((str(self.__getAncestors(elem1)), str(name2))),
+                    "Incompatible element attributes  %s: %s"
+                    % (str(self.__getAncestors(elem1)), str(name2)),
                     [elem1, elem2])
             return False
 
@@ -152,8 +152,8 @@ class Merger(object):
             status = False
             if tagName in self.singles or (name1 and name1 == name2):
                 raise IncompatibleNodeError(
-                    "Incompatible element attributes  %s: "
-                    % str((str(self.__getAncestors(elem1)), str(tags))),
+                    "Incompatible element attributes  %s: %s"
+                    % (str(self.__getAncestors(elem1)), str(tags)),
                     [elem1, elem2])
 
         if tagName in self.uniqueText:

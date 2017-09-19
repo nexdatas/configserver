@@ -1,3 +1,7 @@
+2017-09-19 Jan Kotanski <jankotan@gmail.com>
+	* improve error printout
+	* tagged as v2.8.2
+
 2017-09-18 Jan Kotanski <jankotan@gmail.com>
 	* improve error printout
 	* fix for XMLConfiguration tests
