@@ -22,13 +22,13 @@
 
 import os
 from distutils.core import setup, Command
+from sphinx.setup_command import BuildDoc
+
 
 #: package name
 NXS = "nxsconfigserver"
 #: nxs imported package
 INXS = __import__(NXS)
-
-from sphinx.setup_command import BuildDoc
 
 # __requires__ = 'nextdata ==%s' % INXS.__version__
 
@@ -63,6 +63,7 @@ class TestCommand(Command):
         import subprocess
         errno = subprocess.call([sys.executable, 'test/runtest.py'])
         raise SystemExit(errno)
+
 
 release = INXS.__version__
 version = ".".join(release.split(".")[:2])
