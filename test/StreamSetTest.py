@@ -27,13 +27,14 @@ import random
 import struct
 import binascii
 import time
+
+from nxsconfigserver import StreamSet
+
 # import string
 if sys.version_info > (3,):
     from io import StringIO
 else:
     from StringIO import StringIO
-
-from nxsconfigserver import StreamSet
 
 
 if sys.version_info > (3,):
