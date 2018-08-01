@@ -28,7 +28,10 @@ import struct
 import binascii
 import time
 # import string
-from cStringIO import StringIO
+if sys.version_info > (3,):
+    from io import StringIO
+else:
+    from StringIO import StringIO
 
 from nxsconfigserver import StreamSet
 
