@@ -5174,8 +5174,12 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><group  name='entry' type='NXentry'><%s type='field'>My text </%s></group></definition>" %
-                   (ut, ut), "<definition><group  name='entry' type='NXentry'><%s type='field'>My text 2 </%s></group></definition>" % (ut, ut)]
+            xml = ["<definition><group  name='entry' type='NXentry'>"
+                   "<%s type='field'>My text </%s></group></definition>" %
+                   (ut, ut),
+                   "<definition><group  name='entry' type='NXentry'>"
+                   "<%s type='field'>My text 2 </%s></group></definition>"
+                   % (ut, ut)]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5219,7 +5223,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut]
+                "<definition><field  name='entry' ><datasource type='TANGO'>"
+                "<%s/></datasource></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5235,8 +5240,11 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><field name="entry"><datasource type="TANGO"><%s/></datasource></field></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><field name="entry">'
+                '<datasource type="TANGO"><%s/></datasource></field>'
+                '</definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5272,7 +5280,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><datasource type='TANGO'><%s/></datasource></field></definition>" % ut]
+                "<definition><field  name='entry' ><datasource type='TANGO'>"
+                "<%s/></datasource></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5316,7 +5325,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut]
+                "<definition><field  name='entry' ><attribute type='TANGO'>"
+                "<%s/></attribute></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5332,8 +5342,11 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><field name="entry"><attribute type="TANGO"><%s/></attribute></field></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><field name="entry">'
+                '<attribute type="TANGO"><%s/></attribute></field>'
+                '</definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5367,7 +5380,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><attribute type='TANGO'><%s/></attribute></field></definition>" % ut]
+                "<definition><field  name='entry' ><attribute type='TANGO'>"
+                "<%s/></attribute></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5426,8 +5440,10 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><%s name="entry"/></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><%s name="entry"/>'
+                '</definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5506,7 +5522,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut]
+                "<definition><field  name='entry' ><dimensions type='TANGO'>"
+                "<%s/></dimensions></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5522,8 +5539,11 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><field name="entry"><dimensions type="TANGO"><%s/></dimensions></field></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><field name="entry">'
+                '<dimensions type="TANGO"><%s/></dimensions></field>'
+                '</definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5558,7 +5578,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><field  name='entry' ><dimensions type='TANGO'><%s/></dimensions></field></definition>" % ut]
+                "<definition><field  name='entry' ><dimensions type='TANGO'>"
+                "<%s/></dimensions></field></definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5601,7 +5622,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><field  name='entry' ><%s/></field></definition>" %
+            xml = ["<definition><field  name='entry' ><%s/></field>"
+                   "</definition>" %
                    ut]
             np = len(xml)
             name = []
@@ -5618,8 +5640,10 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><field name="entry"><%s/></field></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><field name="entry">'
+                '<%s/></field></definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5653,7 +5677,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><field  name='entry' ><%s/></field></definition>" %
+            xml = ["<definition><field  name='entry' ><%s/></field>"
+                   "</definition>" %
                    ut]
             np = len(xml)
             name = []
@@ -5697,7 +5722,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><group  name='entry' ><%s/></group></definition>" %
+            xml = ["<definition><group  name='entry' ><%s/></group>"
+                   "</definition>" %
                    ut]
             np = len(xml)
             name = []
@@ -5714,8 +5740,10 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><group name="entry"><%s/></group></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition>'
+                '<group name="entry"><%s/></group></definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5749,7 +5777,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
-            xml = ["<definition><group  name='entry' ><%s/></group></definition>" %
+            xml = ["<definition><group  name='entry' ><%s/></group>"
+                   "</definition>" %
                    ut]
             np = len(xml)
             name = []
@@ -5794,7 +5823,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><link  name='entry' ><%s/></link></definition>" % ut]
+                "<definition><link  name='entry' ><%s/></link>"
+                "</definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5810,8 +5840,10 @@ class XMLConfiguratorTest(unittest.TestCase):
                 self.__cmps.append(name[i])
 
             gxml = el.merge(name)
-            self.assertEqual(gxml.replace("?>\n<", "?><"),
-                             '<?xml version="1.0" ?><definition><link name="entry"><%s/></link></definition>' % (ut))
+            self.assertEqual(
+                gxml.replace("?>\n<", "?><"),
+                '<?xml version="1.0" ?><definition><link name="entry">'
+                '<%s/></link></definition>' % (ut))
 
             for i in range(np):
                 self.assertEqual(el.deleteComponent(name[i]), None)
@@ -5848,7 +5880,8 @@ class XMLConfiguratorTest(unittest.TestCase):
             oname = "mcs_test_component"
             self.assertTrue(isinstance(avc, list))
             xml = [
-                "<definition><link  name='entry' ><%s/></link></definition>" % ut]
+                "<definition><link  name='entry' ><%s/></link>"
+                "</definition>" % ut]
             np = len(xml)
             name = []
             for i in range(np):
@@ -5910,8 +5943,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.mandatoryComponents(), [name[0]])
 
         gxml = el.merge([name[1]])
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry2"/><group type="NXentry"/></definition>') |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><group type="NXentry2"/></definition>'))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry2"/><group type="NXentry"/>'
+             '</definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><group type="NXentry2"/>'
+             '</definition>'))
 
         el.unsetMandatoryComponents([name[0]])
         self.assertEqual(el.mandatoryComponents(), [])
@@ -5966,13 +6004,24 @@ class XMLConfiguratorTest(unittest.TestCase):
         gxml = el.merge([name[2]])
 
         self.assertTrue(
-            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry2"/><group type="NXentry3"/><group type="NXentry"/></definition>') |
-            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry3"/><group type="NXentry2"/><group type="NXentry"/></definition>') |
-            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry3"/><group type="NXentry"/><group type="NXentry2"/></definition>') |
-            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry2"/><group type="NXentry"/><group type="NXentry3"/></definition>') |
-            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><group type="NXentry2"/><group type="NXentry3"/></definition>') |
-            (gxml.replace("?>\n<", "?><")
-             == '<?xml version="1.0" ?><definition><group type="NXentry"/><group type="NXentry3"/><group type="NXentry2"/></definition>')
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry2"/><group type="NXentry3"/>'
+             '<group type="NXentry"/></definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry3"/><group type="NXentry2"/>'
+             '<group type="NXentry"/></definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry3"/><group type="NXentry"/>'
+             '<group type="NXentry2"/></definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry2"/><group type="NXentry"/>'
+             '<group type="NXentry3"/></definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><group type="NXentry2"/>'
+             '<group type="NXentry3"/></definition>') |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><group type="NXentry3"/>'
+             '<group type="NXentry2"/></definition>')
         )
 
         el.unsetMandatoryComponents([name[1]])
@@ -6008,11 +6057,15 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>'
+        xml = ['<definition><group type="NXentry" name="entry$var.%s"/>'
+               '<field name="field1">some</field></definition>'
                % (vrs[0]),
-               '<definition><group type="NXentry"/><field name="field2">$var.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">'
+               '$var.%s</field></definition>'
                % (vrs[1]),
-               '<definition><group type="NXentry"/><field name="field3">$var.%s</field><field name="field4">$var.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">'
+               '$var.%s</field><field name="field4">$var.%s</field>'
+               '</definition>'
                % (vrs[2], vrs[3])
                ]
 
@@ -6060,11 +6113,15 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry" name="entry$var.%s"/><field name="field1">some</field></definition>'
+        xml = ['<definition><group type="NXentry" name="entry$var.%s"/>'
+               '<field name="field1">some</field></definition>'
                % (vrs[0]),
-               '<definition><group type="NXentry"/><field name="field2">$var.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">'
+               '$var.%s</field></definition>'
                % (vrs[1]),
-               '<definition><group type="NXentry"/><field name="field3">$var.%s</field><field name="field4">$var.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">'
+               '$var.%s</field><field name="field4">$var.%s</field>'
+               '</definition>'
                % (vrs[2], vrs[3])
                ]
 
@@ -6109,7 +6166,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        vrs = ["eid", "myvar1", "var2", "mvar3"]
+        # vrs = ["eid", "myvar1", "var2", "mvar3"]
 
         np = 6
         name = []
@@ -6121,16 +6178,24 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print(avc
 
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field4"></field><field name="field4"></field>$components.%s$components.%s</definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field4">'
+               '</field><field name="field4"></field>'
+               '$components.%s$components.%s</definition>'
                % (name[1], name[2]),
-               '<definition>$components.%s$components.%s<group type="NXentry"/><field name="field5"></field><field name="field4"></field></definition>'
+               '<definition>$components.%s$components.%s'
+               '<group type="NXentry"/><field name="field5"></field>'
+               '<field name="field4"></field></definition>'
                % (name[2], name[3]),
-               '<definition><group type="NXentry" name="entry$components.%s"/><field name="field">some</field></definition>'
+               '<definition><group type="NXentry" name="entry$components.%s"/>'
+               '<field name="field">some</field></definition>'
                % (name[4]),
-               '<definition><group type="NXentry"/><field name="field1">$components.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field1">'
+               '$components.%s</field></definition>'
                % (name[5]),
-               '<definition><group type="NXentry"/><field name="field2"></field><field name="field4"></field></definition>',
-               '<definition><group type="NXentry"/><field name="field3"></field><field name="field4"></field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">'
+               '</field><field name="field4"></field></definition>',
+               '<definition><group type="NXentry"/><field name="field3">'
+               '</field><field name="field4"></field></definition>'
                ]
 
         for i in range(np):
@@ -6205,7 +6270,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for ar in arr:
 
             css = [name[i] for i in ar[0]]
-            cmps = []
+            # cmps = []
             mdss = el.dependentComponents(css)
             self.assertEqual(sorted(mdss), sorted([name[i] for i in ar[1]]))
 
@@ -6230,7 +6295,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         avc = el.availableComponents()
 
-        vrs = ["eid", "myvar1", "var2", "mvar3"]
+        # vrs = ["eid", "myvar1", "var2", "mvar3"]
 
         np = 6
         name = []
@@ -6242,16 +6307,24 @@ class XMLConfiguratorTest(unittest.TestCase):
 #        print(avc
 
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field4"></field><field name="field4"></field>$components.%s$components.%s</definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field4">'
+               '</field><field name="field4"></field>'
+               '$components.%s$components.%s</definition>'
                % (name[1], name[2]),
-               '<definition>$components.%s$components.%s<group type="NXentry"/><field name="field5"></field><field name="field4"></field></definition>'
+               '<definition>$components.%s$components.%s'
+               '<group type="NXentry"/><field name="field5"></field>'
+               '<field name="field4"></field></definition>'
                % (name[2], name[3]),
-               '<definition><group type="NXentry" name="entry$components.%s"/><field name="field">some</field></definition>'
+               '<definition><group type="NXentry" name="entry$components.%s"/>'
+               '<field name="field">some</field></definition>'
                % (name[4]),
-               '<definition><group type="NXentry"/><field name="field1">$components.%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field1">'
+               '$components.%s</field></definition>'
                % (name[5]),
-               '<definition><group type="NXentry"/><field name="field2"></field><field name="field4"></field></definition>',
-               '<definition><group type="NXentry"/><field name="field3"></field><field name="field4"></field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">'
+               '</field><field name="field4"></field></definition>',
+               '<definition><group type="NXentry"/><field name="field3">'
+               '</field><field name="field4"></field></definition>'
                ]
 
         for i in range(np):
@@ -6325,7 +6398,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         for ar in arr:
             css = [name[i] for i in ar[0]]
-            cmps = []
+            # cmps = []
             el.setMandatoryComponents([name[i] for i in ar[1]])
             mdss = el.dependentComponents(css)
             el.unsetMandatoryComponents([name[i] for i in ar[1]])
@@ -6351,10 +6424,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6375,11 +6452,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % (xds[0] % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % (xds[1] % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % (xds[2] % dsname[2], xds[3] % dsname[3])
                ]
 
@@ -6424,10 +6504,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6448,11 +6532,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -6497,10 +6584,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6521,11 +6612,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -6631,10 +6725,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6655,20 +6753,25 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
         xml2 = [
-            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">%s'
+            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<field name="field1">%s'
             '</field></definition>',
             '<definition><group type="NXentry"/><field name="field2">%s'
             '</field></definition>',
-            '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">%s'
+            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<field name="field3">%s'
             '</field><field name="field4">%s</field></definition>'
         ]
 
@@ -6765,10 +6868,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6789,11 +6896,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -6846,7 +6956,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(set(mdss), set([dsname[3], dsname[1]]))
         self.assertEqual(
             el.components([name[2]])[0],
-            xml2[2] % ("$datasources.%s" % dsname[3], "$datasources.%s" % dsname[1]))
+            xml2[2] % ("$datasources.%s" % dsname[3],
+                       "$datasources.%s" % dsname[1]))
         self.assertEqual(el.components([tname[2]])[0], xml[2])
 
         mdss = el.componentDataSources(tname[1])
@@ -6906,8 +7017,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -6931,11 +7044,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
                ]
 
@@ -6980,8 +7096,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7004,11 +7122,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">'
+               '<datasource>%s%s</datasource></field></definition>'
                % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
                ]
 
@@ -7053,10 +7174,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7077,11 +7202,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % (xds[0] % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -7125,10 +7253,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7149,11 +7281,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % (xds[0] % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % (xds[1] % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % (xds[2] % dsname[2], xds[3] % dsname[3])
                ]
 
@@ -7197,10 +7332,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7221,11 +7360,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % (xds[0] % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % (xds[1] % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % (xds[2] % dsname[2], xds[3] % dsname[3])
                ]
 
@@ -7273,10 +7415,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7297,11 +7443,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -7345,8 +7494,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7369,11 +7520,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
                ]
 
@@ -7416,8 +7570,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7440,11 +7596,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">'
+               '<datasource>%s%s</datasource></field></definition>'
                % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
                ]
 
@@ -7488,10 +7647,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7512,11 +7675,14 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
-        xml = ['<definition><group type="NXentry"/><field name="field1">%s</field></definition>'
+        xml = ['<definition><group type="NXentry"/><field name="field1">%s'
+               '</field></definition>'
                % (xds[0] % dsname[0]),
-               '<definition><group type="NXentry"/><field name="field2">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field2">%s'
+               '</field></definition>'
                % ("$datasources.%s" % dsname[1]),
-               '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+               '<definition><group type="NXentry"/><field name="field3">%s'
+               '</field><field name="field4">%s</field></definition>'
                % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
                ]
 
@@ -7560,10 +7726,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7585,11 +7755,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -7610,8 +7783,25 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field> <field name="field1">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  '
+             '\n  <datasource name="%s" type="CLIENT">   <record name="r1"/>'
+             '  </datasource> </field> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>'
+             '  </datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -7632,10 +7822,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7654,15 +7848,17 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -7681,11 +7877,29 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         css = [name[0], name[2]]
 
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field> <field name="field1">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/> '
+             ' </datasource> </field> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -7707,7 +7921,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="$var.name1" /></datasource>',
         ]
 
         odsname = "mcs_test_datasource"
@@ -7726,15 +7941,17 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 xds[0] % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 "$datasources.$var.source"),
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0])
         ]
 
@@ -7756,8 +7973,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{"name1":"r1", "source":"%s"}' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertEqual(gxml.replace("?>\n<", "?><"),
-                         '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0]))
+        self.assertEqual(
+            gxml.replace("?>\n<", "?><"),
+            '<?xml version="1.0" ?><definition> <group type="NXentry"/> '
+            '<field name="field">  \n  <datasource name="%s" type="CLIENT">  '
+            ' <record name="r1"/>  </datasource> </field></definition>'
+            % (dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
@@ -7779,10 +8000,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name5" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name5" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7801,15 +8026,17 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -7828,11 +8055,29 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         css = [name[0], name[2]]
 
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name=""/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name=""/>  </datasource> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name=""/>  '
+             '</datasource> </field> <field name="field1">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/> '
+             ' </datasource> </field> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name=""/> '
+             ' </datasource> </field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -7854,8 +8099,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7879,13 +8126,17 @@ class XMLConfiguratorTest(unittest.TestCase):
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -7906,8 +8157,25 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r2"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0], dsname[1], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r2"/>  </datasource> </field></definition>' % (dsname[0], dsname[0], dsname[1])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r2"/>  '
+             '</datasource> </field> <field name="field1">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[1], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r2"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[0], dsname[1])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -7929,8 +8197,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -7951,17 +8221,20 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource>%s%s</datasource></field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -7982,10 +8255,26 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0], dsname[1], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field></definition>' %
-                         (dsname[0], dsname[0], dsname[1]))
-                        )
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">'
+             '  <datasource>   \n   <datasource name="%s" type="CLIENT"> '
+             '   <record name="r1"/>   </datasource>   \n   '
+             '<datasource name="%s" type="CLIENT">    <record name="r2"/>   '
+             '</datasource>  </datasource> </field> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[1], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field> <field name="field3">  <datasource>   \n'
+             '   <datasource name="%s" type="CLIENT">    <record name="r1"/>'
+             '   </datasource>   \n   <datasource name="%s" type="CLIENT">    '
+             '<record name="r2"/>   </datasource>  </datasource> '
+             '</field></definition>' %
+             (dsname[0], dsname[0], dsname[1]))
+        )
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -8007,9 +8296,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            """<datasource name="%s" type="CLIENT">$datasources.%s"""
+            """$datasources.%s<result>
 import nxsconfigserver
 ds.result = nxsconfigserver.__version__</result></datasource>"""
         ]
@@ -8040,13 +8332,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field></definition>'
             % ("$datasources.%s" % dsname[2])
         ]
 
@@ -8068,11 +8364,33 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
 
-        mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(">  ", ">").replace("> ", ">")\
-            .replace("    <", "<").replace("   <", "<").replace("  <", "<").replace(" <", "<")\
-            .replace("?>\n<", "?><")
-        self.assertTrue((mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1], dsname[0])) |
-                        (mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field></definition>' % (dsname[0], dsname[2], dsname[0], dsname[1])))
+        mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(
+            ">  ", ">").replace("> ", ">").replace("    <", "<").replace(
+                "   <", "<").replace("  <", "<").replace(" <", "<").replace(
+                    "?>\n<", "?><")
+        self.assertTrue(
+            (mxml == '<?xml version="1.0" ?><definition>'
+             '<group type="NXentry"/><field name="field3">\n'
+             '<datasource name="%s" type="CLIENT">\n'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource>\n<datasource name="%s" type="CLIENT">'
+             '<record name="r2"/></datasource><result>\n'
+             'import nxsconfigserver\nds.result = nxsconfigserver.__version__'
+             '</result></datasource></field><field name="field1">\n'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource></field></definition>'
+             % (dsname[2], dsname[0], dsname[1], dsname[0])) |
+            (mxml == '<?xml version="1.0" ?><definition>'
+             '<group type="NXentry"/><field name="field1">\n'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource></field><field name="field3">\n'
+             '<datasource name="%s" type="CLIENT">\n'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource>\n<datasource name="%s" type="CLIENT">'
+             '<record name="r2"/></datasource><result>\n'
+             'import nxsconfigserver\nds.result = nxsconfigserver.__version__'
+             '</result></datasource></field></definition>'
+             % (dsname[0], dsname[2], dsname[0], dsname[1])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8094,10 +8412,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8112,7 +8434,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
                 dsname[i] = dsname[i] + '_%s' % i
 
         for i in range(dsnp):
-            self.setXML(el, "<?xml version=\'1.0\'?><definition>%s</definition>" %
+            self.setXML(el, "<?xml version=\'1.0\'?><definition>%s"
+                        "</definition>" %
                         (xds[i] % dsname[i]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
@@ -8120,11 +8443,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8144,8 +8470,25 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         css = [name[0], name[2]]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field> <field name="field1">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>'
+             '  </datasource> </field> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/> '
+             ' </datasource> </field> <field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource> </field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8168,10 +8511,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8193,11 +8540,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8216,8 +8566,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[2]]
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8239,10 +8600,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8264,11 +8629,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8287,10 +8655,22 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[2]]
 
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="$var.name3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="$var.name3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8312,10 +8692,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name5" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name5" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8337,11 +8721,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8360,10 +8747,22 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[2]]
 
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="$var.name3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="$var.name3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="$var.name3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8385,8 +8784,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8407,17 +8808,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -8437,8 +8841,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         css = [name[0], name[2]]
 
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[0], dsname[1], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[0], dsname[1])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[0], dsname[1], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field></definition>' % (dsname[0], dsname[0], dsname[1])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -8460,8 +8875,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8482,17 +8899,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource>%s%s</datasource></field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -8511,8 +8931,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         css = [name[0], name[3]]
 
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource>$datasources.%s$datasources.%s</datasource></field><field name="field1">$datasources.%s</field></definition>' % (dsname[0], dsname[1], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource>$datasources.%s$datasources.%s</datasource></field></definition>' % (dsname[0], dsname[0], dsname[1])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource>$datasources.%s$datasources.%s</datasource>'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[0], dsname[1], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3"><datasource>'
+             '$datasources.%s$datasources.%s</datasource></field>'
+             '</definition>' % (dsname[0], dsname[0], dsname[1])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -8534,9 +8963,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            """<datasource name="%s" type="CLIENT">$datasources.%s"""
+            """$datasources.%s<result>
 import nxsconfigserver
 ds.result = nxsconfigserver.__version__</result></datasource>"""
         ]
@@ -8567,13 +8999,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field></definition>'
             % ("$datasources.%s" % dsname[2])
         ]
 
@@ -8592,12 +9028,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[3]]
         gxml = el.merge(css)
-        mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(">  ", ">").replace("> ", ">")\
-            .replace("    <", "<").replace("   <", "<").replace("  <", "<").replace(" <", "<")\
-            .replace("?>\n<", "?><")
+        mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(
+            ">  ", ">").replace("> ", ">").replace("    <", "<").replace(
+                "   <", "<").replace("  <", "<").replace(" <", "<").replace(
+                    "?>\n<", "?><")
 
-        self.assertTrue((mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2],  dsname[0])) |
-                        (mxml == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3">$datasources.%s</field></definition>' % (dsname[0],  dsname[2])))
+        self.assertTrue(
+            (mxml == '<?xml version="1.0" ?><definition>'
+             '<group type="NXentry"/><field name="field3">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[2],  dsname[0])) |
+            (mxml == '<?xml version="1.0" ?><definition>'
+             '<group type="NXentry"/><field name="field1">$datasources.%s'
+             '</field><field name="field3">$datasources.%s</field>'
+             '</definition>' % (dsname[0],  dsname[2])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8619,10 +9063,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8637,19 +9085,24 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
                 dsname[i] = dsname[i] + '_%s' % i
 
         for i in range(dsnp):
-            self.setXML(el, "<?xml version=\'1.0\'?><definition>%s</definition>" %
-                        (xds[i] % dsname[i]))
+            self.setXML(
+                el,
+                "<?xml version=\'1.0\'?><definition>%s</definition>" %
+                (xds[i] % dsname[i]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8667,8 +9120,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[2]]
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field><field name="field1">$datasources.%s</field>'
+             '</definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s</field><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource></field><field name="field4">$datasources.%s'
+             '</field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8692,10 +9156,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8717,11 +9185,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8742,9 +9213,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field1">\n'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<record name="r3" /></datasource></field><field name="field4">\n'
+            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>')
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8765,10 +9244,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8790,11 +9273,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8812,14 +9298,23 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         css = [name[0], name[2]]
 
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
 
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field1">\n'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<record name="r3" /></datasource></field><field name="field4">\n'
+            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>')
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8841,7 +9336,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="$var.name1" /></datasource>',
         ]
 
         odsname = "mcs_test_datasource"
@@ -8863,11 +9359,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 xds[0] % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 "$datasources.$var.source"),
-            '<definition><group type="NXentry"/><field name="field">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0])
         ]
 
@@ -8888,11 +9387,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 3)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field"><datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1" /></datasource></field></definition>')
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field">'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1" /></datasource></field></definition>')
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field">\n'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
         self.assertEqual(
-            comps[2], '<definition><group type="NXentry"/><field name="field">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[2],
+            '<definition><group type="NXentry"/><field name="field">\n'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
@@ -8914,10 +9422,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="$var.name1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="$var.name5" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="$var.name1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="$var.name5" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -8939,11 +9451,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -8960,14 +9475,23 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
+        el.variables = \
+            '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
 
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field1">\n'
+            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name=""/></datasource></field></definition>')
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<record name="r3" /></datasource></field><field name="field4">\n'
+            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
+            '<record name=""/></datasource></field></definition>')
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -8989,8 +9513,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9014,13 +9540,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -9040,9 +9570,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[0]))
+            comps[0], '<definition><group type="NXentry"/>'
+            '<field name="field1">\n<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % (dsname[0]))
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r1" /></datasource></field><field name="field4">\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource></field></definition>' % (dsname[0], dsname[1]))
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource></field><field name="field4">\n'
+            '<datasource name="%s" type="CLIENT"><record name="r2"/>'
+            '</datasource></field></definition>' % (dsname[0], dsname[1]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -9064,8 +9602,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9089,13 +9629,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3"><datasource>%s%s</datasource></field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource>%s%s</datasource></field></definition>'
             % ("$datasources.%s" % dsname[0], "$datasources.%s" % dsname[1])
         ]
 
@@ -9115,9 +9659,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[0]))
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field1">\n'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource></field></definition>' % (dsname[0]))
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource>\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource></datasource></field></definition>' % (dsname[0], dsname[1]))
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource>\n<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource>\n'
+            '<datasource name="%s" type="CLIENT"><record name="r2"/>'
+            '</datasource></datasource></field></definition>'
+            % (dsname[0], dsname[1]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 6)
         el.setMandatoryComponents(man)
@@ -9139,9 +9692,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            """<datasource name="%s" type="CLIENT">$datasources.%s$datasources.%s<result>
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            """<datasource name="%s" type="CLIENT">"""
+            """$datasources.%s$datasources.%s<result>
 import nxsconfigserver
 ds.result = nxsconfigserver.__version__</result></datasource>"""
         ]
@@ -9172,13 +9728,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[0] % dsname[0], "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field></definition>'
             % ("$datasources.%s" % dsname[2])
         ]
 
@@ -9198,9 +9758,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field></definition>' % (dsname[0]))
+            comps[0],
+            '<definition><group type="NXentry"/><field name="field1">\n'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource></field></definition>' % (dsname[0]))
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3">\n<datasource name="%s" type="CLIENT">\n<datasource name="%s" type="CLIENT"><record name="r1"/></datasource>\n<datasource name="%s" type="CLIENT"><record name="r2"/></datasource><result>\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__</result></datasource></field></definition>' % (dsname[2], dsname[0], dsname[1]))
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">\n'
+            '<datasource name="%s" type="CLIENT">\n'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource>\n<datasource name="%s" type="CLIENT">'
+            '<record name="r2"/></datasource><result>'
+            '\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__'
+            '</result></datasource></field></definition>'
+            % (dsname[2], dsname[0], dsname[1]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9221,10 +9792,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9239,19 +9814,23 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
                 dsname[i] = dsname[i] + '_%s' % i
 
         for i in range(dsnp):
-            self.setXML(el, "<?xml version=\'1.0\'?><definition>%s</definition>" %
-                        (xds[i] % dsname[i]))
+            self.setXML(
+                el, "<?xml version=\'1.0\'?><definition>%s</definition>" %
+                (xds[i] % dsname[i]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s</field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '</field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s</field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '</field><field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9271,9 +9850,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
-            comps[0], '<definition><group type="NXentry"/><field name="field1">\n<datasource name="mcs_test_datasource_0" type="CLIENT"><record name="r1"/></datasource></field></definition>')
+            comps[0], '<definition><group type="NXentry"/>'
+            '<field name="field1">'
+            '\n<datasource name="mcs_test_datasource_0" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>')
         self.assertEqual(
-            comps[1], '<definition><group type="NXentry"/><field name="field3"><datasource name="mcs_test_datasource_2" type="CLIENT"><record name="r3" /></datasource></field><field name="field4">\n<datasource name="mcs_test_datasource_3" type="CLIENT"><record name="r4"/></datasource></field></definition>')
+            comps[1],
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<record name="r3" /></datasource></field><field name="field4">'
+            '\n<datasource name="mcs_test_datasource_3" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>')
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9295,10 +9882,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9320,11 +9911,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s</field>'
+            '</definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9343,8 +9938,25 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         css = [name[0], name[2]]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource>  <strategy mode="FINAL"/> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="INIT"/> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="INIT"/> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource>  <strategy mode="FINAL"/> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource>  <strategy mode="FINAL"/> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource> </field> '
+             '<field name="field1">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r1"/>  </datasource>  <strategy mode="INIT"/>'
+             ' </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource>  <strategy mode="INIT"/> </field> '
+             '<field name="field3">  <datasource name="%s" type="CLIENT">   '
+             '<record name="r3"/>  </datasource> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource>  <strategy mode="FINAL"/>'
+             ' </field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9366,10 +9978,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9391,11 +10007,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s</field>'
+            '</definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9415,8 +10035,25 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.stepdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource>  <strategy mode="FINAL"/> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="STEP"/> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="STEP"/> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource>  <strategy mode="FINAL"/> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource>  <strategy mode="FINAL"/> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource> </field> '
+             '<field name="field1">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r1"/>  </datasource>  <strategy mode="STEP"/>'
+             ' </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>'
+             '  </datasource>  <strategy mode="STEP"/> </field> '
+             '<field name="field3">  <datasource name="%s" type="CLIENT">   '
+             '<record name="r3"/>  </datasource> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource>  <strategy mode="FINAL"/>'
+             ' </field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9438,10 +10075,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9463,11 +10104,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s</field>'
+            '</definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9488,8 +10133,26 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.stepdatasources = '["%s"]' % dsname[2]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource>  <strategy mode="STEP"/> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="INIT"/> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="INIT"/> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource>  <strategy mode="STEP"/> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">'
+             '  <datasource name="%s" type="CLIENT">   <record name="r3"/>'
+             '  </datasource>  <strategy mode="STEP"/> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource> </field> '
+             '<field name="field1">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r1"/>  </datasource>  <strategy mode="INIT"/>'
+             ' </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>  '
+             '</datasource>  <strategy mode="INIT"/> </field> '
+             '<field name="field3">  <datasource name="%s" type="CLIENT">   '
+             '<record name="r3"/>  </datasource> </field> '
+             '<field name="field4">  \n  '
+             '<datasource name="%s" type="CLIENT">   <record name="r4"/>  '
+             '</datasource>  <strategy mode="STEP"/> </field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9511,10 +10174,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9536,11 +10203,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s'
+            '</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9561,8 +10232,25 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.stepdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource>  <strategy mode="STEP"/> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="STEP"/> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="STEP"/> </field> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource>  <strategy mode="STEP"/> </field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field3">  '
+             '<datasource name="%s" type="CLIENT">   <record name="r3"/>  '
+             '</datasource>  <strategy mode="STEP"/> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource> </field> '
+             '<field name="field1">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r1"/>  </datasource>  <strategy mode="STEP"/>'
+             ' </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition> <group type="NXentry"/> <field name="field1">  \n'
+             '  <datasource name="%s" type="CLIENT">   <record name="r1"/>'
+             '  </datasource>  <strategy mode="STEP"/> </field> '
+             '<field name="field3">  <datasource name="%s" type="CLIENT">   '
+             '<record name="r3"/>  </datasource> </field> '
+             '<field name="field4">  \n  <datasource name="%s" type="CLIENT">'
+             '   <record name="r4"/>  </datasource>  <strategy mode="STEP"/>'
+             ' </field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9584,10 +10272,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9609,11 +10301,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field></group>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9636,9 +10334,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         gxml = self.getXML(el)
         print(gxml.replace("?>\n<", "?><"))
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field1"/></group>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9659,10 +10369,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9684,11 +10398,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry" /><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group name="entry" type="NXentry" />'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group  name="entry" type="NXentry"/>'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group  name="entry" type="NXentry" />'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9710,9 +10430,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field></definition>'
+            % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9733,10 +10462,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9758,11 +10491,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field>'
+            '<group name="data" type="NXdata" /></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9783,9 +10523,23 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field3"/>'
+            '<link name="%s" target="/entry:NXentry/field1"/>'
+            '</group><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9807,10 +10561,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9832,11 +10590,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field>'
+            '<group name="data" type="NXdata" /></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9859,14 +10624,38 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         gxml = self.getXML(el)
         try:
             self.assertEqual(
-                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                    ">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition>'
+                '<group name="entry" type="NXentry"><field name="field3">'
+                '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+                '</datasource><strategy mode="FINAL"/></field>'
+                '<field name="field4"><datasource name="%s" type="CLIENT">'
+                '<record name="r4"/></datasource></field>'
+                '<field name="field1"><datasource name="%s" type="CLIENT">'
+                '<record name="r1"/></datasource><strategy mode="INIT"/>'
+                '</field><group name="data" type="NXdata">'
+                '<link name="%s" target="/entry:NXentry/field1"/>'
+                '</group></group></definition>'
+                % (dsname[2], dsname[3], dsname[0], dsname[0]))
         except:
             self.assertEqual(
-                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                    ">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4"><datasource name="%s" type="CLIENT"><record name="r4"/></datasource></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource><strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition>'
+                '<group name="entry" type="NXentry"><field name="field3">'
+                '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+                '</datasource><strategy mode="FINAL"/></field>'
+                '<field name="field4"><datasource name="%s" type="CLIENT">'
+                '<record name="r4"/></datasource></field>'
+                '<group name="data" type="NXdata">'
+                '<link name="%s" target="/entry:NXentry/field1"/></group>'
+                '<field name="field1"><datasource name="%s" type="CLIENT">'
+                '<record name="r1"/></datasource><strategy mode="INIT"/>'
+                '</field></group></definition>'
+                % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -9887,10 +10676,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9909,15 +10702,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s</field>'
+            '</definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -9937,8 +10733,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         css = [name[0], name[2]]
 
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s<strategy mode="INIT"/></field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">datasources.%s</datasource><strategy mode="FINAL"/></field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource><strategy mode="FINAL"/></field>'
+             '<field name="field4">$datasources.%s</field>'
+             '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s<strategy mode="INIT"/></field>'
+             '<field name="field3"><datasource name="%s" type="CLIENT">'
+             '<record name="r3"/></datasource></field><field name="field4">'
+             'datasources.%s</datasource><strategy mode="FINAL"/></field>'
+             '</definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9960,10 +10769,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -9985,11 +10798,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s'
+            '</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10010,8 +10827,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.stepdatasources = "%s" % dsname[0]
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="STEP"/></field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s<strategy mode="STEP"/></field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s<strategy mode="FINAL"/></field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource><strategy mode="FINAL"/></field>'
+             '<field name="field4">$datasources.%s</field>'
+             '<field name="field1">$datasources.%s<strategy mode="STEP"/>'
+             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s<strategy mode="STEP"/></field>'
+             '<field name="field3"><datasource name="%s" type="CLIENT">'
+             '<record name="r3"/></datasource></field><field name="field4">'
+             '$datasources.%s<strategy mode="FINAL"/></field>'
+             '</definition>' % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -10033,10 +10863,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10055,15 +10889,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s'
+            '</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10085,8 +10922,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.stepdatasources = "%s" % dsname[2]
         gxml = el.merge(css)
-        self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="STEP"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-                        (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s<strategy mode="INIT"/></field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s<strategy mode="STEP"/></field></definition>' % (dsname[0], dsname[2], dsname[3])))
+        self.assertTrue(
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field3">'
+             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+             '</datasource><strategy mode="STEP"/></field>'
+             '<field name="field4">$datasources.%s</field>'
+             '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
+            (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?>'
+             '<definition><group type="NXentry"/><field name="field1">'
+             '$datasources.%s<strategy mode="INIT"/></field>'
+             '<field name="field3"><datasource name="%s" type="CLIENT">'
+             '<record name="r3"/></datasource></field><field name="field4">'
+             '$datasources.%s<strategy mode="STEP"/></field></definition>'
+             % (dsname[0], dsname[2], dsname[3])))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -10108,10 +10958,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10133,11 +10987,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group type="NXentry"/><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field1">%s'
+            '<strategy mode="INIT"/></field></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group type="NXentry"/><field name="field2">%s'
+            '<strategy mode="FINAL"/></field></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group type="NXentry"/><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group type="NXentry"/><field name="field3">%s'
+            '<strategy mode="FINAL"/></field><field name="field4">%s'
+            '</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10194,10 +11052,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10216,15 +11078,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.assertEqual(el.storeDataSource(dsname[i]), None)
             self.__ds.append(dsname[i])
 
-
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field></group>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10246,9 +11113,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+            '</field><group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field1"/></group>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -10269,10 +11146,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10294,11 +11175,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry" /><field name="field1">%s<strategy mode="INIT"/></field></definition>' % (
+            '<definition><group name="entry" type="NXentry" />'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"/><field name="field2">%s<strategy mode="FINAL"/></field></definition>' % (
+            '<definition><group  name="entry" type="NXentry"/>'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry" /><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field></definition>'
+            '<definition><group  name="entry" type="NXentry" />'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10320,9 +11207,16 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+            '</field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -10343,10 +11237,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10368,11 +11266,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field>'
+            '<group name="data" type="NXdata" /></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10394,9 +11299,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         gxml = el.merge(css)
         self.assertEqual(
-            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+            gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                ">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-            '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field3"/><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
+            '<?xml version="1.0" ?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field3"/>'
+            '<link name="%s" target="/entry:NXentry/field1"/></group>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+            '</field></group></definition>'
+            % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -10418,10 +11334,14 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         avc = el.availableComponents()
 
         xds = [
-            '<datasource name="%s" type="CLIENT"><record name="r1" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r2" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r3" /></datasource>',
-            '<datasource name="%s" type="CLIENT"><record name="r4" /></datasource>'
+            '<datasource name="%s" type="CLIENT"><record name="r1" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r2" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource>',
+            '<datasource name="%s" type="CLIENT"><record name="r4" />'
+            '</datasource>'
         ]
 
         odsname = "mcs_test_datasource"
@@ -10443,11 +11363,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
         xml = [
-            '<definition><group name="entry" type="NXentry"><field name="field1">%s<strategy mode="INIT"/></field></group></definition>' % (
+            '<definition><group name="entry" type="NXentry">'
+            '<field name="field1">%s<strategy mode="INIT"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[0]),
-            '<definition><group  name="entry" type="NXentry"><field name="field2">%s<strategy mode="FINAL"/></field></group></definition>' % (
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field2">%s<strategy mode="FINAL"/></field>'
+            '</group></definition>' % (
                 "$datasources.%s" % dsname[1]),
-            '<definition><group  name="entry" type="NXentry"><field name="field3">%s<strategy mode="FINAL"/></field><field name="field4">%s</field><group name="data" type="NXdata" /></group></definition>'
+            '<definition><group  name="entry" type="NXentry">'
+            '<field name="field3">%s<strategy mode="FINAL"/></field>'
+            '<field name="field4">%s</field>'
+            '<group name="data" type="NXdata" /></group></definition>'
             % (xds[2] % dsname[2], "$datasources.%s" % dsname[3])
         ]
 
@@ -10470,14 +11397,34 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         gxml = el.merge(css)
         try:
             self.assertEqual(
-                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                    ">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition>'
+                '<group name="entry" type="NXentry"><field name="field3">'
+                '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+                '</datasource><strategy mode="FINAL"/></field>'
+                '<field name="field4">$datasources.%s</field>'
+                '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+                '</field><group name="data" type="NXdata">'
+                '<link name="%s" target="/entry:NXentry/field1"/>'
+                '</group></group></definition>'
+                % (dsname[2], dsname[3], dsname[0], dsname[0]))
         except:
             self.assertEqual(
-                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
+                gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(
+                    ">    <", "><").replace(
                     ">   <", "><").replace(">  <", "><").replace("> <", "><"),
-                '<?xml version="1.0" ?><definition><group name="entry" type="NXentry"><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><group name="data" type="NXdata"><link name="%s" target="/entry:NXentry/field1"/></group><field name="field1">$datasources.%s<strategy mode="INIT"/></field></group></definition>' % (dsname[2], dsname[3], dsname[0], dsname[0]))
+                '<?xml version="1.0" ?><definition>'
+                '<group name="entry" type="NXentry"><field name="field3">'
+                '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+                '</datasource><strategy mode="FINAL"/></field>'
+                '<field name="field4">$datasources.%s</field>'
+                '<group name="data" type="NXdata">'
+                '<link name="%s" target="/entry:NXentry/field1"/></group>'
+                '<field name="field1">$datasources.%s<strategy mode="INIT"/>'
+                '</field></group></definition>'
+                % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
