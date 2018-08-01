@@ -20,7 +20,6 @@
 # the unittest runner
 #
 
-import os
 import sys
 import unittest
 
@@ -30,7 +29,7 @@ import ErrorsTest
 import StreamSetTest
 
 try:
-    import PyTango
+    __import__("PyTango")
     # if module PyTango avalable
     PYTANGO_AVAILABLE = True
 except ImportError as e:
@@ -85,9 +84,6 @@ if PYTANGO_AVAILABLE:
 
 # main function
 def main():
-
-    # test server
-    ts = None
 
     # test suit
     suite = unittest.TestSuite()

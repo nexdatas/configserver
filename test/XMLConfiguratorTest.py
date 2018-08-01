@@ -22,15 +22,10 @@
 import unittest
 import os
 import sys
-import subprocess
 import random
 import struct
 import binascii
-import time
 import json
-
-# if 64-bit machione
-IS64BIT = (struct.calcsize("P") == 8)
 
 from nxsconfigserver.XMLConfigurator import XMLConfigurator
 from nxsconfigserver.Merger import Merger
@@ -38,6 +33,13 @@ from nxsconfigserver.Errors import (
     NonregisteredDBRecordError, UndefinedTagError,
     IncompatibleNodeError)
 import nxsconfigserver
+
+# if 64-bit machione
+IS64BIT = (struct.calcsize("P") == 8)
+
+
+if sys.version_info > (3,):
+    long = int
 
 
 # test fixture
@@ -80,13 +82,13 @@ class XMLConfiguratorTest(unittest.TestCase):
     # test starter
     # \brief Common set up
     def setUp(self):
-        print "\nsetting up..."
-        print "SEED =", self.seed
+        print("\nsetting up...")
+        print("SEED = %s" % self.seed)
 
     # test closer
     # \brief Common tear down
     def tearDown(self):
-        print "tearing down ..."
+        print("tearing down ...")
         if self.__cmps:
             el = self.openConf()
             for cp in self.__cmps:
@@ -132,7 +134,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(xmlc.xmlstring, "")
         self.assertEqual(xmlc.selection, "{}")
         xmlc.jsonsettings = args
-        print args
+        print(args)
         xmlc.open()
 
         version = xmlc.version
@@ -175,10 +177,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         return selectionc.selection
 
     # open close test test
-    # \brief It tests XMLConfigurator
-    def test_openClose(self):
+    # \brief It tests XMLConfigurator def test_openClose(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         xmlc = self.openConf()
         self.assertEqual(long(xmlc.version.split('.')[-1]), self.revision)
@@ -194,7 +195,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_comp_available(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         avc = el.availableComponents()
@@ -205,13 +206,13 @@ class XMLConfiguratorTest(unittest.TestCase):
               "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -236,7 +237,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableComponents()
@@ -245,13 +246,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -284,7 +285,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableComponents()
@@ -293,7 +294,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.components, [name])
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision)
@@ -303,7 +304,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableComponents()
@@ -313,14 +314,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
 
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -336,7 +337,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -369,7 +370,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableComponents()
@@ -382,14 +383,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
 
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -405,7 +406,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -445,7 +446,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableSelections()
@@ -454,13 +455,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-        print avc
+        print(avc)
         cpx = el.selections(avc)
         self.setSelection(el, xml)
         self.assertEqual(el.storeSelection(name), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-        print avc2
+        print(avc2)
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -493,7 +494,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_sel(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableSelections()
@@ -502,7 +503,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.selections, [name])
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision)
@@ -512,7 +513,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableSelections()
@@ -522,14 +523,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.selections(avc)
 
         self.setSelection(el, xml)
         self.assertEqual(el.storeSelection(name), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -545,7 +546,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeSelection(name), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -578,7 +579,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableSelections()
@@ -591,14 +592,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.selections(avc)
 
         self.setSelection(el, xml)
         self.assertEqual(el.storeSelection(name), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -614,7 +615,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeSelection(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -654,7 +655,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_dsrc_available(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         avc = el.availableDataSources()
@@ -664,13 +665,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name), None)
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -695,7 +696,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableDataSources()
@@ -704,13 +705,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
         self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -743,7 +744,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_dsrc(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableDataSources()
@@ -752,7 +753,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.dataSources, [name])
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision)
@@ -762,7 +763,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableDataSources()
@@ -772,14 +773,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
 
         self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -795,7 +796,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -828,7 +829,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
 
         avc = el.availableDataSources()
@@ -841,14 +842,14 @@ class XMLConfiguratorTest(unittest.TestCase):
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
 
         self.setXML(el, xml)
         self.assertEqual(el.storeDataSource(name), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -864,7 +865,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeDataSource(name2), None)
         self.__ds.append(name2)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -904,7 +905,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_no_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
@@ -914,7 +915,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
 
         self.assertEqual(el.setMandatoryComponents([name]), None)
         man2 = el.mandatoryComponents()
@@ -932,7 +933,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
@@ -942,12 +943,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatoryComponents([name]), None)
         self.assertEqual(el.setMandatoryComponents([name]), None)
         man2 = el.mandatoryComponents()
@@ -984,7 +985,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_comp2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
         man = el.mandatoryComponents()
         self.assertTrue(isinstance(man, list))
@@ -998,13 +999,13 @@ class XMLConfiguratorTest(unittest.TestCase):
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
 
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatoryComponents([name]), None)
         man2 = el.mandatoryComponents()
         self.assertEqual(len(man) + 1, len(man2))
@@ -1017,7 +1018,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatoryComponents([name2]), None)
         man2 = el.mandatoryComponents()
         self.assertEqual(len(man) + 2, len(man2))
@@ -1029,7 +1030,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.unsetMandatoryComponents([name]), None)
 
-#        print man
+#        print(man
         man2 = el.mandatoryComponents()
         self.assertEqual(len(man) + 1, len(man2))
         for cp in man:
@@ -1065,7 +1066,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
 
@@ -1085,7 +1086,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1101,12 +1102,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1139,7 +1140,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1155,12 +1156,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1201,7 +1202,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var_cp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1221,7 +1222,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name = name + '_1'
         while name2 in avc:
             name2 = name2 + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
@@ -1229,7 +1230,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1281,7 +1282,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1297,12 +1298,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='$var.entryType' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1342,7 +1343,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_cp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1363,7 +1364,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         while name2 in avc:
             name2 = name2 + '_1'
         self.setXML(el, xml)
@@ -1373,7 +1374,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1426,7 +1427,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_cp_default(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1447,7 +1448,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         while name2 in avc:
             name2 = name2 + '_1'
         self.setXML(el, xml)
@@ -1457,7 +1458,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1510,7 +1511,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_cp_default2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1540,7 +1541,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         while name2 in avc:
             name2 = name2 + '_1'
         self.setXML(el, xml)
@@ -1550,7 +1551,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1605,7 +1606,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_cp_default2_tocut(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1635,7 +1636,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         while name2 in avc:
             name2 = name2 + '_1'
         self.setXML(el, xml)
@@ -1645,7 +1646,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1695,12 +1696,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.setMandatoryComponents(man)
         el.close()
 
-        
+
     # creatConf test
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var_default(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1718,12 +1719,12 @@ class XMLConfiguratorTest(unittest.TestCase):
               "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1766,7 +1767,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var_default_q(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1782,12 +1783,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry#\&quot;12def34\&quot;'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1826,7 +1827,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     def test_createConf_default_2_var_default_q2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1842,12 +1843,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry' name='$var.myentry#&quot;12def34&quot;'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1886,7 +1887,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     def test_createConf_default_2_var_defaul_t2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1902,12 +1903,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = '<?xml version=\'1.0\'?><definition><group type="NXentry" name="$var.myentry#\"12def34\""/></definition>'
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -1946,7 +1947,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     def test_createConf_default_2_var_defaul_t2q(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -1962,12 +1963,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = '<?xml version=\'1.0\'?><definition><group type="NXentry" name="$var.myentry#\&quot;12def34\&quot;"/></definition>'
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2006,7 +2007,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     def test_createConf_default_2_var_defaul_t2q2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2022,12 +2023,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = '<?xml version=\'1.0\'?><definition><group type="NXentry" name="$var.myentry#&quot;12def34&quot;"/></definition>'
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2067,7 +2068,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_default(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2083,12 +2084,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='$var.entryType#\'myty\'' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2129,7 +2130,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var_default2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2145,12 +2146,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = '<?xml version=\'1.0\'?><definition><group type=\'NXentry\' name=\'$var.myentry#\"12def34\"\'/></definition>'
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2190,7 +2191,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_default_2_var2_default2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2206,12 +2207,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type=\"$var.entryType#'myty'\" name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2252,7 +2253,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_def(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2268,12 +2269,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<group type='NXentry'/>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -2302,7 +2303,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2322,7 +2323,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name[0] = name[0] + '_1'
         while name[1] in avc:
             name[1] = name[1] + '_2'
-#        print avc
+#        print(avc
         self.setXML(el, xml[0])
         self.assertEqual(el.storeComponent(name[0]), None)
         self.__cmps.append(name[0])
@@ -2350,7 +2351,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_5(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2371,7 +2372,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2395,7 +2396,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2417,7 +2418,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2441,7 +2442,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2461,7 +2462,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2481,7 +2482,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_error_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2502,7 +2503,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2523,7 +2524,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_field_3(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2545,7 +2546,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2569,7 +2570,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_field(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2591,7 +2592,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2615,7 +2616,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2637,7 +2638,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2661,7 +2662,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_3(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2683,7 +2684,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2707,7 +2708,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_4(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2729,7 +2730,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2753,7 +2754,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_field_4(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2775,7 +2776,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2799,7 +2800,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_field_5(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2822,7 +2823,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2846,7 +2847,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_field_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2869,7 +2870,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2896,7 +2897,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2919,7 +2920,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2940,7 +2941,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_single_name(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -2963,7 +2964,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -2987,7 +2988,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_single_name_2_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         mr = Merger()
         for sg in mr.singles:
@@ -3012,7 +3013,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3036,7 +3037,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_uniqueText_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         mr = Merger()
         for ut in mr.uniqueText:
@@ -3061,7 +3062,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3084,7 +3085,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_datasource(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = self.children
         for ut in uts:
@@ -3107,7 +3108,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3131,7 +3132,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_datasource_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3161,7 +3162,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3182,7 +3183,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_attribute(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['attribute']
         for ut in uts:
@@ -3205,7 +3206,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3229,7 +3230,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_attribute_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3257,7 +3258,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3279,7 +3280,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_definition(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['definition']
         for ut in uts:
@@ -3301,7 +3302,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3325,7 +3326,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_definition_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3354,7 +3355,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3376,7 +3377,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_dimensions(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['dimensions']
         for ut in uts:
@@ -3399,7 +3400,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3423,7 +3424,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_dimensions_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3452,7 +3453,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3474,7 +3475,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_field(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['field']
         for ut in uts:
@@ -3497,7 +3498,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3521,7 +3522,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_field_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3550,7 +3551,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3572,7 +3573,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['group']
         for ut in uts:
@@ -3595,7 +3596,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3619,7 +3620,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_group_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3648,7 +3649,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3670,7 +3671,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_link(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['link']
         for ut in uts:
@@ -3693,7 +3694,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3717,7 +3718,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_children_link_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -3748,7 +3749,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -3770,7 +3771,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -3792,7 +3793,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -3822,7 +3823,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConf_group_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -3846,7 +3847,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -3888,7 +3889,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_default(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
 
@@ -3907,7 +3908,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_default_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -3923,12 +3924,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -3960,7 +3961,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_default_2_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -3977,12 +3978,12 @@ class XMLConfiguratorTest(unittest.TestCase):
               "<group type='NXentry' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -4023,7 +4024,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_default_2_var_cp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4101,7 +4102,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_default_2_var2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4117,12 +4118,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<?xml version='1.0'?><definition><group type='$var.entryType' name='$var.myentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -4161,7 +4162,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_def(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4177,12 +4178,12 @@ class XMLConfiguratorTest(unittest.TestCase):
         xml = "<group type='NXentry'/>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.setXML(el, xml)
         self.assertEqual(el.storeComponent(name), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -4211,7 +4212,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4231,7 +4232,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name[0] = name[0] + '_1'
         while name[1] in avc:
             name[1] = name[1] + '_2'
-#        print avc
+#        print(avc
         self.setXML(el, xml[0])
         self.assertEqual(el.storeComponent(name[0]), None)
         self.__cmps.append(name[0])
@@ -4258,7 +4259,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_5(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4279,7 +4280,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4302,7 +4303,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4324,7 +4325,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4347,7 +4348,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4366,7 +4367,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4386,7 +4387,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_error_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4407,7 +4408,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4428,7 +4429,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_field_3(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4450,7 +4451,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4473,7 +4474,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_field(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4496,7 +4497,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4519,7 +4520,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4541,7 +4542,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4564,7 +4565,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_3(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4586,7 +4587,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4609,7 +4610,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_4(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4631,7 +4632,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4654,7 +4655,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_field_4(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4676,7 +4677,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4699,7 +4700,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_field_5(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4722,7 +4723,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4745,7 +4746,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_field_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4768,7 +4769,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4792,7 +4793,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_field_name_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4814,7 +4815,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4835,7 +4836,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_single_name(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -4857,7 +4858,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -4880,7 +4881,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_single_name_2_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         mr = Merger()
         for sg in mr.singles:
@@ -4903,7 +4904,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -4924,7 +4925,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_uniqueText_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         mr = Merger()
         for ut in mr.uniqueText:
@@ -4947,7 +4948,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -4968,7 +4969,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_datasource(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = self.children
         for ut in uts:
@@ -4991,7 +4992,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5014,7 +5015,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_datasource_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5044,7 +5045,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5065,7 +5066,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_attribute(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['attribute']
         for ut in uts:
@@ -5088,7 +5089,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5111,7 +5112,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_attribute_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5139,7 +5140,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5160,7 +5161,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_definition(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['definition']
         for ut in uts:
@@ -5182,7 +5183,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5205,7 +5206,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_definition_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5234,7 +5235,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5255,7 +5256,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_dimensions(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['dimensions']
         for ut in uts:
@@ -5278,7 +5279,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5301,7 +5302,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_dimensions_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5330,7 +5331,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5351,7 +5352,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_field(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['field']
         for ut in uts:
@@ -5374,7 +5375,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5397,7 +5398,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_field_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5426,7 +5427,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5447,7 +5448,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_group(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['group']
         for ut in uts:
@@ -5470,7 +5471,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5493,7 +5494,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_group_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5522,7 +5523,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5543,7 +5544,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_link(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = el.children['link']
         for ut in uts:
@@ -5566,7 +5567,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5589,7 +5590,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_children_link_error(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = Merger()
         uts = []
         for k in el.children:
@@ -5620,7 +5621,7 @@ class XMLConfiguratorTest(unittest.TestCase):
                 name.append(oname + '_%s' % i)
                 while name[i] in avc:
                     name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
             for i in range(np):
                 self.setXML(el, xml[i])
@@ -5641,7 +5642,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -5663,7 +5664,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -5692,7 +5693,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_merge_group_group_group_mandatory(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -5716,7 +5717,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -5757,7 +5758,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentVariables(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -5787,7 +5788,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -5809,7 +5810,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsVariables(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -5839,7 +5840,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -5860,7 +5861,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_dependentComponents(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -5882,7 +5883,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field4"></field><field name="field4"></field>$components.%s$components.%s</definition>'
@@ -5981,7 +5982,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_dependentComponents_man(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6003,7 +6004,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         self.assertTrue(isinstance(avc, list))
         xml = ['<definition><group type="NXentry"/><field name="field4"></field><field name="field4"></field>$components.%s$components.%s</definition>'
@@ -6103,7 +6104,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentDataSources(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6154,7 +6155,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6176,7 +6177,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentDataSources_external(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6227,7 +6228,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6249,7 +6250,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_setComponentDataSources(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6309,7 +6310,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6383,7 +6384,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_setComponentDataSources_postrun(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6443,7 +6444,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6517,7 +6518,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_setComponentDataSources_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6577,7 +6578,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
+#        print(avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6658,7 +6659,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentDataSources_external_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6686,8 +6687,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             rename = rename + "_1"
             dsname[0] = rename + '_1'
             dsname[1] = rename + '_11'
-            print "AVDS", avds
-            print "WW ", rename, dsname[0], dsname[1]
+            print("AVDS %s" % avds)
 
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
@@ -6711,7 +6711,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6734,7 +6733,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentDataSources_external_2_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6785,7 +6784,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6808,7 +6806,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentDataSources_mixed(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6859,7 +6857,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6870,7 +6867,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         cmps = []
         for cs in css:
             mdss = el.componentDataSources(cs)
-            print mdss
             cmps.extend(mdss)
         self.assertEqual(cmps, [dsname[0], dsname[2], dsname[3]])
 
@@ -6882,7 +6878,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -6933,7 +6929,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -6955,7 +6950,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources_man(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7006,7 +7001,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7032,7 +7026,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources_external(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7083,7 +7077,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7105,7 +7098,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources_external_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7156,7 +7149,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7177,7 +7169,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources_external_2_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7228,7 +7220,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7250,7 +7241,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_componentsDataSources_mixed(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7301,7 +7292,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7311,7 +7301,6 @@ class XMLConfiguratorTest(unittest.TestCase):
         css = [name[0], name[2]]
         cmps = []
         mdss = el.componentsDataSources(css)
-        print mdss
         cmps.extend(mdss)
         self.assertEqual(
             sorted(cmps), sorted([dsname[0], dsname[2], dsname[3]]))
@@ -7324,7 +7313,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7356,10 +7345,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7379,7 +7365,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7387,7 +7372,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
@@ -7402,7 +7386,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7433,10 +7417,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7456,7 +7438,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7464,7 +7445,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         self.assertEqual(el.createConfiguration(css), None)
@@ -7480,7 +7460,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_var_1(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7509,10 +7489,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7532,7 +7510,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7540,7 +7517,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[i] for i in range(len(xml))]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "source":"%s"}' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
@@ -7556,7 +7532,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7588,10 +7564,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7611,7 +7585,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7619,7 +7592,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         self.assertEqual(el.createConfiguration(css), None)
@@ -7635,7 +7607,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7667,10 +7639,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7692,7 +7661,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7700,7 +7668,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
@@ -7715,7 +7682,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7747,10 +7714,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7772,7 +7737,6 @@ class XMLConfiguratorTest(unittest.TestCase):
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7780,11 +7744,9 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.__cmps.append(name[i])
 
         css = [name[0], name[3]]
-        print "AVAIL2", el.availableDataSources()
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print "GXML2:\n", gxml
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[0], dsname[1], dsname[0])) |
                         (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field> <field name="field3">  <datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r1"/>   </datasource>   \n   <datasource name="%s" type="CLIENT">    <record name="r2"/>   </datasource>  </datasource> </field></definition>' %
                          (dsname[0], dsname[0], dsname[1]))
@@ -7798,7 +7760,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7838,10 +7800,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             else:
                 self.setXML(el, xds[i] % (dsname[2], dsname[0], dsname[1]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -7863,7 +7822,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7871,11 +7829,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[3]]
-        print "AVAIL2", el.availableDataSources()
 
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print "GXML3:\n", gxml
 
         mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(">  ", ">").replace("> ", ">")\
             .replace("    <", "<").replace("   <", "<").replace("  <", "<").replace(" <", "<")\
@@ -7891,7 +7847,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -7944,7 +7900,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -7952,9 +7907,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print el.components([name[0], name[2]])
-        print "CSS", css
-        print "MAND", el.mandatoryComponents()
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
@@ -7968,7 +7920,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8001,10 +7953,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8024,7 +7973,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8032,8 +7980,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         gxml = el.merge(css)
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
                         (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
@@ -8046,7 +7992,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8078,10 +8024,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8101,7 +8044,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8109,7 +8051,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         gxml = el.merge(css)
@@ -8124,7 +8065,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8156,10 +8097,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8179,7 +8117,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8187,7 +8124,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
         gxml = el.merge(css)
@@ -8202,7 +8138,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8234,10 +8170,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8259,7 +8193,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8267,7 +8200,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         gxml = el.merge(css)
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r1"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[0], dsname[1], dsname[0])) |
@@ -8281,7 +8213,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8313,10 +8245,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8338,8 +8268,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
@@ -8359,7 +8287,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8399,10 +8327,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             else:
                 self.setXML(el, xds[i] % (dsname[2], dsname[0], dsname[1]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8424,7 +8349,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8432,8 +8356,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[3]]
-        print "AVAIL2", el.availableDataSources()
-
         gxml = el.merge(css)
         mxml = gxml.replace(">    ", ">").replace(">   ", ">").replace(">  ", ">").replace("> ", ">")\
             .replace("    <", "<").replace("   <", "<").replace("  <", "<").replace(" <", "<")\
@@ -8450,7 +8372,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8503,17 +8425,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print el.components([name[0], name[2]])
-        print "CSS", css
-        print "MAND", el.mandatoryComponents()
         gxml = el.merge(css)
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
                         (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s</field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s</field></definition>' % (dsname[0], dsname[2], dsname[3])))
@@ -8528,7 +8445,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8560,10 +8477,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8583,7 +8497,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -8591,8 +8504,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
@@ -8608,7 +8519,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_var(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8639,10 +8550,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8662,15 +8570,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
 
@@ -8689,7 +8594,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_var_1(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8718,10 +8623,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8741,16 +8643,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[i] for i in range(len(xml))]
-        print "AVAIL2", el.availableDataSources()
-
         el.variables = '{"name1":"r1", "source":"%s"}' % dsname[0]
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 3)
@@ -8769,7 +8667,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_var_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8801,10 +8699,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8824,16 +8719,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         el.variables = '{"name1":"r1", "name2":"r2", "name3":"r3", "name4":"r4"}'
 
         comps = el.instantiatedComponents(css)
@@ -8851,7 +8742,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8883,10 +8774,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8908,16 +8796,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
@@ -8933,7 +8817,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_2_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -8965,10 +8849,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -8990,16 +8871,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[3]]
-        print "AVAIL2", el.availableDataSources()
-
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
@@ -9015,7 +8892,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_3_double(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9055,10 +8932,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             else:
                 self.setXML(el, xds[i] % (dsname[2], dsname[0], dsname[1]))
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9080,16 +8954,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[3]]
-        print "AVAIL2", el.availableDataSources()
-
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
@@ -9104,7 +8974,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_instantiatedComponents_mixed_definition(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9157,17 +9027,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print el.components([name[0], name[2]])
-        print "CSS", css
-        print "MAND", el.mandatoryComponents()
         comps = el.instantiatedComponents(css)
         self.assertEqual(len(comps), 2)
         self.assertEqual(
@@ -9183,7 +9048,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_switch_none(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9215,10 +9080,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9238,16 +9100,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition> <group type="NXentry"/> <field name="field3">  <datasource name="%s" type="CLIENT">   <record name="r3"/>  </datasource>  <strategy mode="FINAL"/> </field> <field name="field4">  \n  <datasource name="%s" type="CLIENT">   <record name="r4"/>  </datasource> </field> <field name="field1">  \n  <datasource name="%s" type="CLIENT">   <record name="r1"/>  </datasource>  <strategy mode="INIT"/> </field></definition>' % (dsname[2], dsname[3], dsname[0])) |
@@ -9261,7 +9119,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_switch_one(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9293,10 +9151,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9316,16 +9171,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         el.stepdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
@@ -9340,7 +9191,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_switch_one_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9372,10 +9223,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9395,15 +9243,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.stepdatasources = '["%s"]' % dsname[2]
         self.assertEqual(el.createConfiguration(css), None)
@@ -9419,7 +9264,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_mixed_switch_two(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9451,10 +9296,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9474,15 +9316,12 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.stepdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         self.assertEqual(el.createConfiguration(css), None)
@@ -9498,7 +9337,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_addlink_one(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9530,10 +9369,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9553,7 +9389,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -9561,12 +9396,10 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         el.linkdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print gxml.replace("?>\n<", "?><")
+        print(gxml.replace("?>\n<", "?><"))
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -9579,7 +9412,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_addlink_noentry(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9611,10 +9444,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9634,7 +9464,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -9642,12 +9471,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         el.linkdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print gxml.replace("?>\n<", "?><")
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -9660,7 +9486,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_addlink_two(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9692,10 +9518,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9715,20 +9538,15 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
-
         el.linkdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print gxml.replace("?>\n<", "?><")
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -9742,7 +9560,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_createConfiguration_addlink_withdata(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9774,10 +9592,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9797,20 +9612,16 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
-
         for i in range(np):
             self.setXML(el, xml[i])
             self.assertEqual(el.storeComponent(name[i]), None)
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.linkdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        print gxml.replace("?>\n<", "?><")
         try:
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
@@ -9829,7 +9640,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_switch_none(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9861,10 +9672,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9884,7 +9693,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -9892,10 +9700,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         gxml = el.merge(css)
-        print gxml
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="INIT"/></field></definition>' % (dsname[2], dsname[3], dsname[0])) |
                         (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s<strategy mode="INIT"/></field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">datasources.%s</datasource><strategy mode="FINAL"/></field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
@@ -9907,7 +9713,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_switch_one(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -9939,10 +9745,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -9962,7 +9765,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -9970,11 +9772,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.stepdatasources = "%s" % dsname[0]
         gxml = el.merge(css)
-        print gxml
         self.assertTrue((gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource><strategy mode="FINAL"/></field><field name="field4">$datasources.%s</field><field name="field1">$datasources.%s<strategy mode="STEP"/></field></definition>' % (dsname[2], dsname[3], dsname[0])) |
                         (gxml.replace("?>\n<", "?><") == '<?xml version="1.0" ?><definition><group type="NXentry"/><field name="field1">$datasources.%s<strategy mode="STEP"/></field><field name="field3"><datasource name="%s" type="CLIENT"><record name="r3"/></datasource></field><field name="field4">$datasources.%s<strategy mode="FINAL"/></field></definition>' % (dsname[0], dsname[2], dsname[3])))
 
@@ -9986,7 +9786,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_switch_one_2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10018,10 +9818,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10041,7 +9839,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10049,7 +9846,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
+        print(el.availableDataSources())
 
         el.stepdatasources = "%s" % dsname[2]
         gxml = el.merge(css)
@@ -10064,7 +9861,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_mixed_switch_two(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10096,10 +9893,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10119,7 +9913,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10127,11 +9920,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.stepdatasources = "%s %s" % (dsname[0], dsname[2])
         gxml = el.merge(css)
-        print gxml
         self.assertTrue(
             (gxml.replace("?>\n<", "?><") ==
              '<?xml version="1.0" ?><definition><group type="NXentry"/>'
@@ -10156,7 +9947,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_addlink_one(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10188,10 +9979,8 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
 
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10211,7 +10000,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10219,11 +10007,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        print gxml.replace("?>\n<", "?><")
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -10236,7 +10022,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_addlink_noentry(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10268,10 +10054,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10291,7 +10074,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10299,11 +10081,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        print gxml.replace("?>\n<", "?><")
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -10316,7 +10096,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_addlink_two(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10348,10 +10128,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10371,7 +10148,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10379,11 +10155,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.linkdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         gxml = el.merge(css)
-        print gxml.replace("?>\n<", "?><")
         self.assertEqual(
             gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(
                 ">   <", "><").replace(">  <", "><").replace("> <", "><"),
@@ -10397,7 +10171,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
     # \brief It tests XMLConfigurator
     def test_merge_addlink_withdata(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = self.openConf()
         man = el.mandatoryComponents()
@@ -10429,10 +10203,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         for i in range(dsnp):
             self.setXML(el, xds[i] % dsname[i])
             self.assertEqual(el.storeDataSource(dsname[i]), None)
-            print "DS store", dsname[i]
             self.__ds.append(dsname[i])
-
-        print "AVAIL", el.availableDataSources()
 
         oname = "mcs_test_component"
         self.assertTrue(isinstance(avc, list))
@@ -10452,7 +10223,6 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             name.append(oname + '_%s' % i)
             while name[i] in avc:
                 name[i] = name[i] + '_%s' % i
-#        print avc
 
         for i in range(np):
             self.setXML(el, xml[i])
@@ -10460,11 +10230,9 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             self.__cmps.append(name[i])
 
         css = [name[0], name[2]]
-        print "AVAIL2", el.availableDataSources()
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        print gxml.replace("?>\n<", "?><")
         try:
             self.assertEqual(
                 gxml.replace("?>\n<", "?><").replace(" \n ", "").replace(">    <", "><").replace(

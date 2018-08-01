@@ -65,7 +65,7 @@ class ErrorsTest(unittest.TestCase):
         try:
             error = False
             method(*args, **kwargs)
-        except exception as e:
+        except Exception as e:
             error = True
         self.assertEqual(error, True)
 

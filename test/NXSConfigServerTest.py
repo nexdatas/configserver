@@ -20,19 +20,19 @@
 # unittests for field Tags running Tango Server
 #
 import unittest
-import os
 import sys
-import subprocess
-import random
 import time
 import PyTango
 
 import ServerSetUp
 import XMLConfiguratorTest
 # import XMLConTest as XMLConfiguratorTest
-from nxsconfigserver import XMLConfigurator
+# from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
 # test fixture
+
+if sys.version_info > (3,):
+    long = int
 
 
 class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
@@ -49,7 +49,7 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
     # \brief Common set up of Tango Server
     def setUp(self):
         self._sv.setUp()
-        print "SEED =", self.seed
+        print("SEED = %s" % self.seed)
 
     # test closer
     # \brief Common tear down oif Tango Server
@@ -66,15 +66,15 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
         cnt = 0
         while not found and cnt < 1000:
             try:
-                print "\b.",
+                sys.stdout.write("\b.")
                 xmlc = PyTango.DeviceProxy(
                     self._sv.new_device_info_writer.name)
                 time.sleep(0.01)
                 if xmlc.state() == PyTango.DevState.ON:
                     found = True
                 found = True
-            except Exception, e:
-                print self._sv.new_device_info_writer.name, e
+            except Exception as e:
+                print("%s %s" % (self._sv.new_device_info_writer.name, e))
                 found = False
             except:
                 found = False
