@@ -20,8 +20,13 @@
 """ Providesthe access to MYSQL database with NDTS configuration files """
 
 import MySQLdb
+import sys
 
 from .Errors import NonregisteredDBRecordError
+
+
+if sys.version_info > (3,):
+    long = int
 
 
 class MYSQLDataBase(object):

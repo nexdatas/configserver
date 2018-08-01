@@ -20,9 +20,15 @@
 """ Classes for merging DOM component trees """
 
 import re
+import sys
 
 from xml.dom.minidom import parseString, Element
 from .Errors import IncompatibleNodeError, UndefinedTagError
+
+
+if sys.version_info > (3,):
+    basestring = str
+    unicode = str
 
 
 class Merger(object):
