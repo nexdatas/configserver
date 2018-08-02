@@ -21,6 +21,7 @@
 
 import json
 import re
+import sys
 from xml import sax
 from xml.dom.minidom import parseString
 
@@ -321,9 +322,13 @@ class XMLConfigurator(object):
         index = text.find("$%s%s" % (label, delimiter))
         while index != -1:
             try:
-                subc = re.finditer(
+                finder = re.finditer(
                     rechars, text[(index + len(label) + 2):]
-                ).next().group(0)
+                )
+                if sys.version_info > (3,):
+                    subc = finder.__next__().group(0)
+                else:
+                    subc = finder.next().group(0)
             except:
                 subc = ""
             name = subc.strip() if subc else ""
@@ -628,9 +633,14 @@ class XMLConfigurator(object):
             subc = ''
             dsubc = ''
             try:
-                subc = re.finditer(
+                finder = re.finditer(
                     r"[\w]+",
-                    component[(index + len(label) + 2):]).next().group(0)
+                    component[(index + len(label) + 2):])
+                if sys.version_info > (3,):
+                    subc = finder.__next__().group(0)
+                else:
+                    subc = finder.next().group(0)
+
                 if not tag:
                     offset = index + len(subc) + len(label) + 2
                     if component[offset] == '#':
@@ -645,9 +655,13 @@ class XMLConfigurator(object):
                                 (offset + 1):(offset + 15 + soff)]
                             defsubc = dsubc[7:-7].replace('\\"', '"')
                         else:
-                            dsubc = re.finditer(
+                            finder = re.finditer(
                                 r"([\"'])(?:\\\1|.)*?\1",
-                                component[(offset + 1):]).next().group(0)
+                                component[(offset + 1):])
+                            if sys.version_info > (3,):
+                                dsubc = finder.__next__().group(0)
+                            else:
+                                dsubc = finder.next().group(0)
                             if dsubc:
                                 if dsubc[0] == "'":
                                     defsubc = dsubc[1:-1].replace("\\'", "'")
