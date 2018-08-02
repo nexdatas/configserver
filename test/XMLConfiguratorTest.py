@@ -9215,15 +9215,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             comps[0],
             '<definition><group type="NXentry"/><field name="field1">\n'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>' %
+            (dsname[0]))
         self.assertEqual(
             comps[1],
             '<definition><group type="NXentry"/><field name="field3">'
-            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<datasource name="%s" type="CLIENT">'
             '<record name="r3" /></datasource></field><field name="field4">\n'
-            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
-            '<record name="r4"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>' %
+            (dsname[2], dsname[3]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9306,15 +9308,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             comps[0],
             '<definition><group type="NXentry"/><field name="field1">\n'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % (dsname[0])
+        )
         self.assertEqual(
             comps[1],
             '<definition><group type="NXentry"/><field name="field3">'
-            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<datasource name="%s" type="CLIENT">'
             '<record name="r3" /></datasource></field><field name="field4">\n'
-            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
-            '<record name="r4"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>' % (
+                dsname[2], dsname[3]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9389,18 +9394,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             comps[0],
             '<definition><group type="NXentry"/><field name="field">'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1" /></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1" /></datasource></field></definition>'
+            % dsname[0])
         self.assertEqual(
             comps[1],
             '<definition><group type="NXentry"/><field name="field">\n'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % (dsname[0]))
         self.assertEqual(
             comps[2],
             '<definition><group type="NXentry"/><field name="field">\n'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % dsname[0])
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 4)
         el.setMandatoryComponents(man)
@@ -9483,15 +9491,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             comps[0],
             '<definition><group type="NXentry"/><field name="field1">\n'
-            '<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % (dsname[0]))
         self.assertEqual(
             comps[1],
             '<definition><group type="NXentry"/><field name="field3">'
-            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<datasource name="%s" type="CLIENT">'
             '<record name="r3" /></datasource></field><field name="field4">\n'
-            '<datasource name="mcs_test_datasource_3" type="CLIENT">'
-            '<record name=""/></datasource></field></definition>')
+            '<datasource name="%s" type="CLIENT">'
+            '<record name=""/></datasource></field></definition>'
+            % (dsname[2], dsname[3]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -9852,15 +9862,17 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         self.assertEqual(
             comps[0], '<definition><group type="NXentry"/>'
             '<field name="field1">'
-            '\n<datasource name="mcs_test_datasource_0" type="CLIENT">'
-            '<record name="r1"/></datasource></field></definition>')
+            '\n<datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource></field></definition>'
+            % dsname[0])
         self.assertEqual(
             comps[1],
             '<definition><group type="NXentry"/><field name="field3">'
-            '<datasource name="mcs_test_datasource_2" type="CLIENT">'
+            '<datasource name="%s" type="CLIENT">'
             '<record name="r3" /></datasource></field><field name="field4">'
-            '\n<datasource name="mcs_test_datasource_3" type="CLIENT">'
-            '<record name="r4"/></datasource></field></definition>')
+            '\n<datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field></definition>'
+            % (dsname[2], dsname[3]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
