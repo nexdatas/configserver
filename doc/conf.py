@@ -298,8 +298,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'nxsconfigserver.tex', u'nxsconfigserver Documentation',
-   u'Author', 'manual'),
+    ('index', 'nxsconfigserver.tex', u'nxsconfigserver Documentation',
+     u'Author', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -342,9 +342,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'nxsconfigserver', u'nxsconfigserver Documentation',
-   u'Author', 'nxsconfigserver', 'One line description of project.',
-   'Miscellaneous'),
+    ('index', 'nxsconfigserver', u'nxsconfigserver Documentation',
+     u'Author', 'nxsconfigserver', 'One line description of project.',
+     'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
