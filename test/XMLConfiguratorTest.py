@@ -6455,7 +6455,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             # cmps = []
             el.setMandatoryComponents([name[i] for i in ar[1]])
             # print("CSS: %s" % str(css))
-            mdss = el.dependentComponents(numpy.array(css))
+            mdss = el.dependentComponents(css)
             el.unsetMandatoryComponents([name[i] for i in ar[1]])
             self.assertEqual(sorted(mdss), sorted([name[i] for i in ar[2]]))
 
