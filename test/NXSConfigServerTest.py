@@ -24,15 +24,18 @@ import sys
 import time
 import PyTango
 
-from . import ServerSetUp
-from . import XMLConfiguratorTest
 # import XMLConTest as XMLConfiguratorTest
 # from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
 # test fixture
 
 if sys.version_info > (3,):
+    from . import ServerSetUp
+    from . import XMLConfiguratorTest
     long = int
+else:
+    import ServerSetUp
+    import XMLConfiguratorTest
 
 
 class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
