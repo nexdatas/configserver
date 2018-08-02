@@ -114,7 +114,7 @@ class ComponentHandlerTest(unittest.TestCase):
         name = "datasource"
         attr = {"name": "myds"}
         self.assertEqual(el.startElement(name, attr), None)
-        self.assertEqual(el.datasources,  {'__unnamed__0': '', 'myds': ''})
+        self.assertEqual(el.datasources, {'__unnamed__0': '', 'myds': ''})
 
         name = "datasource"
         attr = {"name": "myds2", "type": "TANGO"}
@@ -151,7 +151,7 @@ class ComponentHandlerTest(unittest.TestCase):
         name = "datasource"
         attr = {"name": "myds", "name2": "mydt"}
         self.assertEqual(el.startElement(name, attr), None)
-        self.assertEqual(el.datasources,  {'__unnamed__0': '', 'myds': ''})
+        self.assertEqual(el.datasources, {'__unnamed__0': '', 'myds': ''})
 
         name = "datasource"
         attr = {"name": "myds2", "type": "CLIENT", "name2": "mydt"}

@@ -54,7 +54,7 @@ class ServerSetUp(object):
         if os.path.isfile("../NXSConfigServer"):
             self._psub = subprocess.call(
                 "cd ..; ./NXSConfigServer MCSTEST &", stdout=None,
-                stderr=None,  shell=True)
+                stderr=None, shell=True)
         else:
             self._psub = subprocess.call(
                 "NXSConfigServer MCSTEST &", stdout=None,

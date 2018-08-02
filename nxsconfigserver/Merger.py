@@ -294,8 +294,8 @@ class Merger(object):
                            child.getAttribute("type") in self.tocut and \
                            (len(child.attributes.keys()) == 1 or
                             (len(child.attributes.keys()) == 2 and
-                             "NX" + child.getAttribute("name")
-                             == child.getAttribute("type"))):
+                             "NX" + child.getAttribute("name") ==
+                             child.getAttribute("type"))):
                             node.removeChild(child)
                 c1 += 1
 
@@ -317,8 +317,8 @@ class Merger(object):
         while index >= 0:
             try:
                 finder = re.finditer(
-                        r"[\w]+",
-                        text[(index + len(self.__dsvars)):])
+                    r"[\w]+",
+                    text[(index + len(self.__dsvars)):])
                 if sys.version_info > (3,):
                     subc = finder.__next__().group(0)
                 else:
@@ -489,8 +489,10 @@ class Merger(object):
                     raise UndefinedTagError("<definition> not defined")
                 for cd in defin[0].childNodes:
                     if cd.nodeType != cd.TEXT_NODE or \
-                            (cd.nodeType == cd.TEXT_NODE
-                             and str(cd.data).strip()):
+                       (
+                           cd.nodeType == cd.TEXT_NODE and
+                           str(cd.data).strip()
+                       ):
 
                         icd = self.__root.importNode(cd, True)
                         rootDef.appendChild(icd)

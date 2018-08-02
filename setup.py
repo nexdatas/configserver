@@ -87,7 +87,7 @@ SETUPDATA = dict(
     version=INXS.__version__,
     author="Jan Kotanski, Eugen Wintersberger , Halil Pasic",
     author_email="jankotan@gmail.com, eugen.wintersberger@gmail.com, "
-    + "halil.pasic@gmail.com",
+    "halil.pasic@gmail.com",
     description=("Configuration Server for Nexus Data Writer"),
     license="GNU GENERAL PUBLIC LICENSE v3",
     keywords="configuration MySQL writer Tango server nexus data",

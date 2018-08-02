@@ -104,9 +104,9 @@ class ComponentHandler(sax.ContentHandler):
             while index != -1:
                 try:
                     finder = re.finditer(
-                            r"[\w]+",
-                            text[(index + len(self.__dsLabel) + 2):]
-                        )
+                        r"[\w]+",
+                        text[(index + len(self.__dsLabel) + 2):]
+                    )
                     if sys.version_info > (3,):
                         subc = finder.__next__().group(0)
                     else:
