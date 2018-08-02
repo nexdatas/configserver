@@ -94,3 +94,4 @@ class ServerSetUp(object):
                 subprocess.call(
                     "kill -9 %s" %
                     sr[1], stderr=subprocess.PIPE, shell=True)
+        pipe.close()
