@@ -24,8 +24,8 @@ import sys
 import time
 import PyTango
 
-import ServerSetUp
-import XMLConfiguratorTest
+from . import ServerSetUp
+from . import XMLConfiguratorTest
 # import XMLConTest as XMLConfiguratorTest
 # from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
