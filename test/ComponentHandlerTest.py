@@ -28,6 +28,13 @@ from xml import sax
 from nxsconfigserver.ComponentParser import ComponentHandler
 
 
+def parseEncode(text, element):
+    if hasattr(text, "encode"):
+        return sax.parseString(text.encode("utf8"), element)
+    else:
+        return text
+
+
 # if 64-bit machione
 IS64BIT = (struct.calcsize("P") == 8)
 
@@ -356,7 +363,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<group name="mygroup" ><attribute name="type">NXentry'
             '</attribute></group>',
             el)
@@ -369,7 +376,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<field name="myfield" ><datasource name2="TANGO">NXentry'
             '</datasource></field>',
             el)
@@ -383,7 +390,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString('<field name="myfield" >$datasources.</field>', el)
+        parseEncode('<field name="myfield" >$datasources.</field>', el)
 
         self.assertEqual(el.datasources, {})
 
@@ -394,7 +401,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<field name="myfield" ><datasource name="myTANGO">NXentry'
             '</datasource></field>', el)
         self.assertEqual(el.datasources, {u'myTANGO': ''})
@@ -406,7 +413,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<field name="myfield" >$datasources.myTANGO</field>', el)
 
         self.assertEqual(el.datasources, {u'myTANGO': '__FROM_DB__'})
@@ -418,7 +425,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<group><field name="myfield" >$datasources.myTANGO</field>' +
             '<field name="myfield2" >$datasources.myTANGO2</field></group>',
             el)
@@ -434,7 +441,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<group>$datasources.myTANGO<field name="myfield" >'
             '$datasources.myTANGO</field>'
             '<field name="myfield2" >$datasources.myTANGO2</field></group>',
@@ -451,7 +458,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<group><field name="myfield" >$datasources.myTANGO<strategy/>'
             '</field><field name="myfield2" >$datasources.myTANGO2<doc/>'
             '</field></group>', el)
@@ -467,7 +474,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<group><field name="myfield" >$datasources.myTANGO'
             '<attribute name="myattr" >$datasources.myTANGO2</attribute>'
             '</field></group>', el)
@@ -483,7 +490,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler("ds")
-        sax.parseString(
+        parseEncode(
             '<group><field name="myfield" >$datasources.myTANGO'
             '<attribute name="myattr" >$datasources.myTANGO2</attribute>'
             '</field></group>', el)
@@ -497,7 +504,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler("ds")
-        sax.parseString(
+        parseEncode(
             '<group><field name="myfield" >$ds.myTANGO'
             '<attribute name="myattr" >$ds.myTANGO2</attribute></field>'
             '</group>', el)
@@ -513,7 +520,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<field name="myfield" ><datasource type="TANGO">NXentry'
             '</datasource></field>', el)
 
@@ -526,7 +533,7 @@ class ComponentHandlerTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         el = ComponentHandler()
-        sax.parseString(
+        parseEncode(
             '<field name="myfield" ><datasource type="TANGO" name="myTango">'
             'NXentry</datasource></field>', el)
 
@@ -593,7 +600,7 @@ class ComponentHandlerTest(unittest.TestCase):
 </definition>
 """
 
-        sax.parseString(str(nxml).strip(), el)
+        parseEncode(str(nxml).strip(), el)
 
         self.assertEqual(
             el.datasources,
