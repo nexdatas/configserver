@@ -20,16 +20,20 @@
 # unittests for Error classes
 #
 import unittest
-import os
+# import os
 import sys
-import subprocess
-import random
-import struct
-import numpy
+# import subprocess
+# import random
+# import struct
+# import numpy
 
 
 from nxsconfigserver.Errors import (
     IncompatibleNodeError, UndefinedTagError, NonregisteredDBRecordError)
+
+
+if sys.version_info > (3,):
+    long = int
 
 
 # test fixture
@@ -45,12 +49,12 @@ class ErrorsTest(unittest.TestCase):
     # \brief Common set up
     def setUp(self):
         # file handle
-        print "\nsetting up..."
+        print("\nsetting up...")
 
     # test closer
     # \brief Common tear down
     def tearDown(self):
-        print "tearing down ..."
+        print("tearing down ...")
 
     # Exception tester
     # \param exception expected exception
@@ -61,7 +65,7 @@ class ErrorsTest(unittest.TestCase):
         try:
             error = False
             method(*args, **kwargs)
-        except exception, e:
+        except Exception as e:
             error = True
         self.assertEqual(error, True)
 
@@ -69,7 +73,7 @@ class ErrorsTest(unittest.TestCase):
     # \brief It tests default settings
     def test_IncompatibleNodeError(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         value = 'ble ble'
         err = IncompatibleNodeError(value)
         self.assertTrue(isinstance(err, Exception))
@@ -81,7 +85,7 @@ class ErrorsTest(unittest.TestCase):
     # \brief It tests default settings
     def test_IncompatibleNodeError_nodes(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         value = 1234
         nodes = ['asdads1234']
         err = IncompatibleNodeError(value, nodes)
@@ -94,7 +98,7 @@ class ErrorsTest(unittest.TestCase):
     # \brief It tests default settings
     def test_UndefinedTagError(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         err = UndefinedTagError()
         self.assertTrue(isinstance(err, Exception))
 
@@ -102,7 +106,7 @@ class ErrorsTest(unittest.TestCase):
     # \brief It tests default settings
     def test_NonregisteredDBRecordError(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         err = NonregisteredDBRecordError()
         self.assertTrue(isinstance(err, Exception))
 

@@ -20,8 +20,13 @@
 """ Providesthe access to MYSQL database with NDTS configuration files """
 
 import MySQLdb
+import sys
 
 from .Errors import NonregisteredDBRecordError
+
+
+if sys.version_info > (3,):
+    long = int
 
 
 class MYSQLDataBase(object):
@@ -152,7 +157,8 @@ class MYSQLDataBase(object):
                     argout.append(data[0])
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
         return argout
 
@@ -182,7 +188,8 @@ class MYSQLDataBase(object):
                     argout.append(data[0])
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
         return argout
 
@@ -213,7 +220,8 @@ class MYSQLDataBase(object):
                     argout.append(data[0])
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
         return argout
 
@@ -233,7 +241,8 @@ class MYSQLDataBase(object):
                 argout = [d[0] for d in data]
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
         return argout
@@ -254,7 +263,8 @@ class MYSQLDataBase(object):
                 argout = [d[0] for d in data]
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
         return argout
@@ -277,7 +287,8 @@ class MYSQLDataBase(object):
                 argout = [d[0] for d in data]
                 cursor.close()
             except:
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
         return argout
 
@@ -321,7 +332,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
             if self._streams:
@@ -369,7 +381,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
             if self._streams:
                 self._streams.info("MYSQLDataBase::storeDataSource() "
@@ -416,7 +429,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
             if self._streams:
                 self._streams.info("MYSQLDataBase::storeSelection() "
@@ -448,7 +462,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
             if self._streams:
@@ -481,7 +496,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
             if self._streams:
@@ -515,7 +531,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
             if self._streams:
                 self._streams.info(
@@ -550,7 +567,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
 
             if self._streams:
@@ -576,6 +594,8 @@ class MYSQLDataBase(object):
                 argout = [d[0] for d in data]
                 cursor.close()
             except:
+                if cursor:
+                    cursor.close()
                 raise
 
         return argout
@@ -606,7 +626,8 @@ class MYSQLDataBase(object):
                 cursor.close()
             except:
                 self.__db.rollback()
-                cursor.close()
+                if cursor:
+                    cursor.close()
                 raise
             if self._streams:
                 self._streams.info("MYSQLDataBase::deleteDataSource() "

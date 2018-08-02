@@ -20,7 +20,6 @@
 # the unittest runner
 #
 
-import os
 import sys
 import unittest
 
@@ -30,12 +29,12 @@ import ErrorsTest
 import StreamSetTest
 
 try:
-    import PyTango
+    __import__("PyTango")
     # if module PyTango avalable
     PYTANGO_AVAILABLE = True
-except ImportError, e:
+except ImportError as e:
     PYTANGO_AVAILABLE = False
-    print "PyTango is not available: %s" % e
+    print("PyTango is not available: %s" % e)
 
 # list of available databases
 DB_AVAILABLE = []
@@ -63,12 +62,12 @@ except:
         mydb.close()
         DB_AVAILABLE.append("MYSQL")
 
-    except ImportError, e:
-        print "MYSQL not available: %s" % e
-    except Exception, e:
-        print "MYSQL not available: %s" % e
+    except ImportError as e:
+        print("MYSQL not available: %s" % e)
+    except Exception as e:
+        print("MYSQL not available: %s" % e)
     except:
-        print "MYSQL not available"
+        print("MYSQL not available")
 
 
 if "MYSQL" in DB_AVAILABLE:
@@ -85,9 +84,6 @@ if PYTANGO_AVAILABLE:
 
 # main function
 def main():
-
-    # test server
-    ts = None
 
     # test suit
     suite = unittest.TestSuite()

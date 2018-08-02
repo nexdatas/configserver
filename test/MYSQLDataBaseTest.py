@@ -20,18 +20,16 @@
 # unittests for Error classes
 #
 import unittest
-import os
 import sys
-import subprocess
-import random
-import struct
-import numpy
 
 
 from nxsconfigserver.MYSQLDataBase import MYSQLDataBase
 from nxsconfigserver.Errors import NonregisteredDBRecordError
 
 # test fixture
+
+if sys.version_info > (3,):
+    long = int
 
 
 class MYSQLDataBaseTest(unittest.TestCase):
@@ -43,20 +41,22 @@ class MYSQLDataBaseTest(unittest.TestCase):
         unittest.TestCase.__init__(self, methodName)
 
         self.__args = {'host': u'localhost', 'db': u'nxsconfig',
-                       'read_default_file': u'/etc/my.cnf', 'use_unicode': True}
+                       'read_default_file': u'/etc/my.cnf',
+                       'use_unicode': True}
         self.__cmps = []
         self.__ds = []
         self.version = None
         from os.path import expanduser
         home = expanduser("~")
-        self.__args2 = {'host': u'localhost', 'db': u'nxsconfig',
-                        'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
+        self.__args2 = {
+            'host': u'localhost', 'db': u'nxsconfig',
+            'read_default_file': u'%s/.my.cnf' % home, 'use_unicode': True}
 
     # test starter
     # \brief Common set up
     def setUp(self):
         # file handle
-        print "\nsetting up..."
+        print("\nsetting up...")
         el = MYSQLDataBase()
         self.connect(el)
         self.version = long(el.version())
@@ -72,7 +72,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # test closer
     # \brief Common tear down
     def tearDown(self):
-        print "tearing down ..."
+        print("tearing down ...")
         if self.__cmps:
             el = MYSQLDataBase()
             self.connect(el)
@@ -95,7 +95,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         try:
             error = False
             method(*args, **kwargs)
-        except exception, e:
+        except Exception as e:
             error = True
         self.assertEqual(error, True)
 
@@ -103,7 +103,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_init(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
 
@@ -111,7 +111,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_connect_close(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
@@ -122,22 +122,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" \\\\<group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" " \
+              + "\\\\<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeComponent(name, xml), None)
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -162,22 +163,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp_strange_name(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component\\ \' \" \\\" \\\\"
-        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" \\\\<group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" " \
+              + "\\\\<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeComponent(name, xml), None)
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -202,22 +204,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -250,17 +253,16 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.components, [name])
 
         self.assertEqual(long(el.version()), self.version)
@@ -270,24 +272,26 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
 
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -302,7 +306,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name, xml2), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -335,27 +339,29 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_comp2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableComponents()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.components(avc)
 
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -370,7 +376,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2, xml2), None)
         self.__cmps.append(name2)
         avc2 = el.availableComponents()
-#        print avc2
+#        print(avc2
         cpx2 = el.components(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -410,22 +416,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" \\\\<group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" " \
+              + "\\\\<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeSelection(name, xml), None)
         self.assertEqual(el.storeSelection(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -450,22 +457,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel_strange_name(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection\\ \' \" \\\" \\\\"
-        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" \\\\<group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" " \
+              + "\\\\<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeSelection(name, xml), None)
         self.assertEqual(el.storeSelection(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -490,22 +498,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.selections(avc)
         self.assertEqual(el.storeSelection(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -538,17 +547,16 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_sel(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.selections, [name])
 
         self.assertEqual(long(el.version()), self.version)
@@ -558,24 +566,26 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.selections(avc)
 
         self.assertEqual(el.storeSelection(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -590,7 +600,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeSelection(name, xml2), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -623,27 +633,29 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_sel2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.selections(avc)
 
         self.assertEqual(el.storeSelection(name, xml), None)
         self.__cmps.append(name)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -658,7 +670,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeSelection(name2, xml2), None)
         self.__cmps.append(name2)
         avc2 = el.availableSelections()
-#        print avc2
+#        print(avc2
         cpx2 = el.selections(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -698,22 +710,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -738,22 +751,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc_strange(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource\\ \' \" \\\" \\\\"
-        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" \\\\<group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition>\\ \' \" \\\" " \
+              + "\\\\<group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         self.assertTrue(isinstance(avc2, list))
         for cp in avc:
             self.assertTrue(cp in avc2)
@@ -778,22 +792,23 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -826,17 +841,16 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_no_dsrc(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.myAssertRaise(NonregisteredDBRecordError, el.dataSources, [name])
 
         self.assertEqual(long(el.version()), self.version)
@@ -846,24 +860,26 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc_update(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
 
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -878,7 +894,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeDataSource(name, xml2), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -911,27 +927,29 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_available_dsrc2_xml(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
         avc = el.availableDataSources()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_datasource"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
-        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
+        xml2 = "<?xml version='1.0'?><definition><group type='NXentry2'/>" \
+               + "</definition>"
         while name in avc:
             name = name + '_1'
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
         cpx = el.dataSources(avc)
 
         self.assertEqual(el.storeDataSource(name, xml), None)
         self.__ds.append(name)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -946,7 +964,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeDataSource(name2, xml2), None)
         self.__ds.append(name2)
         avc2 = el.availableDataSources()
-#        print avc2
+#        print(avc2
         cpx2 = el.dataSources(avc2)
         self.assertTrue(isinstance(avc2, list))
         for i in range(len(avc)):
@@ -986,7 +1004,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_no_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
@@ -995,10 +1013,9 @@ class MYSQLDataBaseTest(unittest.TestCase):
         avc = el.availableComponents()
 
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
 
         self.assertEqual(el.setMandatory(name), None)
         self.assertEqual(el.setMandatory(name), None)
@@ -1018,7 +1035,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_comp(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
@@ -1027,14 +1044,15 @@ class MYSQLDataBaseTest(unittest.TestCase):
         avc = el.availableComponents()
 
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
-#        print avc
+#        print(avc
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatory(name), None)
         self.assertEqual(el.setMandatory(name), None)
         man2 = el.mandatory()
@@ -1071,7 +1089,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     # \brief It tests default settings
     def test_mandatory_comp2(self):
         fun = sys._getframe().f_code.co_name
-        print "Run: %s.%s() " % (self.__class__.__name__, fun)
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = MYSQLDataBase()
         self.assertTrue(isinstance(el, object))
         self.connect(el)
@@ -1080,19 +1098,20 @@ class MYSQLDataBaseTest(unittest.TestCase):
         avc = el.availableComponents()
 
         name = "mcs_test_component"
-        xml = "<?xml version='1.0'?><definition><group type='NXentry'/></definition>"
+        xml = "<?xml version='1.0'?><definition><group type='NXentry'/>" \
+              + "</definition>"
         while name in avc:
             name = name + '_1'
 
         name2 = name + '_2'
         while name2 in avc:
             name2 = name2 + '_2'
-#        print avc
+#        print(avc
 
         self.assertEqual(el.storeComponent(name, xml), None)
         self.__cmps.append(name)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatory(name), None)
         man2 = el.mandatory()
         self.assertEqual(len(man) + 1, len(man2))
@@ -1104,7 +1123,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.storeComponent(name2, xml), None)
         self.__cmps.append(name2)
 
-#        print man
+#        print(man
         self.assertEqual(el.setMandatory(name2), None)
         man2 = el.mandatory()
         self.assertEqual(len(man) + 2, len(man2))
@@ -1117,7 +1136,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
         self.assertEqual(el.unsetMandatory(name), None)
 
 
-#        print man
+#        print(<man
         man2 = el.mandatory()
         self.assertEqual(len(man) + 1, len(man2))
         for cp in man:
