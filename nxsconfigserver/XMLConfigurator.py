@@ -388,7 +388,7 @@ class XMLConfigurator(object):
                 if cpl:
                     dps[nm] = self.__findElements(cpl[0], self.__cpLabel)
                     self.dependentComponents(dps[nm], dps)
-        return dps.keys()
+        return list(dps.keys())
 
     def dataSources(self, names, _=None):
         """ fetches the required datasources
@@ -531,7 +531,7 @@ class XMLConfigurator(object):
                 tcomp = self.__commentDataSources(tcomp, disds)
             comp = self.__attachElements(
                 tcomp, self.__dsLabel,
-                self.__parameters.keys(),
+                list(self.__parameters.keys()),
                 self.__getParameter, onlyexisting=True)
             self.__mydb.storeComponent(cpname, comp)
 
@@ -736,7 +736,7 @@ class XMLConfigurator(object):
             self.__parameters[str(k)] = str(targs[k])
         return self.__attachElements(
             component, self.__varLabel,
-            self.__parameters.keys(), self.__getVariable)
+            list(self.__parameters.keys()), self.__getVariable)
 
     def __attachComponents(self, component):
         """ attaches variables to component
