@@ -28,14 +28,19 @@ import PyTango
 # from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
 # test fixture
+try:
+    from . import ServerSetUp
+except:
+    import ServerSetUp
+
+try:
+    from . import XMLConfiguratorTest
+except:
+    import XMLConfiguratorTest
+
 
 if sys.version_info > (3,):
-    from . import ServerSetUp
-    from . import XMLConfiguratorTest
     long = int
-else:
-    import ServerSetUp
-    import XMLConfiguratorTest
 
 
 class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
