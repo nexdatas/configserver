@@ -7,7 +7,7 @@
 #   - computing a similar diff to what github is showing in a PR. The
 #     diff is done between:
 #       1. the common ancestor of the local branch and the
-#          pni-libraries/python-pni remote
+#          nexdatas/configserver remote
 #       2. the local branch
 #   - run flake8 --diff --show-source on the computed diff
 #
@@ -31,7 +31,7 @@ set -o errexit
 # pipefail is necessary to propagate exit codes
 set -o pipefail
 
-PROJECT=pni-libraries/python-pni
+PROJECT=nexdatas/configserver
 PROJECT_URL=https://github.com/$PROJECT.git
 
 # Find the remote with the project name (upstream in most cases)
@@ -91,11 +91,11 @@ if [[ -z "$COMMIT_RANGE" ]]; then
     echo '--------------------------------------------------------------------------------'
     git log -2 $LOCAL_BRANCH_REF
 
-    REMOTE_DEVELOP_REF="$REMOTE/master"
+    REMOTE_DEVELOP_REF="$REMOTE/develop"
     # Make sure that $REMOTE_DEVELOP_REF is a valid reference
     echo -e "\nFetching $REMOTE_DEVELOP_REF"
     echo '--------------------------------------------------------------------------------'
-    git fetch $REMOTE master:refs/remotes/$REMOTE_DEVELOP_REF
+    git fetch $REMOTE develop:refs/remotes/$REMOTE_DEVELOP_REF
     LOCAL_BRANCH_SHORT_HASH=$(git rev-parse --short $LOCAL_BRANCH_REF)
     REMOTE_DEVELOP_SHORT_HASH=$(git rev-parse --short $REMOTE_DEVELOP_REF)
 
