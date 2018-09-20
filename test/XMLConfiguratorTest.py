@@ -111,7 +111,7 @@ class XMLConfiguratorTest(unittest.TestCase):
     def openConf(self):
         try:
             el = self.openConfig(self.__args)
-        except:
+        except Exception:
             el = self.openConfig(self.__args2)
         return el
 
@@ -124,7 +124,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         try:
             error = False
             method(*args, **kwargs)
-        except:
+        except Exception:
             error = True
         self.assertEqual(error, True)
 

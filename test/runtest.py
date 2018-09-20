@@ -48,7 +48,7 @@ try:
     mydb = MySQLdb.connect(**args)
     mydb.close()
     DB_AVAILABLE.append("MYSQL")
-except:
+except Exception:
     try:
         import MySQLdb
         from os.path import expanduser
@@ -66,7 +66,7 @@ except:
         print("MYSQL not available: %s" % e)
     except Exception as e:
         print("MYSQL not available: %s" % e)
-    except:
+    except Exception:
         print("MYSQL not available")
 
 

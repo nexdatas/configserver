@@ -1880,7 +1880,7 @@ class MergerTest(unittest.TestCase):
                 '<group name="data" type="NXdata">'
                 '<link name="ds1" target="/entry:NXentry/mf"/></group>'
                 '</group></definition>')
-        except:
+        except Exception:
             self.assertEqual(
                 el.toString().replace("?>\n<", "?><"),
                 '<?xml version="1.0" ?><definition>'

@@ -65,7 +65,7 @@ class MYSQLDataBaseTest(unittest.TestCase):
     def connect(self, el):
         try:
             res = el.connect(self.__args)
-        except:
+        except Exception:
             res = el.connect(self.__args2)
         self.assertEqual(res, None)
 

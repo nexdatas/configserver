@@ -111,7 +111,7 @@ class ComponentHandler(sax.ContentHandler):
                         subc = finder.__next__().group(0)
                     else:
                         subc = finder.next().group(0)
-                except:
+                except Exception:
                     subc = ""
                 aName = subc.strip() if subc else ""
                 if aName:
