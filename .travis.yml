@@ -30,7 +30,7 @@ before_script:
 
 script:
   - if [ $TEST == "testsuit" ]; then .travis/run.sh ${PYTHON}; fi
-  - if [ $TEST == "flake8" ]; then .travis/flake8.sh; fi
+  - if [ $TEST == "flake8" ]; then flake8; fi
 
 
 after-script:

@@ -30,12 +30,12 @@ import nxsconfigserver
 # test fixture
 try:
     from . import ServerSetUp
-except:
+except Exception:
     import ServerSetUp
 
 try:
     from . import XMLConfiguratorTest
-except:
+except Exception:
     import XMLConfiguratorTest
 
 
@@ -84,7 +84,7 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
             except Exception as e:
                 print("%s %s" % (self._sv.new_device_info_writer.name, e))
                 found = False
-            except:
+            except Exception:
                 found = False
 
             cnt += 1

@@ -70,7 +70,7 @@ class MYSQLDataBase(object):
                 self.__db.ping(True)
                 if self.__db.open:
                     self.__db.close()
-            except:
+            except Exception:
                 pass
 
     def version(self):
@@ -85,7 +85,7 @@ class MYSQLDataBase(object):
             try:
                 try:
                     self.__db.ping(True)
-                except:
+                except Exception:
                     return argout
                 if not self.__db.open:
                     self.connect(self.__args)
@@ -99,7 +99,7 @@ class MYSQLDataBase(object):
                         % self.__args)
                 argout = data[0]
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -156,7 +156,7 @@ class MYSQLDataBase(object):
                             "Component %s not registered in the database" % ar)
                     argout.append(data[0])
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -187,7 +187,7 @@ class MYSQLDataBase(object):
                             "Selection %s not registered in the database" % ar)
                     argout.append(data[0])
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -219,7 +219,7 @@ class MYSQLDataBase(object):
                             % ar)
                     argout.append(data[0])
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -240,7 +240,7 @@ class MYSQLDataBase(object):
                 data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -262,7 +262,7 @@ class MYSQLDataBase(object):
                 data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -286,7 +286,7 @@ class MYSQLDataBase(object):
                 data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -330,7 +330,7 @@ class MYSQLDataBase(object):
                     self.__incRevision(cursor)
                     self.__db.commit()
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -379,7 +379,7 @@ class MYSQLDataBase(object):
                     self.__incRevision(cursor)
                     self.__db.commit()
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -427,7 +427,7 @@ class MYSQLDataBase(object):
 #                    self.__incRevision(cursor)
                     self.__db.commit()
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -460,7 +460,7 @@ class MYSQLDataBase(object):
                     self.__db.commit()
                 self.__incRevision(cursor)
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -494,7 +494,7 @@ class MYSQLDataBase(object):
                     self.__db.commit()
 #                self.__incRevision(cursor)
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -529,7 +529,7 @@ class MYSQLDataBase(object):
                 else:
                     self.__db.rollback()
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -565,7 +565,7 @@ class MYSQLDataBase(object):
                     self.__db.rollback()
 
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()
@@ -593,7 +593,7 @@ class MYSQLDataBase(object):
                 data = cursor.fetchall()
                 argout = [d[0] for d in data]
                 cursor.close()
-            except:
+            except Exception:
                 if cursor:
                     cursor.close()
                 raise
@@ -624,7 +624,7 @@ class MYSQLDataBase(object):
                     self.__db.commit()
                 self.__incRevision(cursor)
                 cursor.close()
-            except:
+            except Exception:
                 self.__db.rollback()
                 if cursor:
                     cursor.close()

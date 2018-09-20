@@ -197,7 +197,7 @@ class XMLConfigurator(object):
             targs = dict(js.items())
             for k in targs.keys():
                 args[str(k)] = targs[k]
-        except:
+        except Exception:
             self._streams.info("%s" % args)
             args = {}
         self.__mydb.connect(args)
@@ -329,7 +329,7 @@ class XMLConfigurator(object):
                     subc = finder.__next__().group(0)
                 else:
                     subc = finder.next().group(0)
-            except:
+            except Exception:
                 subc = ""
             name = subc.strip() if subc else ""
             if name:
@@ -667,7 +667,7 @@ class XMLConfigurator(object):
                                     defsubc = dsubc[1:-1].replace("\\'", "'")
                                 elif dsubc[0] == '"':
                                     defsubc = dsubc[1:-1].replace('\\"', '"')
-            except:
+            except Exception:
                 pass
             name = subc.strip() if subc else ""
             if name:
@@ -677,7 +677,7 @@ class XMLConfigurator(object):
                             tag if tag else "variable", name, component))
                 try:
                     xmlds = funValue([name], defsubc)
-                except:
+                except Exception:
                     xmlds = []
                 if not onlyexisting and not xmlds:
                     raise NonregisteredDBRecordError(

@@ -323,7 +323,7 @@ class Merger(object):
                     subc = finder.__next__().group(0)
                 else:
                     subc = finder.next().group(0)
-            except:
+            except Exception:
                 subc = ''
             name = subc.strip() if subc else ""
             if name in dslist:
