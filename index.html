@@ -5,18 +5,18 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to NeXuS Configuration Server’s documentation! &mdash; NXSConfigServer 2.8.0 documentation</title>
+    <title>Welcome to NeXuS Configuration Server’s documentation! &#8212; NXSConfigServer 2.10.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.8.0',
+        VERSION:     '2.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,9 +27,11 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="NXSConfigServer 2.8.0 documentation" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="NXSConfigServer 2.10.0 documentation" href="#" />
     <link rel="next" title="nxsconfigserver package" href="nxsconfigserver.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -37,7 +39,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -50,7 +52,7 @@
         </button>
         <a class="navbar-brand" href="#">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.8</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.10</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -114,7 +116,7 @@
               
                 
   <li>
-    <a href="nxsconfigserver.html" title="Next Chapter: nxsconfigserver package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">nxsconfigserver ... &raquo;</span>
+    <a href="nxsconfigserver.html" title="Next Chapter: nxsconfigserver package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">nxsconfigserv... &raquo;</span>
     </a>
   </li>
               
@@ -169,11 +171,11 @@ and perform the process of component merging.</p>
 <div class="line"><a class="reference external" href="https://github.com/nexdatas/configserver-db/">https://github.com/nexdatas/configserver-db/</a></div>
 </div>
 <p>Extract the sources and run</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> python setup.py install
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> python setup.py install
 </pre></div>
 </div>
 <p>To set database execute</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> mysql &lt; conf/mysql_create.sql
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mysql &lt; conf/mysql_create.sql
 </pre></div>
 </div>
 <p>with proper privileges.</p>
@@ -182,26 +184,26 @@ and perform the process of component merging.</p>
 <h3>Debian packages<a class="headerlink" href="#debian-packages" title="Permalink to this headline">¶</a></h3>
 <p>Debian Jessie (and Wheezy) packages can be found in the HDRI repository.</p>
 <p>To install the debian packages, add the PGP repository key</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> sudo su
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo su
 <span class="gp">$</span> wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg <span class="p">|</span> apt-key add -
 </pre></div>
 </div>
 <p>and then download the corresponding source list</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd</span> /etc/apt/sources.list.d
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> /etc/apt/sources.list.d
 <span class="gp">$</span> wget http://repos.pni-hdri.de/jessie-pni-hdri.list
 </pre></div>
 </div>
 <p>Finally,</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get update
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get update
 <span class="gp">$</span> apt-get install python-nxsconfigserver nxsconfigserver-db
 </pre></div>
 </div>
 <p>To instal other NexDaTaS packages</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-nxswriter nxsconfigtool nxstools
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install python-nxswriter nxsconfigtool nxstools
 </pre></div>
 </div>
 <p>and</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
 </pre></div>
 </div>
 <p>for Component Selector and Sardana related packages.</p>
@@ -209,7 +211,7 @@ and perform the process of component merging.</p>
 <div class="section" id="setting-nexus-configuration-server">
 <h3>Setting NeXus Configuration Server<a class="headerlink" href="#setting-nexus-configuration-server" title="Permalink to this headline">¶</a></h3>
 <p>To set up  NeXus Configuration Server with the default configuration run</p>
-<div class="highlight-console"><div class="highlight"><pre><span class="gp">$</span> nxsetup -x NXSConfigServer
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> nxsetup -x NXSConfigServer
 </pre></div>
 </div>
 <p>The <em>nxsetup</em> command comes from the <strong>python-nxstools</strong> package.</p>
@@ -249,167 +251,167 @@ attribute.</p>
 </div>
 <div class="section" id="client-code">
 <h1>Client code<a class="headerlink" href="#client-code" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># In this section we present an example how to communicate with</span>
-<span class="c"># Configuration Server making use of PyTango.</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># In this section we present an example how to communicate with</span>
+<span class="c1"># Configuration Server making use of PyTango.</span>
 
 <span class="kn">import</span> <span class="nn">PyTango</span>
 
-<span class="n">cnfServer</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="s">&quot;p00/xmlconfigserver/exp.01&quot;</span><span class="p">)</span>
+<span class="n">cnfServer</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="s2">&quot;p00/xmlconfigserver/exp.01&quot;</span><span class="p">)</span>
 
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">JSONSettings</span> <span class="o">=</span> \
-    <span class="s">&#39;{&quot;host&quot;:&quot;localhost&quot;,&quot;db&quot;:&quot;ndts_p02&quot;,&quot;read_default_file&quot;:&quot;/etc/my.cnf&quot;,&quot;use_unicode&quot;:true}&#39;</span>
+    <span class="s1">&#39;{&quot;host&quot;:&quot;localhost&quot;,&quot;db&quot;:&quot;ndts_p02&quot;,&quot;read_default_file&quot;:&quot;/etc/my.cnf&quot;,&quot;use_unicode&quot;:true}&#39;</span>
 
-<span class="c"># opens DB connection</span>
+<span class="c1"># opens DB connection</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">Open</span><span class="p">()</span>
 
-<span class="c"># After creating the server proxy we can set configuration for connection to</span>
-<span class="c">#  the MYSQL DB.</span>
-<span class="c"># The JSONSettings attribute is memorized so you have to write it only when you</span>
-<span class="c"># change configuration of DB connection. Next, we open connection to</span>
-<span class="c"># DB specified by our JSONSettings.</span>
+<span class="c1"># After creating the server proxy we can set configuration for connection to</span>
+<span class="c1">#  the MYSQL DB.</span>
+<span class="c1"># The JSONSettings attribute is memorized so you have to write it only when you</span>
+<span class="c1"># change configuration of DB connection. Next, we open connection to</span>
+<span class="c1"># DB specified by our JSONSettings.</span>
 
 
 
-<span class="c"># stores default component</span>
-<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;default.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores default component</span>
+<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;default.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">cpxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
 
-<span class="c"># stores slit1 component in DB</span>
-<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;slit1.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores slit1 component in DB</span>
+<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;slit1.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">cpxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s">&#39;slit1&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s1">&#39;slit1&#39;</span><span class="p">)</span>
 
-<span class="c"># stores slit2 component in DB</span>
-<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;slit2.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores slit2 component in DB</span>
+<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;slit2.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">cpxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s">&#39;slit2&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s1">&#39;slit2&#39;</span><span class="p">)</span>
 
-<span class="c"># stores slit3 component in DB</span>
-<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;slit3.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores slit3 component in DB</span>
+<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;slit3.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">cpxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s">&#39;slit3&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s1">&#39;slit3&#39;</span><span class="p">)</span>
 
-<span class="c"># stores pilatus300k component in DB</span>
-<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;pilatus.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores pilatus300k component in DB</span>
+<span class="n">cpxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;pilatus.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">cpxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreComponent</span><span class="p">(</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">)</span>
 
 
-<span class="c"># stores motor01 datasource in DB</span>
-<span class="n">dsxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;motor.ds.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores motor01 datasource in DB</span>
+<span class="n">dsxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;motor.ds.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">dsxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreDataSource</span><span class="p">(</span><span class="s">&#39;motor01&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreDataSource</span><span class="p">(</span><span class="s1">&#39;motor01&#39;</span><span class="p">)</span>
 
-<span class="c"># stores motor02 datasource in DB</span>
-<span class="n">dsxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;motor.ds.xml&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># stores motor02 datasource in DB</span>
+<span class="n">dsxml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;motor.ds.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span> <span class="o">=</span> <span class="n">dsxml</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreDataSource</span><span class="p">(</span><span class="s">&#39;motor02&#39;</span><span class="p">)</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">StoreDataSource</span><span class="p">(</span><span class="s1">&#39;motor02&#39;</span><span class="p">)</span>
 
 
 
-<span class="c"># removes slit3 component from DB</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">DeleteComponent</span><span class="p">(</span><span class="s">&#39;slit3&#39;</span><span class="p">)</span>
+<span class="c1"># removes slit3 component from DB</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">DeleteComponent</span><span class="p">(</span><span class="s1">&#39;slit3&#39;</span><span class="p">)</span>
 
-<span class="c"># removes motor02 datasource from DB</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">DeleteDataSource</span><span class="p">(</span><span class="s">&#39;motor02&#39;</span><span class="p">)</span>
+<span class="c1"># removes motor02 datasource from DB</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">DeleteDataSource</span><span class="p">(</span><span class="s1">&#39;motor02&#39;</span><span class="p">)</span>
 
-<span class="c"># If someone cannot use ComponentDesigner it is also an option to store</span>
-<span class="c"># or delete components and datasources using directly tango interface</span>
-<span class="c"># as it is shown above.</span>
+<span class="c1"># If someone cannot use ComponentDesigner it is also an option to store</span>
+<span class="c1"># or delete components and datasources using directly tango interface</span>
+<span class="c1"># as it is shown above.</span>
 
 
 
-<span class="c"># provides names of available components</span>
+<span class="c1"># provides names of available components</span>
 <span class="n">cmpNameList</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">AvailableComponents</span><span class="p">()</span>
-<span class="c"># provides names of available datasources</span>
+<span class="c1"># provides names of available datasources</span>
 <span class="n">dsNameList</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">AvailableDataSources</span><span class="p">()</span>
 
-<span class="c"># To get information about names of available components and datasources</span>
-<span class="c"># in Configuration Server we use the above commands.</span>
+<span class="c1"># To get information about names of available components and datasources</span>
+<span class="c1"># in Configuration Server we use the above commands.</span>
 
 
 
-<span class="c"># provides a list of required components</span>
+<span class="c1"># provides a list of required components</span>
 <span class="n">cmpList</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">Components</span><span class="p">(</span><span class="n">cmpNameList</span><span class="p">)</span>
-<span class="c"># provides a list of required Datasources</span>
+<span class="c1"># provides a list of required Datasources</span>
 <span class="n">dsList</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">DataSources</span><span class="p">(</span><span class="n">dsNameList</span><span class="p">)</span>
 
-<span class="c"># Having names of stored elements we can get their XML code.</span>
+<span class="c1"># Having names of stored elements we can get their XML code.</span>
 
-<span class="c"># provides a list of Datasources from a given Component</span>
-<span class="n">dsList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentDataSources</span><span class="p">(</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">)</span>
-<span class="n">dsList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentsDataSources</span><span class="p">([</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s">&#39;slit1&#39;</span><span class="p">])</span>
+<span class="c1"># provides a list of Datasources from a given Component</span>
+<span class="n">dsList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentDataSources</span><span class="p">(</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">)</span>
+<span class="n">dsList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentsDataSources</span><span class="p">([</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s1">&#39;slit1&#39;</span><span class="p">])</span>
 
-<span class="c"># as well as query Configuration Server which datasource</span>
-<span class="c"># are related to the particular component.</span>
+<span class="c1"># as well as query Configuration Server which datasource</span>
+<span class="c1"># are related to the particular component.</span>
 
-<span class="c"># provides a dependent components</span>
-<span class="n">cpList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">DependentComponents</span><span class="p">([</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s">&#39;slit3&#39;</span><span class="p">])</span>
-
-
-<span class="c"># Moreover, one can also query Configuration Server for a list of</span>
-<span class="c"># dependent components</span>
-
-<span class="c"># provides a list of Variables from a given components</span>
-<span class="n">varList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentVariables</span><span class="p">(</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">)</span>
-<span class="n">varList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentsVariables</span><span class="p">([</span><span class="s">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s">&#39;slit3&#39;</span><span class="p">])</span>
-
-<span class="c">#or ask for a list of variables which are related to the particular components.</span>
-
-<span class="c"># sets values of variables</span>
-<span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s">&#39;{&quot;entry_id&quot;:&quot;123&quot;,&quot;beamtime_id&quot;:&quot;123453535453&quot;}&#39;</span>
-
-<span class="c">#The variable values can be passed to the Configuration Server</span>
-<span class="c"># via a JSON string.</span>
+<span class="c1"># provides a dependent components</span>
+<span class="n">cpList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">DependentComponents</span><span class="p">([</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s1">&#39;slit3&#39;</span><span class="p">])</span>
 
 
+<span class="c1"># Moreover, one can also query Configuration Server for a list of</span>
+<span class="c1"># dependent components</span>
 
-<span class="c"># sets given component as mandatory for the final configuration</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">SetMandatoryComponents</span><span class="p">([</span><span class="s">&#39;default&#39;</span><span class="p">,</span><span class="s">&#39;slit1&#39;</span><span class="p">])</span>
-<span class="c"># un-sets given component as mandatory for the final configuration</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">UnsetMandatoryComponents</span><span class="p">([</span><span class="s">&#39;slit1&#39;</span><span class="p">])</span>
+<span class="c1"># provides a list of Variables from a given components</span>
+<span class="n">varList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentVariables</span><span class="p">(</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">)</span>
+<span class="n">varList</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">ComponentsVariables</span><span class="p">([</span><span class="s1">&#39;pilatus300k&#39;</span><span class="p">,</span> <span class="s1">&#39;slit3&#39;</span><span class="p">])</span>
 
-<span class="c"># provides names of mandatory components</span>
+<span class="c1">#or ask for a list of variables which are related to the particular components.</span>
+
+<span class="c1"># sets values of variables</span>
+<span class="n">cnf</span><span class="o">.</span><span class="n">Server</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s1">&#39;{&quot;entry_id&quot;:&quot;123&quot;,&quot;beamtime_id&quot;:&quot;123453535453&quot;}&#39;</span>
+
+<span class="c1">#The variable values can be passed to the Configuration Server</span>
+<span class="c1"># via a JSON string.</span>
+
+
+
+<span class="c1"># sets given component as mandatory for the final configuration</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">SetMandatoryComponents</span><span class="p">([</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="s1">&#39;slit1&#39;</span><span class="p">])</span>
+<span class="c1"># un-sets given component as mandatory for the final configuration</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">UnsetMandatoryComponents</span><span class="p">([</span><span class="s1">&#39;slit1&#39;</span><span class="p">])</span>
+
+<span class="c1"># provides names of mandatory components</span>
 <span class="n">man</span> <span class="o">=</span>  <span class="n">cnfServer</span><span class="o">.</span><span class="n">MandatoryComponents</span><span class="p">()</span>
 
-<span class="c"># Some of the component can be set as mandatory in</span>
-<span class="c"># the final configuration. To define them Configuration Server provides</span>
-<span class="c"># above commands.</span>
+<span class="c1"># Some of the component can be set as mandatory in</span>
+<span class="c1"># the final configuration. To define them Configuration Server provides</span>
+<span class="c1"># above commands.</span>
 
 
 
-<span class="c"># provides the current configuration version</span>
+<span class="c1"># provides the current configuration version</span>
 <span class="n">version</span> <span class="o">=</span>  <span class="n">cnfServer</span><span class="o">.</span><span class="n">Version</span>
 
-<span class="c"># Each configuration has a revision number. It can be found</span>
-<span class="c"># together with Configuration Server version in Version attribute.</span>
+<span class="c1"># Each configuration has a revision number. It can be found</span>
+<span class="c1"># together with Configuration Server version in Version attribute.</span>
 
-<span class="c"># creates the final configuration from slit2 and pilatus300k</span>
-<span class="c"># as well as all mandatory components</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">(</span><span class="s">&#39;slit2&#39;</span><span class="p">,</span> <span class="s">&#39;pilatus300k&#39;</span><span class="p">)</span>
-<span class="c"># XML string ready to use by Tango Data Server</span>
+<span class="c1"># creates the final configuration from slit2 and pilatus300k</span>
+<span class="c1"># as well as all mandatory components</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">(</span><span class="s1">&#39;slit2&#39;</span><span class="p">,</span> <span class="s1">&#39;pilatus300k&#39;</span><span class="p">)</span>
+<span class="c1"># XML string ready to use by Tango Data Server</span>
 <span class="n">finalXML</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">XMLString</span>
 
-<span class="c"># In order to create our final configuration we execute CreateConfiguration</span>
-<span class="c"># command with a list of names of required components. The command merges</span>
-<span class="c"># these components with mandatory ones and provides the resulting NXDL-like</span>
-<span class="c"># configuration in the XMLString attribute.</span>
+<span class="c1"># In order to create our final configuration we execute CreateConfiguration</span>
+<span class="c1"># command with a list of names of required components. The command merges</span>
+<span class="c1"># these components with mandatory ones and provides the resulting NXDL-like</span>
+<span class="c1"># configuration in the XMLString attribute.</span>
 
 
 
 
-<span class="c"># merges given components</span>
-<span class="n">mergedComp</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">Merge</span><span class="p">([</span><span class="s">&#39;slit2&#39;</span><span class="p">,</span> <span class="s">&#39;pilatus300k&#39;</span><span class="p">])</span>
+<span class="c1"># merges given components</span>
+<span class="n">mergedComp</span> <span class="o">=</span> <span class="n">cnfServer</span><span class="o">.</span><span class="n">Merge</span><span class="p">([</span><span class="s1">&#39;slit2&#39;</span><span class="p">,</span> <span class="s1">&#39;pilatus300k&#39;</span><span class="p">])</span>
 
-<span class="c"># Similarly, the Merge command provides configuration by unresolved links</span>
-<span class="c"># to datasoures and with non-assigned variable values.</span>
+<span class="c1"># Similarly, the Merge command provides configuration by unresolved links</span>
+<span class="c1"># to datasoures and with non-assigned variable values.</span>
 
 
-<span class="c"># closes connection to DB</span>
+<span class="c1"># closes connection to DB</span>
 <span class="n">cnfServer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="c"># Command close terminates our connection to the DB server.</span>
+<span class="c1"># Command close terminates our connection to the DB server.</span>
 </pre></div>
 </div>
 </div>
@@ -418,7 +420,7 @@ attribute.</p>
 <p>Values of configuration variables can be also define inside the component xmls.
 Let&#8217;s consider two following components:</p>
 <p><em>mydetector</em> with a general detector transformation group</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;definition&gt;</span>
   <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXentry&#39;</span> <span class="na">name=</span><span class="s">&#39;entry&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXinstrument&#39;</span> <span class="na">name=</span><span class="s">&#39;instrument&#39;</span><span class="nt">&gt;</span>
        <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXdetector&#39;</span> <span class="na">name=</span><span class="s">&#39;$var.detector#\&quot;mydetector\&quot;&#39;</span><span class="nt">&gt;</span>
@@ -430,7 +432,7 @@ Let&#8217;s consider two following components:</p>
 </pre></div>
 </div>
 <p>and <em>pilatus</em> created for the particular detector</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;definition&gt;</span>
   <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXentry&#39;</span> <span class="na">name=</span><span class="s">&#39;entry&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXinstrument&#39;</span> <span class="na">name=</span><span class="s">&#39;instrument&#39;</span><span class="nt">&gt;</span>
        <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXdetector&#39;</span> <span class="na">name=</span><span class="s">&#39;pilatus&#39;</span><span class="nt">&gt;</span>
@@ -443,12 +445,12 @@ Let&#8217;s consider two following components:</p>
 </pre></div>
 </div>
 <p>Creating configuration without variables</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s">&#39;{}&#39;</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s">&quot;mydetector&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s1">&#39;{}&#39;</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s2">&quot;mydetector&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>results in</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;definition&gt;</span>
   <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXentry&#39;</span> <span class="na">name=</span><span class="s">&#39;entry&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXinstrument&#39;</span> <span class="na">name=</span><span class="s">&#39;instrument&#39;</span><span class="nt">&gt;</span>
        <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXdetector&#39;</span> <span class="na">name=</span><span class="s">&#39;mydetector&#39;</span><span class="nt">&gt;</span>
@@ -460,12 +462,12 @@ Let&#8217;s consider two following components:</p>
 </pre></div>
 </div>
 <p>When configuration variables are defined</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s">&#39;{&quot;detector&quot;: &quot;det1&quot;}&#39;</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s">&quot;mydetector&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s1">&#39;{&quot;detector&quot;: &quot;det1&quot;}&#39;</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s2">&quot;mydetector&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>one can get</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;definition&gt;</span>
   <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXentry&#39;</span> <span class="na">name=</span><span class="s">&#39;entry&#39;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXinstrument&#39;</span> <span class="na">name=</span><span class="s">&#39;instrument&#39;</span><span class="nt">&gt;</span>
        <span class="nt">&lt;group</span> <span class="na">type=</span><span class="s">&#39;NXdetector&#39;</span> <span class="na">name=</span><span class="s">&#39;det1&#39;</span><span class="nt">&gt;</span>
@@ -477,12 +479,12 @@ Let&#8217;s consider two following components:</p>
 </pre></div>
 </div>
 <p>Finally, creating configuration xml from our two components without variables</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s">&#39;{}&#39;</span>
-<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s">&quot;mydetector&quot;</span><span class="p">,</span> <span class="s">&quot;pilatus&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cnfServer</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="s1">&#39;{}&#39;</span>
+<span class="n">cnfServer</span><span class="o">.</span><span class="n">CreateConfiguration</span><span class="p">([</span><span class="s2">&quot;mydetector&quot;</span><span class="p">,</span> <span class="s2">&quot;pilatus&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>results in</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;definition&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;definition&gt;</span>
 <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">&quot;entry&quot;</span> <span class="na">type=</span><span class="s">&quot;NXentry&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">&quot;instrument&quot;</span> <span class="na">type=</span><span class="s">&quot;NXinstrument&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">&quot;pilatus&quot;</span> <span class="na">type=</span><span class="s">&quot;NXdetector&quot;</span><span class="nt">&gt;</span>
@@ -518,9 +520,9 @@ Let&#8217;s consider two following components:</p>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
@@ -539,7 +541,7 @@ Let&#8217;s consider two following components:</p>
         &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.<br/>
     </p>
   </div>
 </footer>
