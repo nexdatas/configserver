@@ -65,26 +65,28 @@ and then download the corresponding source list
 	  $ cd /etc/apt/sources.list.d
 	  $ wget http://repos.pni-hdri.de/jessie-pni-hdri.list
 
-Finally,
+Finally, for python2 packages
 
 .. code-block:: console
 
 	  $ apt-get update
 	  $ apt-get install python-nxsconfigserver nxsconfigserver-db
 
-To instal other NexDaTaS packages
+and the NXSConfigServer tango server (from 2.10.0)	  
+		
+	  $ apt-get install nxsconfigserver
+
+or for python3
 
 .. code-block:: console
 
-	  $ apt-get install python-nxswriter nxsconfigtool nxstools
+	  $ apt-get update
+	  $ apt-get install python3-nxsconfigserver nxsconfigserver-db
 
-and
+and the NXSConfigServer tango server (from 2.10.0)	  
+		
+	  $ apt-get install nxsconfigserver3
 
-.. code-block:: console
-
-	  $ apt-get install python-nxsrecselector nxselector python-sardana-nxsrecorder
-
-for Component Selector and Sardana related packages.
 
 Setting NeXus Configuration Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
