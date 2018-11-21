@@ -26,10 +26,10 @@ docker exec -it --user root ndts service tango-starter restart
 
 if [ $2 = "2" ]; then
     echo "install python-pytango"
-    docker exec -it --user root ndts /bin/sh -c 'apt-get -qq update; export DEBIAN_FRONTEND=noninteractive; apt-get -qq install -y   python-pytango'
+    docker exec -it --user root ndts /bin/sh -c 'apt-get -qq update; export DEBIAN_FRONTEND=noninteractive; apt-get -qq install -y   python-pytango  python-mysqldb'
 else
     echo "install python3-pytango"
-    docker exec -it --user root ndts /bin/sh -c 'apt-get -qq update; export DEBIAN_FRONTEND=noninteractive; apt-get -qq install -y   python3-pytango'
+    docker exec -it --user root ndts /bin/sh -c 'apt-get -qq update; export DEBIAN_FRONTEND=noninteractive; apt-get -qq install -y   python3-pytango python3-mysqldb'
 fi
 if [ $? -ne "0" ]
 then
@@ -38,7 +38,7 @@ fi
 
 
 echo "install sardana, taurus and nexdatas"
-docker exec -it --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y  nxsconfigserver-db; sleep 10'
+docker exec -it --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive;  apt-get -qq update; apt-get -qq install -y nxsconfigserver-db; sleep 10'
 if [ $? -ne "0" ]
 then
     exit -1
