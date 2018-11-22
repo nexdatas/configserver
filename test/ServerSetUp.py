@@ -85,8 +85,7 @@ class ServerSetUp(object):
 
         if sys.version_info > (3,):
             with subprocess.Popen(
-                    "ps -ef | grep 'NXSConfigServer %s' | grep -v grep" %
-                    self.instance,
+                    "ps -ef | grep 'NXSConfigServer MCSTEST' | grep -v grep",
                     stdout=subprocess.PIPE, shell=True) as proc:
 
                 pipe = proc.stdout
@@ -100,8 +99,7 @@ class ServerSetUp(object):
                 pipe.close()
         else:
             pipe = subprocess.Popen(
-                "ps -ef | grep 'NXSConfigServer %s' | grep -v grep" %
-                self.instance,
+                "ps -ef | grep 'NXSConfigServer MCSTEST' | grep -v grep",
                 stdout=subprocess.PIPE, shell=True).stdout
 
             res = str(pipe.read()).split("\n")
