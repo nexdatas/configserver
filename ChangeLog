@@ -1,3 +1,7 @@
+2018-11-26 Jan Kotanski <jankotan@gmail.com>
+	* workaround for broken pipe in StreamSet
+	* tagged as v2.10.1
+
 2018-10-18 Jan Kotanski <jankotan@gmail.com>
 	* bump version for package split purpose
 	* tagged as v2.10.0
