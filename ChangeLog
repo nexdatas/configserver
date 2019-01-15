@@ -1,3 +1,7 @@
+2019-01-15 Jan Kotanski <jankotan@gmail.com>
+	* add flush for stderr stream
+	* tagged as v2.10.2
+
 2018-11-26 Jan Kotanski <jankotan@gmail.com>
 	* workaround for broken pipe in StreamSet
 	* tagged as v2.10.1
