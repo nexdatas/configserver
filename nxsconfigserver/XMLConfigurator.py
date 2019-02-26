@@ -280,7 +280,11 @@ class XMLConfigurator(object):
             cpl = self.instantiatedComponents([name])
             if len(cpl) > 0:
                 handler = ComponentHandler(self.__dsLabel)
-                sax.parseString(str(cpl[0]).strip(), handler)
+                text = str(cpl[0]).strip()
+                if sys.version_info > (3,):
+                    sax.parseString(bytes(text, "UTF-8"), handler)
+                else:
+                    sax.parseString(text, handler)
                 return list(handler.datasources.keys())
             else:
                 return []
@@ -297,7 +301,10 @@ class XMLConfigurator(object):
         if mcnf:
             cnf = self.__instantiate(mcnf)
             handler = ComponentHandler(self.__dsLabel)
-            sax.parseString(cnf, handler)
+            if sys.version_info > (3,):
+                sax.parseString(bytes(cnf, "UTF-8"), handler)
+            else:
+                sax.parseString(cnf, handler)
             return list(handler.datasources.keys())
         else:
             return []
@@ -684,7 +691,10 @@ class XMLConfigurator(object):
                         "The %s %s of %s not registered" % (
                             tag if tag else "variable", name, component))
                 if tag:
-                    dom = parseString(xmlds[0])
+                    if sys.version_info > (3,):
+                        dom = parseString(bytes(xmlds[0], "UTF-8"))
+                    else:
+                        dom = parseString(xmlds[0])
                     domds = dom.getElementsByTagName(tag)
                     if not domds:
                         raise NonregisteredDBRecordError(
@@ -840,7 +850,10 @@ class XMLConfigurator(object):
         cnfMerged = self.__merge([cnf])
 
         if cnfMerged and hasattr(cnfMerged, "strip") and cnfMerged.strip():
-            reparsed = parseString(cnfMerged)
+            if sys.version_info > (3,):
+                reparsed = parseString(bytes(cnfMerged, "UTF-8"))
+            else:
+                reparsed = parseString(cnfMerged)
             self.xmlstring = str((reparsed.toprettyxml(indent=" ", newl="")))
         else:
             self.xmlstring = ''
