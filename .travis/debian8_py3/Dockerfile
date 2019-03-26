@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM debian:jessie
 
 MAINTAINER DESY, Jan Kotanski <jankotan@gmail.com>
 
