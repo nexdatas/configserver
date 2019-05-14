@@ -58,6 +58,8 @@ class XMLConfigurator(object):
         self.__stepdatasources = "[]"
         #: (:obj:`str`) datasources to which links will be added
         self.__linkdatasources = "[]"
+        #: (:obj:`str`) datasources to be switched into CanFail mode
+        self.__canfaildatasources = "[]"
 
         #: (:obj:`str`) string with XML variables
         self.variables = "{}"
@@ -168,6 +170,35 @@ class XMLConfigurator(object):
         __getLinkDatSources,
         __setLinkDatSources,
         doc='link datasource list')
+
+    def __getCanFailDatSources(self):
+        """ get method for dataSourceGroup attribute
+
+        :returns: names of CanFail dataSources
+        :rtype: :obj:`str`
+        """
+        try:
+            lad = json.loads(self.__canfaildatasources)
+            assert isinstance(lad, list)
+            return self.__canfaildatasources
+        except Exception:
+            return '[]'
+
+    def __setCanFailDatSources(self, names):
+        """ set method for dataSourceGroup attribute
+
+        :param names: of CanFail dataSources
+        :type names: :obj:`str`
+        """
+        jnames = self.__stringToListJson(names)
+        #: administator data
+        self.__canfaildatasources = jnames
+
+    #: (:obj:`str`) the json data string
+    canfaildatasources = property(
+        __getCanFailDatSources,
+        __setCanFailDatSources,
+        doc='canfail datasource list')
 
     def __getVersion(self):
         """ get method for version attribute
@@ -835,6 +866,7 @@ class XMLConfigurator(object):
         mgr = Merger()
         mgr.switchdatasources = json.loads(self.stepdatasources)
         mgr.linkdatasources = json.loads(self.linkdatasources)
+        mgr.canfaildatasources = json.loads(self.canfaildatasources)
         mgr.collect(xmls)
         mgr.merge()
         return mgr.toString()

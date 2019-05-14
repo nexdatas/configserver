@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <pogoDsl:PogoSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pogoDsl="http://www.esrf.fr/tango/pogo/PogoDsl">
-  <classes name="NXSConfigServer" pogoRevision="8.1">
-    <description description="NeXuS Configuration Server is a Tango Server with its implementation based&#xA;on a MySQL database. It allows to store XML configuration datasources&#xA;and components. It also gives possibility to select mandatory components&#xA;and perform the process of component merging.&#xA;&#xA;Source code: https://github.com/nexdatas/configserver/&#xA;Web page: https://nexdatas.github.io/configserver/&#xA;NexDaTaS Web page: https://nexdatas.github.io&#xA;" title="Configuration Server for Nexus Data Writer" sourcePath="/home/jkotan/ndts/nexdatas.configserver" language="Python" filestogenerate="XMI   file,Code files,html Pages" license="GPL" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false" descriptionHtmlExists="false">
+  <classes name="NXSConfigServer" pogoRevision="9.4">
+    <description description="NeXuS Configuration Server is a Tango Server with its implementation based&#xA;on a MySQL database. It allows to store XML configuration datasources&#xA;and components. It also gives possibility to select mandatory components&#xA;and perform the process of component merging.&#xA;&#xA;Source code: https://github.com/nexdatas/configserver/&#xA;Web page: https://nexdatas.github.io/configserver/&#xA;NexDaTaS Web page: https://nexdatas.github.io&#xA;" title="Configuration Server for Nexus Data Writer" sourcePath="/home/jkotan/ndts/nexdatas.configserver" language="Python" filestogenerate="XMI   file,Code files,Protected Regions,html Pages" license="GPL" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false" descriptionHtmlExists="false">
       <inheritances classname="Device_Impl" sourcePath=""/>
       <identification contact="at desy.de - jan.kotanski" author="jan.kotanski" emailDomain="desy.de" classFamily="Acquisition" siteSpecific="" platform="All Platforms" bus="Not Applicable" manufacturer="DESY" reference=""/>
     </description>
@@ -370,6 +370,22 @@
       <dataReadyEvent fire="false" libCheckCriteria="true"/>
       <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
       <properties description="JSON list of datasources to be switched into STEP mode during creating configuration process" label="Datasources to be switched into STEP Mode" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="LinkDataSources" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="JSON list of datasources to which links will be added" label="Datasources to which links will be added" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="CanFailDataSources" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="JSON list of datasources to be switched into CanFail mode during creating configuration process" label="Datasources to be switched into CanFail mode" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
     </attributes>
     <states name="ON" description="Server is ON">
       <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
