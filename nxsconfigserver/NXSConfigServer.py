@@ -260,6 +260,39 @@ class NXSConfigServer(PyTango.Device_4Impl):
             return False
         return True
 
+    def read_CanFailDataSources(self, attr):
+        """ Read CanFailDataSources attribute
+
+        :param attr: step datasources attribute
+        :type attr: :class:`PyTango.Attribute`
+        """
+        self.debug_stream("In read_CanFailDataSources()")
+        attr.set_value(self.xmlc.canfaildatasources or "")
+
+    def write_CanFailDataSources(self, attr):
+        """ Write CanFailDataSources attribute
+
+        :param attr: step datasources attribute
+        :type attr: :class:`PyTango.Attribute`
+        """
+        self.debug_stream("In write_CanFailDataSources()")
+        if self.is_CanFailDataSources_write_allowed():
+            self.xmlc.canfaildatasources = attr.get_write_value() or ""
+        else:
+            self.warn_stream("To change the settings please close the server.")
+            raise Exception(
+                "To change the settings please close the server.")
+
+    def is_CanFailDataSources_write_allowed(self):
+        """ CanFailDataSources attribute Write State Machine
+
+        :returns: True if the operation allowed
+        :rtype: :obj:`bool`
+        """
+        if self.get_state() in [PyTango.DevState.RUNNING]:
+            return False
+        return True
+
     def read_Version(self, attr):
         """ Read Version attribute
 
@@ -1264,6 +1297,15 @@ class NXSConfigServerClass(PyTango.DeviceClass):
              'label': "Datasources to which links will be added",
              'description': "JSON list of datasources"
              "to which links will be added",
+        }],
+        'CanFailDataSources':
+        [[PyTango.DevString,
+          PyTango.SCALAR,
+          PyTango.READ_WRITE],
+         {
+             'label': "Datasources to be switched into CanFail Mode",
+             'description': "JSON list of datasources to be switched "
+             "into CanFail mode during creating configuration process",
         }],
     }
 

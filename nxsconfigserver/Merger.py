@@ -87,6 +87,9 @@ class Merger(object):
         #: (:obj:`list` <:obj:`str`> ) aliased to add links
         self.linkdatasources = []
 
+        #: (:obj:`list` <:obj:`str`> ) aliased to switch to CanFial mode
+        self.canfaildatasources = []
+
         #: (:obj:`str`) datasource label
         self.__dsvars = "$datasources."
 
@@ -278,6 +281,8 @@ class Merger(object):
                     self.__switch(child)
                 if cName in self.linkable and self.linkdatasources:
                     self.__addlink(child)
+                if cName in self.switchable and self.canfaildatasources:
+                    self.__canfail(child)
                 child = child.nextSibling
 
             children = node.childNodes
@@ -377,6 +382,47 @@ class Merger(object):
                     break
             if stnode and dsnode:
                 stnode.setAttribute("mode", self.modesToSwitch[mode])
+
+    def __canfail(self, node):
+        """ switch the given node to canfail mode
+
+        :param node: the given node
+        :type node: :obj:`xml.dom.minidom.Node`
+        """
+        if node:
+            stnode = None
+            dsname = None
+            dsnode = None
+
+            dsname, dsnode = self.__getTextDataSource(
+                node, self.canfaildatasources)
+
+            children = node.childNodes
+            for child in children:
+                cName = unicode(child.nodeName) \
+                    if isinstance(child, Element) else ""
+                if cName == 'datasource':
+                    dsname = child.getAttribute("name")
+                    if dsname in self.canfaildatasources:
+                        dsnode = child
+                    else:
+                        dsname, dsnode = self.__getTextDataSource(
+                            child, self.canfaildatasources)
+                    if not dsnode:
+                        gchildren = child.childNodes
+                        for gchild in gchildren:
+                            gcName = unicode(gchild.nodeName) \
+                                if isinstance(gchild, Element) else ""
+                            if gcName == 'datasource':
+                                gdsname = gchild.getAttribute("name")
+                                if gdsname in self.canfaildatasources:
+                                    dsnode = child
+                elif cName == 'strategy':
+                    stnode = child
+                if stnode and dsnode:
+                    break
+            if stnode and dsnode:
+                stnode.setAttribute("canfail", "true")
 
     def __addlink(self, node):
         """ add link in NXdata group
