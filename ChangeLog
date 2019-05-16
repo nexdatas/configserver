@@ -1,5 +1,5 @@
 2019-05-14 Jan Kotanski <jankotan@gmail.com>
-	* add CanFailDatasources attribute
+	* add CanFailDataSources attribute
 	* tagged as v2.11.0
 
 2019-01-15 Jan Kotanski <jankotan@gmail.com>
