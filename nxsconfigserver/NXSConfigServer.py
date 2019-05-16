@@ -1223,10 +1223,11 @@ class NXSConfigServerClass(PyTango.DeviceClass):
     }
 
     #: (:obj:`dict` <:obj:`str`, \
-    #:       [[ :class:`PyTango.CmdArgType`, \
-    #:          :class:`PyTango.AttrDataFormat`, \
-    #:          :class:`PyTango.AttrWriteType` ], \
-    #:          :obj:`dict` <:obj:`str` , any> ] > ) Attribute definitions
+    #       [ [ \
+    #          :class:`PyTango.CmdArgType`,
+    #          :class:`PyTango.AttrDataFormat`,
+    #          :class:`PyTango.AttrWriteType` ],
+    #          :obj:`dict` < :obj:`str` , any > ] > ) Attribute definitions
     attr_list = {
         'XMLString':
         [[PyTango.DevString,
