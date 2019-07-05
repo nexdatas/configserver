@@ -22,13 +22,45 @@
 import re
 import sys
 
-from xml.dom.minidom import parseString, Element
+import xml.etree.ElementTree as et
+from lxml.etree import XMLParser
+import lxml.etree as etree
 from .Errors import IncompatibleNodeError, UndefinedTagError
 
 
 if sys.version_info > (3,):
     basestring = str
     unicode = str
+
+
+def _tostr(text):
+    """ converts text  to str type
+
+    :param text: text
+    :type text: :obj:`bytes` or :obj:`unicode`
+    :returns: text in str type
+    :rtype: :obj:`str`
+    """
+    if isinstance(text, str):
+        return text
+    elif sys.version_info > (3,):
+        return str(text, encoding="utf8")
+    else:
+        return str(text)
+
+
+def _toxml(node):
+    """ provides xml content of the whole node
+
+    :param node: DOM node
+    :type node: :class:`xml.dom.Node`
+    :returns: xml content string
+    :rtype: :obj:`str`
+    """
+    xml = _tostr(et.tostring(node, encoding='utf8', method='xml'))
+    if xml.startswith("<?xml version='1.0' encoding='utf8'?>"):
+        xml = str(xml[38:])
+    return xml
 
 
 class Merger(object):
@@ -40,7 +72,7 @@ class Merger(object):
         """ consturctor
         """
 
-        #: (:obj:`xml.dom.minidom.Node`) DOM root node
+        #: (:obj:`xml.etree.ElementTree.Element`) DOM root node
         self.__root = None
         #: (:obj:`list` <:obj:`str`> ) tags which cannot have the same siblings
         self.singles = ['strategy', 'dimensions', 'definition',
@@ -98,61 +130,58 @@ class Merger(object):
         """ collects text from text child nodes
 
         :param node: parent node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         """
-        text = ""
-        if node:
-            child = node.firstChild
-            while child:
-                if child.nodeType == child.TEXT_NODE:
-                    text += child.data
-                child = child.nextSibling
-        return text
+        if node is not None:
+            tnodes = ([node.text] if node.text else []) \
+                     + [child.tail for child in node if child.tail]
+            return unicode("".join(tnodes)).strip()
+        return ""
 
-    def __getAncestors(self, node):
+    def __getAncestors(self, node, ancestors):
         """ gets ancestors form the xml tree
 
         :param node: dom node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         :returns: xml path
         :rtype: :obj:`str`
         """
         res = ""
 
-        name = node.getAttribute("name") if isinstance(node, Element) else ""
+        name = node.get("name")
 
-        if node and node.parentNode and \
-                node.parentNode.nodeName != '#document':
-            res = self.__getAncestors(node.parentNode)
-        res += "/" + unicode(node.nodeName)
+        for an in ancestors:
+            res += "/" + an[0]
+            if an[1]:
+                res += ":" + an[1]
+        res += "/" + unicode(node.tag)
         if name:
             res += ":" + name
         return res
 
-    def __areMergeable(self, elem1, elem2):
+    def __areMergeable(self, elem1, elem2, ancestors):
         """ checks if two elements are mergeable
 
         :param elem1: first element
-        :type elem1: :obj:`xml.dom.minidom.Element`
+        :type elem1: :obj:`xml.etree.ElementTree.Element`
         :param elem2: second element
-        :type elem2: :obj:`xml.dom.minidom.Element`
+        :type elem2: :obj:`xml.etree.ElementTree.Element`
         :returns: bool varaible if two elements are mergeable
         :rtype: :obj:`bool`
         """
 
-        if elem1.nodeName != elem2.nodeName:
+        if elem1.tag != elem2.tag:
             return False
-        tagName = unicode(elem1.nodeName)
+        tagName = unicode(elem1.tag)
         status = True
 
-        name1 = elem1.getAttribute("name")
-        name2 = elem2.getAttribute("name")
-
+        name1 = elem1.get("name")
+        name2 = elem2.get("name")
         if name1 != name2 and name1 and name2:
             if tagName in self.singles:
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: %s"
-                    % (str(self.__getAncestors(elem1)), str(name2)),
+                    % (str(self.__getAncestors(elem1, ancestors)), str(name2)),
                     [elem1, elem2])
             return False
 
@@ -162,7 +191,7 @@ class Merger(object):
             if tagName in self.singles or (name1 and name1 == name2):
                 raise IncompatibleNodeError(
                     "Incompatible element attributes  %s: %s"
-                    % (str(self.__getAncestors(elem1)), str(tags)),
+                    % (str(self.__getAncestors(elem1, ancestors)), str(tags)),
                     [elem1, elem2])
 
         if tagName in self.uniqueText:
@@ -171,144 +200,147 @@ class Merger(object):
             if text1 != text2 and text1 and text2:
                 raise IncompatibleNodeError(
                     "Incompatible \n%s element value\n%s \n%s "
-                    % (str(self.__getAncestors(elem1)), text1, text2),
+                    % (str(self.__getAncestors(elem1, ancestors)),
+                       text1, text2),
                     [elem1, elem2])
-
         return status
 
     def __checkAttributes(self, elem1, elem2):
         """ checks if two elements are mergeable
 
         :param elem1: first element
-        :type elem1: :obj:`xml.dom.minidom.Element`
+        :type elem1: :obj:`xml.etree.ElementTree.Element`
         :param elem2: second element
-        :type elem2: :obj:`xml.dom.minidom.Element`
+        :type elem2: :obj:`xml.etree.ElementTree.Element`
         :returns: tags with not mergeable attributes
         :rtype: :obj:`list` <:obj:`tuple` <:obj:`str`>>
         """
         tags = []
-        attr1 = elem1.attributes
-        attr2 = elem2.attributes
-        for i1 in range(attr1.length):
-            for i2 in range(attr2.length):
-                at1 = attr1.item(i1)
-                at2 = attr2.item(i2)
-                if at1.nodeName == at2.nodeName \
-                        and at1.nodeValue != at2.nodeValue:
-                    tags.append((str(self.__getAncestors(at1)),
-                                 str(at1.nodeValue), str(at2.nodeValue)))
+        attr1 = elem1.attrib
+        attr2 = elem2.attrib
+        for i1 in attr1.keys():
+            for i2 in attr2.keys():
+                if i1 == i2 and attr1[i1] != attr2[i2]:
+                    tags.append((str(attr1[i1]), str(attr2[i2])))
         return tags
 
     @classmethod
-    def __mergeNodes(cls, elem1, elem2):
+    def __mergeNodes(cls, elem1, elem2, parent):
         """ merges two dom elements
 
         :param elem1: first element
-        :type elem1: :obj:`xml.dom.minidom.Element`
+        :type elem1: :obj:`xml.etree.ElementTree.Element`
         :param elem2: second element
-        :type elem2: :obj:`xml.dom.minidom.Element`
+        :type elem2: :obj:`xml.etree.ElementTree.Element`
         """
-        attr2 = elem2.attributes
+        attr2 = elem2.attrib
         texts = []
-
-        for i2 in range(attr2.length):
-            at2 = attr2.item(i2)
-            elem1.setAttribute(at2.nodeName, at2.nodeValue)
-
-        child1 = elem1.firstChild
-        while child1:
-            if child1.nodeType == child1.TEXT_NODE:
-                texts.append(unicode(child1.data).strip())
-            child1 = child1.nextSibling
-
         toMove = []
 
-        child2 = elem2.firstChild
-        while child2:
-            if child2.nodeType == child2.TEXT_NODE:
-                if unicode(child2.data).strip() not in texts:
-                    toMove.append(child2)
+        for i2, at2 in attr2.items():
+            elem1.attrib[i2] = at2
+
+        if cls.__getText(elem1) != cls.__getText(elem2):
+            if elem1.text:
+                texts.append(unicode(elem1.text).strip())
+            for tchild in elem1:
+                if tchild.tail:
+                    texts.append(unicode(tchild.tail).strip())
+
+            if unicode(elem2.text).strip() not in texts:
+                if elem2.text:
+                    toMove.append(elem2.text)
+            for tchild in elem2:
+                if unicode(tchild.tail).strip() not in texts:
+                    if tchild.tail:
+                        toMove.append(tchild.tail)
+        for tchild in elem2:
+            elem1.append(tchild)
+        if toMove:
+            if elem1.text:
+                print(elem1.text)
+                print(toMove)
+                elem1.text += "".join(toMove)
             else:
-                toMove.append(child2)
-            child2 = child2.nextSibling
+                elem1.text = "".join(toMove)
 
-        for child in toMove:
-            elem1.appendChild(child)
-        toMove = []
+        parent.remove(elem2)
 
-        parent = elem2.parentNode
-        parent.removeChild(elem2)
-
-    def __mergeChildren(self, node):
+    def __mergeChildren(self, node, ancestors, entrynode=None):
         """ merge the given node
 
         :param node: the given node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         """
-        if node:
+        if node is not None and node.tag != "definition":
+            newancestors = tuple(
+                list(ancestors) +
+                [(node.tag, node.get("name"), node.get("type"))])
+            if entrynode is None:
+                entrynode = node
+        else:
+            newancestors = ancestors
+        if node is not None:
 
-            children = node.childNodes
+            children = list(node)
             c1 = 0
-            while c1 < children.length:
-                child1 = children.item(c1)
+            while c1 < len(children):
+                child1 = children[c1]
                 c2 = c1 + 1
-                while c2 < children.length:
-                    child2 = children.item(c2)
+                while c2 < len(children):
+                    child2 = children[c2]
                     if child1 != child2:
-                        if isinstance(child1, Element) \
-                                and isinstance(child2, Element):
-                            if self.__areMergeable(child1, child2):
-                                self.__mergeNodes(child1, child2)
-                                c2 -= 1
+                        if self.__areMergeable(
+                                child1, child2,
+                                ancestors):
+                            self.__mergeNodes(child1, child2, node)
+                            children.pop(c2)
+                            c2 -= 1
                     c2 += 1
                 c1 += 1
 
-            child = node.firstChild
-            nName = unicode(node.nodeName) if isinstance(node, Element) else ""
+            nName = unicode(node.tag)
 
-            while child:
-                cName = unicode(child.nodeName) \
-                    if isinstance(child, Element) else ""
+            for child in node:
+                cName = unicode(child.tag)
                 if nName and nName in self.children.keys():
                     if cName and cName not in self.children[nName]:
                         raise IncompatibleNodeError(
                             "Not allowed <%s> child of \n < %s > \n  parent"
-                            % (cName, self.__getAncestors(child)),
+                            % (cName,
+                               self.__getAncestors(child, newancestors)),
                             [child])
 
-                self.__mergeChildren(child)
+                self.__mergeChildren(child, newancestors, entrynode)
                 if cName in self.switchable and self.switchdatasources:
                     self.__switch(child)
                 if cName in self.linkable and self.linkdatasources:
-                    self.__addlink(child)
+                    self.__addlink(child, newancestors, entrynode)
                 if cName in self.switchable and self.canfaildatasources:
                     self.__canfail(child)
-                child = child.nextSibling
 
-            children = node.childNodes
+            children = list(node)
             c1 = 0
-            while c1 < children.length:
-                child = children.item(c1)
-                if isinstance(child, Element):
-                    if child.nodeName == "group":
-                        cchildren = child.childNodes
-                        elems = [cchildren.item(i)
-                                 for i in range(cchildren.length)
-                                 if isinstance(cchildren.item(i), Element)]
-                        if not elems and \
-                           child.getAttribute("type") in self.tocut and \
-                           (len(child.attributes.keys()) == 1 or
-                            (len(child.attributes.keys()) == 2 and
-                             "NX" + child.getAttribute("name") ==
-                             child.getAttribute("type"))):
-                            node.removeChild(child)
+            while c1 < len(children):
+                child = children[c1]
+                if child.tag == "group":
+                    cchildren = list(child)
+                    elems = [cchildren[i]
+                             for i in range(len(cchildren))]
+                    if not elems and \
+                       child.get("type") in self.tocut and \
+                       (len(child.attrib.keys()) == 1 or
+                        (len(child.attrib.keys()) == 2 and
+                         "NX" + child.get("name") ==
+                         child.get("type"))):
+                        node.remove(child)
                 c1 += 1
 
     def __getTextDataSource(self, node, dslist=None):
         """ find first datasources node and name in text nodes of the node
 
         :param node: the parent node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         :param dslist: list of datasources
         :type dslist: :obj:`list` <:obj:`str`>
         :returns: (node, name) of the searched datasource
@@ -343,9 +375,9 @@ class Merger(object):
         """ switch the given node to step mode
 
         :param node: the given node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         """
-        if node:
+        if node is not None:
             stnode = None
             mode = None
             dsname = None
@@ -353,43 +385,39 @@ class Merger(object):
 
             dsname, dsnode = self.__getTextDataSource(node)
 
-            children = node.childNodes
-            for child in children:
-                cName = unicode(child.nodeName) \
-                    if isinstance(child, Element) else ""
+            for child in node:
+                cName = unicode(child.tag)
                 if cName == 'datasource':
-                    dsname = child.getAttribute("name")
+                    dsname = child.get("name")
                     if dsname in self.switchdatasources:
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(child)
                     if not dsnode:
-                        gchildren = child.childNodes
-                        for gchild in gchildren:
-                            gcName = unicode(gchild.nodeName) \
-                                if isinstance(gchild, Element) else ""
+                        for gchild in child:
+                            gcName = unicode(gchild.tag)
                             if gcName == 'datasource':
-                                gdsname = gchild.getAttribute("name")
+                                gdsname = gchild.get("name")
                                 if gdsname in self.switchdatasources:
                                     dsnode = child
                 elif cName == 'strategy':
-                    mode = child.getAttribute("mode")
+                    mode = child.get("mode")
                     if mode in self.modesToSwitch.keys():
                         stnode = child
                     else:
                         break
-                if stnode and dsnode:
+                if stnode is not None and dsnode is not None:
                     break
-            if stnode and dsnode:
-                stnode.setAttribute("mode", self.modesToSwitch[mode])
+            if stnode is not None and dsnode is not None:
+                stnode.attrib["mode"] = self.modesToSwitch[mode]
 
     def __canfail(self, node):
         """ switch the given node to canfail mode
 
         :param node: the given node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         """
-        if node:
+        if node is not None:
             stnode = None
             dsname = None
             dsnode = None
@@ -397,96 +425,78 @@ class Merger(object):
             dsname, dsnode = self.__getTextDataSource(
                 node, self.canfaildatasources)
 
-            children = node.childNodes
-            for child in children:
-                cName = unicode(child.nodeName) \
-                    if isinstance(child, Element) else ""
+            for child in node:
+                cName = unicode(child.tag)
                 if cName == 'datasource':
-                    dsname = child.getAttribute("name")
+                    dsname = child.get("name")
                     if dsname in self.canfaildatasources:
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(
                             child, self.canfaildatasources)
-                    if not dsnode:
-                        gchildren = child.childNodes
-                        for gchild in gchildren:
-                            gcName = unicode(gchild.nodeName) \
-                                if isinstance(gchild, Element) else ""
+                    if dsnode is None:
+                        for gchild in child:
+                            gcName = unicode(gchild.tag)
                             if gcName == 'datasource':
-                                gdsname = gchild.getAttribute("name")
+                                gdsname = gchild.get("name")
                                 if gdsname in self.canfaildatasources:
                                     dsnode = child
                 elif cName == 'strategy':
                     stnode = child
-                if stnode and dsnode:
+                if stnode is not None and dsnode is not None:
                     break
-            if stnode and dsnode:
-                stnode.setAttribute("canfail", "true")
+            if stnode is not None and dsnode is not None:
+                stnode.attrib["canfail"] = "true"
 
-    def __addlink(self, node):
+    def __addlink(self, node, ancestors, entrynode):
         """ add link in NXdata group
 
         :param node: the given node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         """
-        if node:
+        if node is not None:
             dsname = None
             dsnode = None
 
             dsname, dsnode = self.__getTextDataSource(
                 node, self.linkdatasources)
-
-            children = node.childNodes
-            for child in children:
-                cName = unicode(child.nodeName) \
-                    if isinstance(child, Element) else ""
+            for child in node:
+                cName = unicode(child.tag)
                 if cName == 'datasource':
-                    dsname = child.getAttribute("name")
+                    dsname = child.get("name")
                     if dsname in self.linkdatasources:
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(
                             child, self.linkdatasources)
-                if dsnode:
+                if dsnode is not None:
                     break
-            if dsnode:
-                grpnode = node.parentNode
-                path = [(node.getAttribute("name"), dsname)]
-                entrynode = None
-                while hasattr(grpnode, "getAttribute"):
-                    if grpnode.nodeName == 'group':
-                        entrynode = grpnode
-                        path.append(
-                            (grpnode.getAttribute("name"),
-                             grpnode.getAttribute("type")))
-                    grpnode = grpnode.parentNode
+            if dsnode is not None:
+                path = []
+                path = [(node.get("name"), dsname)]
+                for anc in reversed(ancestors):
+                    path.append((anc[1], anc[2]))
                 linkfound = False
                 datanode = None
-                if entrynode:
-                    gchildren = entrynode.childNodes
-                    for gchild in gchildren:
-                        if hasattr(gchild, "getAttribute"):
-                            if gchild.getAttribute("name") == 'data' \
-                               and gchild.getAttribute("type") == 'NXdata':
-                                datanode = gchild
-                                dchildren = datanode.childNodes
-                                for dchild in dchildren:
-                                    if hasattr(dchild, "getAttribute"):
-                                        if dchild.getAttribute("name") \
-                                           == dsname:
-                                            linkfound = True
-                                            break
+                if entrynode is not None:
+                    for gchild in entrynode:
+                        if gchild.get("name") == 'data' \
+                           and gchild.get("type") == 'NXdata':
+                            datanode = gchild
+                            for dchild in datanode:
+                                if dchild.get("name") == dsname:
+                                    linkfound = True
+                                    break
                     if not linkfound:
-                        self.__createLink(grpnode, entrynode, datanode, path)
+                        self.__createLink(entrynode, datanode, path)
 
-    def __createLink(self, root, entry, data, path):
+    def __createLink(self, entry, data, path):
         """ create link on given node
 
         :param root: root node
-        :type root: :class:`xml.dom.minidom.Node`
+        :type root: :class:`xml.etree.ElementTree.Element`
         :param node: the given node
-        :type node: :obj:`xml.dom.minidom.Node`
+        :type node: :obj:`xml.etree.ElementTree.Element`
         :param path: list with NeXus path (name, type)
         :type node: :obj:`list` < (:obj:`str`,:obj:`str`) >
         """
@@ -494,19 +504,19 @@ class Merger(object):
         if path:
             target, dsname = path[0]
             if target:
-                if not data:
-                    data = root.createElement("group")
-                    entry.appendChild(data)
-                    data.setAttribute("type", "NXdata")
-                    data.setAttribute("name", "data")
+                if data is None:
+                    data = etree.Element("group")
+                    entry.append(data)
+                    data.attrib["type"] = "NXdata"
+                    data.attrib["name"] = "data"
                 for gname, gtype in path[1:]:
                     target = "%s:%s/" % (gname, gtype) + target
                 target = "/" + target
                 if dsname:
-                    link = root.createElement("link")
-                    data.appendChild(link)
-                    link.setAttribute("target", "%s" % target)
-                    link.setAttribute("name", dsname)
+                    link = etree.Element("link")
+                    data.append(link)
+                    link.attrib["target"] = "%s" % target
+                    link.attrib["name"] = dsname
 
     def collect(self, components):
         """ collects the given components in one DOM tree
@@ -519,29 +529,22 @@ class Merger(object):
         for cp in components:
             dcp = None
             if cp:
-                dcp = parseString(cp)
-            if not dcp:
+                if sys.version_info > (3,):
+                    cp = bytes(cp, "UTF-8")
+                dcp = et.fromstring(cp, parser=XMLParser(collect_ids=False))
+            if dcp is None:
                 continue
 
             if self.__root is None:
                 self.__root = dcp
-                rdef = dcp.getElementsByTagName("definition")
-                if not rdef:
+                if dcp.tag != "definition":
                     raise UndefinedTagError("<definition> not defined")
-                rootDef = rdef[0]
+                rootDef = dcp
             else:
-                defin = dcp.getElementsByTagName("definition")
-                if not defin:
+                if dcp.tag != "definition":
                     raise UndefinedTagError("<definition> not defined")
-                for cd in defin[0].childNodes:
-                    if cd.nodeType != cd.TEXT_NODE or \
-                       (
-                           cd.nodeType == cd.TEXT_NODE and
-                           str(cd.data).strip()
-                       ):
-
-                        icd = self.__root.importNode(cd, True)
-                        rootDef.appendChild(icd)
+                for cd in dcp:
+                    rootDef.append(cd)
 
     def toString(self):
         """ Converts DOM tree to string
@@ -549,13 +552,14 @@ class Merger(object):
         :returns: DOM tree in XML string
         :rtype: :obj:`str`
         """
-        if self.__root:
-            return str(self.__root.toxml())
+        if self.__root is not None:
+            return _tostr(
+                et.tostring(self.__root, encoding='utf8', method='xml'))
 
     def merge(self):
         """ performs the merging operation
         """
-        self.__mergeChildren(self.__root)
+        self.__mergeChildren(self.__root, ())
 
 
 if __name__ == "__main__":
