@@ -346,9 +346,6 @@ class NXSConfigServer(PyTango.Device_4Impl):
         """
         self.debug_stream("In Open()")
         try:
-            if self.get_state() == PyTango.DevState.OPEN:
-                self.set_state(PyTango.DevState.RUNNING)
-                self.xmlc.close()
             self.set_state(PyTango.DevState.RUNNING)
             self.xmlc.open()
             self.set_state(PyTango.DevState.OPEN)

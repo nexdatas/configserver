@@ -939,24 +939,6 @@ class XMLConfigurator(object):
             self.xmlstring = ''
         self._streams.info("XMLConfigurator::createConfiguration() "
                            "- Create configuration")
-        # JKR tests
-        # gccheck()
-
-
-def gccheck():
-    import gc
-    gc.set_debug(gc.DEBUG_LEAK)
-    n = gc.collect()
-    print("UNREACHABLE %s" % n)
-    gres = gc.garbage
-    print("GARBAGE %s" % len(gres))
-    # res = str(gres)
-    # import time
-    # fname = "/tmp/cfgcdump-%s.gc" % str(time.time())
-    # print(fname)
-    # fl = open(fname, "w")
-    # fl.write(res)
-    # fl.close()
 
 
 if __name__ == "__main__":

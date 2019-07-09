@@ -21,6 +21,7 @@
 
 import MySQLdb
 import sys
+import json
 
 from .Errors import NonregisteredDBRecordError
 
@@ -45,6 +46,8 @@ class MYSQLDataBase(object):
         self.__db = None
         #: (:obj:`dict` <:obj:`str`, any>) connect arguments
         self.__args = None
+        #: (:obj:`dict` <:obj:`str`, any>) connect arguments string
+        self.__argstr = None
         #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
         self._streams = streams
 
@@ -57,8 +60,18 @@ class MYSQLDataBase(object):
         if self._streams:
             self._streams.debug(
                 "MYSQLDataBase::connect() - connect: %s" % args)
-        self.__db = MySQLdb.connect(**args)
-        self.__args = args
+        argstr = json.dumps(args)
+        if self.__argstr == argstr and self.__db.open:
+            try:
+                self.__db.ping(True)
+            except Exception as e:
+                self.close()
+                self.__db = MySQLdb.connect(**args)
+        else:
+            self.close()
+            self.__db = MySQLdb.connect(**args)
+            self.__args = args
+            self.__argstr = argstr
 
     def close(self):
         """ closes database connection
