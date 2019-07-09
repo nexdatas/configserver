@@ -64,7 +64,7 @@ class MYSQLDataBase(object):
         if self.__argstr == argstr and self.__db.open:
             try:
                 self.__db.ping(True)
-            except Exception as e:
+            except Exception:
                 self.close()
                 self.__db = MySQLdb.connect(**args)
         else:
