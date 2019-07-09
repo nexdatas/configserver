@@ -119,8 +119,9 @@ class MergerTest(unittest.TestCase):
 
         el = Merger()
         self.assertEqual(el.collect(["<definition/>"]), None)
-        self.assertEqual(el.toString().replace(
-            "?>\n<", "?><"), '<?xml version="1.0" ?><definition/>')
+        self.assertEqual(
+            el.toString().replace("?>\n<", "?><"),
+            "<?xml version='1.0' encoding='utf8'?><definition />")
 
     # test collect
     # \brief It tests default settings
@@ -145,7 +146,8 @@ class MergerTest(unittest.TestCase):
             None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
             '</definition>')
 
     # test collect
@@ -161,9 +163,14 @@ class MergerTest(unittest.TestCase):
             None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
-            '<group type="NXentry"/><group type="NXentry"/>'
-            '<group type="NXentry"/><group type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition>'
+            '<group type="NXentry" />'
+            '<group type="NXentry" />'
+            '<group type="NXentry" />'
+            '<group type="NXentry" />'
+            '<group type="NXentry" />'
+            '</definition>')
 
     # test collect
     # \brief It tests default settings
@@ -178,8 +185,9 @@ class MergerTest(unittest.TestCase):
             None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
-            '<group type="NXentry2"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
+            '<group type="NXentry2" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -216,10 +224,11 @@ class MergerTest(unittest.TestCase):
                  "</group></definition>"] * 3), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<field type="field"/></group><group type="NXentry">'
-            '<field type="field"/></group><group type="NXentry">'
-            '<field type="field"/></group></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<field type="field" /></group><group type="NXentry">'
+            '<field type="field" /></group><group type="NXentry">'
+            '<field type="field" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -236,9 +245,11 @@ class MergerTest(unittest.TestCase):
                  "<field name='field1'/></definition>"]), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<field name="field1"/></group><group type="NXentry2"/>'
-            '<field name="field1"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<field name="field1" /></group>'
+            '<group type="NXentry2" />'
+            '<field name="field1" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -271,8 +282,9 @@ class MergerTest(unittest.TestCase):
         el = Merger()
         self.assertEqual(el.collect(["<definition/>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(el.toString().replace(
-            "?>\n<", "?><"), '<?xml version="1.0" ?><definition/>')
+        self.assertEqual(
+            el.toString().replace("?>\n<", "?><"),
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition />')
 
     # test collect
     # \brief It tests default settings
@@ -288,7 +300,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
             '</definition>')
 
     # test collect
@@ -306,7 +319,8 @@ class MergerTest(unittest.TestCase):
             None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<", "?><"),
-                         '<?xml version="1.0" ?><definition/>')
+                         '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+                         '<definition />')
 
     # test collect
     # \brief It tests default settings
@@ -322,7 +336,8 @@ class MergerTest(unittest.TestCase):
                  "<definition><group type='NXentry'/></definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<", "?><"),
-                         '<?xml version="1.0" ?><definition/>')
+                         '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+                         '<definition />')
 
     # test collect
     # \brief It tests default settings
@@ -339,7 +354,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
             '</definition>')
 
     # test collect
@@ -358,8 +374,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<group/></group></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<group /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -376,7 +393,8 @@ class MergerTest(unittest.TestCase):
                  "</definition>"]), None)
         self.assertEqual(el.merge(), None)
         self.assertEqual(el.toString().replace("?>\n<", "?><"),
-                         '<?xml version="1.0" ?><definition/>')
+                         '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+                         '<definition />')
 
     # test collect
     # \brief It tests default settings
@@ -394,8 +412,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry2" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry2" type="NXentry" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -414,8 +432,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group attr="ble ble" name="entry" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group attr="ble ble" name="entry" type="NXentry" />'
+            '</definition>')
 
     # test collect
     # \brief It tests default settings
@@ -434,8 +453,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry2" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition>'
+            '<group name="entry2" type="NXentry" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -454,9 +474,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry2" type="NXentry">'
-            '<group type="NXtransformations"/></group></definition>')
+            '<group type="NXtransformations" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -475,8 +495,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?>'
-            '<definition><group name="entry2" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry2" type="NXentry" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -495,9 +515,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry2" type="NXentry">'
-            '<group name="transformations2" type="NXtransformations"/>'
+            '<group name="transformations2" type="NXtransformations" />'
             '</group></definition>')
 
     # test collect
@@ -514,7 +534,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
             '</definition>')
 
     # test collect
@@ -531,8 +552,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry"/>'
-            '<group type="NXentry2"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry" />'
+            '<group type="NXentry2" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -548,8 +570,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry" type="NXentry2"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry2" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -566,8 +588,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?>'
-            '<definition><group name="entry" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry" type="NXentry" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -584,8 +606,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group name="entry2"/>'
-            '<group name="entry" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry2" />'
+            '<group name="entry" type="NXentry" /></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -601,8 +624,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<field type="field"/></group></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<field type="field" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -618,8 +642,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<field type="field"/></group></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<field type="field" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -637,8 +662,9 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry" type="NXentry"><field type="field"/></group>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry">'
+            '<field type="field" /></group>'
             '</definition>')
 
     # test collect
@@ -673,10 +699,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry" type="NXentry"><field type="field"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field type="field" />'
             '</group><group name="entry2" type="NXentry2">'
-            '<field type="field"/></group></definition>')
+            '<field type="field" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -711,9 +737,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition><group type="NXentry">'
-            '<field type="field"/></group><group type="NXentry2">'
-            '<field type="field"/></group></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry">'
+            '<field type="field" /></group><group type="NXentry2">'
+            '<field type="field" /></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -750,7 +777,7 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry" type="NXentry">'
             '<field type="field">My text My text 2 </field></group>'
             '</definition>')
@@ -818,8 +845,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry" type="NXentry"><field type="field"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field type="field" />'
             '</group></definition>')
 
     # test collect
@@ -876,8 +903,8 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
-            '<group name="entry" type="NXentry"><field type="field"/>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field type="field" />'
             '</group></definition>')
 
     # test collect
@@ -931,11 +958,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -957,11 +984,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="STEP"/>'
-            '</field><attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="STEP" />'
+            '</field><attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -983,11 +1010,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1009,11 +1036,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1037,11 +1064,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="STEP"/>'
-            '</field><attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="STEP" />'
+            '</field><attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1065,11 +1092,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1093,11 +1120,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1121,11 +1148,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry" type="NXentry">'
-            '<field type="field"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></field><attribute type="field2">'
-            '<datasource name="ds2"/><strategy mode="FINAL"/></attribute>'
+            '<field type="field"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></field><attribute type="field2">'
+            '<datasource name="ds2" /><strategy mode="FINAL" /></attribute>'
             '</group></definition>')
 
     # test collect
@@ -1150,11 +1177,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1178,11 +1205,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1207,11 +1234,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="INIT"/></field>'
+            '$datasources.ds1<strategy mode="INIT" /></field>'
             '<attribute type="field2">$datasources.ds1'
-            '<strategy mode="INIT"/></attribute></group></definition>')
+            '<strategy mode="INIT" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1233,11 +1260,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1259,11 +1286,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1285,11 +1312,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
+            '$datasources.ds1<strategy mode="STEP" /></field>'
             '<attribute type="field2">$datasources.ds1'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1313,11 +1340,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1341,11 +1368,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1369,11 +1396,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1397,11 +1424,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="POSTRUN"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="POSTRUN" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1425,11 +1452,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1453,11 +1480,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="STEP"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="STEP" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1481,11 +1508,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy mode="POSTRUN"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '$datasources.ds1<strategy mode="POSTRUN" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1509,11 +1536,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<field type="field">$datasources.ds1'
-            '<strategy mode="INIT"/></field><attribute type="field2">'
-            '<datasource name="ds2"/><strategy mode="STEP"/>'
+            '<strategy mode="INIT" /></field><attribute type="field2">'
+            '<datasource name="ds2" /><strategy mode="STEP" />'
             '</attribute></group></definition>')
 
     # test collect
@@ -1534,10 +1561,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1557,10 +1584,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1580,10 +1607,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1602,10 +1629,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1624,10 +1651,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy mode="STEP"/></attribute></group></definition>')
+            '<strategy mode="STEP" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1646,10 +1673,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy mode="FINAL"/></attribute></group></definition>')
+            '<strategy mode="FINAL" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1673,11 +1700,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1701,11 +1728,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy mode="INIT" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1729,13 +1756,13 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
-            '<field name="myfield" type="field"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></field><attribute type="field2">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></attribute>'
+            '<field name="myfield" type="field"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></field><attribute type="field2">'
+            '<datasource name="ds1" /><strategy mode="INIT" /></attribute>'
             '<group name="data" type="NXdata">'
-            '<link name="ds1" target="/entry:NXentry/myfield"/>'
+            '<link name="ds1" target="/entry:NXentry/myfield" />'
             '</group></group></definition>')
 
     # test collect
@@ -1761,13 +1788,13 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
-            '<field name="myfield" type="field"><datasource name="ds1"/>'
-            '<strategy mode="STEP"/></field><attribute type="field2">'
-            '<datasource name="ds1"/><strategy mode="INIT"/></attribute>'
+            '<field name="myfield" type="field"><datasource name="ds1" />'
+            '<strategy mode="STEP" /></field><attribute type="field2">'
+            '<datasource name="ds1" /><strategy mode="INIT" /></attribute>'
             '<group name="data" type="NXdata">'
-            '<link name="ds1" target="/entry:NXentry/myfield"/>'
+            '<link name="ds1" target="/entry:NXentry/myfield" />'
             '</group></group></definition>')
 
     # test collect
@@ -1795,15 +1822,15 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
-            '<field name="myfield" type="field"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></field></group>'
-            '<field name="mf" type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></field>'
+            '<field name="myfield" type="field"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></field></group>'
+            '<field name="mf" type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></field>'
             '<group name="data" type="NXdata">'
-            '<link name="ds1" target="/entry:NXentry/mf"/>'
+            '<link name="ds1" target="/entry:NXentry/mf" />'
             '</group></group></definition>')
 
     # test collect
@@ -1831,17 +1858,17 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
-            '<field name="myfield" type="field"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></field></group>'
-            '<field name="mf" type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></field>'
+            '<field name="myfield" type="field"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></field></group>'
+            '<field name="mf" type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></field>'
             '<group name="data" type="NXdata">'
             '<link name="ds2" '
-            'target="/entry:NXentry/instrument:NXinstrument/myfield"/>'
-            '<link name="ds1" target="/entry:NXentry/mf"/>'
+            'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
+            '<link name="ds1" target="/entry:NXentry/mf" />'
             '</group></group></definition>')
 
     # test collect
@@ -1870,29 +1897,29 @@ class MergerTest(unittest.TestCase):
         try:
             self.assertEqual(
                 el.toString().replace("?>\n<", "?><"),
-                '<?xml version="1.0" ?><definition>'
+                '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
                 '<group name="entry" type="NXentry">'
                 '<group name="instrument" type="NXinstrument">'
-                '<field name="myfield" type="field"><datasource name="ds1"/>'
-                '<strategy mode="STEP"/></field></group>'
-                '<field name="mf" type="field2"><datasource name="ds1"/>'
-                '<strategy mode="INIT"/></field>'
+                '<field name="myfield" type="field"><datasource name="ds1" />'
+                '<strategy mode="STEP" /></field></group>'
+                '<field name="mf" type="field2"><datasource name="ds1" />'
+                '<strategy mode="INIT" /></field>'
                 '<group name="data" type="NXdata">'
-                '<link name="ds1" target="/entry:NXentry/mf"/></group>'
+                '<link name="ds1" target="/entry:NXentry/mf" /></group>'
                 '</group></definition>')
         except Exception:
             self.assertEqual(
                 el.toString().replace("?>\n<", "?><"),
-                '<?xml version="1.0" ?><definition>'
+                '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
                 '<group name="entry" type="NXentry">'
                 '<group name="instrument" type="NXinstrument">'
-                '<field name="myfield" type="field"><datasource name="ds1"/>'
-                '<strategy mode="STEP"/></field></group>'
-                '<field name="mf" type="field2"><datasource name="ds1"/>'
-                '<strategy mode="INIT"/></field>'
+                '<field name="myfield" type="field"><datasource name="ds1" />'
+                '<strategy mode="STEP" /></field></group>'
+                '<field name="mf" type="field2"><datasource name="ds1" />'
+                '<strategy mode="INIT" /></field>'
                 '<group name="data" type="NXdata">'
                 '<link name="ds1" '
-                'target="/entry:NXentry/instrument:NXinstrument/myfield"/>'
+                'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
                 '</group></group></definition>')
 
     # test collect
@@ -1921,17 +1948,17 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
-            '<field name="myfield" type="field"><datasource name="ds2"/>'
-            '<strategy mode="STEP"/></field></group>'
-            '<field name="mf" type="field2"><datasource name="ds1"/>'
-            '<strategy mode="INIT"/></field>'
+            '<field name="myfield" type="field"><datasource name="ds2" />'
+            '<strategy mode="STEP" /></field></group>'
+            '<field name="mf" type="field2"><datasource name="ds1" />'
+            '<strategy mode="INIT" /></field>'
             '<group name="data" type="NXdata">'
-            '<link name="ds1" target="/entry:NXentry"/>'
+            '<link name="ds1" target="/entry:NXentry" />'
             '<link name="ds2" '
-            'target="/entry:NXentry/instrument:NXinstrument/myfield"/>'
+            'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
             '</group></group></definition>')
 
     # test collect
@@ -1957,11 +1984,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="false"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="false" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -1983,11 +2010,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="true"/>'
-            '</field><attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="true" />'
+            '</field><attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2010,11 +2037,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="false"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="false" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2037,11 +2064,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="true"/></field>'
-            '<attribute type="field2"><datasource name="ds1"/>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="true" /></field>'
+            '<attribute type="field2"><datasource name="ds1" />'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2064,11 +2091,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="true"/>'
-            '</field><attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="true" />'
+            '</field><attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2092,11 +2119,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="false"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="false" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2120,11 +2147,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '<datasource name="ds1"/><strategy canfail="true"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<datasource name="ds1" /><strategy canfail="true" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2151,11 +2178,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="false"/></field>'
+            '$datasources.ds1<strategy canfail="false" /></field>'
             '<attribute type="field2">$datasources.ds1'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2178,11 +2205,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="true"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '$datasources.ds1<strategy canfail="true" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2206,11 +2233,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="false"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '$datasources.ds1<strategy canfail="false" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2233,11 +2260,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="true"/></field>'
+            '$datasources.ds1<strategy canfail="true" /></field>'
             '<attribute type="field2">$datasources.ds1'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2262,11 +2289,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="true"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '$datasources.ds1<strategy canfail="true" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2291,11 +2318,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="false"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '$datasources.ds1<strategy canfail="false" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2320,11 +2347,11 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
-            '$datasources.ds1<strategy canfail="true"/></field>'
-            '<attribute type="field2"><datasource name="ds2"/>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '$datasources.ds1<strategy canfail="true" /></field>'
+            '<attribute type="field2"><datasource name="ds2" />'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2344,10 +2371,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2367,10 +2394,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2390,10 +2417,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
-            '<datasource name="ds2"><datasource name="ds1"/></datasource>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<datasource name="ds2"><datasource name="ds1" /></datasource>'
+            '<strategy canfail="false" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2412,10 +2439,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2434,10 +2461,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy canfail="true"/></attribute></group></definition>')
+            '<strategy canfail="true" /></attribute></group></definition>')
 
     # test collect
     # \brief It tests default settings
@@ -2456,10 +2483,10 @@ class MergerTest(unittest.TestCase):
         self.assertEqual(el.merge(), None)
         self.assertEqual(
             el.toString().replace("?>\n<", "?><"),
-            '<?xml version="1.0" ?><definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><attribute type="field2">'
             '<datasource name="ds2">$datasources.ds1</datasource>'
-            '<strategy canfail="false"/></attribute></group></definition>')
+            '<strategy canfail="false" /></attribute></group></definition>')
 
 
 if __name__ == '__main__':

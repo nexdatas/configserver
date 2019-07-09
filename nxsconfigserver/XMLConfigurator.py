@@ -22,8 +22,11 @@
 import json
 import re
 import sys
+import weakref
 from xml import sax
-from xml.dom.minidom import parseString
+import xml.etree.ElementTree as et
+from lxml.etree import XMLParser
+from lxml import etree
 
 from .MYSQLDataBase import MYSQLDataBase as MyDB
 from .ComponentParser import ComponentHandler
@@ -31,6 +34,36 @@ from .Merger import Merger
 from .Errors import NonregisteredDBRecordError
 from .Release import __version__
 from .StreamSet import StreamSet
+
+
+def _tostr(text):
+    """ converts text  to str type
+
+    :param text: text
+    :type text: :obj:`bytes` or :obj:`unicode`
+    :returns: text in str type
+    :rtype: :obj:`str`
+    """
+    if isinstance(text, str):
+        return text
+    elif sys.version_info > (3,):
+        return str(text, encoding="utf8")
+    else:
+        return str(text)
+
+
+def _toxml(node):
+    """ provides xml content of the whole node
+
+    :param node: DOM node
+    :type node: :class:`xml.dom.Node`
+    :returns: xml content string
+    :rtype: :obj:`str`
+    """
+    xml = _tostr(et.tostring(node, encoding='utf8', method='xml'))
+    if xml.startswith("<?xml version='1.0' encoding='utf8'?>"):
+        xml = str(xml[38:])
+    return xml
 
 
 class XMLConfigurator(object):
@@ -47,7 +80,7 @@ class XMLConfigurator(object):
 
         """
         #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
-        self._streams = StreamSet(server)
+        self._streams = StreamSet(weakref.ref(server) if server else None)
         #: (:obj:`str`) XML config string
         self.xmlstring = ""
         #: (:obj:`str`) component selection
@@ -723,15 +756,23 @@ class XMLConfigurator(object):
                             tag if tag else "variable", name, component))
                 if tag:
                     if sys.version_info > (3,):
-                        dom = parseString(bytes(xmlds[0], "UTF-8"))
+                        root = et.fromstring(
+                            bytes(xmlds[0], "UTF-8"),
+                            parser=XMLParser(collect_ids=False))
                     else:
-                        dom = parseString(xmlds[0])
-                    domds = dom.getElementsByTagName(tag)
-                    if not domds:
+                        root = et.fromstring(
+                            xmlds[0], parser=XMLParser(collect_ids=False))
+                        # dom = parseString(xmlds[0])
+                    if root.tag == tag:
+                        etds = [root]
+                    else:
+                        etds = root.findall(".//%s" % tag)
+                    # domds = dom.getElementsByTagName(tag)
+                    if not etds:
                         raise NonregisteredDBRecordError(
                             "The %s %s of %s not registered in the DataBase"
                             % (tag if tag else "variable", name, component))
-                    ds = domds[0].toxml()
+                    ds = _toxml(etds[0])
                     if not ds:
                         raise NonregisteredDBRecordError(
                             "The %s %s of %s not registered" % (
@@ -880,13 +921,20 @@ class XMLConfigurator(object):
         cnf = self.__mergeVars(names, withVariables=True)
         cnf = self.__instantiate(cnf)
         cnfMerged = self.__merge([cnf])
-
         if cnfMerged and hasattr(cnfMerged, "strip") and cnfMerged.strip():
             if sys.version_info > (3,):
-                reparsed = parseString(bytes(cnfMerged, "UTF-8"))
+                reparsed = et.fromstring(
+                    bytes(cnfMerged, "UTF-8"),
+                    parser=XMLParser(collect_ids=False))
             else:
-                reparsed = parseString(cnfMerged)
-            self.xmlstring = str((reparsed.toprettyxml(indent=" ", newl="")))
+                reparsed = et.fromstring(
+                    cnfMerged, parser=XMLParser(collect_ids=False))
+            xmls = _tostr(etree.tostring(reparsed, encoding='utf8',
+                                         method='xml', pretty_print=True))
+            if xmls.startswith("<?xml"):
+                self.xmlstring = xmls
+            else:
+                self.xmlstring = "<?xml version='1.0' encoding='utf8'?>" + xmls
         else:
             self.xmlstring = ''
         self._streams.info("XMLConfigurator::createConfiguration() "
