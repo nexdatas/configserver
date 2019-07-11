@@ -31,7 +31,7 @@ class IncompatibleNodeError(Exception):
         :param value: string with error message
         :type value: :obj:`str`
         :param nodes: list of nodes with errors
-        :type nodes: :obj:`list` <:class:`xml.dom.minidom.Node`>
+        :type nodes: :obj:`list` <:class:`lxml.etree.Element`>
         """
         Exception.__init__(self, value)
         #: exception value
