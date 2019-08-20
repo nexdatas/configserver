@@ -256,6 +256,8 @@ class Merger(object):
                         toMove.append(tchild.tail)
         for tchild in elem2:
             elem1.append(tchild)
+        if elem2.tail.strip():
+            elem1.tail += elem2.tail
         if toMove:
             if elem1.text:
                 print(elem1.text)
@@ -545,6 +547,12 @@ class Merger(object):
                     raise UndefinedTagError("<definition> not defined")
                 for cd in dcp:
                     rootDef.append(cd)
+                txt = self.__getText(dcp)
+                if txt:
+                    if len(rootDef) > 0:
+                        rootDef[-1].tail += txt
+                    else:
+                        rootDef.txt += txt
 
     def toString(self):
         """ Converts DOM tree to string
