@@ -256,7 +256,7 @@ class Merger(object):
                         toMove.append(tchild.tail)
         for tchild in elem2:
             elem1.append(tchild)
-        if elem2.tail.strip():
+        if elem2.tail:
             elem1.tail += elem2.tail
         if toMove:
             if elem1.text:
