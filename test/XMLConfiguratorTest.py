@@ -5257,6 +5257,61 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     # creatConf test
     # \brief It tests XMLConfigurator
+    def test_merge_group_group_inertxt4(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+
+        el = self.openConf()
+        man = el.mandatoryComponents()
+        el.unsetMandatoryComponents(man)
+        self.__man += man
+
+        revision = long(el.version.split('.')[-1])
+
+        avc = el.availableComponents()
+
+        oname = "mcs_test_component"
+        self.assertTrue(isinstance(avc, list))
+        xml = ["<definition><group type='NXentry'><doc/>txt</group>"
+               "</definition>",
+               "<definition><group type='NXentry'>txt<doc/></group>"
+               "</definition>"]
+        np = len(xml)
+        name = []
+        for i in range(np):
+
+            name.append(oname + '_%s' % i)
+            while name[i] in avc:
+                name[i] = name[i] + '_%s' % i
+                #        print(avc)
+
+        for i in range(np):
+            self.setXML(el, xml[i])
+            self.assertEqual(el.storeComponent(name[i]), None)
+            self.__cmps.append(name[i])
+
+        gxml = el.merge(name)
+        print(gxml)
+        self.assertTrue(
+            (gxml.replace(">\n", ">") ==
+             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+             '<definition><group type="NXentry"><doc />txt</group>'
+             '</definition>') |
+            (gxml.replace(">\n", ">") ==
+             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+             '<definition><group type="NXentry">txt<doc /></group>'
+             '</definition>')
+        )
+        for i in range(np):
+            self.assertEqual(el.deleteComponent(name[i]), None)
+            self.__cmps.pop(0)
+
+        self.assertEqual(long(el.version.split('.')[-1]), revision + np * 2)
+        el.setMandatoryComponents(man)
+        el.close()
+
+    # creatConf test
+    # \brief It tests XMLConfigurator
     def test_merge_group_group_error(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
