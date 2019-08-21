@@ -549,10 +549,11 @@ class Merger(object):
                     rootDef.append(cd)
                 txt = self.__getText(dcp)
                 if txt:
-                    if len(rootDef) > 0:
-                        rootDef[-1].tail += txt
-                    else:
-                        rootDef.txt += txt
+                    if len(rootDef) > 0 and rootDef[-1].tail:
+                        if rootDef[-1].tail != txt:
+                            rootDef[-1].tail += txt
+                    if rootDef.text != txt:
+                        rootDef.text += txt
 
     def toString(self):
         """ Converts DOM tree to string
