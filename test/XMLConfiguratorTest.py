@@ -5182,12 +5182,16 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         gxml = el.merge(name)
         print(gxml)
-        self.assertEqual(
-            gxml.replace(">\n", ">"),
-            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-            '<definition><group type="NXentry">txt2txt</group>'
-            '</definition>')
-
+        self.assertTrue(
+            (gxml.replace(">\n", ">") ==
+             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+             '<definition><group type="NXentry">txt2txt</group>'
+             '</definition>') |
+            (gxml.replace(">\n", ">") ==
+             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+             '<definition><group type="NXentry">txttxt2</group>'
+             '</definition>')
+        )
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
             self.__cmps.pop(0)
