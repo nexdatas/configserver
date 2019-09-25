@@ -241,22 +241,23 @@ class Merger(object):
             elem1.attrib[i2] = at2
 
         if cls.__getText(elem1) != cls.__getText(elem2):
-            if elem1.text:
+            if elem1.text and unicode(elem1.text).strip():
                 texts.append(unicode(elem1.text).strip())
             for tchild in elem1:
-                if tchild.tail:
+                if tchild.tail and unicode(tchild.tail).strip():
                     texts.append(unicode(tchild.tail).strip())
 
             if unicode(elem2.text).strip() not in texts:
-                if elem2.text:
+                if elem2.text and unicode(elem2.text).strip():
                     toMove.append(elem2.text)
             for tchild in elem2:
                 if unicode(tchild.tail).strip() not in texts:
-                    if tchild.tail:
+                    if tchild.tail and unicode(tchild.tail).strip():
                         toMove.append(tchild.tail)
         for tchild in elem2:
             elem1.append(tchild)
-        if elem2.tail and elem1.tail != elem2.tail and \
+        if elem2.tail and unicode(elem2.tail).strip() \
+           and elem1.tail != elem2.tail and \
            elem2.tail != parent.text:
             if elem1.tail:
                 elem1.tail += "\n" + elem2.tail
@@ -550,9 +551,8 @@ class Merger(object):
                 for cd in dcp:
                     rootDef.append(cd)
                 txt = self.__getText(dcp)
-                if txt:
+                if txt and unicode(txt).strip():
                     if rootDef.text != txt:
-                        rootDef.text += txt
                         rootDef.text += "\n" + txt
 
     def toString(self):
