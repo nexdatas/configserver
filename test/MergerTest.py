@@ -779,7 +779,7 @@ class MergerTest(unittest.TestCase):
             el.toString().replace("?>\n<", "?><"),
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry" type="NXentry">'
-            '<field type="field">My text My text 2 </field></group>'
+            '<field type="field">My text \nMy text 2 </field></group>'
             '</definition>')
 
     # test collect

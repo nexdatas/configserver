@@ -5185,11 +5185,11 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(
             (gxml.replace(">\n", ">") ==
              '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry">txt2txt</group>'
+             '<definition><group type="NXentry">txt2\ntxt</group>'
              '</definition>') |
             (gxml.replace(">\n", ">") ==
              '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry">txttxt2</group>'
+             '<definition><group type="NXentry">txt\ntxt2</group>'
              '</definition>')
         )
         for i in range(np):

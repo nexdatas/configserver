@@ -135,7 +135,7 @@ class Merger(object):
         if node is not None:
             tnodes = ([node.text] if node.text else []) \
                      + [child.tail for child in node if child.tail]
-            return unicode("".join(tnodes)).strip()
+            return unicode("\n".join(tnodes)).strip()
         return ""
 
     def __getAncestors(self, node, ancestors):
@@ -259,16 +259,14 @@ class Merger(object):
         if elem2.tail and elem1.tail != elem2.tail and \
            elem2.tail != parent.text:
             if elem1.tail:
-                elem1.tail += elem2.tail
+                elem1.tail += "\n" + elem2.tail
             else:
                 elem1.tail = elem2.tail
         if toMove:
             if elem1.text:
-                print(elem1.text)
-                print(toMove)
-                elem1.text += "".join(toMove)
+                elem1.text += "\n" + "\n".join(toMove)
             else:
-                elem1.text = "".join(toMove)
+                elem1.text = "\n".join(toMove)
 
         parent.remove(elem2)
 
@@ -553,11 +551,9 @@ class Merger(object):
                     rootDef.append(cd)
                 txt = self.__getText(dcp)
                 if txt:
-                    if len(rootDef) > 0 and rootDef[-1].tail:
-                        if rootDef[-1].tail != txt:
-                            rootDef[-1].tail += txt
                     if rootDef.text != txt:
                         rootDef.text += txt
+                        rootDef.text += "\n" + txt
 
     def toString(self):
         """ Converts DOM tree to string
