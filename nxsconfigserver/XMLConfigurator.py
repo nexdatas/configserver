@@ -692,7 +692,6 @@ class XMLConfigurator(object):
         :type funValue: :obj:`instancemethod`
         :param tag: xml tag
         :type tag: :obj:`str`
-
         :param onlyexisting: attachElement only if exists
         :type onlyexisting: :obj:`bool`
         :returns: component with attached variables
