@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxsconfigserver.Merger &#8212; NXSConfigServer 2.12.0 documentation</title>
+    <title>nxsconfigserver.Merger &#8212; NXSConfigServer 2.13.0 documentation</title>
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
@@ -38,7 +38,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.12</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.13</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -259,7 +259,7 @@
         <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">tnodes</span> <span class="o">=</span> <span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">text</span> <span class="k">else</span> <span class="p">[])</span> \
                      <span class="o">+</span> <span class="p">[</span><span class="n">child</span><span class="o">.</span><span class="n">tail</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span> <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">tail</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tnodes</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tnodes</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__getAncestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">ancestors</span><span class="p">):</span>
@@ -365,28 +365,33 @@
             <span class="n">elem1</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="n">i2</span><span class="p">]</span> <span class="o">=</span> <span class="n">at2</span>
 
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__getText</span><span class="p">(</span><span class="n">elem1</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__getText</span><span class="p">(</span><span class="n">elem2</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">elem1</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">elem1</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">elem1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
                 <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">elem1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
             <span class="k">for</span> <span class="n">tchild</span> <span class="ow">in</span> <span class="n">elem1</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tchild</span><span class="o">.</span><span class="n">tail</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
                     <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 
             <span class="k">if</span> <span class="n">unicode</span><span class="p">(</span><span class="n">elem2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">elem2</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">elem2</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">elem2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
                     <span class="n">toMove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">tchild</span> <span class="ow">in</span> <span class="n">elem2</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">unicode</span><span class="p">(</span><span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">tchild</span><span class="o">.</span><span class="n">tail</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
                         <span class="n">toMove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tchild</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">tchild</span> <span class="ow">in</span> <span class="n">elem2</span><span class="p">:</span>
             <span class="n">elem1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tchild</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">elem2</span><span class="o">.</span><span class="n">tail</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">elem2</span><span class="o">.</span><span class="n">tail</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> \
+           <span class="ow">and</span> <span class="n">elem1</span><span class="o">.</span><span class="n">tail</span> <span class="o">!=</span> <span class="n">elem2</span><span class="o">.</span><span class="n">tail</span> <span class="ow">and</span> \
+           <span class="n">elem2</span><span class="o">.</span><span class="n">tail</span> <span class="o">!=</span> <span class="n">parent</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">elem1</span><span class="o">.</span><span class="n">tail</span><span class="p">:</span>
+                <span class="n">elem1</span><span class="o">.</span><span class="n">tail</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">elem2</span><span class="o">.</span><span class="n">tail</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">elem1</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="n">elem2</span><span class="o">.</span><span class="n">tail</span>
         <span class="k">if</span> <span class="n">toMove</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">elem1</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">elem1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">toMove</span><span class="p">)</span>
-                <span class="n">elem1</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">toMove</span><span class="p">)</span>
+                <span class="n">elem1</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">toMove</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">elem1</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">toMove</span><span class="p">)</span>
+                <span class="n">elem1</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">toMove</span><span class="p">)</span>
 
         <span class="n">parent</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">elem2</span><span class="p">)</span>
 
@@ -668,7 +673,11 @@
                 <span class="k">if</span> <span class="n">dcp</span><span class="o">.</span><span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;definition&quot;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">UndefinedTagError</span><span class="p">(</span><span class="s2">&quot;&lt;definition&gt; not defined&quot;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">cd</span> <span class="ow">in</span> <span class="n">dcp</span><span class="p">:</span>
-                    <span class="n">rootDef</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cd</span><span class="p">)</span></div>
+                    <span class="n">rootDef</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cd</span><span class="p">)</span>
+                <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getText</span><span class="p">(</span><span class="n">dcp</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">txt</span> <span class="ow">and</span> <span class="n">unicode</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">rootDef</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="n">txt</span><span class="p">:</span>
+                        <span class="n">rootDef</span><span class="o">.</span><span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">txt</span></div>
 
 <div class="viewcode-block" id="Merger.toString"><a class="viewcode-back" href="../../nxsconfigserver.html#nxsconfigserver.Merger.Merger.toString">[docs]</a>    <span class="k">def</span> <span class="nf">toString</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Converts DOM tree to string</span>

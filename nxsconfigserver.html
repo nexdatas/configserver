@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxsconfigserver package &#8212; NXSConfigServer 2.12.0 documentation</title>
+    <title>nxsconfigserver package &#8212; NXSConfigServer 2.13.0 documentation</title>
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
@@ -39,7 +39,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           NXSConfigServer</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.12</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.13</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -173,7 +173,7 @@
 <dl class="class">
 <dt id="nxsconfigserver.ComponentParser.ComponentHandler">
 <em class="property">class </em><code class="descname">ComponentHandler</code><span class="sig-paren">(</span><em>dsLabel='datasources'</em>, <em>delimiter='.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxsconfigserver/ComponentParser.html#ComponentHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.ComponentParser.ComponentHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/xml.sax.handler.html#xml.sax.handler.ContentHandler" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xml.sax.handler.ContentHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/xml.sax.handler.html#xml.sax.handler.ContentHandler" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xml.sax.handler.ContentHandler</span></code></a></p>
 <p>SAX2 parser</p>
 <p>constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -181,8 +181,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dsLabel</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – variable element label, e.g. ‘datasources’</li>
-<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – variable element delimiter, e.g. ‘.’</li>
+<li><strong>dsLabel</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – variable element label, e.g. ‘datasources’</li>
+<li><strong>delimiter</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – variable element delimiter, e.g. ‘.’</li>
 </ul>
 </td>
 </tr>
@@ -196,13 +196,13 @@
 <code class="descname">characters</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxsconfigserver/ComponentParser.html#ComponentHandler.characters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.ComponentParser.ComponentHandler.characters" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds the tag content</p>
 <p>param content: partial content of the tag
-:type content: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+:type content: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.ComponentParser.ComponentHandler.datasources">
 <code class="descname">datasources</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.ComponentParser.ComponentHandler.datasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) dictionary with datasources</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) dictionary with datasources</p>
 </dd></dl>
 
 <dl class="method">
@@ -213,7 +213,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – tag name</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – tag name</td>
 </tr>
 </tbody>
 </table>
@@ -228,8 +228,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – tag name</li>
-<li><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – attribute dictionary</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – tag name</li>
+<li><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – attribute dictionary</li>
 </ul>
 </td>
 </tr>
@@ -254,7 +254,7 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – string with error message</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – string with error message</li>
 <li><strong>nodes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<code class="xref py py-class docutils literal notranslate"><span class="pre">lxml.etree.Element</span></code>&gt;) – list of nodes with errors</li>
 </ul>
 </td>
@@ -296,7 +296,7 @@
 <dl class="class">
 <dt id="nxsconfigserver.MYSQLDataBase.MYSQLDataBase">
 <em class="property">class </em><code class="descname">MYSQLDataBase</code><span class="sig-paren">(</span><em>streams=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxsconfigserver/MYSQLDataBase.html#MYSQLDataBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.MYSQLDataBase.MYSQLDataBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>XML Configurer</p>
 <p>constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -319,7 +319,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -335,7 +335,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available datasources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -351,7 +351,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -379,11 +379,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -397,7 +397,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, any&gt;) – arguments of the MySQLdb connect method</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, any&gt;) – arguments of the MySQLdb connect method</td>
 </tr>
 </tbody>
 </table>
@@ -411,11 +411,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of datasource names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of datasource names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given datasources</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -429,7 +429,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
 </tr>
 </tbody>
 </table>
@@ -443,7 +443,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to delete</td>
 </tr>
 </tbody>
 </table>
@@ -457,7 +457,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to delete</td>
 </tr>
 </tbody>
 </table>
@@ -473,7 +473,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -487,11 +487,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of selection names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of selection names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given selections</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -505,7 +505,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component</td>
 </tr>
 </tbody>
 </table>
@@ -520,8 +520,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to store</li>
-<li><strong>xml</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – component tree</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to store</li>
+<li><strong>xml</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – component tree</li>
 </ul>
 </td>
 </tr>
@@ -538,8 +538,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to store</li>
-<li><strong>xml</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – datasource tree</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to store</li>
+<li><strong>xml</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – datasource tree</li>
 </ul>
 </td>
 </tr>
@@ -556,8 +556,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to store</li>
-<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – selection tree</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to store</li>
+<li><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – selection tree</li>
 </ul>
 </td>
 </tr>
@@ -573,7 +573,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
 </tr>
 </tbody>
 </table>
@@ -589,7 +589,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DB configuration version</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -604,19 +604,19 @@
 <dl class="class">
 <dt id="nxsconfigserver.Merger.Merger">
 <em class="property">class </em><code class="descname">Merger</code><a class="reference internal" href="_modules/nxsconfigserver/Merger.html#Merger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.Merger.Merger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>merges the components</p>
 <p>consturctor</p>
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.canfaildatasources">
 <code class="descname">canfaildatasources</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.canfaildatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to switch to CanFial mode</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to switch to CanFial mode</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.children">
 <code class="descname">children</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.children" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#tuple" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;&gt; ) allowed children</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#tuple" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;&gt; ) allowed children</p>
 </dd></dl>
 
 <dl class="method">
@@ -627,7 +627,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>components</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>components</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
 </tr>
 </tbody>
 </table>
@@ -636,13 +636,13 @@
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.linkable">
 <code class="descname">linkable</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.linkable" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) node which can have links</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) node which can have links</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.linkdatasources">
 <code class="descname">linkdatasources</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.linkdatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to add links</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to add links</p>
 </dd></dl>
 
 <dl class="method">
@@ -654,25 +654,25 @@
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.modesToSwitch">
 <code class="descname">modesToSwitch</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.modesToSwitch" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) strategy modes to switch</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> , <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) strategy modes to switch</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.singles">
 <code class="descname">singles</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.singles" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) tags which cannot have the same siblings</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) tags which cannot have the same siblings</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.switchable">
 <code class="descname">switchable</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.switchable" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) node which can have switched strategy</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) node which can have switched strategy</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.switchdatasources">
 <code class="descname">switchdatasources</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.switchdatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to switch to STEP mode</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) aliased to switch to STEP mode</p>
 </dd></dl>
 
 <dl class="method">
@@ -685,7 +685,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DOM tree in XML string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -694,13 +694,13 @@
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.tocut">
 <code class="descname">tocut</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.tocut" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) tags which cannot have the same siblings</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) tags which cannot have the same siblings</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.Merger.Merger.uniqueText">
 <code class="descname">uniqueText</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.Merger.Merger.uniqueText" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) with unique text</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt; ) with unique text</p>
 </dd></dl>
 
 </dd></dl>
@@ -732,8 +732,8 @@ DevState.RUNNING -  Performing a query,</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cl</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – class name</li>
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – device name</li>
+<li><strong>cl</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – class name</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – device name</li>
 </ul>
 </td>
 </tr>
@@ -751,7 +751,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available component names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -769,7 +769,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available DataSource names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -787,7 +787,7 @@ DevState.RUNNING -  Performing a query,</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of available selection names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -817,11 +817,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of datasource names for a given component</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of datasource names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -837,11 +837,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of variable names for a given component</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of variable names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -857,11 +857,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -877,11 +877,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of datasource names for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of datasource names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -897,11 +897,11 @@ DevState.RUNNING -  Performing a query,</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of variable names for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of variable names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -918,7 +918,7 @@ DevState.RUNNING -  Performing a query,</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Creates the NDTS configuration script from the
 given components. The result is strored in XMLString</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -934,11 +934,11 @@ given components. The result is strored in XMLString</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required DataSources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of DataSource names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of DataSource names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required DataSources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -954,7 +954,7 @@ given components. The result is strored in XMLString</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Deletes the given component</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
 </tr>
 </tbody>
 </table>
@@ -970,7 +970,7 @@ given components. The result is strored in XMLString</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Deletes the given datasource</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    datasource name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    datasource name</td>
 </tr>
 </tbody>
 </table>
@@ -986,7 +986,7 @@ given components. The result is strored in XMLString</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Deletes the given selection</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    selection name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    selection name</td>
 </tr>
 </tbody>
 </table>
@@ -1003,11 +1003,11 @@ given components. The result is strored in XMLString</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">returns a list of dependent component names
 for a given components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of component names</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1023,11 +1023,11 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of instantiated components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1045,7 +1045,7 @@ for a given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    component names</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1061,11 +1061,11 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Merges give components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevString    merged components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1095,11 +1095,11 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Returns a list of required selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of selection names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of selection names</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DevVarStringArray    list of required selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -1115,7 +1115,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Sets component datasources according to given dictionary</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString   JSON dict { comp1: {ds: tds, …}, …}</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString   JSON dict { comp1: {ds: tds, …}, …}</td>
 </tr>
 </tbody>
 </table>
@@ -1131,7 +1131,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Sets the mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    component names</td>
 </tr>
 </tbody>
 </table>
@@ -1147,7 +1147,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Stores the component from XMLString</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    component name</td>
 </tr>
 </tbody>
 </table>
@@ -1163,7 +1163,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Stores the DataSource from XMLString</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    datasource name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    datasource name</td>
 </tr>
 </tbody>
 </table>
@@ -1179,7 +1179,7 @@ for a given components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Stores the selection from XMLString</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    selection name</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – DevString    selection name</td>
 </tr>
 </tbody>
 </table>
@@ -1196,7 +1196,7 @@ for a given components</td>
 <tr class="field-odd field"><th class="field-name">Brief:</th><td class="field-body">Removes the given components
 from the mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argin</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – DevVarStringArray    list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -1230,7 +1230,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1246,7 +1246,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1262,7 +1262,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1278,7 +1278,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1294,7 +1294,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1310,7 +1310,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1326,7 +1326,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1342,7 +1342,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1358,7 +1358,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1374,7 +1374,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1390,7 +1390,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1406,7 +1406,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1422,7 +1422,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1438,7 +1438,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1454,7 +1454,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1470,7 +1470,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1486,7 +1486,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1502,7 +1502,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1518,7 +1518,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1534,7 +1534,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1550,7 +1550,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1566,7 +1566,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1582,7 +1582,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1598,7 +1598,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1614,7 +1614,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1630,7 +1630,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1646,7 +1646,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1662,7 +1662,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1678,7 +1678,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1694,7 +1694,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1710,7 +1710,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1726,7 +1726,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1742,7 +1742,7 @@ from the mandatory components</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the operation allowed</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1986,20 +1986,20 @@ from the mandatory components</td>
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.class_property_list">
 <code class="descname">class_property_list</code><em class="property"> = {}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.class_property_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>&gt; ] ] &gt; ) Class Properties</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [ <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>&gt; ] ] &gt; ) Class Properties</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list">
 <code class="descname">cmd_list</code><em class="property"> = {'AvailableComponents': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available component names']], 'AvailableDataSources': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available DataSource names']], 'AvailableSelections': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'list of available selection names']], 'Close': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVoid, '']], 'ComponentDataSources': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'ComponentVariables': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVarStringArray, 'list of variable names']], 'Components': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required components']], 'ComponentsDataSources': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of datasource names']], 'ComponentsVariables': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of variable names']], 'CreateConfiguration': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVoid, '']], 'DataSources': [[tango._tango.CmdArgType.DevVarStringArray, 'list of DataSource names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required DataSources']], 'DeleteComponent': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVoid, '']], 'DeleteDataSource': [[tango._tango.CmdArgType.DevString, 'datasource name'], [tango._tango.CmdArgType.DevVoid, '']], 'DeleteSelection': [[tango._tango.CmdArgType.DevString, 'selection name'], [tango._tango.CmdArgType.DevVoid, '']], 'DependentComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of component names']], 'InstantiatedComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of instantiated components']], 'MandatoryComponents': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVarStringArray, 'component names']], 'Merge': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevString, 'merged components']], 'Open': [[tango._tango.CmdArgType.DevVoid, ''], [tango._tango.CmdArgType.DevVoid, '']], 'Selections': [[tango._tango.CmdArgType.DevVarStringArray, 'list of selection names'], [tango._tango.CmdArgType.DevVarStringArray, 'list of required selections']], 'SetComponentDataSources': [[tango._tango.CmdArgType.DevString, 'JSON dict {comp1: {tds1: ds1, ...}, ...}'], [tango._tango.CmdArgType.DevVoid, '']], 'SetMandatoryComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'component names'], [tango._tango.CmdArgType.DevVoid, '']], 'StoreComponent': [[tango._tango.CmdArgType.DevString, 'component name'], [tango._tango.CmdArgType.DevVoid, '']], 'StoreDataSource': [[tango._tango.CmdArgType.DevString, 'datasource name'], [tango._tango.CmdArgType.DevVoid, '']], 'StoreSelection': [[tango._tango.CmdArgType.DevString, 'selection name'], [tango._tango.CmdArgType.DevVoid, '']], 'UnsetMandatoryComponents': [[tango._tango.CmdArgType.DevVarStringArray, 'list of component names'], [tango._tango.CmdArgType.DevVoid, '']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [[ <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]] &gt;)
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [[ <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]] &gt;)
 Command definitions</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list">
 <code class="descname">device_property_list</code><em class="property"> = {'VersionLabel': [tango._tango.CmdArgType.DevString, 'version label', ['XCS']]}</em><a class="headerlink" href="#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>&gt; ] ] &gt; ) Device Properties</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, [ <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTango.CmdArgType</span></code>, [ <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>&gt; ] ] &gt; ) Device Properties</p>
 </dd></dl>
 
 </dd></dl>
@@ -2011,7 +2011,7 @@ Command definitions</p>
 <dl class="class">
 <dt id="nxsconfigserver.StreamSet.StreamSet">
 <em class="property">class </em><code class="descname">StreamSet</code><span class="sig-paren">(</span><em>streams</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxsconfigserver/StreamSet.html#StreamSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.StreamSet.StreamSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>streamset constractor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2030,8 +2030,8 @@ Command definitions</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – debug message</li>
-<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – debug message</li>
+<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -2049,8 +2049,8 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – error message</li>
-<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – error message</li>
+<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -2068,8 +2068,8 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – error message</li>
-<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – error message</li>
+<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -2087,8 +2087,8 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – info message</li>
-<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – info message</li>
+<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -2136,8 +2136,8 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – warning message</li>
-<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – warning message</li>
+<li><strong>std</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a>) – True if it writes to sys stream
 when log stream does not exist</li>
 </ul>
 </td>
@@ -2155,7 +2155,7 @@ when log stream does not exist</li>
 <dl class="class">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator">
 <em class="property">class </em><code class="descname">XMLConfigurator</code><span class="sig-paren">(</span><em>server=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxsconfigserver/XMLConfigurator.html#XMLConfigurator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>XML Configurator</p>
 <p>constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -2178,7 +2178,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2194,7 +2194,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available datasources</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2210,7 +2210,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available selections</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2219,7 +2219,7 @@ when log stream does not exist</li>
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.canfaildatasources">
 <code class="descname">canfaildatasources</code><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.canfaildatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
 </dd></dl>
 
 <dl class="method">
@@ -2244,11 +2244,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – given component</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – given component</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of datasource names from the given component</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2262,11 +2262,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – given component</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – given component</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of variable names from the given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -2280,11 +2280,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2298,11 +2298,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of datasource names from the given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2316,11 +2316,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – given components</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">tuple of variable names from the given components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2334,7 +2334,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2348,11 +2348,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of datasource names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of datasource names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given datasources</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2366,7 +2366,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to delete</td>
 </tr>
 </tbody>
 </table>
@@ -2380,7 +2380,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to delete</td>
 </tr>
 </tbody>
 </table>
@@ -2394,7 +2394,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to delete</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to delete</td>
 </tr>
 </tbody>
 </table>
@@ -2409,15 +2409,15 @@ when log stream does not exist</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – component names to check</li>
-<li><strong>deps</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – dictionery with dependent components</li>
+<li><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – component names to check</li>
+<li><strong>deps</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – dictionery with dependent components</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of depending components</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</p>
 </td>
 </tr>
 </tbody>
@@ -2432,11 +2432,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of instantiated components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2445,13 +2445,13 @@ when log stream does not exist</li>
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.jsonsettings">
 <code class="descname">jsonsettings</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.jsonsettings" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) JSON string with arguments to connect to database</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) JSON string with arguments to connect to database</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.linkdatasources">
 <code class="descname">linkdatasources</code><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.linkdatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
 </dd></dl>
 
 <dl class="method">
@@ -2464,7 +2464,7 @@ when log stream does not exist</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">mandatory components</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2478,11 +2478,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">merged components</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -2505,7 +2505,7 @@ when log stream does not exist</li>
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.selection">
 <code class="descname">selection</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.selection" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) component selection</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) component selection</p>
 </dd></dl>
 
 <dl class="method">
@@ -2516,11 +2516,11 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of selection names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of selection names</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of given selections</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -2534,7 +2534,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>jdict</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – JSON dict of component datasources</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>jdict</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – JSON dict of component datasources</td>
 </tr>
 </tbody>
 </table>
@@ -2548,7 +2548,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2557,7 +2557,7 @@ when log stream does not exist</li>
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.stepdatasources">
 <code class="descname">stepdatasources</code><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.stepdatasources" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) the json data string</p>
 </dd></dl>
 
 <dl class="method">
@@ -2568,7 +2568,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to store</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the component to store</td>
 </tr>
 </tbody>
 </table>
@@ -2582,7 +2582,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to store</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the datasource to store</td>
 </tr>
 </tbody>
 </table>
@@ -2596,7 +2596,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to store</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – name of the selection to store</td>
 </tr>
 </tbody>
 </table>
@@ -2610,7 +2610,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – list of component names</td>
 </tr>
 </tbody>
 </table>
@@ -2619,25 +2619,25 @@ when log stream does not exist</li>
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.variables">
 <code class="descname">variables</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.variables" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) string with XML variables</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) string with XML variables</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.version">
 <code class="descname">version</code><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.version" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>)configuration version</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>)configuration version</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.versionLabel">
 <code class="descname">versionLabel</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.versionLabel" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) version label</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) version label</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="nxsconfigserver.XMLConfigurator.XMLConfigurator.xmlstring">
 <code class="descname">xmlstring</code><em class="property"> = None</em><a class="headerlink" href="#nxsconfigserver.XMLConfigurator.XMLConfigurator.xmlstring" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) XML config string</p>
+<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) XML config string</p>
 </dd></dl>
 
 </dd></dl>
@@ -2654,7 +2654,7 @@ when log stream does not exist</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – command-line arguments</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – command-line arguments</td>
 </tr>
 </tbody>
 </table>

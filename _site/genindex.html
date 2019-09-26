@@ -1,0 +1,996 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Index &mdash; NXSConfigServer 2.4.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.4.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="NXSConfigServer 2.4.2 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          NXSConfigServer</a>
+        <span class="navbar-text navbar-version pull-left"><b>2.4</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="nxsconfigserver.html">nxsconfigserver package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.ComponentParser">nxsconfigserver.ComponentParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.Errors">nxsconfigserver.Errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.Merger">nxsconfigserver.Merger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.Streams">nxsconfigserver.Streams module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxsconfigserver.html#module-nxsconfigserver">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.always_executed_hook">always_executed_hook() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.attr_list">attr_list (NXSConfigServerClass attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.availableComponents">availableComponents() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.AvailableComponents">AvailableComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.availableComponents">availableComponents() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.availableDataSources">availableDataSources() (MYSQLDataBase method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.AvailableDataSources">AvailableDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.availableDataSources">availableDataSources() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.availableSelections">availableSelections() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.AvailableSelections">AvailableSelections() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.availableSelections">availableSelections() (XMLConfigurator method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.ComponentParser.ComponentHandler.characters">characters() (ComponentHandler method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.children">children (Merger attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.class_property_list">class_property_list (NXSConfigServerClass attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.close">close() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.Close">Close() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.close">close() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.cmd_list">cmd_list (NXSConfigServerClass attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.collect">collect() (Merger method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentDataSources">ComponentDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.componentDataSources">componentDataSources() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.ComponentParser.ComponentHandler">ComponentHandler (class in nxsconfigserver.ComponentParser)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.components">components() (MYSQLDataBase method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.Components">Components() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.components">components() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentsDataSources">ComponentsDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.componentsDataSources">componentsDataSources() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentsVariables">ComponentsVariables() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.componentsVariables">componentsVariables() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.ComponentVariables">ComponentVariables() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.componentVariables">componentVariables() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.connect">connect() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.CreateConfiguration">CreateConfiguration() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.createConfiguration">createConfiguration() (XMLConfigurator method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.ComponentParser.ComponentHandler.datasources">datasources (ComponentHandler attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.dataSources">dataSources() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DataSources">DataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.dataSources">dataSources() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.debug">debug() (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.delete_device">delete_device() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.deleteComponent">deleteComponent() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DeleteComponent">DeleteComponent() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.deleteComponent">deleteComponent() (XMLConfigurator method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.deleteDataSource">deleteDataSource() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DeleteDataSource">DeleteDataSource() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.deleteDataSource">deleteDataSource() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.deleteSelection">deleteSelection() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DeleteSelection">DeleteSelection() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.deleteSelection">deleteSelection() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.DependentComponents">DependentComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.dependentComponents">dependentComponents() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServerClass.device_property_list">device_property_list (NXSConfigServerClass attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.ComponentParser.ComponentHandler.endElement">endElement() (ComponentHandler method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.error">error() (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.fatal">fatal() (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Errors.IncompatibleNodeError">IncompatibleNodeError</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.info">info() (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.init_device">init_device() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.InstantiatedComponents">InstantiatedComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.instantiatedComponents">instantiatedComponents() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_AvailableComponents_allowed">is_AvailableComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_AvailableDataSources_allowed">is_AvailableDataSources_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_AvailableSelections_allowed">is_AvailableSelections_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Close_allowed">is_Close_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_ComponentDataSources_allowed">is_ComponentDataSources_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Components_allowed">is_Components_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_ComponentsDataSources_allowed">is_ComponentsDataSources_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_ComponentsVariables_allowed">is_ComponentsVariables_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_ComponentVariables_allowed">is_ComponentVariables_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_CreateConfiguration_allowed">is_CreateConfiguration_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DataSources_allowed">is_DataSources_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DeleteComponent_allowed">is_DeleteComponent_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DeleteDataSource_allowed">is_DeleteDataSource_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DeleteSelection_allowed">is_DeleteSelection_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_DependentComponents_allowed">is_DependentComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_InstantiatedComponents_allowed">is_InstantiatedComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_JSONSettings_write_allowed">is_JSONSettings_write_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_MandatoryComponents_allowed">is_MandatoryComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Merge_allowed">is_Merge_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Open_allowed">is_Open_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Selection_allowed">is_Selection_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Selections_allowed">is_Selections_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_SetComponentDataSources_allowed">is_SetComponentDataSources_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_SetMandatoryComponents_allowed">is_SetMandatoryComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_STEPDataSources_write_allowed">is_STEPDataSources_write_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_StoreComponent_allowed">is_StoreComponent_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_StoreDataSource_allowed">is_StoreDataSource_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_StoreSelection_allowed">is_StoreSelection_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_UnsetMandatoryComponents_allowed">is_UnsetMandatoryComponents_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Variables_allowed">is_Variables_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_Version_allowed">is_Version_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.is_XMLString_allowed">is_XMLString_allowed() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.jsonsettings">jsonsettings (XMLConfigurator attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_debug">log_debug (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_error">log_error (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_fatal">log_fatal (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_info">log_info (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.log_warn">log_warn (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.mandatory">mandatory() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.MandatoryComponents">MandatoryComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.mandatoryComponents">mandatoryComponents() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.merge">merge() (Merger method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.Merge">Merge() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.merge">merge() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger">Merger (class in nxsconfigserver.Merger)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.modesToSwitch">modesToSwitch (Merger attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase">MYSQLDataBase (class in nxsconfigserver.MYSQLDataBase)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Errors.IncompatibleNodeError.nodes">nodes (IncompatibleNodeError attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Errors.NonregisteredDBRecordError">NonregisteredDBRecordError</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer">NXSConfigServer (class in nxsconfigserver.NXSConfigServer)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver">nxsconfigserver (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.ComponentParser">nxsconfigserver.ComponentParser (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.Errors">nxsconfigserver.Errors (module)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.Merger">nxsconfigserver.Merger (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.MYSQLDataBase">nxsconfigserver.MYSQLDataBase (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.NXSConfigServer">nxsconfigserver.NXSConfigServer (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.Streams">nxsconfigserver.Streams (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#module-nxsconfigserver.XMLConfigurator">nxsconfigserver.XMLConfigurator (module)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServerClass">NXSConfigServerClass (class in nxsconfigserver.NXSConfigServer)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.Open">Open() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.open">open() (XMLConfigurator method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_attr_hardware">read_attr_hardware() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_JSONSettings">read_JSONSettings() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_Selection">read_Selection() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_STEPDataSources">read_STEPDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_Variables">read_Variables() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_Version">read_Version() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.read_XMLString">read_XMLString() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.run">run() (in module nxsconfigserver)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.selection">selection (XMLConfigurator attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.selections">selections() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.Selections">Selections() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.selections">selections() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.SetComponentDataSources">SetComponentDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.setComponentDataSources">setComponentDataSources() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.setMandatory">setMandatory() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.SetMandatoryComponents">SetMandatoryComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.setMandatoryComponents">setMandatoryComponents() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.singles">singles (Merger attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.ComponentParser.ComponentHandler.startElement">startElement() (ComponentHandler method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.stepdatasources">stepdatasources (XMLConfigurator attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.storeComponent">storeComponent() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.StoreComponent">StoreComponent() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.storeComponent">storeComponent() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.storeDataSource">storeDataSource() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.StoreDataSource">StoreDataSource() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.storeDataSource">storeDataSource() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.storeSelection">storeSelection() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.StoreSelection">StoreSelection() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.storeSelection">storeSelection() (XMLConfigurator method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.switchable">switchable (Merger attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.switchdatasources">switchdatasources (Merger attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.toString">toString() (Merger method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Errors.UndefinedTagError">UndefinedTagError</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Merger.Merger.uniqueText">uniqueText (Merger attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.unsetMandatory">unsetMandatory() (MYSQLDataBase method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.UnsetMandatoryComponents">UnsetMandatoryComponents() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.unsetMandatoryComponents">unsetMandatoryComponents() (XMLConfigurator method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Errors.IncompatibleNodeError.value">value (IncompatibleNodeError attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.variables">variables (XMLConfigurator attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.version">version (XMLConfigurator attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.MYSQLDataBase.MYSQLDataBase.version">version() (MYSQLDataBase method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.versionLabel">versionLabel (XMLConfigurator attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.Streams.warn">warn() (in module nxsconfigserver.Streams)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_JSONSettings">write_JSONSettings() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_Selection">write_Selection() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_STEPDataSources">write_STEPDataSources() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_Variables">write_Variables() (NXSConfigServer method)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.write_XMLString">write_XMLString() (NXSConfigServer method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.NXSConfigServer.NXSConfigServer.xmlc">xmlc (NXSConfigServer attribute)</a>
+  </dt>
+
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator">XMLConfigurator (class in nxsconfigserver.XMLConfigurator)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="nxsconfigserver.html#nxsconfigserver.XMLConfigurator.XMLConfigurator.xmlstring">xmlstring (XMLConfigurator attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2012-2016 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
+
+GNU GENERAL PUBLIC LICENSE, version 3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
