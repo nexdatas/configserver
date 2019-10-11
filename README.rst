@@ -39,13 +39,13 @@ Extract the sources and run
 	  $ python setup.py install
 
 To set database execute
-	  
+
 .. code-block:: console
 
 	  $ mysql < conf/mysql_create.sql
 
 with proper privileges.
-	  
+
 Debian packages
 ^^^^^^^^^^^^^^^
 
@@ -72,8 +72,8 @@ Finally, for python2 packages
 	  $ apt-get update
 	  $ apt-get install python-nxsconfigserver nxsconfigserver-db
 
-and the NXSConfigServer tango server (from 2.10.0)	  
-		
+and the NXSConfigServer tango server (from 2.10.0)
+
 	  $ apt-get install nxsconfigserver
 
 or for python3
@@ -83,20 +83,22 @@ or for python3
 	  $ apt-get update
 	  $ apt-get install python3-nxsconfigserver nxsconfigserver-db
 
-and the NXSConfigServer tango server (from 2.10.0)	  
-		
+and the NXSConfigServer tango server (from 2.10.0)
+
 	  $ apt-get install nxsconfigserver3
 
 
 From pip
 """"""""
 
-To install it from pip you can
+To install it from pip you need pymysqldb e.g.
 
 .. code-block:: console
 
    $ python3 -m venv myvenv
    $ . myvenv/bin/activate
+
+   $ pip install pymysqldb
 
    $ pip install nxsconfigserver
 
@@ -105,7 +107,7 @@ Moreover it is also good to install
 .. code-block:: console
 
    $ pip install pytango
-   
+
 Setting NeXus Configuration Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
