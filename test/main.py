@@ -23,10 +23,10 @@
 import sys
 import unittest
 
-import ComponentHandlerTest
-import MergerTest
-import ErrorsTest
-import StreamSetTest
+import ComponentHandler_test
+import Merger_test
+import Errors_test
+import StreamSet_test
 
 try:
     __import__("PyTango")
@@ -71,13 +71,13 @@ except Exception:
 
 
 if "MYSQL" in DB_AVAILABLE:
-    import MYSQLDataBaseTest
-    import XMLConfiguratorTest
+    import MYSQLDataBase_test
+    import XMLConfigurator_test
 
 
 if PYTANGO_AVAILABLE:
     if "MYSQL" in DB_AVAILABLE:
-        import NXSConfigServerTest
+        import NXSConfigServer_test
 
 
 # import TestServerSetUp
@@ -89,30 +89,30 @@ def main():
     suite = unittest.TestSuite()
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(ComponentHandlerTest))
+        unittest.defaultTestLoader.loadTestsFromModule(ComponentHandler_test))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(MergerTest))
+        unittest.defaultTestLoader.loadTestsFromModule(Merger_test))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(ErrorsTest))
+        unittest.defaultTestLoader.loadTestsFromModule(Errors_test))
 
     suite.addTests(
-        unittest.defaultTestLoader.loadTestsFromModule(StreamSetTest))
+        unittest.defaultTestLoader.loadTestsFromModule(StreamSet_test))
 
     if "MYSQL" in DB_AVAILABLE:
         suite.addTests(
-            unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBaseTest))
+            unittest.defaultTestLoader.loadTestsFromModule(MYSQLDataBase_test))
         suite.addTests(
             unittest.defaultTestLoader.loadTestsFromModule(
-                XMLConfiguratorTest))
+                XMLConfigurator_test))
 
     if PYTANGO_AVAILABLE:
 
         if "MYSQL" in DB_AVAILABLE:
             suite.addTests(
                 unittest.defaultTestLoader.loadTestsFromModule(
-                    NXSConfigServerTest))
+                    NXSConfigServer_test))
 
     # test runner
     runner = unittest.TextTestRunner()

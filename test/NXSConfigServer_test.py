@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
 # \package test nexdatas
-# \file NXSConfigServerTest.py
+# \file NXSConfigServer_test.py
 # unittests for field Tags running Tango Server
 #
 import unittest
@@ -24,7 +24,7 @@ import sys
 import time
 import PyTango
 
-# import XMLConTest as XMLConfiguratorTest
+# import XMLConTest as XMLConfigurator_test
 # from nxsconfigserver import XMLConfigurator
 import nxsconfigserver
 # test fixture
@@ -34,22 +34,22 @@ except Exception:
     import ServerSetUp
 
 try:
-    from . import XMLConfiguratorTest
+    from . import XMLConfigurator_test
 except Exception:
-    import XMLConfiguratorTest
+    import XMLConfigurator_test
 
 
 if sys.version_info > (3,):
     long = int
 
 
-class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
+class NXSConfigServerTest(XMLConfigurator_test.XMLConfiguratorTest):
 
     # constructor
     # \param methodName name of the test method
 
     def __init__(self, methodName):
-        XMLConfiguratorTest.XMLConfiguratorTest.__init__(self, methodName)
+        XMLConfigurator_test.XMLConfiguratorTest.__init__(self, methodName)
 
         self._sv = ServerSetUp.ServerSetUp()
 
@@ -62,7 +62,7 @@ class NXSConfigServerTest(XMLConfiguratorTest.XMLConfiguratorTest):
     # test closer
     # \brief Common tear down oif Tango Server
     def tearDown(self):
-        XMLConfiguratorTest.XMLConfiguratorTest.tearDown(self)
+        XMLConfigurator_test.XMLConfiguratorTest.tearDown(self)
         self._sv.tearDown()
 
     # opens config server
