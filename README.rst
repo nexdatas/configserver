@@ -88,6 +88,24 @@ and the NXSConfigServer tango server (from 2.10.0)
 	  $ apt-get install nxsconfigserver3
 
 
+From pip
+""""""""
+
+To install it from pip you can
+
+.. code-block:: console
+
+   $ python3 -m venv myvenv
+   $ . myvenv/bin/activate
+
+   $ pip install nxsconfigserver
+
+Moreover it is also good to install
+
+.. code-block:: console
+
+   $ pip install pytango
+   
 Setting NeXus Configuration Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #   This file is part of nexdatas - Tango Server for NeXus data writer
 #
-#    Copyright (C) 2012-2017 DESY, Jan Kotanski <jkotan@mail.desy.de>
+#    Copyright (C) 2012-2018 DESY, Jan Kotanski <jkotan@mail.desy.de>
 #
 #    nexdatas is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -15,9 +15,13 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with nexdatas.  If not, see <http://www.gnu.org/licenses/>.
+# \package test nexdatas
+# \file runtest.py
+# the unittest runner
 #
 
-""" release version module """
+import main
 
-#: version number
-__version__ = "2.13.1"
+
+if __name__ == "__main__":
+    main.main()
