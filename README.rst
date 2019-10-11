@@ -107,6 +107,7 @@ Moreover it is also good to install
 .. code-block:: console
 
    $ pip install pytango
+   $ pip install nxstools
 
 Setting NeXus Configuration Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

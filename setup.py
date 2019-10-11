@@ -91,7 +91,7 @@ REQUIRED = [
 #: required python packages
 install_requires = [
     'lxml',
-    'nxstools',
+    # 'nxstools',
     # 'pymysqldb',
     # 'pytango',
 ]
