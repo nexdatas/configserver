@@ -4,6 +4,9 @@
 if [ $1 = "ubuntu16.04" ]; then
     docker exec -it --user root ndts sed -i "s/\[mysqld\]/\[mysqld\]\nsql_mode = NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION/g" /etc/mysql/mysql.conf.d/mysqld.cnf
 fi
+if [ $1 = "ubuntu20.04" ]; then
+    docker exec -it --user root ndts sed -i "s/\[mysql\]/\[mysqld\]\nsql_mode = NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION\ncharacter_set_server=latin1\ncollation_server=latin1_swedish_ci\n\[mysql\]/g" /etc/mysql/mysql.conf.d/mysql.cnf
+fi
 
 docker exec -it --user root ndts service mysql stop
 docker exec -it --user root ndts /bin/sh -c '$(service mysql start &) && sleep 30'
