@@ -28,6 +28,11 @@ import struct
 import binascii
 import json
 
+try:
+    from .checks import checkxmls
+except Exception:
+    from checks import checkxmls
+
 
 from os.path import expanduser
 
@@ -1153,13 +1158,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry"/>'
             '</definition>')
@@ -1215,13 +1216,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="" type="NXentry"/></definition>')
 
@@ -1229,13 +1226,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -1300,12 +1293,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="" type="NXentry"/></definition>')
 
@@ -1313,43 +1303,26 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name, name2]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry2" type="NXentry"/>'
-             '<doc>$var(myentry=entry2)</doc>'
-             '</definition>') |
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<doc>$var(myentry=entry2)</doc>'
-             '<group name="entry2" type="NXentry"/>'
-             '</definition>')
+        checkxmls(
+            self,
+            xml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry2" type="NXentry"/>'
+            '<doc>$var(myentry=entry2)</doc>'
+            '</definition>'
         )
 
         el.variables = '{"myentry":"entry1"}'
         self.assertEqual(el.createConfiguration([name, name2]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry1" type="NXentry"/>'
-             '<doc>$var(myentry=entry2)</doc>'
-             '</definition>') |
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<doc>$var(myentry=entry2)</doc>'
-             '<group name="entry1" type="NXentry"/>'
-             '</definition>')
-        )
+        checkxmls(
+            self,
+            xml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry1" type="NXentry"/>'
+            '<doc>$var(myentry=entry2)</doc>'
+            '</definition>')
 
         self.assertEqual(el.deleteComponent(name2), None)
         self.__cmps.pop()
@@ -1405,26 +1378,18 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="" type=""/></definition>')
         el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -1488,13 +1453,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="" type=""/>'
             '</definition>')
@@ -1502,35 +1463,21 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{}'
         self.assertEqual(el.createConfiguration([name, name2]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry2" type="NXentry"/>'
-             '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
-             '</definition>') |
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><doc>$var(myentry=entry2)'
-             ' $var(entryType=NXentry)</doc>'
-             '<group name="entry2" type="NXentry"/>'
-             '</definition>')
+        checkxmls(
+            self,
+            xml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry2" type="NXentry"/>'
+            '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
+            '</definition>'
         )
 
         el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -1598,13 +1545,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="12def34" type=""/>'
             '</definition>')
@@ -1612,33 +1555,20 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{}'
         self.assertEqual(el.createConfiguration([name, name2]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml.replace(">\n", ">") ==
+        checkxmls(
+            self,
+            xml,
              '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
              '<group name="entry2" type="NXentry"/>'
              '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
-             '</definition>') |
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
-             '<group name="entry2" type="NXentry"/>'
-             '</definition>')
+             '</definition>'
         )
         el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -1713,13 +1643,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
@@ -1730,30 +1656,17 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{}'
         self.assertEqual(el.createConfiguration([name, name2]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry">'
-             '<group name="instrument" type="NXinstrument">'
-             '<group name="pilatus" type="NXdetector">'
-             '<group name="transformations2" type="NXtransformations"/>'
-             '<field name="data" type="NX_FLOAT64"/>'
-             '</group></group></group>'
-             '<doc>$var(detector=pilatus)</doc></definition>') |
-            (xml.replace(">\n", ">") ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry">'
-             '<group name="instrument" type="NXinstrument">'
-             '<group name="pilatus" type="NXdetector">'
-             '<field name="data" type="NX_FLOAT64"/>'
-             '<group name="transformations2" type="NXtransformations"/>'
-             '</group></group></group>'
-             '<doc>$var(detector=pilatus)</doc></definition>')
+        checkxmls(
+            self,
+            xml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry">'
+            '<group name="instrument" type="NXinstrument">'
+            '<group name="pilatus" type="NXdetector">'
+            '<group name="transformations2" type="NXtransformations"/>'
+            '<field name="data" type="NX_FLOAT64"/>'
+            '</group></group></group>'
+            '<doc>$var(detector=pilatus)</doc></definition>'
         )
 
         self.assertEqual(el.deleteComponent(name2), None)
@@ -1827,12 +1740,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
@@ -1843,28 +1752,16 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{}'
         self.assertEqual(el.createConfiguration([name, name2]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace("> <", "><").\
-            replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (xml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry">'
-             '<group name="instrument" type="NXinstrument">'
-             '<group name="pilatus" type="NXdetector">'
-             '<field name="data" type="NX_FLOAT64"/>'
-             '</group></group></group>'
-             '<doc>$var(detector=pilatus)</doc></definition>') |
-            (xml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry">'
-             '<group name="instrument" type="NXinstrument">'
-             '<group name="pilatus" type="NXdetector">'
-             '<field name="data" type="NX_FLOAT64"/>'
-             '</group></group></group>'
-             '<doc>$var(detector=pilatus)</doc></definition>')
+        checkxmls(
+            self,
+            xml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry">'
+            '<group name="instrument" type="NXinstrument">'
+            '<group name="pilatus" type="NXdetector">'
+            '<field name="data" type="NX_FLOAT64"/>'
+            '</group></group></group>'
+            '<doc>$var(detector=pilatus)</doc></definition>'
         )
 
         self.assertEqual(el.deleteComponent(name2), None)
@@ -1921,12 +1818,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="12def34" type="NXentry"/></definition>')
 
@@ -1934,12 +1828,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        xml = self.getXML(el)
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -1995,12 +1887,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="12def34" '
             'type="NXentry"/></definition>')
@@ -2009,12 +1898,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry1" '
             'type="NXentry"/></definition>')
@@ -2069,11 +1955,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="12def34" '
@@ -2083,11 +1966,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
@@ -2141,12 +2021,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="12def34" type="NXentry"/></definition>')
 
@@ -2154,12 +2031,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -2212,12 +2086,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="12def34" type="NXentry"/></definition>')
 
@@ -2225,12 +2096,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -2283,11 +2151,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="12def34" type="NXentry"/></definition>')
@@ -2296,12 +2161,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -2357,12 +2219,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="" type="myty"/>'
             '</definition>')
@@ -2370,12 +2229,9 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -2430,12 +2286,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name]), None)
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-           xml,
+        checkxmls(
+            self,
+            xml,
            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
            '<group name="12def34" type="NXentry"/></definition>')
 
@@ -2443,11 +2296,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
@@ -2504,24 +2354,18 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="" type="myty"/></definition>')
         el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
         self.assertEqual(el.createConfiguration([name]), None)
 
         xml = self.getXML(el)
-        xml = xml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            xml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            xml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry1" type="NXentry"/></definition>')
 
@@ -2623,11 +2467,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry"/>'
@@ -2677,11 +2518,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry"/>'
@@ -2730,21 +2568,13 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition>'
-             '<group type="NXentry2"/><group type="NXentry"/>'
-             '</definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition>'
-             '<group type="NXentry"/><group type="NXentry2"/>'
-             '</definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition>'
+            '<group type="NXentry2"/><group type="NXentry"/>'
+            '</definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -2872,12 +2702,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            gxml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry">'
             '<field type="field"/></group></definition>')
@@ -2927,21 +2754,13 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry2"/><field name="field1"/>'
-             '<group type="NXentry"><field name="field1"/></group>'
-             '</definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"><field name="field1"/>'
-             '</group><group type="NXentry2"/><field name="field1"/>'
-             '</definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry2"/><field name="field1"/>'
+            '<group type="NXentry"><field name="field1"/></group>'
+            '</definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -2986,11 +2805,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry2"/></definition>')
@@ -3039,14 +2855,11 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group name="entry" type="NXentry"/></definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry" type="NXentry"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -3092,19 +2905,12 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group name="entry" type="NXentry"/>'
-             '<group name="entry2"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group name="entry2"/>'
-             '<group name="entry" type="NXentry"/></definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry" type="NXentry"/>'
+            '<group name="entry2"/></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -3150,12 +2956,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            gxml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry">'
             '<field type="field"/></group></definition>')
@@ -3206,12 +3009,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
-            gxml.replace(">\n", ">"),
+        checkxmls(
+            self,
+            gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<field type="field"/></group></definition>')
@@ -3263,11 +3063,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         el.variables = '{"entry":"entry", "value":"myvalue", "some":"ble"}'
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertEqual(
+        checkxmls(
+            self,
             gxml,
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry" '
@@ -3366,21 +3163,13 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration(name), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group name="entry2" type="NXentry2">'
-             '<field type="field"/></group><group name="entry" '
-             'type="NXentry"><field type="field"/></group></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group name="entry" type="NXentry">'
-             '<field type="field"/></group><group name="entry2" '
-             'type="NXentry2"><field type="field"/></group></definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group name="entry2" type="NXentry2">'
+            '<field type="field"/></group><group name="entry" '
+            'type="NXentry"><field type="field"/></group></definition>')
 
         for i in range(np):
             self.assertEqual(el.deleteComponent(name[i]), None)
@@ -3529,12 +3318,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
-                gxml.replace(">\n", ">"),
+            checkxmls(
+                self,
+                gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
                 '<field name="entry">'
                 '<datasource type="TANGO"><%s/></datasource></field>'
@@ -3638,12 +3424,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
-                gxml.replace(">\n", ">"),
+            checkxmls(
+                self,
+                gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition>'
                 '<field name="entry">'
@@ -3747,11 +3530,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
+            checkxmls(
+                self,
                 gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition><%s name="entry"/>'
@@ -3854,12 +3634,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
-                gxml.replace(">\n", ">"),
+            checkxmls(
+                self,
+                gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition><field name="entry">'
                 '<dimensions type="TANGO"><%s/></dimensions></field>'
@@ -3962,12 +3739,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
-                gxml.replace(">\n", ">"),
+            checkxmls(
+                self,
+                gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition><field name="entry">'
                 '<%s/></field></definition>' % (ut))
@@ -4069,12 +3843,9 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
-                gxml.replace(">\n", ">"),
+            checkxmls(
+                self,
+                gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition><group name="entry">'
                 '<%s/></group></definition>' % (ut))
@@ -4176,11 +3947,8 @@ class XMLConfiguratorTest(unittest.TestCase):
 
             self.assertEqual(el.createConfiguration(name), None)
             gxml = self.getXML(el)
-            gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-                replace(">    <", "><").\
-                replace(">      <", "><").\
-                replace(">        <", "><").strip()
-            self.assertEqual(
+            checkxmls(
+                self,
                 gxml,
                 '<?xml version=\'1.0\' encoding=\'utf8\'?>'
                 '<definition><link name="entry">'
@@ -4286,19 +4054,12 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name[1]]), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry2"/>'
-             '<group type="NXentry"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><group type="NXentry2"/>'
-             '</definition>'))
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry"/>'
+            '<group type="NXentry2"/></definition>')
 
         el.unsetMandatoryComponents([name[0]])
         self.assertEqual(el.mandatoryComponents(), [])
@@ -4352,36 +4113,12 @@ class XMLConfiguratorTest(unittest.TestCase):
 
         self.assertEqual(el.createConfiguration([name[2]]), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry2"/><group type="NXentry3"/>'
-             '<group type="NXentry"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry3"/><group type="NXentry2"/>'
-             '<group type="NXentry"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry3"/><group type="NXentry"/>'
-             '<group type="NXentry2"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry2"/><group type="NXentry"/>'
-             '<group type="NXentry3"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><group type="NXentry2"/>'
-             '<group type="NXentry3"/></definition>') |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/>'
-             '<group type="NXentry3"/><group type="NXentry2"/></definition>')
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry2"/><group type="NXentry3"/>'
+            '<group type="NXentry"/></definition>')
 
         el.unsetMandatoryComponents([name[1]])
 

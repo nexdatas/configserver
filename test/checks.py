@@ -32,7 +32,7 @@ def checknodes(utest, n1, n2):
     :type n1: :obj:`xml.etree.ElementTree.Element`
     :param n2: second node
     :type n2: :obj:`xml.etree.ElementTree.Element`
-o    """
+    """
     utest.assertEqual(n1.tag, n2.tag)
     utest.assertEqual(n1.text, n2.text)
     utest.assertEqual(n1.tail, n2.tail)
@@ -40,7 +40,7 @@ o    """
     utest.assertEqual(len(n1.attrib), len(n2.attrib))
     for k, v in n1.attrib.items():
         utest.assertTrue(k in n2.attrib.keys())
-        utest.assertTrue(v, n2.attrib[k])
+        utest.assertEqual(v, n2.attrib[k])
     for c1, c2 in zip(n1, n2):
         checknodes(utest, c1, c2)
 
