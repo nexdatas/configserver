@@ -28,7 +28,7 @@ from nxsconfigserver.Merger import (
     Merger, UndefinedTagError, IncompatibleNodeError)
 try:
     from .checks import checkxmls
-except ImportError:
+except Exception:
     from checks import checkxmls
 
 
