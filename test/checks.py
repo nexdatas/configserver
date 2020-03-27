@@ -123,3 +123,33 @@ def checkxmls(utest, xml1, xml2):
     except Exception:
         print("%s\n!=\n%s" % (xml1, xml2))
         raise
+
+def checknxmls(utest, xml1, xmls):
+    """ compare xmls via unittests
+
+    :param utest: unittest case object
+    :type utest: :obj:`unittest.TestCase`
+    :param xml1: first xml
+    :type xml1: :obj:`str`
+    :param xml2: second xml
+    :type xml: :obj:`str`
+    """
+
+    n1 = et.fromstring(
+        xml1,
+        parser=XMLParser(collect_ids=False,
+                         remove_blank_text=True))
+    ns = []
+    for xml2 in xmls:
+        ns.append(
+            et.fromstring(
+                xml2,
+                parser=XMLParser(collect_ids=False,
+                             remove_blank_text=True)))
+    for i, n2 in enumerate(ns):
+        try:
+            checknodes(utest, n1, n2)
+        except Exception:
+            print("%s\n!=\n%s" % (xml1, xml2))
+            if i + 1 == len(ns):
+                raise
