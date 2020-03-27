@@ -1558,10 +1558,10 @@ class XMLConfiguratorTest(unittest.TestCase):
         checkxmls(
             self,
             xml,
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry2" type="NXentry"/>'
-             '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
-             '</definition>'
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry2" type="NXentry"/>'
+            '<doc>$var(myentry=entry2) $var(entryType=NXentry)</doc>'
+            '</definition>'
         )
         el.variables = '{"myentry":"entry1", "entryType":"NXentry"}'
         self.assertEqual(el.createConfiguration([name]), None)
@@ -2289,8 +2289,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         checkxmls(
             self,
             xml,
-           '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-           '<group name="12def34" type="NXentry"/></definition>')
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="12def34" type="NXentry"/></definition>')
 
         el.variables = '{"myentry":"entry1"}'
         self.assertEqual(el.createConfiguration([name]), None)

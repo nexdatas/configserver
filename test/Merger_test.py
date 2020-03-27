@@ -1903,6 +1903,46 @@ class MergerTest(unittest.TestCase):
                  "<strategy mode='STEP' /></field></group></group>"
                  "</definition>",
                  "<definition><group name='entry' type='NXentry'>"
+                 "<field name='mf' type='field2'><datasource name='ds2'/>"
+                 "<strategy mode='INIT'/></field>"
+                 "<group name='data' type='NXdata' /></group>"
+                 "</definition>"]), None)
+        self.assertEqual(el.merge(), None)
+        checkxmls(
+            self,
+            el.toString(),
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry">'
+            '<group name="instrument" type="NXinstrument">'
+            '<field name="myfield" type="field"><datasource name="ds1" />'
+            '<strategy mode="STEP" /></field></group>'
+            '<field name="mf" type="field2"><datasource name="ds2" />'
+            '<strategy mode="INIT" /></field>'
+            '<group name="data" type="NXdata">'
+            '<link name="ds1" '
+            'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
+            '<link name="ds2" target="/entry:NXentry/mf" />'
+            '</group>'
+            '</group></definition>')
+
+    # test collect
+    # \brief It tests default settings
+    def ttest_linkdatasources_ds1_twoduplinks2(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+
+        el = Merger()
+        el.linkdatasources = ["ds1"]
+        self.assertEqual(el.linkable, ["field"])
+
+        self.assertEqual(
+            el.collect(
+                ["<definition><group  name='entry' type='NXentry'>"
+                 "<group  name='instrument' type='NXinstrument'>"
+                 "<field name='myfield' type='field'><datasource name='ds1'/>"
+                 "<strategy mode='STEP' /></field></group></group>"
+                 "</definition>",
+                 "<definition><group name='entry' type='NXentry'>"
                  "<field name='mf' type='field2'><datasource name='ds1'/>"
                  "<strategy mode='INIT'/></field>"
                  "<group name='data' type='NXdata' /></group>"
@@ -1919,7 +1959,8 @@ class MergerTest(unittest.TestCase):
             '<field name="mf" type="field2"><datasource name="ds1" />'
             '<strategy mode="INIT" /></field>'
             '<group name="data" type="NXdata">'
-            '<link name="ds1" target="/entry:NXentry/mf" /></group>'
+            '<link name="ds1" '
+            'target="/entry:NXentry/instrument:NXinstrument/mf" /></group>'
             '</group></definition>')
 
     # test collect
