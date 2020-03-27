@@ -24,10 +24,12 @@ import unittest
 import sys
 import struct
 
-# from xml import sax
-
 from nxsconfigserver.Merger import (
     Merger, UndefinedTagError, IncompatibleNodeError)
+try:
+    from .checks import checkxmls, checknxmls
+except Exception:
+    from checks import checkxmls, checknxmls
 
 
 # if 64-bit machione
@@ -46,6 +48,7 @@ class MergerTest(unittest.TestCase):
         self._bint = "int64" if IS64BIT else "int32"
         self._buint = "uint64" if IS64BIT else "uint32"
         self._bfloat = "float64" if IS64BIT else "float32"
+        self.maxDiff = None
 
     # Exception tester
     # \param exception expected exception
@@ -410,8 +413,9 @@ class MergerTest(unittest.TestCase):
                  "<definition><group type='NXentry' name='entry2'></group>"
                  "</definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry2" type="NXentry" /></definition>')
 
@@ -430,8 +434,10 @@ class MergerTest(unittest.TestCase):
                  "<group type='NXentry' name='entry' attr='ble ble'></group>"
                  "</definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        self.assertEqual(el.merge(), None)
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group attr="ble ble" name="entry" type="NXentry" />'
             '</definition>')
@@ -451,8 +457,9 @@ class MergerTest(unittest.TestCase):
                  "<group type='NXtransformations'/></group></definition>"]),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition>'
             '<group name="entry2" type="NXentry" /></definition>')
@@ -472,8 +479,9 @@ class MergerTest(unittest.TestCase):
                 "<group type='NXtransformations'/></group></definition>"]),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry2" type="NXentry">'
             '<group type="NXtransformations" /></group></definition>')
@@ -493,8 +501,9 @@ class MergerTest(unittest.TestCase):
                  "<group type='NXtransformations' name='transformations'/>"
                  "</group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry2" type="NXentry" /></definition>')
 
@@ -513,8 +522,9 @@ class MergerTest(unittest.TestCase):
                  "<group type='NXtransformations' name='transformations2'/>"
                  "</group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group name="entry2" type="NXentry">'
             '<group name="transformations2" type="NXtransformations" />'
@@ -532,8 +542,9 @@ class MergerTest(unittest.TestCase):
                 ["<definition><group type='NXentry'/></definition>"] * 5),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?>'
             '<definition><group type="NXentry" />'
             '</definition>')
@@ -1394,8 +1405,8 @@ class MergerTest(unittest.TestCase):
                  "<strategy mode='FINAL'/></attribute></group></definition>"]),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self, el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry"><field type="field">'
             '$datasources.ds1<strategy mode="STEP" /></field>'
@@ -1754,8 +1765,8 @@ class MergerTest(unittest.TestCase):
                  "<strategy mode='INIT'/></attribute></group>"
                  "</definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self, el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<field name="myfield" type="field"><datasource name="ds1" />'
@@ -1786,8 +1797,9 @@ class MergerTest(unittest.TestCase):
                  "<group name='data' type='NXdata' />"
                  "</group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<field name="myfield" type="field"><datasource name="ds1" />'
@@ -1820,8 +1832,9 @@ class MergerTest(unittest.TestCase):
                  "<group name='data' type='NXdata' /></group></definition>"]),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
@@ -1856,8 +1869,9 @@ class MergerTest(unittest.TestCase):
                  "<group name='data' type='NXdata' /></group></definition>"]),
             None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'
@@ -1894,9 +1908,10 @@ class MergerTest(unittest.TestCase):
                  "<group name='data' type='NXdata' /></group>"
                  "</definition>"]), None)
         self.assertEqual(el.merge(), None)
-        try:
-            self.assertEqual(
-                el.toString().replace("?>\n<", "?><"),
+        checknxmls(
+            self,
+            el.toString(),
+            [
                 '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
                 '<group name="entry" type="NXentry">'
                 '<group name="instrument" type="NXinstrument">'
@@ -1905,11 +1920,9 @@ class MergerTest(unittest.TestCase):
                 '<field name="mf" type="field2"><datasource name="ds1" />'
                 '<strategy mode="INIT" /></field>'
                 '<group name="data" type="NXdata">'
-                '<link name="ds1" target="/entry:NXentry/mf" /></group>'
-                '</group></definition>')
-        except Exception:
-            self.assertEqual(
-                el.toString().replace("?>\n<", "?><"),
+                '<link name="ds1" '
+                'target="/entry:NXentry/mf" /></group>'
+                '</group></definition>',
                 '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
                 '<group name="entry" type="NXentry">'
                 '<group name="instrument" type="NXinstrument">'
@@ -1920,7 +1933,10 @@ class MergerTest(unittest.TestCase):
                 '<group name="data" type="NXdata">'
                 '<link name="ds1" '
                 'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
-                '</group></group></definition>')
+                '</group>'
+                '</group></definition>'
+            ]
+            )
 
     # test collect
     # \brief It tests default settings
@@ -1946,8 +1962,9 @@ class MergerTest(unittest.TestCase):
                  "<link name='ds1' target='/entry:NXentry'/>"
                  "</group></group></definition>"]), None)
         self.assertEqual(el.merge(), None)
-        self.assertEqual(
-            el.toString().replace("?>\n<", "?><"),
+        checkxmls(
+            self,
+            el.toString(),
             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
             '<group name="entry" type="NXentry">'
             '<group name="instrument" type="NXinstrument">'

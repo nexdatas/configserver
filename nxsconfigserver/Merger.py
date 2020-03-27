@@ -398,7 +398,7 @@ class Merger(object):
                         dsnode = child
                     else:
                         dsname, dsnode = self.__getTextDataSource(child)
-                    if not dsnode:
+                    if dsnode is None:
                         for gchild in child:
                             gcName = unicode(gchild.tag)
                             if gcName == 'datasource':
