@@ -1885,7 +1885,6 @@ class MergerTest(unittest.TestCase):
             '<link name="ds1" target="/entry:NXentry/mf" />'
             '</group></group></definition>')
 
-
     # test collect
     # \brief It tests default settings
     def test_linkdatasources_ds1_twoduplinks(self):
@@ -1933,7 +1932,8 @@ class MergerTest(unittest.TestCase):
                 '<strategy mode="INIT" /></field>'
                 '<group name="data" type="NXdata">'
                 '<link name="ds1" '
-                'target="/entry:NXentry/instrument:NXinstrument/myfield" /></group>'
+                'target="/entry:NXentry/instrument:NXinstrument/myfield" />'
+                '</group>'
                 '</group></definition>'
             ]
             )

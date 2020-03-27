@@ -106,8 +106,8 @@ def checkxmls(utest, xml1, xml2):
     :type utest: :obj:`unittest.TestCase`
     :param xml1: first xml
     :type xml1: :obj:`str`
-    :param xml2: second xml
-    :type xml: :obj:`str`
+    :param xml2: second xml to compare
+    :type xml2: :obj:`str`
     """
 
     n1 = et.fromstring(
@@ -124,6 +124,7 @@ def checkxmls(utest, xml1, xml2):
         print("%s\n!=\n%s" % (xml1, xml2))
         raise
 
+
 def checknxmls(utest, xml1, xmls):
     """ compare xmls via unittests
 
@@ -131,8 +132,8 @@ def checknxmls(utest, xml1, xmls):
     :type utest: :obj:`unittest.TestCase`
     :param xml1: first xml
     :type xml1: :obj:`str`
-    :param xml2: second xml
-    :type xml: :obj:`str`
+    :param xmls: list of xml to compare
+    :type xmls: :obj:`list` < :obj:`str` >
     """
 
     n1 = et.fromstring(
@@ -145,7 +146,7 @@ def checknxmls(utest, xml1, xmls):
             et.fromstring(
                 xml2,
                 parser=XMLParser(collect_ids=False,
-                             remove_blank_text=True)))
+                                 remove_blank_text=True)))
     for i, n2 in enumerate(ns):
         try:
             checknodes(utest, n1, n2)
