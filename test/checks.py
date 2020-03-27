@@ -150,6 +150,7 @@ def checknxmls(utest, xml1, xmls):
     for i, n2 in enumerate(ns):
         try:
             checknodes(utest, n1, n2)
+            break
         except Exception:
             print("%s\n!=\n%s" % (xml1, xml2))
             if i + 1 == len(ns):
