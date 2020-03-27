@@ -8314,7 +8314,7 @@ class XMLConfiguratorTest(unittest.TestCase):
             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
             '</datasource></field><field name="field4">'
             '<datasource name="%s" type="CLIENT"><record name="r4"/>'
-             '</datasource></field><field name="field1">'
+            '</datasource></field><field name="field1">'
             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
             '</datasource></field></definition>'
             % (dsname[2], dsname[3], dsname[0]))
@@ -8872,7 +8872,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
             '</datasource><datasource name="%s" type="CLIENT">'
             '<record name="r2"/></datasource><result>'
-            'import nxsconfigserver\nds.result = nxsconfigserver.__version__'
+            '\nimport nxsconfigserver\nds.result = nxsconfigserver.__version__'
             '</result></datasource></field><field name="field1">'
             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
             '</datasource></field></definition>'
@@ -10940,43 +10940,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.canfaildatasources = '["%s"]' % dsname[2]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").strip()
-        self.assertTrue(
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy canfail="true"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '<field name="field1"><datasource name="%s" type="CLIENT">'
-             '<record name="r1"/></datasource>'
-             '<strategy canfail="false"/>'
-             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy canfail="false"/></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3"/></datasource></field>'
-             '<field name="field4">'
-             '<datasource name="%s" type="CLIENT"><record name="r4"/>'
-             '</datasource><strategy canfail="true"/></field></definition>'
-             % (dsname[0], dsname[2], dsname[3])) |
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group type="NXentry"/><field name="field1">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r1"/></datasource>'
-             '<strategy canfail="false"/>'
-             '</field><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy canfail="true"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field></definition>'
-             % (dsname[0], dsname[2], dsname[3]))
-        )
-
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy canfail="true"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field>'
+            '<field name="field1"><datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource>'
+            '<strategy canfail="false"/>'
+            '</field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -11055,45 +11031,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.canfaildatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").strip()
-        self.assertTrue(
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy canfail="true"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '<field name="field1"><datasource name="%s" type="CLIENT">'
-             '<record name="r1"/></datasource>'
-             '<strategy canfail="true"/>'
-             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?>'
-             '<definition><group type="NXentry"/><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy canfail="true"/></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3"/></datasource></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource>'
-             '<strategy canfail="true"/>'
-             '</field></definition>' % (dsname[0], dsname[2], dsname[3])) |
-            (gxml == '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group type="NXentry"/><field name="field1">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r1"/></datasource>'
-             '<strategy canfail="true"/>'
-             '</field><field name="field3">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r3"/></datasource>'
-             '<strategy canfail="true"/>'
-             '</field><field name="field4">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '</definition>' % (dsname[0], dsname[2], dsname[3]))
-        )
-
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?>'
+            '<definition><group type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy canfail="true"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field>'
+            '<field name="field1"><datasource name="%s" type="CLIENT">'
+            '<record name="r1"/></datasource>'
+            '<strategy canfail="true"/>'
+            '</field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -11174,39 +11124,21 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy mode="FINAL"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/></field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1"/></group>'
-             '</group></definition>'
-             % (dsname[2], dsname[3], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/>'
-             '</field><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy mode="FINAL"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1"/>'
-             '</group></group></definition>'
-             % (dsname[0], dsname[2], dsname[3], dsname[0]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field1"/></group>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -11287,33 +11219,18 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s"]' % dsname[0]
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"/><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy mode="FINAL"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/></field></definition>'
-             % (dsname[2], dsname[3], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"/><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3"/></datasource><strategy mode="FINAL"/>'
-             '</field><field name="field4">'
-             '<datasource name="%s" type="CLIENT"><record name="r4"/>'
-             '</datasource></field></definition>'
-             % (dsname[0], dsname[2], dsname[3]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"/><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field></definition>'
+            % (dsname[2], dsname[3], dsname[0]))
         #
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -11395,42 +11312,23 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
         el.linkdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         self.assertEqual(el.createConfiguration(css), None)
         gxml = self.getXML(el)
-        gxml = gxml.replace(">\n", ">").replace(">  <", "><").\
-            replace(">    <", "><").\
-            replace(">      <", "><").\
-            replace(">        <", "><").strip()
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3"/>'
-             '</datasource><strategy mode="FINAL"/></field>'
-             '<field name="field4"><datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field3"/>'
-             '<link name="%s" target="/entry:NXentry/field1"/>'
-             '</group><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/></field>'
-             '</group></definition>'
-             % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field1">'
-             '<datasource name="%s" type="CLIENT"><record name="r1"/>'
-             '</datasource><strategy mode="INIT"/></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3"/></datasource><strategy mode="FINAL"/>'
-             '</field><field name="field4">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r4"/></datasource></field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1"/>'
-             '<link name="%s" target="/entry:NXentry/field3"/>'
-             '</group></group></definition>'
-             % (dsname[0], dsname[2], dsname[3], dsname[0], dsname[2]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3"/>'
+            '</datasource><strategy mode="FINAL"/></field>'
+            '<field name="field4"><datasource name="%s" type="CLIENT">'
+            '<record name="r4"/></datasource></field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field3"/>'
+            '<link name="%s" target="/entry:NXentry/field1"/>'
+            '</group><field name="field1">'
+            '<datasource name="%s" type="CLIENT"><record name="r1"/>'
+            '</datasource><strategy mode="INIT"/></field>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -11527,7 +11425,7 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
             '</field><group name="data" type="NXdata">'
             '<link name="%s" target="/entry:NXentry/field1"/>'
             '</group></group></definition>'
-                % (dsname[2], dsname[3], dsname[0], dsname[0]))
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -12320,33 +12218,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        gxml = gxml.replace(">\n", ">").replace(" \n ", "").replace(
-            ">    <", "><").replace(
-                ">   <", "><").replace(">  <", "><").replace("> <", "><")
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field><group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" /></group>'
-             '</group></definition>'
-             % (dsname[2], dsname[3], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field1">'
-             '$datasources.%s<strategy mode="INIT" /></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3" /></datasource><strategy mode="FINAL" />'
-             '</field><field name="field4">$datasources.%s</field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" />'
-             '</group></group></definition>'
-             % (dsname[0], dsname[2], dsname[3], dsname[0]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource><strategy mode="FINAL" /></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT" />'
+            '</field><group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field1" /></group>'
+            '</group></definition>'
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -12427,27 +12311,16 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        gxml = gxml.replace(">\n", ">").replace(" \n ", "").replace(
-            ">    <", "><").replace(
-                ">   <", "><").replace(">  <", "><").replace("> <", "><")
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry" /><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field></definition>' % (dsname[2], dsname[3], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry" /><field name="field1">'
-             '$datasources.%s<strategy mode="INIT" /></field>'
-             '<field name="field3"><datasource name="%s" type="CLIENT">'
-             '<record name="r3" /></datasource><strategy mode="FINAL" />'
-             '</field><field name="field4">$datasources.%s'
-             '</field></definition>' % (dsname[0], dsname[2], dsname[3]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry" /><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource><strategy mode="FINAL" /></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT" />'
+            '</field></definition>' % (dsname[2], dsname[3], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
@@ -12529,36 +12402,20 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.linkdatasources = '["%s", "%s"]' % (dsname[0], dsname[2])
         gxml = el.merge(css)
-        gxml = gxml.replace(">\n", ">").replace(" \n ", "").replace(
-            ">    <", "><").replace(
-                ">   <", "><").replace(">  <", "><").replace("> <", "><")
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field3" />'
-             '<link name="%s" target="/entry:NXentry/field1" /></group>'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field></group></definition>'
-             % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field1">'
-             '$datasources.%s<strategy mode="INIT" />'
-             '</field><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" />'
-             '<link name="%s" target="/entry:NXentry/field3" />'
-             '</group></group></definition>'
-             % (dsname[0], dsname[2], dsname[3], dsname[0], dsname[2]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource><strategy mode="FINAL" /></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field3" />'
+            '<link name="%s" target="/entry:NXentry/field1" /></group>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT" />'
+            '</field></group></definition>'
+            % (dsname[2], dsname[3], dsname[2], dsname[0], dsname[0]))
 
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
@@ -12641,46 +12498,19 @@ ds.result = nxsconfigserver.__version__</result></datasource>"""
 
         el.linkdatasources = '["%s"]' % dsname[0]
         gxml = el.merge(css)
-        gxml = gxml.replace(">\n", ">").replace(" \n ", "").replace(
-            ">    <", "><").replace(
-                ">   <", "><").replace(">  <", "><").replace(
-                    "> <", "><")
-        self.assertTrue(
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field><group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" />'
-             '</group></group></definition>'
-             % (dsname[2], dsname[3], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry"><field name="field3">'
-             '<datasource name="%s" type="CLIENT"><record name="r3" />'
-             '</datasource><strategy mode="FINAL" /></field>'
-             '<field name="field4">$datasources.%s</field>'
-             '<group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" /></group>'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field></group></definition>'
-             % (dsname[2], dsname[3], dsname[0], dsname[0])) |
-            (gxml ==
-             '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
-             '<group name="entry" type="NXentry">'
-             '<field name="field1">$datasources.%s<strategy mode="INIT" />'
-             '</field><field name="field3">'
-             '<datasource name="%s" type="CLIENT">'
-             '<record name="r3" /></datasource><strategy mode="FINAL" />'
-             '</field><field name="field4">$datasources.%s'
-             '</field><group name="data" type="NXdata">'
-             '<link name="%s" target="/entry:NXentry/field1" />'
-             '</group></group></definition>'
-             % (dsname[0], dsname[2], dsname[3], dsname[0]))
-        )
+        checkxmls(
+            self,
+            gxml,
+            '<?xml version=\'1.0\' encoding=\'utf8\'?><definition>'
+            '<group name="entry" type="NXentry"><field name="field3">'
+            '<datasource name="%s" type="CLIENT"><record name="r3" />'
+            '</datasource><strategy mode="FINAL" /></field>'
+            '<field name="field4">$datasources.%s</field>'
+            '<field name="field1">$datasources.%s<strategy mode="INIT" />'
+            '</field><group name="data" type="NXdata">'
+            '<link name="%s" target="/entry:NXentry/field1" />'
+            '</group></group></definition>'
+            % (dsname[2], dsname[3], dsname[0], dsname[0]))
         self.assertEqual(long(el.version.split('.')[-1]), revision + 7)
         el.setMandatoryComponents(man)
         el.close()
