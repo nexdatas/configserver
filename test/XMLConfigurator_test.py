@@ -468,9 +468,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0' encoding='utf8'?>" \
-              "<definition><group type='NXentry'/>" \
-              + "</definition>"
+        xml = '{"ComponentSelection": "{\\"pilatus\\": true}"}'
         while name in avc:
             name = name + '_1'
         print(avc)
@@ -536,12 +534,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0' encoding='utf8'?>" \
-              "<definition><group type='NXentry'/>" \
-              + "</definition>"
-        xml2 = "<?xml version='1.0' encoding='utf8'?>" \
-               "<definition><group type='NXentry2'/>" \
-               + "</definition>"
+        xml = '{"ComponentSelection": "{\\"pilatus\\": true}"}'
+        xml2 = '{"ComponentSelection": "{\\"pilatus3\\": false}"}'
         while name in avc:
             name = name + '_1'
 #        print(avc
@@ -606,12 +600,8 @@ class XMLConfiguratorTest(unittest.TestCase):
         avc = el.availableSelections()
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_selection"
-        xml = "<?xml version='1.0' encoding='utf8'?>" \
-              "<definition><group type='NXentry'/>" \
-              + "</definition>"
-        xml2 = "<?xml version='1.0' encoding='utf8'?>" \
-               "<definition><group type='NXentry2'/>" \
-               + "</definition>"
+        xml = '{"ComponentSelection": "{\\"pilatus\\": true}"}'
+        xml2 = '{"ComponentSelection": "{\\"pilatus3\\": false}"}'
         while name in avc:
             name = name + '_1'
         name2 = name + '_2'
@@ -2001,7 +1991,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
         xml = '<?xml version=\'1.0\'?><definition><group type="NXentry" ' \
-              'name="$var.myentry#\"12def34\"" /></definition>'
+              'name="$var.myentry#\'12def34\'" /></definition>'
         while name in avc:
             name = name + '_1'
 #        print(avc
@@ -2197,7 +2187,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(isinstance(avc, list))
         name = "mcs_test_component"
         xml = "<?xml version='1.0' encoding='utf8'?><definition>" \
-              "<group type='$var.entryType#\'myty\'' name='$var.myentry'/>" \
+              "<group type='$var.entryType#\"myty\"' name='$var.myentry'/>" \
               "</definition>"
         while name in avc:
             name = name + '_1'

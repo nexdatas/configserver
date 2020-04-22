@@ -514,6 +514,13 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
+            if sys.version_info > (3,):
+                et.fromstring(
+                    bytes(self.xmlstring, "UTF-8"),
+                    parser=XMLParser(collect_ids=False))
+            else:
+                et.fromstring(
+                    self.xmlstring, parser=XMLParser(collect_ids=False))
             self.__mydb.storeComponent(name, self.xmlstring)
 
     def storeSelection(self, name):
@@ -523,6 +530,7 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
+            json.loads(self.selection)
             self.__mydb.storeSelection(name, self.selection)
 
     def storeDataSource(self, name):
@@ -532,6 +540,13 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
+            if sys.version_info > (3,):
+                et.fromstring(
+                    bytes(self.xmlstring, "UTF-8"),
+                    parser=XMLParser(collect_ids=False))
+            else:
+                et.fromstring(
+                    self.xmlstring, parser=XMLParser(collect_ids=False))
             self.__mydb.storeDataSource(name, self.xmlstring)
 
     def deleteComponent(self, name):

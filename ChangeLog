@@ -1,3 +1,8 @@
+2020-04-22 Jan Kotanski <jankotan@gmail.com>
+	* add checks if selection is JSON
+	* add checks if xmlstring is XML
+	* tagged as v2.13.2
+
 2019-10-11 Jan Kotanski <jankotan@gmail.com>
 	* switch to setuptools
 	* add support for pip
