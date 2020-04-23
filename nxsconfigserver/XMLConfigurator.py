@@ -31,7 +31,7 @@ from lxml import etree
 from .MYSQLDataBase import MYSQLDataBase as MyDB
 from .ComponentParser import ComponentHandler
 from .Merger import Merger
-from .Errors import NonregisteredDBRecordError
+from .Errors import NonregisteredDBRecordError, WrongXMLError, WrongJSONError
 from .Release import __version__
 from .StreamSet import StreamSet
 
@@ -514,13 +514,16 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
-            if sys.version_info > (3,):
-                et.fromstring(
-                    bytes(self.xmlstring, "UTF-8"),
-                    parser=XMLParser(collect_ids=False))
-            else:
-                et.fromstring(
-                    self.xmlstring, parser=XMLParser(collect_ids=False))
+            try:
+                if sys.version_info > (3,):
+                    et.fromstring(
+                        bytes(self.xmlstring, "UTF-8"),
+                        parser=XMLParser(collect_ids=False))
+                else:
+                    et.fromstring(
+                        self.xmlstring, parser=XMLParser(collect_ids=False))
+            except Exception as e:
+                raise WrongXMLError("WrongXMLError: %s" % str(e))
             self.__mydb.storeComponent(name, self.xmlstring)
 
     def storeSelection(self, name):
@@ -530,7 +533,10 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
-            json.loads(self.selection)
+            try:
+                json.loads(self.selection)
+            except Exception as e:
+                raise WrongJSONError("WrongJSONError: %s" % str(e))
             self.__mydb.storeSelection(name, self.selection)
 
     def storeDataSource(self, name):
@@ -540,13 +546,16 @@ class XMLConfigurator(object):
         :type name: :obj:`str`
         """
         if self.__mydb:
-            if sys.version_info > (3,):
-                et.fromstring(
-                    bytes(self.xmlstring, "UTF-8"),
-                    parser=XMLParser(collect_ids=False))
-            else:
-                et.fromstring(
-                    self.xmlstring, parser=XMLParser(collect_ids=False))
+            try:
+                if sys.version_info > (3,):
+                    et.fromstring(
+                        bytes(self.xmlstring, "UTF-8"),
+                        parser=XMLParser(collect_ids=False))
+                else:
+                    et.fromstring(
+                        self.xmlstring, parser=XMLParser(collect_ids=False))
+            except Exception as e:
+                raise WrongXMLError("WrongXMLError: %s" % str(e))
             self.__mydb.storeDataSource(name, self.xmlstring)
 
     def deleteComponent(self, name):

@@ -56,6 +56,20 @@ class UndefinedTagError(Exception):
     pass
 
 
+class WrongXMLError(Exception):
+
+    """ Exception for undefined tags
+    """
+    pass
+
+
+class WrongJSONError(Exception):
+
+    """ Exception for undefined tags
+    """
+    pass
+
+
 class NonregisteredDBRecordError(Exception):
 
     """ Error for non-existing database records
