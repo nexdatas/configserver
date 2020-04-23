@@ -314,7 +314,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         try:
             el.storeComponent(name)
         except Exception as e:
-            self.assertTrue(str(e).startswith("WrongXMLError: "))
+            self.assertTrue("WrongXMLError" in str(e))
         self.__cmps.append(name)
         avc2 = el.availableComponents()
 #        print(avc2
@@ -498,7 +498,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     # selection test
     # \brief It tests default settings
-    def test_available_sel_xml(self):
+    def test_available_sel_json(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
@@ -546,7 +546,7 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     # selection test
     # \brief It tests default settings
-    def test_available_sel_wrongxml(self):
+    def test_available_sel_wrongjson(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         el = self.openConf()
@@ -561,7 +561,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         try:
             el.storeSelection(name)
         except Exception as e:
-            self.assertTrue(str(e).startswith("WrongJSONError: "))
+            self.assertTrue("WrongJSONError" in str(e))
 
         avc2 = el.availableSelections()
         print(avc2)
@@ -843,7 +843,7 @@ class XMLConfiguratorTest(unittest.TestCase):
         try:
             el.storeDataSource(name)
         except Exception as e:
-            self.assertTrue(str(e).startswith("WrongXMLError: "))
+            self.assertTrue("WrongXMLError" in str(e))
         self.__ds.append(name)
         avc2 = el.availableDataSources()
 #        print(avc2
