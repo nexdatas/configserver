@@ -295,6 +295,44 @@ class XMLConfiguratorTest(unittest.TestCase):
 
     # component test
     # \brief It tests default settings
+    def test_available_comp_wrongxml(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        el = self.openConf()
+
+        avc = el.availableComponents()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_component"
+        xml = "<?xml version='1.0' encoding='utf8'?>" \
+              "<definition><group type=NXentry'/>" \
+              + "</definition>"
+        while name in avc:
+            name = name + '_1'
+#        print(avc
+        cpx = el.components(avc)
+        self.setXML(el, xml)
+        try:
+            el.storeComponent(name)
+        except Exception as e:
+            self.assertTrue(str(e).startswith("WrongXMLError: "))
+        self.__cmps.append(name)
+        avc2 = el.availableComponents()
+#        print(avc2
+        cpx2 = el.components(avc2)
+        self.assertTrue(isinstance(avc2, list))
+        for i in range(len(avc)):
+            self.assertTrue(avc[i] in avc2)
+            j = avc2.index(avc[i])
+            self.assertEqual(cpx2[j], cpx[i])
+
+        self.assertTrue(name not in avc2)
+
+        self.assertEqual(long(el.version.split('.')[-1]),
+                         self.revision)
+        self.assertEqual(el.close(), None)
+
+    # component test
+    # \brief It tests default settings
     def test_available_no_comp(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
@@ -502,6 +540,33 @@ class XMLConfiguratorTest(unittest.TestCase):
             self.assertEqual(cpx3[j], cpx[i])
 
         self.assertTrue(name not in avc3)
+
+        self.assertEqual(long(el.version.split('.')[-1]), self.revision)
+        self.assertEqual(el.close(), None)
+
+    # selection test
+    # \brief It tests default settings
+    def test_available_sel_wrongxml(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        el = self.openConf()
+
+        avc = el.availableSelections()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_selection"
+        xml = '{"ComponentSelection": "{\"pilatus\": true}"}'
+        while name in avc:
+            name = name + '_1'
+        self.setSelection(el, xml)
+        try:
+            el.storeSelection(name)
+        except Exception as e:
+            self.assertTrue(str(e).startswith("WrongJSONError: "))
+
+        avc2 = el.availableSelections()
+        print(avc2)
+
+        self.assertTrue(name not in avc2)
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision)
         self.assertEqual(el.close(), None)
@@ -757,6 +822,34 @@ class XMLConfiguratorTest(unittest.TestCase):
         self.assertTrue(name not in avc3)
 
         self.assertEqual(long(el.version.split('.')[-1]), self.revision + 2)
+        self.assertEqual(el.close(), None)
+
+    # dataSource test
+    # \brief It tests default settings
+    def test_available_dsrc_wrongxml(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        el = self.openConf()
+
+        avc = el.availableDataSources()
+        self.assertTrue(isinstance(avc, list))
+        name = "mcs_test_datasource"
+        xml = "<?xml version='1.0' encoding='utf8'?>" \
+              "<definition><group type='NXentry'>" \
+              + "</definition>"
+        while name in avc:
+            name = name + '_1'
+        self.setXML(el, xml)
+        try:
+            el.storeDataSource(name)
+        except Exception as e:
+            self.assertTrue(str(e).startswith("WrongXMLError: "))
+        self.__ds.append(name)
+        avc2 = el.availableDataSources()
+#        print(avc2
+
+        self.assertTrue(name not in avc2)
+        self.assertEqual(long(el.version.split('.')[-1]), self.revision)
         self.assertEqual(el.close(), None)
 
     # dataSource test
